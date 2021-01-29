@@ -1,7 +1,9 @@
+snapshot <- "date '2020-10-30'"
+
 #Query below runs the sql statement through Athena, using the dbtools function
 
 #Application type 01 Children characteristics - Children Act
-query_CA_child_chars <-
+query_CA_child_chars <-glue(
 "SELECT  
   TTE.RECEIPT_DATE, 
   TTC.CODE, 
@@ -21,9 +23,9 @@ FROM
 WHERE 
 (((TTF.FIELD_MODEL)= 'G50_AT' Or (TTF.FIELD_MODEL)= 'U22_AT') 
   AND ((TTE.Error)= 'N'))
-  AND TTE.mojap_snapshot_date = date '2020-10-30'
-  AND TTF.mojap_snapshot_date = date '2020-10-30'
-  AND TTC.mojap_snapshot_date = date '2020-10-30';"
+  AND TTE.mojap_snapshot_date = {snapshot}
+  AND TTF.mojap_snapshot_date = {snapshot}
+  AND TTC.mojap_snapshot_date = {snapshot};")
 
 Table_CA_child_chars <- dbtools::read_sql(query_CA_child_chars)
 
@@ -46,7 +48,7 @@ WHERE
 Table_CA_parties <- dbtools::read_sql(query_CA_parties)  
 
 #query for count of children by case number
-Table_CA_parties %>% count(party)
+Table_CA_parties %>% group_by(CASE_NUMBER) %>% summarise(count = n())
 
 Table_CA_parties
 
@@ -106,3 +108,29 @@ WHERE
 
 Table_CA_resp_info <- dbtools::read_sql(query_CA_resp_info)
 
+#High court events indicator
+query_CA_HC <-
+"SELECT 
+  EXTRACT(YEAR FROM E.RECEIPT_DATE) AS YEAR,
+  EXTRACT(MONTH FROM E.RECEIPT_DATE) AS MONTH,
+  E.EVENT_MODEL,
+  F.VALUE,
+  F.FIELD_MODEL,
+  E.EVENT,
+  E.CASE_NUMBER,
+  E.CREATING_COURT,
+  E.ERROR,
+  SUBSTR(E.CASE_NUMBER,5,1) AS Expr1
+FROM 
+  familyman_dev_v2.EVENTS E
+  LEFT JOIN familyman_dev_v2.EVENT_FIELDS F
+    ON E.EVENT = F.EVENT
+WHERE
+  Extract(YEAR FROM E.RECEIPT_DATE) >= 2011
+  AND E.EVENT_MODEL     = 'U22'
+  AND F.FIELD_MODEL = 'U22_HC'
+  AND E.ERROR             = 'N'
+  AND E.mojap_snapshot_date = date '2020-10-30'
+  AND F.mojap_snapshot_date = date '2020-10-30';"
+
+Table_CA_HC <- dbtools::read_sql(query_CA_HC)
