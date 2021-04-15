@@ -40,4 +40,4 @@ source(paste0(path_to_project, "dropdowns.R")) # includes code for table 11
 
 # Export ##########################################################################################
 
-openxlsx::saveWorkbook(template, paste0(oath_to_project,"test_output.xlsx"), overwrite = TRUE)
+openxlsx::saveWorkbook(template, paste0(path_to_project,"test_output.xlsx"), overwrite = TRUE)

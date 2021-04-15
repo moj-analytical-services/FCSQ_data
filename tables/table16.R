@@ -160,5 +160,5 @@ write_formatted_table(workbook = template,
                       sheet_name = 'Table_16', 
                       tables = list(dv_year, dv_quarter), 
                       notes = notes16, 
-                      starting_row = 14, 
+                      starting_row = 15, 
                       quarterly_format = c(2))
