@@ -44,7 +44,7 @@ WITH respondent_attendance AS(
 /* Creating a Power of Arrest flag for orders */  
 poa_flag AS(
   SELECT DISTINCT 
-    case_number,
+    event,
     'T' AS flag
   FROM {database}.events
   INNER JOIN {database}.event_fields
@@ -83,7 +83,7 @@ CROSS JOIN UNNEST(SPLIT(value,',')) AS t(value_new)
 LEFT JOIN respondent_attendance
   ON event_fields.event = respondent_attendance.event
 LEFT JOIN poa_flag
-  ON events.case_number = poa_flag.case_number
+  ON events.event = poa_flag.event
 
 WHERE field_model IN('FL404B_7','FL404_79')
   AND value_new IN('NM', 'OCC',' NM', ' OCC')
