@@ -3,3 +3,6 @@
 .RData
 .Ruserdata
 *.csv
+data/temp
+data/lookups
+tables/csvs
