@@ -1,6 +1,9 @@
 # DV SQL extracts for applications and orders
 
-# Applications - table of all applications and whether NMO/OO and Ex-parte/On notice
+# 1. Applications - table of all applications and whether NMO/OO and Ex-parte/On notice
+# 2. Orders - table of all orders and whether NMO/OO, Ex-parte/On notice and with POA/not POA
+
+# 1. Applications - table of all applications and whether NMO/OO and Ex-parte/On notice
 sql_dv_all_apps <- glue("
 /* Creating a table with all the applications for NMO and OO listed once */
   SELECT 
@@ -29,7 +32,7 @@ sql_dv_all_apps <- glue("
     AND events.mojap_snapshot_date = DATE{snapshot_date}
 ")
 
-# Orders - table of all orders and whether NMO/OO, Ex-parte/On notice and with POA/not POA
+# 2. Orders - table of all orders and whether NMO/OO, Ex-parte/On notice and with POA/not POA
 sql_dv_all_ords <- glue("
 /* Creating a respondent attendance flag to determine the notice type of orders */
 WITH respondent_attendance AS(

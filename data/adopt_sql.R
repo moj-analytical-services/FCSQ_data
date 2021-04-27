@@ -1,6 +1,12 @@
 # Adopt SQL extracts for applications and orders, also for details of applicants and children
 
-# Applicants - creating the adopter type - for use in other queries
+# 1. Applicants - creating the adopter type - for use in other queries
+# 2. Country of birth - Generating a list of the country of birth for each case
+# 3. Children - Generating a list of all the children with the DOB and gender
+# 4. Applications - table of all applications and the adopter type - further deduplication needed
+# 5. Orders - table of all orders with the adopter type, country of birth (where relevent), age and gender of child - further deduplication needed
+
+# 1. Applicants - creating the adopter type - for use in other queries
 sql_adopt_applicants <- glue("
 /* All cases counting the number of applicants on each case, with min/max gender/rtcd */
 adopt_all_applicants AS(
@@ -81,7 +87,7 @@ SELECT
 FROM adopt_group_applicants)
 ")
 
-# Country of birth - Generating a list of the country of birth for each case
+# 2. Country of birth - Generating a list of the country of birth for each case
 sql_adopt_country_of_birth <- glue("
 adopt_country_of_birth AS(
 SELECT
@@ -96,7 +102,7 @@ WHERE f.field_model IN('A70_5','A76_2','A77_10','A78_13','A12_1','A15_1')
   AND e.mojap_snapshot_date = DATE{snapshot_date})
 ")
 
-# Children - Generating a list of all the children with the DOB and gender
+# 3. Children - Generating a list of all the children with the DOB and gender
 sql_adopt_children <- glue("
 adopt_children AS(
 SELECT DISTINCT
@@ -116,7 +122,7 @@ WHERE r.role_model = 'CHLDZ'
   AND p.mojap_snapshot_date = DATE{snapshot_date})
 ")
 
-# Applications - table of all applications and the adopter type
+# 4. Applications - table of all applications and the adopter type
 # Please note that further processing is carried out in the Adopt script
 sql_adopt_all_apps <- glue(
   "
@@ -255,7 +261,7 @@ LEFT JOIN adopt_adopter b
 WHERE app_type_new IN('AO','CA','PFO','AD','PF','SP','FO','PLA','RPLA','VPLA','CNO','RCNO','VCNO','CCS','RUK','OR','PT10','PT9','S84','S88','S89',' AO',' CA',' PFO',' AD',' PF',' SP',' FO',' PLA',' RPLA',' VPLA',' CNO',' RCNO',' VCNO',' CCS',' RUK',' OR',' PT10',' PT9',' S84',' S88',' S89')
 ")
 
-# Orders - table of all orders with the adopter type, country of birth (where relevent), age and gender of child
+# 5. Orders - table of all orders with the adopter type, country of birth (where relevent), age and gender of child
 # Please note that further processing is carried out in the Adopt script
 sql_adopt_all_ords <- glue(
   "
