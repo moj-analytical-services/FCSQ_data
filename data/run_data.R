@@ -28,11 +28,11 @@ csv_folder <- "alpha-family-data/CSVs/"                      # location in the S
 # Lookups #########################################################################################
 
 # Court lookup
-s3tools::download_file_from_s3("alpha-family-data/CSVs/lookups/court_lookup.csv", paste0(path_to_project, "court_lookup.csv"), overwrite = TRUE)
+s3tools::download_file_from_s3("alpha-family-data/CSVs/lookups/court_lookup.csv", paste0(path_to_project, "lookups/court_lookup.csv"), overwrite = TRUE)
 court_lookup <- data.table::fread(paste0(path_to_project, "lookups/court_lookup.csv"))
 
 # Birth country lookup
-s3tools::download_file_from_s3("alpha-family-data/CSVs/lookups/adopt_birth_country_lookup.csv", paste0(path_to_project, "birth_country_lookup.csv"), overwrite = TRUE)
+s3tools::download_file_from_s3("alpha-family-data/CSVs/lookups/adopt_birth_country_lookup.csv", paste0(path_to_project, "lookups/birth_country_lookup.csv"), overwrite = TRUE)
 birth_country_lookup <- data.table::fread(paste0(path_to_project, "lookups/birth_country_lookup.csv"))
 
 # Checks ##########################################################################################
