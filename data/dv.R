@@ -16,7 +16,7 @@ dv_function <- function(){
   dv_case_starts <- case_groups(event_data = dv_all_apps, start_end = 'start')
   
   # Cases disposed - grouping orders to one entry per case, with the latest receipt date and the court code from the latest order
-  dv_case_disps <- case_groups(event_data = dv_all_apps, start_end = 'end')
+  dv_case_disps <- case_groups(event_data = dv_all_ords, start_end = 'end')
   
   # DV National CSV - group the apps/ords/cases started/cases disposed up and then put them together by year/quarter/order type/notice type/POA
   dv_csv_national <-

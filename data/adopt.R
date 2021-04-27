@@ -19,7 +19,8 @@ adopt_all_ords <- dbtools::read_sql(sql_adopt_all_ords) %>%
 adopt_case_starts <- case_groups(event_data = adopt_all_apps, start_end = 'start')
 
 # Cases disposed - grouping orders to one entry per case, with the latest receipt date and the court code from the latest order
-adopt_case_disps <- case_groups(event_data = adopt_all_ords, start_end = 'end')
+# adopt_case_disps <- case_groups(event_data = adopt_all_ords, start_end = 'end')
+# This will actually need specific code, following the convention for what constitutes a final order in adoption - different to dv
 
 # Temp
 adopt_all_apps %>%

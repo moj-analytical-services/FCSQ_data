@@ -1,26 +1,10 @@
-# Data extract using the derived tables
+# DV SQL extracts for applications and orders using the derived tables
 
-# Packages ################################################################################################################################
+# 1. Applications - table of all applications and whether NMO/OO and Ex-parte/On notice
+# 2. Orders - table of all orders and whether NMO/OO, Ex-parte/On notice and with POA/not POA
 
-library(glue)
-library(s3tools)
-library(dplyr)
-library(readr)
-
-# Variables ###############################################################################################################################
-
-snapshot_date <- "'2020-10-30'"                  # Specify the FamilyMan snapshot to be used
-exclude_year <- "2020"                           # Specify the incomplete quarter to be excluded from the data
-exclude_quarter <- "4"
-year_cut_off <- "2010"                           # Only records from years after this will be included in the final output
-pub_year <- "2020"                               # Specify the publication year and quarter for the output name
-pub_quarter <- "3"
-database <- "familyman_dev_v2"                   # Specify the database name
-der_database <- "familyman_derived_dev_v1"       # Specify the derived table database name
-
-# Processing ##############################################################################################################################
-
-sql_dv_apps_der <- glue("
+# 1. Applications - table of all applications and whether NMO/OO and Ex-parte/On notice
+sql_dv_all_apps_der <- glue("
 SELECT 
 case_number,
 receipt_date,
@@ -42,11 +26,8 @@ WHERE mojap_snapshot_date = DATE{snapshot_date}
     AND event_model IN ('U22', 'G50')
     AND (app_type LIKE 'On Notice%' OR app_type LIKE 'Exparte%')")
 
-dv_apps_der <- dbtools::read_sql(sql_dv_apps_der)
-
-# Orders - table of all orders and whether NMO/OO, Ex-parte/On notice and with POA/not POA
-
-sql_dv_ords_der <- glue("
+# 2. Orders - table of all orders and whether NMO/OO, Ex-parte/On notice and with POA/not POA
+sql_dv_all_ords_der <- glue("
 /* Creating a respondent attendance flag to determine the notice type of orders */
 WITH respondent_attendance AS(
   SELECT 
@@ -104,5 +85,3 @@ WHERE event_model IN('FL404B','FL404')
   AND ord_type IN('Non-Molestation', 'Occupation')
   AND events_derived.mojap_snapshot_date = DATE{snapshot_date}
 ")
-
-dv_ords_der <- dbtools::read_sql(sql_dv_ords_der)
