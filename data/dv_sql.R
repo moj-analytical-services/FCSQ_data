@@ -59,7 +59,7 @@ poa_flag AS(
     AND events.mojap_snapshot_date = DATE{snapshot_date}
     AND event_fields.mojap_snapshot_date = DATE{snapshot_date})
 
-/* Creating a table with all the applications and orders for NMO and OO listed once */
+/* Creating a table with all the orders for NMO and OO listed once */
 SELECT 
   events.case_number,
   events.receipt_date,
