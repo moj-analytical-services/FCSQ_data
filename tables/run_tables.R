@@ -7,6 +7,7 @@ library(mojrap)
 library(openxlsx)
 library(s3tools)
 library(glue)
+library(readr)
 
 # Variables #######################################################################################
 
@@ -15,7 +16,7 @@ pub_quarter <- 4
 pub_date <- "25th March 2021"
 next_pub_date <- "24th June 2021"
 path_to_project = '~/FCSQ_data/tables/'                                       # UPDATE ONLY IF YOU CHANGE THE LOCATION OF THE PROJECT FILES
-csv_folder <- paste0("alpha-family-data/CSVs/",pub_year, "-",pub_quarter,"/") # location in the S3 bucket to import CSVs from
+csv_folder <- paste0("alpha-family-data/CSVs/",pub_year, "-Q",pub_quarter,"/") # location in the S3 bucket to import CSVs from
 
 # Import ##########################################################################################
 

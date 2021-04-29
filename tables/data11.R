@@ -2,7 +2,7 @@
 
 # Import ##########################################################################################
 
-s3tools::download_file_from_s3(paste0(csv_folder,"CSV Legal Representation National 2020 Q4.csv"), paste0(path_to_project, "csvs/csv_legrep.csv"), overwrite = TRUE)
+s3tools::download_file_from_s3(glue("{csv_folder}CSV Legal Representation National {pub_year} Q{pub_quarter}.csv"), paste0(path_to_project, "csvs/csv_legrep.csv"), overwrite = TRUE)
 csv_legrep <- read_csv(paste0(path_to_project, "csvs/csv_legrep.csv")) %>% 
   rename_with(tolower) %>%
   mutate(case_type = ifelse(case_type=="Divorce", "Divorce (incl. FR)", case_type))

@@ -2,7 +2,7 @@
 
 # Import ##########################################################################################
 
-s3tools::download_file_from_s3(glue(paste0(csv_folder, "/DV_National_{pub_year}_Q{pub_quarter}.csv")), paste0(path_to_project,"csvs/dv_csv_national"), overwrite = TRUE)
+s3tools::download_file_from_s3(glue("{csv_folder}CSV Domestic Violence National {pub_year} Q{pub_quarter}.csv"), paste0(path_to_project,"csvs/dv_csv_national.csv"), overwrite = TRUE)
 dv_csv_national <- read_csv(paste0(path_to_project,"csvs/dv_csv_national"))
 
 # Processing ######################################################################################
