@@ -3,7 +3,8 @@
 # Import ##########################################################################################
 
 s3tools::download_file_from_s3(glue("{csv_folder}CSV Domestic Violence National {pub_year} Q{pub_quarter}.csv"), paste0(path_to_project,"csvs/dv_csv_national.csv"), overwrite = TRUE)
-dv_csv_national <- read_csv(paste0(path_to_project,"csvs/dv_csv_national"))
+dv_csv_national <- read_csv(paste0(path_to_project,"csvs/dv_csv_national.csv")) %>% 
+  rename_with(tolower)
 
 # Processing ######################################################################################
 
@@ -11,44 +12,44 @@ dv_csv_national <- read_csv(paste0(path_to_project,"csvs/dv_csv_national"))
 
 # cases
 dv_case_starts_year <- dv_csv_national %>%
-  filter(event_type=="Cases started") %>%
+  filter(type=="Cases started") %>%
   group_by(year) %>%
   summarise(dv_cs=sum(total))
 
 dv_case_disps_year <- dv_csv_national %>%
-  filter(event_type=='Cases concluded') %>%
+  filter(type=='Cases concluded') %>%
   group_by(year) %>%
   summarise(dv_cd=sum(total))
 
 # applications
 dv_apps_all_year <- dv_csv_national %>%
-  filter(event_type=='Application') %>%
+  filter(type=='Application') %>%
   group_by(year) %>%
   summarise(dv_a=sum(total))
 
 dv_apps_nmo_year <- dv_csv_national %>%
-  filter(event_type=='Application', order_type=='Non-molestation') %>%
+  filter(type=='Application', order_type=='Non-molestation') %>%
   group_by(year) %>%
   summarise(dv_a_nmo=sum(total))
 
 dv_apps_oo_year <- dv_csv_national %>%
-  filter(event_type=='Application', order_type=='Occupation') %>%
+  filter(type=='Application', order_type=='Occupation') %>%
   group_by(year) %>%
   summarise(dv_a_oo=sum(total))
 
 # orders
 dv_ords_all_year <- dv_csv_national %>%
-  filter(event_type=='Order') %>%
+  filter(type=='Order') %>%
   group_by(year) %>%
   summarise(dv_o=sum(total))
 
 dv_ords_nmo_year <- dv_csv_national %>%
-  filter(event_type=='Order', order_type=='Non-molestation') %>%
+  filter(type=='Order', order_type=='Non-molestation') %>%
   group_by(year) %>%
   summarise(dv_o_nmo=sum(total))
 
 dv_ords_oo_year <- dv_csv_national %>%
-  filter(event_type=='Order', order_type=='Occupation') %>%
+  filter(type=='Order', order_type=='Occupation') %>%
   group_by(year) %>%
   summarise(dv_o_oo=sum(total))
 
@@ -70,44 +71,44 @@ dv_year <-
 
 # cases
 dv_case_starts_quarter <- dv_csv_national %>%
-  filter(event_type=='Cases started') %>%
+  filter(type=='Cases started') %>%
   group_by(year, quarter) %>%
   summarise(dv_cs=sum(total))
 
 dv_case_disps_quarter <- dv_csv_national %>%
-  filter(event_type=='Cases concluded') %>%
+  filter(type=='Cases concluded') %>%
   group_by(year, quarter) %>%
   summarise(dv_cd=sum(total))
 
 # applications
 dv_apps_all_quarter <- dv_csv_national %>%
-  filter(event_type=='Application') %>%
+  filter(type=='Application') %>%
   group_by(year, quarter) %>%
   summarise(dv_a=sum(total))
 
 dv_apps_nmo_quarter <- dv_csv_national %>%
-  filter(event_type=='Application', order_type=='Non-molestation') %>%
+  filter(type=='Application', order_type=='Non-molestation') %>%
   group_by(year, quarter) %>%
   summarise(dv_a_nmo=sum(total))
 
 dv_apps_oo_quarter <- dv_csv_national %>%
-  filter(event_type=='Application', order_type=='Occupation') %>%
+  filter(type=='Application', order_type=='Occupation') %>%
   group_by(year, quarter) %>%
   summarise(dv_a_oo=sum(total))
 
 # orders
 dv_ords_all_quarter <- dv_csv_national %>%
-  filter(event_type=='Order') %>%
+  filter(type=='Order') %>%
   group_by(year, quarter) %>%
   summarise(dv_o=sum(total))
 
 dv_ords_nmo_quarter <- dv_csv_national %>%
-  filter(event_type=='Order', order_type=='Non-molestation') %>%
+  filter(type=='Order', order_type=='Non-molestation') %>%
   group_by(year, quarter) %>%
   summarise(dv_o_nmo=sum(total))
 
 dv_ords_oo_quarter <- dv_csv_national %>%
-  filter(event_type=='Order', order_type=='Occupation') %>%
+  filter(type=='Order', order_type=='Occupation') %>%
   group_by(year, quarter) %>%
   summarise(dv_o_oo=sum(total))
 
