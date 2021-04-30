@@ -28,7 +28,7 @@ dv_apps_all_year <- dv_csv_national %>%
   summarise(dv_a=sum(total))
 
 dv_apps_nmo_year <- dv_csv_national %>%
-  filter(type=='Application', order_type=='Non-molestation') %>%
+  filter(type=='Application', order_type=='Non-Molestation') %>%
   group_by(year) %>%
   summarise(dv_a_nmo=sum(total))
 
@@ -44,7 +44,7 @@ dv_ords_all_year <- dv_csv_national %>%
   summarise(dv_o=sum(total))
 
 dv_ords_nmo_year <- dv_csv_national %>%
-  filter(type=='Order', order_type=='Non-molestation') %>%
+  filter(type=='Order', order_type=='Non-Molestation') %>%
   group_by(year) %>%
   summarise(dv_o_nmo=sum(total))
 
@@ -87,7 +87,7 @@ dv_apps_all_quarter <- dv_csv_national %>%
   summarise(dv_a=sum(total))
 
 dv_apps_nmo_quarter <- dv_csv_national %>%
-  filter(type=='Application', order_type=='Non-molestation') %>%
+  filter(type=='Application', order_type=='Non-Molestation') %>%
   group_by(year, quarter) %>%
   summarise(dv_a_nmo=sum(total))
 
@@ -103,7 +103,7 @@ dv_ords_all_quarter <- dv_csv_national %>%
   summarise(dv_o=sum(total))
 
 dv_ords_nmo_quarter <- dv_csv_national %>%
-  filter(type=='Order', order_type=='Non-molestation') %>%
+  filter(type=='Order', order_type=='Non-Molestation') %>%
   group_by(year, quarter) %>%
   summarise(dv_o_nmo=sum(total))
 
