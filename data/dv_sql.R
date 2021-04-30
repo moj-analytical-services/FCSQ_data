@@ -47,7 +47,7 @@ WITH respondent_attendance AS(
 /* Creating a Power of Arrest flag for orders */  
 poa_flag AS(
   SELECT DISTINCT 
-    event,
+    events.event,
     'T' AS flag
   FROM {database}.events
   INNER JOIN {database}.event_fields
