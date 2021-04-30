@@ -104,7 +104,7 @@ dv_function <- function(){
     arrange(year, quarter, region, dfj) %>%                                                        # reorder the rows
     as.data.table()
   
-  data.table::fwrite(dv_csv_dfj, paste0(path_to_project, "temp/dv_csv_dfj_temp"))
+  data.table::fwrite(dv_csv_dfj, paste0(path_to_project, "temp/dv_csv_dfj_temp.csv"))
 }
 
 dv_function()
