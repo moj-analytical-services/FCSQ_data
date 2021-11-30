@@ -16,10 +16,10 @@ library(data.table)
 # Variables #######################################################################################
 
 snapshot_date <- "'2020-10-30'"                              # specify the FamilyMan snapshot to be used
-exclude_year <- "2020"                                       # specify the incomplete quarter to be excluded from the data
+exclude_year <- "2021"                                       # specify the incomplete quarter to be excluded from the data
 exclude_quarter <- "4"
 year_cut_off <- "2010"                                       # only records from years after this will be included in the final output
-pub_year <- "2020"                                           # specify the publication year and quarter for the output name
+pub_year <- "2021"                                           # specify the publication year and quarter for the output name
 pub_quarter <- "3"
 database <- "familyman_dev_v2"                               # specify the database name
 path_to_project <- "~/FCSQ_data/data/"                       # location to save files in the repo
