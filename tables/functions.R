@@ -119,3 +119,43 @@ write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_
                           sheet = sheet_name,
                           showGridLines = FALSE)
 }
+
+
+download_file_from_s3 <- function(s3_path, local_path, overwrite = FALSE) {
+  # trim s3:// if included by the user and add it back in where required
+  s3_path <- paste0("s3://", gsub('^s3://', "", s3_path))
+  if (!(file.exists(local_path)) || overwrite) {
+    local_path_folders <- stringr::str_extract(local_path, ".*[\\/]+")
+    if(!is.na(local_path)) {
+      dir.create(local_path_folders, showWarnings = FALSE, recursive = TRUE)
+    }
+    # download file
+    tryCatch({
+      # download file to tempfile()
+      botor::s3_download_file(s3_path,
+                              local_path,
+                              force = overwrite)
+    },
+    error = function(cond){
+      stop("\nError, file cannot be found. \nYou either don't have access to this bucket, or are using an invalid s3_path argument (file does not exist).")
+    })
+    
+    
+  } else {
+    stop(paste0("The file already exists locally and you didn't specify",
+                " overwrite=TRUE"))
+  }
+}
+
+
+read_using <- function(FUN, s3_path, ...) {
+  # trim s3:// if included by the user
+  s3_path <- paste0("s3://", gsub('^s3://', "", s3_path))
+  # find fileext
+  file_ext <- paste0('.', tolower(tools::file_ext(s3_path)))
+  # download file to tempfile()
+  tmp <- botor::s3_download_file(s3_path,
+                                 tempfile(fileext = file_ext),
+                                 force = TRUE)
+  FUN(tmp, ...)
+}
