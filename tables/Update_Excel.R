@@ -1,16 +1,3 @@
-# Create tables from the CSVs
-
-# Packages ########################################################################################
-
-library(dplyr)
-library(mojrap)
-library(openxlsx)
-#library(s3tools)
-library(glue)
-library(readr)
-library(tidyverse)
-library(xltabr)
-library(a11ytables)
 
 # Variables #######################################################################################
 
@@ -24,9 +11,9 @@ csv_folder <- paste0("alpha-family-data/CSVs/CSV_bulletin/", pub_year, " Q",pub_
 # Import ##########################################################################################
 
 # template Excel sheet
-download_file_from_s3("alpha-family-data/Tables/2021 Q4 Template.xls", paste0(path_to_project, "template.xlsx"), overwrite = TRUE)
-template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "template.xlsx"))
-
+template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "My template.xlsx"))
+#download_file_from_s3("alpha-family-data/Tables/2021 Q4 Template.xls", paste0(path_to_project, "template.xlsx"), overwrite = TRUE)
+#template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "template.xlsx"))
 # Editing #########################################################################################
 # data is used for source data where needed for tables with drop downs
 # table is used for the table itself
@@ -35,12 +22,31 @@ source(paste0(path_to_project, "functions.R"))
 source(paste0(path_to_project, "index.R"))
 
 # tables
-source(paste0(path_to_project, "data11.R"))
-source(paste0(path_to_project, "table11.R"))
-source(paste0(path_to_project, "table16.R"))
+source(paste0(path_to_project, "table15.R"))
+notes_all <- c(t15_notes)
 
-# additional formatting
-source(paste0(path_to_project, "dropdowns.R")) # includes code for table 11
+
+
+####################################################################
+#Financial Remedy
+#Table 15
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_15',
+                    x = timeperiod15,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_15', 
+                      tables = list(t15_year, t15_qtr), 
+                      notes = notes15, 
+                      starting_row = 6, 
+                      quarterly_format = c(2))
+
 
 # Export ##########################################################################################
 
