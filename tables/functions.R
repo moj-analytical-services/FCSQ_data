@@ -159,3 +159,35 @@ read_using <- function(FUN, s3_path, ...) {
                                  force = TRUE)
   FUN(tmp, ...)
 }
+
+#Helper function for adding notes
+note_add <- function(wb, sheetName, table_no, startRow, notes){
+  
+  #Writing the Table Name
+  openxlsx::writeData(wb, 
+                      sheetName, 
+                      paste('Table', table_no),
+                      startRow = startRow,
+                      colNames = F)
+  
+  #Styling by making it bold and larger
+  openxlsx::addStyle(wb,
+                     sheetName,
+                     style = name_style,
+                     rows = startRow,
+                     cols = 1)
+  
+  note_length <- length(notes)
+  
+  #Creating the notes using note number to make the counts accurate
+  note_no <- paste0("[", note_number + seq_along(notes), "]")
+  notes_df <- tibble(`Note number` = note_no, 
+                     `Note text` = notes)
+  
+  #Adding the notes to the sheet
+  openxlsx::writeData(notes_wb,
+                      'Notes',
+                      notes_df,
+                      startRow = startRow + 1)
+  
+}
