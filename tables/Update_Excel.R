@@ -3,6 +3,7 @@
 
 pub_year <- 2021                                                              # Specify the publication year and quarter for the output name
 pub_quarter <- 4
+annual_year <- 2021
 pub_date <- "31st March 2022"
 next_pub_date <- "30th June 2022"
 path_to_project = '~/FCSQ_data/tables/'                                       # UPDATE ONLY IF YOU CHANGE THE LOCATION OF THE PROJECT FILES
@@ -23,9 +24,11 @@ source(paste0(path_to_project, "index.R"))
 
 # tables
 source(paste0(path_to_project, "table15.R"))
+source(paste0(path_to_project, "table16_reg.R"))
 notes_all <- c(t15_notes)
 
-
+# dropdowns
+source(paste0(path_to_project, "Regular_Tables/lists.R"))
 
 ####################################################################
 #Financial Remedy
@@ -47,6 +50,25 @@ write_formatted_table(workbook = template,
                       starting_row = 6, 
                       quarterly_format = c(2))
 
+####################################################################
+#Domestic Violence
+#Table 16
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_16',
+                    x = timeperiod15,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_16', 
+                      tables = list(dv_hard_code, dv_year), 
+                      notes = notes15, 
+                      starting_row = 10, 
+                      quarterly_format = c(3))
 
 # Export ##########################################################################################
 
