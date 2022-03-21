@@ -65,11 +65,22 @@ write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_
     ##Set row heights for quarterly tables; every 4th row is taller to break up data
     #only for tables specified in quarterly_format argument
     if(i %in% quarterly_format) {
+      all_rows <- seq(from = start_row, to = end_row, by = 1)
       quarterly_rows <- seq(from = start_row, to = end_row, by = 4)
+      non_quarterly_rows <- setdiff(all_rows, quarterly_rows)
       openxlsx::setRowHeights(wb = workbook,
                               sheet = sheet_name,
                               rows = quarterly_rows,
                               heights = 26.25)
+      
+      #Styling Year columns not in the quarterly rows white to avoid repetition
+      openxlsx::addStyle(wb = workbook,
+                         sheet = sheet_name,
+                         openxlsx::createStyle(fontColour = "white"),
+                         rows = non_quarterly_rows,
+                         cols = 1,
+                         stack = T,
+                         gridExpand = T)
       #Make sure all values are aligned to the bottom of the cell
       openxlsx::addStyle(workbook,
                          sheet_name,

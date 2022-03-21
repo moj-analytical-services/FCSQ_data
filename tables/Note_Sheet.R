@@ -38,7 +38,7 @@ t15_note_len <- length(t15_notes)
 note_add(notes_wb, 'Notes', table_no = 15, startRow = starting_row, t15_notes)
 
 note_number <- note_number + t15_note_len
-starting_row <- starting_row + t15_note_len + 1
+starting_row <- starting_row + t15_note_len + 2
 
 openxlsx::saveWorkbook(notes_wb, paste0(path_to_project,"note2_output.xlsx"), overwrite = TRUE)
                     
