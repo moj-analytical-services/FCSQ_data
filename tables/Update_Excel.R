@@ -65,10 +65,10 @@ openxlsx::writeData(wb = template,
 # data
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_16', 
-                      tables = list(dv_hard_code, dv_year), 
+                      tables = list(dv_hard_code, dv_year, dv_hard_code_qtr, dv_qtr), 
                       notes = notes15, 
                       starting_row = 10, 
-                      quarterly_format = c(3))
+                      quarterly_format = c(3, 4))
 
 # Export ##########################################################################################
 
