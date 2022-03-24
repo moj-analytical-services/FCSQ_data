@@ -196,7 +196,7 @@ note_add <- function(wb, sheetName, table_no, startRow, notes){
                      `Note text` = notes)
   
   #Adding the notes to the sheet
-  openxlsx::writeData(notes_wb,
+  openxlsx::writeData(wb,
                       'Notes',
                       notes_df,
                       startRow = startRow + 1)
