@@ -11,6 +11,7 @@ library(readr)
 library(tidyverse)
 library(xltabr)
 library(a11ytables)
+library(mojtable)
 
 # Variables #######################################################################################
 

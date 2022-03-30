@@ -2,9 +2,9 @@
 
 # Processing ######################################################################################
 
-# table 11
+# table 11/16
 dropdown11_df <- data.frame(c("Adoption", "Divorce", "Domestic Violence", "Financial Remedy", "Private Law", "Public Law"))
-
+dropdown16_df <- tibble(c('All', 'Exparte', 'On notice'))
 # Output ##########################################################################################
 
 # table 11
