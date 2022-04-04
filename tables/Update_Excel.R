@@ -7,7 +7,7 @@ annual_year <- 2021
 pub_date <- "31st March 2022"
 next_pub_date <- "30th June 2022"
 path_to_project = '~/FCSQ_data/tables/'                                       # UPDATE ONLY IF YOU CHANGE THE LOCATION OF THE PROJECT FILES
-csv_folder <- paste0("alpha-family-data/CSVs/CSV_bulletin/", pub_year, " Q",pub_quarter,"/") # location in the S3 bucket to import CSVs from
+csv_folder <- paste0("alpha-family-data/CSVs/Table_Creation/", pub_year, " Q",pub_quarter,"/") # location in the S3 bucket to import CSVs from
 
 # Import ##########################################################################################
 
@@ -69,7 +69,7 @@ openxlsx::writeData(wb = template,
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_16', 
                       tables = list(dv_hard_code, dv_year, dv_hard_code_qtr, dv_qtr), 
-                      notes = notes15, 
+                      notes = notes16, 
                       starting_row = 10, 
                       quarterly_format = c(3, 4))
 

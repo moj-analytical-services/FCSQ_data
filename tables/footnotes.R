@@ -5,6 +5,13 @@ t15_notes <- c("The types of financial remedy included are as follows: lump sum,
                "These figures relate to the number of disposal events in which one or more types of financial remedy disposals were made (e.g. an order given or a dismissal). Figures on each type of disposals individually were removed from this publication in June 2020 (see accompanying guide for further details)",
                "Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters")
 
+t16_notes <- c(" '-' indicates data is not available.",
+               "A CSV file accompanies this table, which provides data in a machine-readable format that allows a wider range of breakdowns to be produced (including those given in previous publications, for example by ex-parte/on notice and whether power of arrest is attached to order). If you require assistance on using this CSV file, please contact the Statistics team using the details provided at the end of the bulletin.",
+               "Applications made can be for both Non-molestation and Occupation orders, so the total number of orders applied for will be greater than the number of applications made.",
+               "Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters",
+               "There are different types of applications and orders; exparte (where no notice is given to the respondent) and on notice (where notice is given). This information is not available for total applications or cases as they may include a mix of exparte and on notice types",
+               "Some non molestation and occupation orders are applied for and granted in Children Act and Adoption cases rather than domestic violence cases. Only domestic violence cases are included within the cases started/concluded figures.",
+               "For domestic violence cases there is no widely used marker for the conclusion of a case; here cases are considered to be concluded in the quarter of the last definitive order in the case.") 
 # notes
 notes15 <- c("Source:",
              "HMCTS FamilyMan system",
@@ -16,3 +23,15 @@ notes15 <- c("Source:",
              paste0("4) ", t15_notes[4]),
              paste0("5) ", t15_notes[5]),
              paste0("6) ", t15_notes[6]))
+
+notes16 <- c("Source:",
+             "HMCTS FamilyMan system",
+             "",
+             "Notes:",
+             paste0("1) ", t16_notes[1]),
+             paste0("2) ", t16_notes[2]),
+             paste0("3) ", t16_notes[3]),
+             paste0("4) ", t16_notes[4]),
+             paste0("5) ", t16_notes[5]),
+             paste0("6) ", t16_notes[6]),
+             paste0("7) ", t16_notes[7]))

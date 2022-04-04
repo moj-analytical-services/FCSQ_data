@@ -4,7 +4,7 @@
 
 dv_csv <- read_using(readr::read_csv, paste0(csv_folder, "CSV Domestic Violence National", " ", pub_year, " Q", pub_quarter, ".csv"), na = na_keys) %>% rename_with(str_to_title)
 
-dv_hard_code_csv <- read_using(readr::read_csv, glue("{csv_folder}DV_Hard_Code.csv")) %>% rename_with(str_to_title)
+#dv_hard_code_csv <- read_using(readr::read_csv, glue("{csv_folder}DV_Hard_Code.csv")) %>% rename_with(str_to_title)
 
 
 # Processing ######################################################################################
@@ -43,9 +43,9 @@ dv_exp_apps_nmo_year <- dv_csv %>%
   summarise(`Exparte Non-Molestation Orders applied for`= sum(Total))
 
 dv_on_apps_nmo_year <- dv_csv %>%
-  filter(Type=='Orders applied for', Order_type=='Non-Molestation', Exparte_or_on_notice == 'On notice') %>%
+  filter(Type=='Orders applied for', Order_type=='Non-Molestation', Exparte_or_on_notice == 'On Notice') %>%
   group_by(Year) %>%
-  summarise(`On notice Non-Molestation Orders applied for`= sum(Total))
+  summarise(`On Notice Non-Molestation Orders applied for`= sum(Total))
 
 dv_exp_apps_oo_year <- dv_csv %>%
   filter(Type=='Orders applied for', Order_type=='Occupation', Exparte_or_on_notice == 'Exparte') %>%
@@ -53,9 +53,9 @@ dv_exp_apps_oo_year <- dv_csv %>%
   summarise(`Exparte Occupation Orders applied for`= sum(Total))
 
 dv_on_apps_oo_year <- dv_csv %>%
-  filter(Type=='Orders applied for', Order_type=='Occupation', Exparte_or_on_notice == 'On notice') %>%
+  filter(Type=='Orders applied for', Order_type=='Occupation', Exparte_or_on_notice == 'On Notice') %>%
   group_by(Year) %>%
-  summarise(`On notice Occupation Orders applied for`= sum(Total))
+  summarise(`On Notice Occupation Orders applied for`= sum(Total))
 
 # orders
 dv_ords_all_year <- dv_csv %>%
@@ -71,7 +71,7 @@ dv_exp_ords_nmo_year <- dv_csv %>%
 dv_on_ords_nmo_year <- dv_csv %>%
   filter(Type=='Orders made', Order_type=='Non-Molestation', Exparte_or_on_notice == 'On Notice') %>%
   group_by(Year) %>%
-  summarise(`On notice Non-Molestation Orders made`= sum(Total))
+  summarise(`On Notice Non-Molestation Orders made`= sum(Total))
 
 dv_exp_ords_oo_year <- dv_csv %>%
   filter(Type=='Orders made', Order_type=='Occupation', Exparte_or_on_notice == 'Exparte') %>%
@@ -81,7 +81,7 @@ dv_exp_ords_oo_year <- dv_csv %>%
 dv_on_ords_oo_year <- dv_csv %>%
   filter(Type=='Orders made', Order_type=='Occupation', Exparte_or_on_notice == 'On Notice') %>%
   group_by(Year) %>%
-  summarise(`On notice Occupation Orders made`= sum(Total))
+  summarise(`On Notice Occupation Orders made`= sum(Total))
 
 #list of tables in order
 dv_tables <- list(dv_exp_apps_nmo_year, dv_on_apps_nmo_year, dv_exp_apps_oo_year, dv_on_apps_oo_year,
@@ -125,9 +125,9 @@ dv_exp_apps_nmo_qtr <- dv_csv %>%
   summarise(`Exparte Non-Molestation Orders applied for` = sum(Total))
 
 dv_on_apps_nmo_qtr <- dv_csv %>%
-  filter(Type=='Orders applied for', Order_type=='Non-Molestation', Exparte_or_on_notice == 'On notice') %>%
+  filter(Type=='Orders applied for', Order_type=='Non-Molestation', Exparte_or_on_notice == 'On Notice') %>%
   group_by(Year, Quarter) %>%
-  summarise(`On notice Non-Molestation Orders applied for`= sum(Total))
+  summarise(`On Notice Non-Molestation Orders applied for`= sum(Total))
 
 dv_exp_apps_oo_qtr <- dv_csv %>%
   filter(Type=='Orders applied for', Order_type=='Occupation', Exparte_or_on_notice == 'Exparte') %>%
@@ -135,9 +135,9 @@ dv_exp_apps_oo_qtr <- dv_csv %>%
   summarise(`Exparte Occupation Orders applied for`= sum(Total))
 
 dv_on_apps_oo_qtr <- dv_csv %>%
-  filter(Type=='Orders applied for', Order_type=='Occupation', Exparte_or_on_notice == 'On notice') %>%
+  filter(Type=='Orders applied for', Order_type=='Occupation', Exparte_or_on_notice == 'On Notice') %>%
   group_by(Year, Quarter) %>%
-  summarise(`On notice Occupation Orders applied for`= sum(Total))
+  summarise(`On Notice Occupation Orders applied for`= sum(Total))
 
 # orders
 dv_ords_all_qtr <- dv_csv %>%
@@ -153,7 +153,7 @@ dv_exp_ords_nmo_qtr <- dv_csv %>%
 dv_on_ords_nmo_qtr <- dv_csv %>%
   filter(Type=='Orders made', Order_type=='Non-Molestation', Exparte_or_on_notice == 'On Notice') %>%
   group_by(Year, Quarter) %>%
-  summarise(`On notice Non-Molestation Orders made`= sum(Total))
+  summarise(`On Notice Non-Molestation Orders made`= sum(Total))
 
 dv_exp_ords_oo_qtr <- dv_csv %>%
   filter(Type=='Orders made', Order_type=='Occupation', Exparte_or_on_notice == 'Exparte') %>%
@@ -163,7 +163,7 @@ dv_exp_ords_oo_qtr <- dv_csv %>%
 dv_on_ords_oo_qtr <- dv_csv %>%
   filter(Type=='Orders made', Order_type=='Occupation', Exparte_or_on_notice == 'On Notice') %>%
   group_by(Year, Quarter) %>%
-  summarise(`On notice Occupation Orders made`= sum(Total))
+  summarise(`On Notice Occupation Orders made`= sum(Total))
 
 #list of tables in order
 dv_tables_qtr <- list(dv_exp_apps_nmo_qtr, dv_on_apps_nmo_qtr, dv_exp_apps_oo_qtr, dv_on_apps_oo_qtr,
@@ -195,7 +195,7 @@ notes16 <- c("Source:",
              "",
              "Notes:",
              "1) '-' indicates data not currently available due to data processing issues.",
-             "2) A CSV file accompanies this table, which provides data in a machine-readable format that allows a wider range of breakdowns to be produced (including those given in previous publications, for example by ex-party/on notice and whether power of arrest is attached to order). If you require assistance on using this CSV file, please contact the Statistics team using the details provided at the end of the bulletin.",
+             "2) A CSV file accompanies this table, which provides data in a machine-readable format that allows a wider range of breakdowns to be produced (including those given in previous publications, for example by ex-party/On Notice and whether power of arrest is attached to order). If you require assistance on using this CSV file, please contact the Statistics team using the details provided at the end of the bulletin.",
              "3) For domestic violence cases there is no widely used marker for the conclusion of a case; here cases are considered to be concluded in the quarter of the last definitive order in the case.",
              "4) Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters.")
 
