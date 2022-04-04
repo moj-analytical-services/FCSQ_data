@@ -23,8 +23,11 @@ source(paste0(path_to_project, "functions.R"))
 source(paste0(path_to_project, "index.R"))
 
 # tables
-source(paste0(path_to_project, "table15.R"))
-source(paste0(path_to_project, "table16_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table15.R"))
+source(paste0(path_to_project, "Regular_Tables/table16_reg.R"))
+
+# notes
+source(paste0(path_to_project, "footnotes.R"))
 notes_all <- c(t15_notes)
 
 # dropdowns
