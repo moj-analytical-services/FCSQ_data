@@ -12,6 +12,11 @@ csv_folder <- paste0("alpha-family-data/CSVs/Table_Creation/", pub_year, " Q",pu
 # Import ##########################################################################################
 
 # template Excel sheet
+options(digits = 15) # Set the number of significant figure to 15 (same as excel)
+path <- "styles_pub.xlsx"
+xltabr::set_style_path(paste0(path_to_project,path))
+xltabr::set_cell_format_path(paste0(path_to_project,"number_formats.csv"))
+
 template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "My template.xlsx"))
 #download_file_from_s3("alpha-family-data/Tables/2021 Q4 Template.xls", paste0(path_to_project, "template.xlsx"), overwrite = TRUE)
 #template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "template.xlsx"))
@@ -19,16 +24,18 @@ template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "My template.xls
 # data is used for source data where needed for tables with drop downs
 # table is used for the table itself
 
+
 source(paste0(path_to_project, "functions.R"))
 source(paste0(path_to_project, "index.R"))
 
+# notes
+source(paste0(path_to_project, "footnotes.R"))
+
 # tables
+source(paste0(path_to_project, "Regular_Tables/table11_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table15.R"))
 source(paste0(path_to_project, "Regular_Tables/table16_reg.R"))
 
-# notes
-source(paste0(path_to_project, "footnotes.R"))
-notes_all <- c(t15_notes)
 
 # dropdowns
 source(paste0(path_to_project, "Regular_Tables/lists.R"))

@@ -12,13 +12,20 @@ multiple_cell_merge <- function(wb, sheet, rows, cols) {
                          i)
 }
 
-write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_row, quarterly_format = NULL) {
+write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_row, quarterly_format = NULL, lookup_flag = NULL) {
   
   #Throw error if not passed a list of tables
   if(inherits(tables, "list") == FALSE) {stop("Tables must be provided as a list")}
   #Throw error if not passed a vector of notes
   if(is.vector(notes) == FALSE | inherits(notes, "list") == TRUE) {stop("Notes must be provided as a vector")}
   
+  #setting column numbers
+  if (is.null(lookup_flag)){
+    colnum <- seq_len(ncol(tables[[1]]))
+    
+  } else{
+    colnum <- seq_len(lookup_flag)
+  }
   ##Set starting row parameters
   start_row <- starting_row
   
@@ -47,7 +54,7 @@ write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_
                            border = "bottom",
                            borderStyle = "thin"),
                          rows = end_row,
-                         cols = seq_len(ncol(tables[[i]])),
+                         cols = colnum,
                          stack = T,
                          gridExpand = T)
     } else{
@@ -86,7 +93,7 @@ write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_
                          sheet_name,
                          openxlsx::createStyle(valign = "bottom"),
                          rows = start_row:end_row,
-                         cols = seq_len(ncol(tables[[i]])),
+                         cols = colnum,
                          stack = T,
                          gridExpand = T)
     }
@@ -116,21 +123,21 @@ write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_
   multiple_cell_merge(wb = workbook,
                       sheet = sheet_name,
                       rows = start_row_notes:end_row_notes,
-                      cols = seq_len(ncol(tables[[1]])))
+                      cols = colnum)
   openxlsx::addStyle(wb = workbook,
                      sheet = sheet_name,
                      style = note_style,
                      rows = start_row_notes:end_row_notes,
-                     cols = seq_len(ncol(tables[[1]])),
+                     cols = colnum,
                      stack = T,
                      gridExpand = T)
+  
   
   #Remove gridlines from sheet
   openxlsx::showGridLines(wb = workbook,
                           sheet = sheet_name,
                           showGridLines = FALSE)
 }
-
 
 download_file_from_s3 <- function(s3_path, local_path, overwrite = FALSE) {
   # trim s3:// if included by the user and add it back in where required

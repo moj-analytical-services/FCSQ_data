@@ -27,12 +27,13 @@ class(dv_hard_code$Ords_total) <- c(class(dv_hard_code$Ords_total), 'formula')
 
 #Keeping track of row to start with
 current_t16 <- start_t16 + nrow(dv_hard_code)
-t16_year_diff <- annual_year - 2011
-t16_year_num <- t16_year_diff + 1
-dv_year_row_seq <- seq(from = current_t16, to = current_t16 + t16_year_diff)
+dv_label <- dv_csv %>% distinct(Year, Quarter) %>% filter(Year > 2010)
+current_dv_year <- dv_label %>% distinct(Year) %>% pull(Year)
+dv_year_row_seq <- seq(from = current_t16, to = current_t16 + length(current_dv_year) - 1)
+
 
 #Remaining annual data
-dv_year <- tibble(Year = 2011:annual_year,
+dv_year <- tibble(Year = current_dv_year,
                   Quarter = NA_character_,
                   Nmo_app = glue('IF($B$6="All",SUMIFS(Table_16_source!$H:$H,Table_16_source!$A:$A,$A{dv_year_row_seq}\\
                                    ,Table_16_source!$D:$D,LEFT($C$8, LEN($C$8) - 1),Table_16_source!$E:$E,C$9)\\
@@ -113,22 +114,13 @@ class(dv_hard_code_qtr$Ords_total) <- c(class(dv_hard_code_qtr$Ords_total), 'for
 current_t16 <- current_t16 + nrow(dv_hard_code_qtr)
 
 #Making sure that Year and Quarter have the right amount of rows
+current_dv_years <- dv_label$Year
+current_dv_quarter <- paste0('Q', dv_label$Quarter)
 
-if (pub_quarter == 4){
-  t16_qtr_year <- rep(2011:annual_year, each = 4)
-  t16_qtr_qtr <- paste0('Q', rep(1:4, t16_year_num))
-  t16_quarter_num <- length(t16_qtr_qtr)
-  dv_qtr_row_seq <- seq(from = current_t16, to = current_t16 + t16_quarter_num - 1)
-  
-} else{
-  t16_qtr_year <- c(rep(2011:annual_year, each = 4), rep(pub_year, each = pub_quarter))
-  t16_qtr_qtr <- paste0('Q', c(rep(1:4, t16_year_num), 1:pub_quarter))
-  t16_quarter_num <- length(t16_qtr_qtr)
-  dv_qtr_row_seq <- seq(from = current_t16, to = current_t16 + t16_quarter_num - 1)
-}
+dv_qtr_row_seq <- seq(from = current_t16, to = current_t16 + length(current_dv_quarter) - 1)
 
-dv_qtr <- tibble(Year = t16_qtr_year,
-                  Quarter = t16_qtr_qtr,
+dv_qtr <- tibble(Year = current_dv_years,
+                  Quarter = current_dv_quarter,
                   Nmo_app = glue('IF($B$6="All",SUMIFS(Table_16_source!$H:$H,Table_16_source!$A:$A,$A{dv_qtr_row_seq}\\
                                    ,Table_16_source!$D:$D,LEFT($C$8, LEN($C$8) - 1),Table_16_source!$E:$E,C$9\\
                                    ,Table_16_source!$B:$B,MID($B{dv_qtr_row_seq},2,1))\\
