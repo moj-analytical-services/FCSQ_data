@@ -1,6 +1,4 @@
 #Table 15
-na_keys <- c(":", ".", "..", "*", "#REF!", "-")
-fr_csv <- read_using(readr::read_csv, paste0(csv_folder,"CSV Financial Remedy National", " ", pub_year, " Q", pub_quarter, ".csv"), na = na_keys) %>% rename_with(str_to_title)
 
 #Table Creation by Year first
 

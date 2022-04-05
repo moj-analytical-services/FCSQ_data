@@ -2,7 +2,6 @@
 
 # Import ##########################################################################################
 
-dv_csv <- read_using(readr::read_csv, paste0(csv_folder, "CSV Domestic Violence National", " ", pub_year, " Q", pub_quarter, ".csv"), na = na_keys) %>% rename_with(str_to_title)
 
 #dv_hard_code_csv <- read_using(readr::read_csv, glue("{csv_folder}DV_Hard_Code.csv")) %>% rename_with(str_to_title)
 

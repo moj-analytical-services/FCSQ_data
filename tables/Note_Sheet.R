@@ -33,6 +33,13 @@ openxlsx::addStyle(notes_wb,
 starting_row <- 2
 note_number <- 0
 
+#Table 11
+t11_note_len <- length(t11_notes)
+note_add(notes_wb, 'Notes', table_no = 11, startRow = starting_row, t11_notes)
+
+note_number <- note_number + t11_note_len
+starting_row <- starting_row + t11_note_len + 2
+
 #Table 15
 t15_note_len <- length(t15_notes)
 note_add(notes_wb, 'Notes', table_no = 15, startRow = starting_row, t15_notes)
