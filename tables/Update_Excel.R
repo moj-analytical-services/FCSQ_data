@@ -1,13 +1,4 @@
 
-# Variables #######################################################################################
-
-pub_year <- 2021                                                              # Specify the publication year and quarter for the output name
-pub_quarter <- 4
-annual_year <- 2021
-pub_date <- "31st March 2022"
-next_pub_date <- "30th June 2022"
-path_to_project = '~/FCSQ_data/tables/'                                       # UPDATE ONLY IF YOU CHANGE THE LOCATION OF THE PROJECT FILES
-csv_folder <- paste0("alpha-family-data/CSVs/Table_Creation/", pub_year, " Q",pub_quarter,"/") # location in the S3 bucket to import CSVs from
 
 # Import ##########################################################################################
 
