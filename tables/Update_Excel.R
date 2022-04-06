@@ -23,6 +23,7 @@ source(paste0(path_to_project, "index.R"))
 source(paste0(path_to_project, "footnotes.R"))
 
 # tables
+source(paste0(path_to_project, "Regular_Tables/table10_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table11_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table15.R"))
 source(paste0(path_to_project, "Regular_Tables/table16_reg.R"))

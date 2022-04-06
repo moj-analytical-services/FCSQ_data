@@ -1,4 +1,20 @@
 # notes
+t10_notes <- c("Self-representation is determined by the field 'legal representation' in Familyman being left blank. Therefore, this is only a proxy measure and parties without a recorded representative are not necessarily self-representing litigants in person.",
+               "Adoption timeliness figures cover applications for standard, convention and foreign adoptions. They do not cover placement cases. Q3 2014 figures were inflated by a data cleansing exercise which involved closing old cases, which particularly affected the mean disposal time.",
+               "Divorce timeliness figures (measured to decree nisi) include annulments and judicial separations, as well as financial remedies. The representation status may refer to divorce (including civil partnerships) or financial remedy proceedings (formerly known as 'ancillary relief'). Cases involving financial remedies are those which had an application or order made for one or more financial remedies at the time the data was extracted for this publication.",
+               "Duration is calculated from the earliest application/petition date (or date the case was transferred in to the court if earlier) to the date of the earliest disposal/decree nisi.",
+               "The mean duration is calculated as the total of all durations within the category, divided by the number of orders/decrees nisi. Median figures can now be found in the csv file that accompanies this table.",
+               "A party is considered 'applicant-represented' if at least one applicant has a recorded representative, and likewise for respondents.",
+               "'All types' includes a small number of disposals where representation status is unknown, so may exceed the sum of the other categories. In addition, these figures may not be identical to those given in other tables for various reasons - such as incomplete or invalid data, or for Public and Private law the fact that the above figures only relate to specific order types.",
+               "The large volume of decree nisi (disposals) seen in Q1 and Q2 2016 is due to the clearance of the backlog following the creation of the new centralised divorce centre for London and the South East Region during 2015.",
+               "The majority of Public law applicants are public bodies with access to their own legal resources - however, this legal representation is often not recorded. To address this we introduced a new methodology which assumes that all public body applicants have legal representation.",
+               "Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters",
+               "Due to recording errors for some paper petitions, the date when the petition was issued have been incorrectly recorded as the date the petition was received by HMCTS from September 2020. This has resulted in the receipt and issue date being the same and it is estimated to affect around 47% of paper petitions to June 2021. This means that some petitions recorded as been received in one quarter may have actually been received in an earlier quarter, and this would also shorten times to decree nisi and absolute (by around a week).",
+               "As a result of moving to a more robust data source of FamilyMan (for paper cases) and Core Case Data (CCD, for digital cases) for financial remedy, we are unable to provide Q4 2021 (and 2021) timeliness figures for this release. This information will be added in the next publication due June 2022.")
+
+               
+               
+               
 t11_notes <- c("Self-representation is determined by the field 'legal representation' in Familyman being left blank. Therefore, this is only a proxy measure and parties without a recorded representative are not necessarily self-representing litigants in person.",
              "Please note that the latest quarters' figures may reduce in future publications, particularly in regard to parties obtaining legal representation as cases progress. Therefore the latest quarter figures should be considered as provisional. ",
              "In this instance 'at least one hearing' refers to non-vacated scheduled hearings, rather than actual hearings that have taken place.",
@@ -29,8 +45,25 @@ t16_notes <- c(" '-' indicates data is not available.",
                "For domestic violence cases there is no widely used marker for the conclusion of a case; here cases are considered to be concluded in the quarter of the last definitive order in the case.") 
 # notes
 
+notes10 <- c("Source:",
+             "HMCTS FamilyMan and HMCTS Core Case Data",
+             "",
+             "Notes:",
+             paste0("1) ", t10_notes[1]),
+             paste0("2) ", t10_notes[2]),
+             paste0("3) ", t10_notes[3]),
+             paste0("4) ", t10_notes[4]),
+             paste0("5) ", t10_notes[5]),
+             paste0("6) ", t10_notes[6]),
+             paste0("7) ", t10_notes[7]),
+             paste0("8) ", t10_notes[8]),
+             paste0("9) ", t10_notes[9]),
+             paste0("10) ", t10_notes[10]),
+             paste0("11) ", t10_notes[11]),
+             paste0("12) ", t10_notes[12]))
+
 notes11 <- c("Source:",
-             "HMCTS FamilyMan system",
+             "HMCTS FamilyMan and HMCTS Core Case Data",
              "",
              "Notes:",
              paste0("1) ", t11_notes[1]),
