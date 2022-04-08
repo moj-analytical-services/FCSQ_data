@@ -18,3 +18,4 @@ renv::install('botor')
 
 renv::install("git@github.com:moj-analytical-services/xltabr.git")
 renv::install("git@github.com:moj-analytical-services/mojtable.git")
+renv::install("git@github.com:moj-analytical-services/xltabr.git")
