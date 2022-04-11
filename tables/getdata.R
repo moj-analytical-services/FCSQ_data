@@ -1,4 +1,15 @@
+# Packages ########################################################################################
 
+library(dplyr)
+library(mojrap)
+library(openxlsx)
+#library(s3tools)
+library(glue)
+library(readr)
+library(tidyverse)
+library(xltabr)
+library(a11ytables)
+library(mojtable)
 # Variables #######################################################################################
 
 pub_year <- 2021                                                              # Specify the publication year and quarter for the output name

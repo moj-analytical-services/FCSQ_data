@@ -23,6 +23,7 @@ source(paste0(path_to_project, "index.R"))
 source(paste0(path_to_project, "footnotes.R"))
 
 # tables
+source(paste0(path_to_project, "Regular_Tables/table1_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table10_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table11_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table15.R"))
@@ -31,6 +32,26 @@ source(paste0(path_to_project, "Regular_Tables/table16_reg.R"))
 
 # dropdowns
 source(paste0(path_to_project, "Regular_Tables/lists.R"))
+
+####################################################################
+#Financial Remedy
+#Table 1
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_1',
+                    x = timeperiod1,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_1', 
+                      tables = list(table1_pivot_annual, table1_pivot_qtr), 
+                      notes = notes15, 
+                      starting_row = 6, 
+                      quarterly_format = c(2))
 
 ####################################################################
 #Financial Remedy
