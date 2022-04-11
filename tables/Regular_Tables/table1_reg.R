@@ -34,12 +34,15 @@ table1_pivot_annual <- table1_annual %>%
   relocate(blank1, .after = `Total Cases started`)
 
 
-table1_pivot_qtr <- table_1_alt %>%
+#Now doing the same figures for the quarterly version
+table1_quarterly <- table_1_alt %>% 
+  filter(Year > 2010) %>% 
+  arrange(Year, Quarter)
+
+table1_pivot_qtr <- table1_quarterly %>%
   pivot_wider(names_from = c(Category, Stage),
               names_sep = ' ',
               values_from = Count) %>% 
-  filter(Year > 2010) %>% 
-  arrange(Year, Quarter) %>% 
   relocate(Year,
            Quarter,
            `Public Law Cases started`,
