@@ -8,7 +8,11 @@ path <- "styles_pub.xlsx"
 xltabr::set_style_path(paste0(path_to_project,path))
 xltabr::set_cell_format_path(paste0(path_to_project,"number_formats.csv"))
 
+#xltabr::set_style_path()
+#xltabr::set_cell_format_path()
 template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "My template.xlsx"))
+#template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "FCSQ Template.xlsx"))
+
 #download_file_from_s3("alpha-family-data/Tables/2021 Q4 Template.xls", paste0(path_to_project, "template.xlsx"), overwrite = TRUE)
 #template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "template.xlsx"))
 # Editing #########################################################################################
@@ -23,6 +27,7 @@ source(paste0(path_to_project, "index.R"))
 source(paste0(path_to_project, "footnotes.R"))
 
 # tables
+source(paste0(path_to_project, "table_1_change.R"))
 source(paste0(path_to_project, "Regular_Tables/table1_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table10_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table11_reg.R"))

@@ -1,7 +1,7 @@
 #Quarterly Table 1
 #Summing up for yearly total
 table1_annual <- table_1_alt %>% group_by(Year, Category, Stage) %>% summarise(Count = sum(Count)) %>% ungroup() %>% 
-  filter(Year > 2005)
+  filter(Year > 2005, Year <= annual_year)
 
 #Pivoting and reordering the columns
 table1_pivot_annual <- table1_annual %>%

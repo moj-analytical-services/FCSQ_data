@@ -1,20 +1,25 @@
 #Accessible T1
+
+#Grouping the data by years and filtering out any years that aren't full
 table1_annual_access <- table_1_alt %>% group_by(Category, Year, Stage) %>% summarise(Count = sum(Count)) %>% ungroup() %>% 
-  filter(Year > 2005)
+  filter(Year > 2005, Year <= annual_year)
+
+#Renaming the categories
+t1_rename <- c(
+  'Public Law' = 'Children Act - Public Law',
+  'Private Law' = 'Children Act - Private Law',
+  'Financial Remedy' = 'Financial remedies',
+  'Domestic Violence' = 'Domestic violence remedy orders',
+  'Forced Marriage Protection' = 'Forced marriage protection',
+  'Female Genital Mutilation' = 'Female genital mutilation protection',
+  'Adoption' = 'All Adoption Act',
+  'Total'= 'Total cases started'
+)
 
 t1_access_annual <- table1_annual_access %>% 
   pivot_wider(names_from = Stage,
   values_from = Count) %>% 
-  transmute(Category = str_replace_all(Category, c(
-    'Public Law' = 'Children Act - Public Law',
-    'Private Law' = 'Children Act - Private Law',
-    'Financial Remedy' = 'Financial remedies',
-    'Domestic Violence' = 'Domestic violence remedy orders',
-    'Forced Marriage Protection' = 'Forced marriage protection',
-    'Female Genital Mutilation' = 'Female genital mutilation protection',
-    'Adoption' = 'All Adoption Act',
-    'Total'= 'Total cases started'
-  )),
+  transmute(Category = str_replace_all(Category, t1_rename),
   Year = Year,
   Quarter = '[z]',
   `Cases starting`= `Cases started`,
@@ -29,16 +34,7 @@ table1_quarterly <- table_1_alt %>%
 t1_access_qtr <- table1_quarterly %>% 
   pivot_wider(names_from = Stage,
               values_from = Count) %>% 
-  transmute(Category = str_replace_all(Category, c(
-    'Public Law' = 'Children Act - Public Law',
-    'Private Law' = 'Children Act - Private Law',
-    'Financial Remedy' = 'Financial remedies',
-    'Domestic Violence' = 'Domestic violence remedy orders',
-    'Forced Marriage Protection' = 'Forced marriage protection',
-    'Female Genital Mutilation' = 'Female genital mutilation protection',
-    'Adoption' = 'All Adoption Act',
-    'Total'= 'Total cases started'
-  )),
+  transmute(Category = str_replace_all(Category, t1_rename),
   Year = Year,
   Quarter = paste0('Q', Quarter),
   `Cases starting`= `Cases started`,
@@ -49,10 +45,10 @@ t1_access_qtr <- table1_quarterly %>%
 lookup_order = tribble(~Category, ~Order,
                        'Children Act - Public Law', 1,
                        'Children Act - Private Law', 2,
-                       'Matrimonial Matters', 3,
+                       'Matrinomial Matters', 3,
                        'Financial remedies', 4,
                        'Domestic violence remedy orders', 5,
-                       'Forced marriage Protection', 6,
+                       'Forced marriage protection', 6,
                        'Female genital mutilation protection', 7,
                        'All Adoption Act', 8,
                        'Total cases started', 9)
