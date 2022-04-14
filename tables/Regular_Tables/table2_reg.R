@@ -136,7 +136,7 @@ t2_reg_year <- pub_join_year %>% left_join(priv_join_year, by = 'Year') %>%
 pub_ca_ind_child_qtr <- child_act_csv %>%
   filter(Type == 'Application', Count_type == 'Individual children', Public_private == 'Public law') %>% 
   group_by(Qtr) %>% 
-  summarise(pub_ind_child_qtr = sum(Count)) %>% 
+  summarise(pub_ind_child = sum(Count)) %>% 
   separate(Qtr, c('Year', 'Qtr'), sep = '-') %>% 
   mutate(Year = as.double(Year))
 
@@ -144,43 +144,43 @@ pub_ca_ind_child_qtr <- child_act_csv %>%
 pub_ca_app_made_qtr <- child_act_csv %>%
   filter(Type == 'Application', Count_type == 'Application events', Public_private == 'Public law') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(pub_app_made_qtr = sum(Count))
+  summarise(pub_app_made = sum(Count))
 
 #Total orders applied for
 pub_ca_ord_appl_qtr <- child_act_csv %>%
   filter(Type == 'Application', Count_type == 'Order type', Public_private == 'Public law') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(pub_ord_appl_qtr = sum(Count))
+  summarise(pub_ord_appl = sum(Count))
 
 #Cases starting
 pub_ca_case_start_qtr <- child_act_csv %>%
   filter(Type == 'Cases', Count_type == 'Cases starting', Public_private == 'Public law') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(pub_case_start_qtr = sum(Count))
+  summarise(pub_case_start = sum(Count))
 
 #Orders made
 pub_ca_ord_made_qtr <- child_act_csv %>%
   filter(Type == 'Disposal', Count_type == 'Order type', Disposal_type == 'Order made', Public_private == 'Public law') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(pub_ord_made_qtr = sum(Count))
+  summarise(pub_ord_made = sum(Count))
 
 #Disposals made
 pub_ca_disp_made_qtr <- child_act_csv %>%
   filter(Type == 'Disposal', Count_type == 'Order type', Disposal_type != 'Interim order', Public_private == 'Public law') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(pub_disp_made_qtr = sum(Count))
+  summarise(pub_disp_made = sum(Count))
 
 #Disposal events
 pub_ca_disp_event_qtr <- child_act_csv %>%
   filter(Type == 'Disposal', Count_type == 'Disposal events', Public_private == 'Public law') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(pub_disp_event_qtr = sum(Count))
+  summarise(pub_disp_event = sum(Count))
 
 #Cases disposed
 pub_ca_case_close_qtr <- child_act_csv %>%
   filter(Type == 'Cases', Count_type == 'Cases closed', Public_private == 'Public law') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(pub_case_close_qtr = sum(Count))
+  summarise(pub_case_close = sum(Count))
 
 #Gathering the public law quarterly tables and joining them together
 pub_qtr_tables <- list(pub_ca_ind_child_qtr, pub_ca_app_made_qtr, pub_ca_ord_appl_qtr, pub_ca_case_start_qtr,
@@ -196,7 +196,7 @@ pub_join_qtr <- reduce(pub_qtr_tables, left_join, by = c('Year', 'Qtr'))
 priv_ca_ind_child_qtr <- child_act_csv %>%
   filter(Type == 'Application', Count_type == 'Individual children', Public_private == 'Private law') %>% 
   group_by(Qtr) %>% 
-  summarise(priv_ind_child_qtr = sum(Count)) %>% 
+  summarise(priv_ind_child = sum(Count)) %>% 
   separate(Qtr, c('Year', 'Qtr'), sep = '-') %>% 
   mutate(Year = as.double(Year))
 
@@ -204,43 +204,43 @@ priv_ca_ind_child_qtr <- child_act_csv %>%
 priv_ca_app_made_qtr <- child_act_csv %>%
   filter(Type == 'Application', Count_type == 'Application events', Public_private == 'Private law') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(priv_app_made_qtr = sum(Count))
+  summarise(priv_app_made = sum(Count))
 
 #Total orders applied for
 priv_ca_ord_appl_qtr <- child_act_csv %>%
   filter(Type == 'Application', Count_type == 'Order type', Public_private == 'Private law') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(priv_ord_appl_qtr = sum(Count))
+  summarise(priv_ord_appl = sum(Count))
 
 #Cases starting
 priv_ca_case_start_qtr <- child_act_csv %>%
   filter(Type == 'Cases', Count_type == 'Cases starting', Public_private == 'Private law') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(priv_case_start_qtr = sum(Count))
+  summarise(priv_case_start = sum(Count))
 
 #Orders made
 priv_ca_ord_made_qtr <- child_act_csv %>%
   filter(Type == 'Disposal', Count_type == 'Order type', Disposal_type == 'Order made', Public_private == 'Private law') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(priv_ord_made_qtr = sum(Count))
+  summarise(priv_ord_made = sum(Count))
 
 #Disposals made
 priv_ca_disp_made_qtr <- child_act_csv %>%
   filter(Type == 'Disposal', Count_type == 'Order type', Disposal_type != 'Interim order', Public_private == 'Private law') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(priv_disp_made_qtr = sum(Count))
+  summarise(priv_disp_made = sum(Count))
 
 #Disposal events
 priv_ca_disp_event_qtr <- child_act_csv %>%
   filter(Type == 'Disposal', Count_type == 'Disposal events', Public_private == 'Private law') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(priv_disp_event_qtr = sum(Count))
+  summarise(priv_disp_event = sum(Count))
 
 #Cases disposed
 priv_ca_case_close_qtr <- child_act_csv %>%
   filter(Type == 'Cases', Count_type == 'Cases closed', Public_private == 'Private law') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(priv_case_close_qtr = sum(Count))
+  summarise(priv_case_close = sum(Count))
 
 #Gathering the public law quarterly tables and joining them together
 priv_qtr_tables <- list(priv_ca_ind_child_qtr, priv_ca_app_made_qtr, priv_ca_ord_appl_qtr, priv_ca_case_start_qtr,
@@ -253,9 +253,9 @@ t2_reg_qtr <- pub_join_qtr %>% left_join(priv_join_qtr, by = c('Year', 'Qtr')) %
   filter(!is.na(Year)) %>% 
   mutate(Qtr = paste0('Q', Qtr), blank1 = NA, blank2 = NA, blank3 = NA) %>% 
   relocate(Qtr, .after = Year) %>% 
-  relocate(blank1, .after = pub_case_start_qtr) %>% 
-  relocate(blank2, .after = pub_case_close_qtr) %>% 
-  relocate(blank3, .after = priv_case_start_qtr)
+  relocate(blank1, .after = pub_case_start) %>% 
+  relocate(blank2, .after = pub_case_close) %>% 
+  relocate(blank3, .after = priv_case_start)
 
 # Content #########################################################################################
 
