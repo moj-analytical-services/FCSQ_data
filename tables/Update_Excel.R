@@ -54,7 +54,7 @@ openxlsx::writeData(wb = template,
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_1', 
                       tables = list(table1_pivot_annual, table1_pivot_qtr), 
-                      notes = notes15, 
+                      notes = notes1, 
                       starting_row = 6, 
                       quarterly_format = c(2))
 

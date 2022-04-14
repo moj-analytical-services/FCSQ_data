@@ -1,4 +1,18 @@
 # notes
+
+t1_notes <- c("'-' indicates data not available due to changes in data collection and recording procedures.",
+              "Cases disposed for most case types show the number of cases that were concluded in that quarter, indicated by a final order or a case closure marker. However for domestic violence and forced marriage protection cases there is no widely used marker for the conclusion of a case; here cases are considered to be concluded in the quarter of the last definitive order in the case.",
+              "Financial remedy (formerly known as 'ancillary relief') application figures are known to under-represent the actual number of applications made by at least 10% due to data recording issues.",
+              "Forced marriage protection orders were introduced on 25 November 2008, and so figures for 2008 do not cover a whole calendar year.",
+              "These relate to definitive applications and orders issued under the Adoption and Children Act 2002, including placement, adoption and a few other order types, as shown in the accompanying adoptions csv file.",
+              "Case disposal figures for public and private law in 2011 may represent an under-count due to data collection procedures that have now been resolved.",
+              "There was a one-off increase in the number of Private law cases in quarter 3 (July to September) 2014 due to an audit by HMCTS of all open private law cases.",
+              "Matrimonial matters (including civil partnerships) includes divorce, annulment and judicial separation",
+              "Female genital mutilation protection orders were introduced on 17 July 2015, and so figures for Q3 2015 do not cover a whole quarter and figures for 2015 do not cover a whole year",
+              "Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters")
+
+
+
 t10_notes <- c("Self-representation is determined by the field 'legal representation' in Familyman being left blank. Therefore, this is only a proxy measure and parties without a recorded representative are not necessarily self-representing litigants in person.",
                "Adoption timeliness figures cover applications for standard, convention and foreign adoptions. They do not cover placement cases. Q3 2014 figures were inflated by a data cleansing exercise which involved closing old cases, which particularly affected the mean disposal time.",
                "Divorce timeliness figures (measured to decree nisi) include annulments and judicial separations, as well as financial remedies. The representation status may refer to divorce (including civil partnerships) or financial remedy proceedings (formerly known as 'ancillary relief'). Cases involving financial remedies are those which had an application or order made for one or more financial remedies at the time the data was extracted for this publication.",
@@ -44,6 +58,22 @@ t16_notes <- c(" '-' indicates data is not available.",
                "Some non molestation and occupation orders are applied for and granted in Children Act and Adoption cases rather than domestic violence cases. Only domestic violence cases are included within the cases started/concluded figures.",
                "For domestic violence cases there is no widely used marker for the conclusion of a case; here cases are considered to be concluded in the quarter of the last definitive order in the case.") 
 # notes
+
+notes1 <- c("Source:",
+             "HMCTS FamilyMan and HMCTS Core Case Data",
+             "",
+             "Notes:",
+             paste0("1) ", t1_notes[1]),
+             paste0("2) ", t1_notes[2]),
+             paste0("3) ", t1_notes[3]),
+             paste0("4) ", t1_notes[4]),
+             paste0("5) ", t1_notes[5]),
+             paste0("6) ", t1_notes[6]),
+             paste0("7) ", t1_notes[7]),
+             paste0("8) ", t1_notes[8]),
+             paste0("9) ", t1_notes[9]),
+             paste0("10) ", t1_notes[10]))
+
 
 notes10 <- c("Source:",
              "HMCTS FamilyMan and HMCTS Core Case Data",
