@@ -29,6 +29,7 @@ source(paste0(path_to_project, "footnotes.R"))
 # tables
 source(paste0(path_to_project, "table_1_change.R"))
 source(paste0(path_to_project, "Regular_Tables/table1_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table2_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table10_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table11_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table15.R"))
@@ -39,7 +40,7 @@ source(paste0(path_to_project, "Regular_Tables/table16_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/lists.R"))
 
 ####################################################################
-#Financial Remedy
+#Summary Tables
 #Table 1
 
 ####################################################################
@@ -54,6 +55,26 @@ openxlsx::writeData(wb = template,
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_1', 
                       tables = list(table1_pivot_annual, table1_pivot_qtr), 
+                      notes = notes1, 
+                      starting_row = 6, 
+                      quarterly_format = c(2))
+
+####################################################################
+#Children Act Summary
+#Table 2
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_2',
+                    x = timeperiod2,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_1', 
+                      tables = list(t2_reg_year, t2_reg_qtr), 
                       notes = notes1, 
                       starting_row = 6, 
                       quarterly_format = c(2))
