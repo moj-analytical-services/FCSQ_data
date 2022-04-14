@@ -30,8 +30,10 @@ source(paste0(path_to_project, "footnotes.R"))
 source(paste0(path_to_project, "table_1_change.R"))
 source(paste0(path_to_project, "Regular_Tables/table1_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table2_reg.R"))
+#Formula cols
 source(paste0(path_to_project, "Regular_Tables/table10_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table11_reg.R"))
+
 source(paste0(path_to_project, "Regular_Tables/table15.R"))
 source(paste0(path_to_project, "Regular_Tables/table16_reg.R"))
 
@@ -73,10 +75,10 @@ openxlsx::writeData(wb = template,
 
 # data
 write_formatted_table(workbook = template, 
-                      sheet_name = 'Table_1', 
+                      sheet_name = 'Table_2', 
                       tables = list(t2_reg_year, t2_reg_qtr), 
-                      notes = notes1, 
-                      starting_row = 6, 
+                      notes = notes2, 
+                      starting_row = 10, 
                       quarterly_format = c(2))
 
 ####################################################################

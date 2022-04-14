@@ -12,6 +12,18 @@ t1_notes <- c("'-' indicates data not available due to changes in data collectio
               "Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters")
 
 
+t2_notes <-  c('A CSV file accompanies this table, which provides data in a machine-readable format and gives detailed information about types of orders. Figures for applications and disposals by type of order as published in previous bulletin tables are now given in this CSV file. If you require assistance on using this CSV file, please contact the Statistics team using the details provided at the end of the FCSQ bulletin.',
+             'Figures previously published in this table showing the number of children involved in applications, orders and disposals prior to 2011 are now included in the accompanying csv file.',
+             'Private law adoptions are not included.',
+             'The number of individual children counts children within the specified period. Where a child is involved in two applications in a year across two separate quarters, they will be counted once in each quarter, and once annually. As such, quarterly totals do not sum to annual totals.',
+             'The figures in this table differ to the children count in table 3, where children are counted for each order applied for.',
+             'An application or disposal can be made in respect of more than one child. Therefore the figures for court events are less than the number of children involved.',
+             'A single application can include applications for more than one order, so the total number of orders applied for will be greater than the number of applications made.',
+             'Each case is counted only once in the quarter it started (first application made) and in the quarter when its last disposal was made. A case may include more than one application, and therefore the figures for cases are less than the number of children involved and court events.',
+             'Orders and total disposal figures do not include interim orders. For interim order numbers please see the accompanying csv file and table 4.',
+             'More than one order can be granted in a single event. The number of disposal events counts where orders/disposals are made within a single event as recorded on Familyman.',
+             'There was a one-off increase in the number of Private law cases in quarter 3 (July to September) 2014 due to an audit by HMCTS of all open private law cases.',
+             'Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters.')
 
 t10_notes <- c("Self-representation is determined by the field 'legal representation' in Familyman being left blank. Therefore, this is only a proxy measure and parties without a recorded representative are not necessarily self-representing litigants in person.",
                "Adoption timeliness figures cover applications for standard, convention and foreign adoptions. They do not cover placement cases. Q3 2014 figures were inflated by a data cleansing exercise which involved closing old cases, which particularly affected the mean disposal time.",
@@ -74,6 +86,23 @@ notes1 <- c("Source:",
              paste0("9) ", t1_notes[9]),
              paste0("10) ", t1_notes[10]))
 
+
+notes2 <- c("Source:",
+             "HMCTS FamilyMan system",
+             "",
+             "Notes:",
+             paste0("1) ", t2_notes[1]),
+             paste0("2) ", t2_notes[2]),
+             paste0("3) ", t2_notes[3]),
+             paste0("4) ", t2_notes[4]),
+             paste0("5) ", t2_notes[5]),
+             paste0("6) ", t2_notes[6]),
+             paste0("7) ", t2_notes[7]),
+             paste0("8) ", t2_notes[8]),
+             paste0("9) ", t2_notes[9]),
+             paste0("10) ", t2_notes[10]),
+             paste0("11) ", t2_notes[11]),
+             paste0("12) ", t2_notes[12]))
 
 notes10 <- c("Source:",
              "HMCTS FamilyMan and HMCTS Core Case Data",
