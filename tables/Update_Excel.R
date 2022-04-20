@@ -30,6 +30,7 @@ source(paste0(path_to_project, "footnotes.R"))
 source(paste0(path_to_project, "table_1_change.R"))
 source(paste0(path_to_project, "Regular_Tables/table1_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table2_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table5_reg.R"))
 #Formula cols
 source(paste0(path_to_project, "Regular_Tables/table10_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table11_reg.R"))
@@ -81,6 +82,25 @@ write_formatted_table(workbook = template,
                       starting_row = 10, 
                       quarterly_format = c(2))
 
+####################################################################
+#Children Act Individual children
+#Table 5
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_5',
+                    x = timeperiod5,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_5', 
+                      tables = list(t5_reg_year, t5_reg_qtr), 
+                      notes = notes2, 
+                      starting_row = 7, 
+                      quarterly_format = c(2))
 ####################################################################
 #Financial Remedy
 #Table 15
