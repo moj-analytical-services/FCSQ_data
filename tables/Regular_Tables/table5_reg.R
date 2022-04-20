@@ -293,7 +293,7 @@ priv_child_qtr_tables <- list(priv_app_one_qtr, priv_app_four_qtr, priv_app_nine
 priv_child_join_qtr <-  reduce(priv_child_qtr_tables, left_join, by = c('Year', 'Qtr'))
 
 t5_reg_qtr <- pub_child_join_qtr %>% left_join(priv_child_join_qtr, by = c('Year', 'Qtr')) %>% 
-  filter(Year <= annual_year, !is.na(Year)) %>% 
+  filter(!is.na(Year)) %>% 
   mutate(Qtr = paste0('Q', Qtr), blank1 = NA, blank2 = NA) %>% 
   relocate(Qtr, .after = Year) %>% 
   relocate(blank1, .after = pub_total_apps) %>% 
