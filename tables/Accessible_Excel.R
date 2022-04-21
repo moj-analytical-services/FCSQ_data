@@ -11,46 +11,78 @@ cover_df <- tribble(
 contents_df <- tribble(
   ~"Sheet name", ~"Sheet title",
   "Notes", "Notes",
-  "Table 15", "Number of applicantions and disposals made for one or more types of financial remedy orders, in England and Wales"
+  "Table 1", "Cases starting and cases concluding in Family courts in England and Wales",
+  "Table 2", "Public and Private (Children Act) cases started and disposed, counted by case, individual children, applications and disposals, in England and Wales",
+  "Table 5", "Number of individual children involved in Public and Private (Children Act) applications made in the Family courts in England and Wales by age",
+  "Table 10", "Number of disposals and average time to first definitve disposal in courts in England and Wales by case type and legal representaion of parties",
+  "Table 11", "Legal representation status of applicants and respondents in cases with at least one hearing in Family courts in England and Wales",
+  "Table 15", "Number of applications and disposals made for one or more types of financial remedy (formerly ancillary relief) orders, in England and Wales",
+  "Table 16", "Applications and orders made for domestic violence remedies in England and Wales"
 )
 
 # A notes page, notes_all is made from the update excel file
-note_no <- paste0("[", seq_len(length(notes_all)), "]")
-notes_df <- tibble(`Note number` = note_no, 
-                   `Note text` = notes_all)
+source(paste0(path_to_project, "footnotes.R"))
+
 
 notes_df2 <- tribble(
-  ~"Note number", ~"Note text",
-  "[c]", "Confidential: suppressed.",
-  "[z]", "Not applicable.")
+  ~"Note number", ~"Note text", ~"Table number",
+  "[c]", "Confidential: suppressed.", '[z]',
+  "[z]", "Not applicable.", '[z]')
 
-notes_df <- bind_rows(notes_df2, notes_df)
+notes_df <- bind_rows(notes_df2, notes_all)
+
 fcsq_a11y <- new_a11ytable(
-  tab_titles = c("Cover", "Contents", "Notes", "Table 15"),
-  sheet_types = c("cover", "contents", "notes", "tables"),
+  tab_titles = c("Cover", "Contents", "Notes", "Table 1", "Table 2", "Table 5",
+                 "Table 10", "Table 11", "Table 15", "Table 16" ),
+  sheet_types = c("cover", "contents", "notes", "tables", "tables", "tables", 
+                  "tables", "tables", "tables", "tables"),
   sheet_titles = c(
-    "The mtcars demo datset: 'Motor Trend Car Road Tests'",
+    "Family Court Tables",
     "Table of contents",
     "Notes",
-    "Financial Remedy"
+    contents_df$`Sheet title`[2],
+    contents_df$`Sheet title`[3],
+    contents_df$`Sheet title`[4],
+    contents_df$`Sheet title`[5],
+    contents_df$`Sheet title`[6],
+    contents_df$`Sheet title`[7],
+    contents_df$`Sheet title`[8]
   ),
   sources = c(
     NA_character_,
     NA_character_,
-    NA_character_, 
-    "HMCTS FamilyMan and Core Case Data"
+    NA_character_,
+    "HMCTS FamilyMan and Core Case Data",
+    "HMCTS FamilyMan",
+    "HMCTS FamilyMan",
+    "HMCTS FamilyMan and Core Case Data",
+    "HMCTS FamilyMan and Core Case Data",
+    "HMCTS FamilyMan and Core Case Data",
+    "HMCTS FamilyMan"
   ),
   table_names = c(
     "cover_sheet",
     "table_of_contents",
     "notes_table",
-    "Accessible_15"
+    "Overall_Family_Court_Summary",
+    "Children_Act_Summary",
+    "Children_Act_Individual_Children_Age",
+    "Overall_time_to_first_disposal",
+    "Overall_Legal_Representation",
+    "Financial_Remedy_Summary",
+    "Domestic_Violence_Summary"
   ),
   tables = list(
     cover_df,
     contents_df,
     notes_df,
-    t15_accessible
+    t1_accessible,
+    t2_accessible,
+    t5_accessible,
+    t10_accessible,
+    t11_accessible,
+    t15_accessible,
+    t16_accessible
   )
 )
 

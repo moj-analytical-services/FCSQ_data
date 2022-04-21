@@ -137,6 +137,12 @@ write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_
   openxlsx::showGridLines(wb = workbook,
                           sheet = sheet_name,
                           showGridLines = FALSE)
+  
+  #Attempting row heights
+  openxlsx::setRowHeights(wb = workbook,
+                          sheet = sheet_name,
+                          rows = start_row_notes:end_row_notes,
+                          heights = rep("auto", length(end_row_notes - start_row_notes + 1)))
 }
 
 download_file_from_s3 <- function(s3_path, local_path, overwrite = FALSE) {
