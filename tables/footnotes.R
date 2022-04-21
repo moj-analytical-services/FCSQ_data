@@ -25,6 +25,12 @@ t2_notes <-  c('A CSV file accompanies this table, which provides data in a mach
              'There was a one-off increase in the number of Private law cases in quarter 3 (July to September) 2014 due to an audit by HMCTS of all open private law cases.',
              'Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters.')
 
+t5_notes <- c('Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters',
+              'Private law adoptions are not included.',
+              '"Other" includes those who were aged 18 by the time the order was made, or where the age was not correctly recorded.',
+              '"Unknown" includes those where the date of birth was not recorded.',
+              'Please note that the quarterly number of individual children counts the number of individual children within a given quarter, rather than the quarterly breakdown of the number of individual children within a year. As such, the quarterly totals do not sum to the relevant annual total.')
+  
 t10_notes <- c("Self-representation is determined by the field 'legal representation' in Familyman being left blank. Therefore, this is only a proxy measure and parties without a recorded representative are not necessarily self-representing litigants in person.",
                "Adoption timeliness figures cover applications for standard, convention and foreign adoptions. They do not cover placement cases. Q3 2014 figures were inflated by a data cleansing exercise which involved closing old cases, which particularly affected the mean disposal time.",
                "Divorce timeliness figures (measured to decree nisi) include annulments and judicial separations, as well as financial remedies. The representation status may refer to divorce (including civil partnerships) or financial remedy proceedings (formerly known as 'ancillary relief'). Cases involving financial remedies are those which had an application or order made for one or more financial remedies at the time the data was extracted for this publication.",
@@ -69,94 +75,49 @@ t16_notes <- c(" '-' indicates data is not available.",
                "There are different types of applications and orders; exparte (where no notice is given to the respondent) and on notice (where notice is given). This information is not available for total applications or cases as they may include a mix of exparte and on notice types",
                "Some non molestation and occupation orders are applied for and granted in Children Act and Adoption cases rather than domestic violence cases. Only domestic violence cases are included within the cases started/concluded figures.",
                "For domestic violence cases there is no widely used marker for the conclusion of a case; here cases are considered to be concluded in the quarter of the last definitive order in the case.") 
-# notes
+
+# notes added to regular tables
 
 notes1 <- c("Source:",
              "HMCTS FamilyMan and HMCTS Core Case Data",
              "",
              "Notes:",
-             paste0("1) ", t1_notes[1]),
-             paste0("2) ", t1_notes[2]),
-             paste0("3) ", t1_notes[3]),
-             paste0("4) ", t1_notes[4]),
-             paste0("5) ", t1_notes[5]),
-             paste0("6) ", t1_notes[6]),
-             paste0("7) ", t1_notes[7]),
-             paste0("8) ", t1_notes[8]),
-             paste0("9) ", t1_notes[9]),
-             paste0("10) ", t1_notes[10]))
+            glue("{seq_along(t1_notes)}) {t1_notes}"))
 
 
 notes2 <- c("Source:",
              "HMCTS FamilyMan system",
              "",
              "Notes:",
-             paste0("1) ", t2_notes[1]),
-             paste0("2) ", t2_notes[2]),
-             paste0("3) ", t2_notes[3]),
-             paste0("4) ", t2_notes[4]),
-             paste0("5) ", t2_notes[5]),
-             paste0("6) ", t2_notes[6]),
-             paste0("7) ", t2_notes[7]),
-             paste0("8) ", t2_notes[8]),
-             paste0("9) ", t2_notes[9]),
-             paste0("10) ", t2_notes[10]),
-             paste0("11) ", t2_notes[11]),
-             paste0("12) ", t2_notes[12]))
+            glue("{seq_along(t2_notes)}) {t2_notes}"))
+
+notes5 <- c("Source:",
+             "HMCTS FamilyMan system",
+             "",
+             "Notes:",
+            glue("{seq_along(t5_notes)}) {t5_notes}"))
 
 notes10 <- c("Source:",
              "HMCTS FamilyMan and HMCTS Core Case Data",
              "",
              "Notes:",
-             paste0("1) ", t10_notes[1]),
-             paste0("2) ", t10_notes[2]),
-             paste0("3) ", t10_notes[3]),
-             paste0("4) ", t10_notes[4]),
-             paste0("5) ", t10_notes[5]),
-             paste0("6) ", t10_notes[6]),
-             paste0("7) ", t10_notes[7]),
-             paste0("8) ", t10_notes[8]),
-             paste0("9) ", t10_notes[9]),
-             paste0("10) ", t10_notes[10]),
-             paste0("11) ", t10_notes[11]),
-             paste0("12) ", t10_notes[12]))
+             glue("{seq_along(t10_notes)}) {t10_notes}"))
 
 notes11 <- c("Source:",
              "HMCTS FamilyMan and HMCTS Core Case Data",
              "",
              "Notes:",
-             paste0("1) ", t11_notes[1]),
-             paste0("2) ", t11_notes[2]),
-             paste0("3) ", t11_notes[3]),
-             paste0("4) ", t11_notes[4]),
-             paste0("5) ", t11_notes[5]),
-             paste0("6) ", t11_notes[6]),
-             paste0("7) ", t11_notes[7]),
-             paste0("8) ", t11_notes[8]),
-             paste0("9) ", t11_notes[9]),
-             paste0("10) ", t11_notes[10]),
-             paste0("11) ", t11_notes[11]))
+             glue("{seq_along(t11_notes)}) {t11_notes}"))
 
 
 notes15 <- c("Source:",
              "HMCTS FamilyMan system",
              "",
              "Notes:",
-             paste0("1) ", t15_notes[1]),
-             paste0("2) ", t15_notes[2]),
-             paste0("3) ", t15_notes[3]),
-             paste0("4) ", t15_notes[4]),
-             paste0("5) ", t15_notes[5]),
-             paste0("6) ", t15_notes[6]))
+             glue("{seq_along(t15_notes)}) {t15_notes}"))
 
 notes16 <- c("Source:",
              "HMCTS FamilyMan system",
              "",
              "Notes:",
-             paste0("1) ", t16_notes[1]),
-             paste0("2) ", t16_notes[2]),
-             paste0("3) ", t16_notes[3]),
-             paste0("4) ", t16_notes[4]),
-             paste0("5) ", t16_notes[5]),
-             paste0("6) ", t16_notes[6]),
-             paste0("7) ", t16_notes[7]))
+             glue("{seq_along(t16_notes)}) {t16_notes}"))
