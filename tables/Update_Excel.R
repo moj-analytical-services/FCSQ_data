@@ -62,6 +62,28 @@ write_formatted_table(workbook = template,
                       starting_row = 6, 
                       quarterly_format = c(2))
 
+na_cols <- c(3, 4, 7, 10, 11, 13, 14, 17, 20, 21)
+na_adder(wb = template,
+         sheet = 'Table_1',
+         value = "-",
+         cols = na_cols,
+         lengths = rep(5, length(na_cols)),
+         start_row = 6)
+
+na_cols_fmpo_fgm <- c(8, 9, 18, 19)
+na_adder(wb = template,
+         sheet = 'Table_1',
+         value = "..",
+         cols = na_cols_fmpo_fgm,
+         lengths = c(3, 9, 3, 9),
+         start_row = 6)
+
+na_adder(wb = template,
+         sheet = 'Table_1',
+         value = "..",
+         cols = c(9, 19),
+         lengths = c(18, 18),
+         start_row = 22)
 ####################################################################
 #Children Act Summary
 #Table 2

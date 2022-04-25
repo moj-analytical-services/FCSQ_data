@@ -215,3 +215,22 @@ note_add <- function(wb, sheetName, table_no, startRow, notes){
                       startRow = startRow + 1)
   
 }
+
+na_adder <- function(wb, sheet, value, cols, lengths, start_row ){
+  # cols - vector of column numbers
+  # lengths - how many times the value is repeated as a vector
+  # values - what value for the NA
+  # start row - Row to start with
+  # What NA to add
+  for (i in seq_along(cols)){
+    data <- rep(value, lengths[[i]])
+    openxlsx::writeData(wb = wb,
+                        sheet = sheet,
+                        x = data,
+                        startRow = start_row,
+                        startCol = cols[[i]],
+                        colNames = F)
+    
+  }
+  
+}
