@@ -29,8 +29,11 @@ source(paste0(path_to_project, "footnotes.R"))
 # tables
 source(paste0(path_to_project, "table_1_change.R"))
 source(paste0(path_to_project, "Regular_Tables/table1_reg.R"))
+#Children Act
 source(paste0(path_to_project, "Regular_Tables/table2_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table5_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table6_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table7_reg.R"))
 #Formula cols
 source(paste0(path_to_project, "Regular_Tables/table10_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table11_reg.R"))
@@ -120,6 +123,46 @@ openxlsx::writeData(wb = template,
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_5', 
                       tables = list(t5_reg_year, t5_reg_qtr), 
+                      notes = notes2, 
+                      starting_row = 7, 
+                      quarterly_format = c(2))
+
+####################################################################
+#Children Act Parties
+#Table 6
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_6',
+                    x = timeperiod6,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_6', 
+                      tables = list(t6_reg_year, t6_reg_qtr), 
+                      notes = notes2, 
+                      starting_row = 7, 
+                      quarterly_format = c(2))
+
+####################################################################
+#Children Act High Court
+#Table 7
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_7',
+                    x = timeperiod7,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_7', 
+                      tables = list(t7_reg_year, t7_reg_qtr), 
                       notes = notes2, 
                       starting_row = 7, 
                       quarterly_format = c(2))
