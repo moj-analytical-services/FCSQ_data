@@ -14,6 +14,8 @@ contents_df <- tribble(
   "Table 1", "Cases starting and cases concluding in Family courts in England and Wales",
   "Table 2", "Public and Private (Children Act) cases started and disposed, counted by case, individual children, applications and disposals, in England and Wales",
   "Table 5", "Number of individual children involved in Public and Private (Children Act) applications made in the Family courts in England and Wales by age",
+  "Table 6", "Number of individual parties involved in Public and Private (Children Act) cases in England and Wales",
+  "Table 7", "Number of Public and Private (Children Act) cases started in England and Wales by High court indicator and area",
   "Table 10", "Number of disposals and average time to first definitve disposal in courts in England and Wales by case type and legal representaion of parties",
   "Table 11", "Legal representation status of applicants and respondents in cases with at least one hearing in Family courts in England and Wales",
   "Table 15", "Number of applications and disposals made for one or more types of financial remedy (formerly ancillary relief) orders, in England and Wales",
@@ -33,9 +35,9 @@ notes_df <- bind_rows(notes_df2, notes_all)
 
 fcsq_a11y <- new_a11ytable(
   tab_titles = c("Cover", "Contents", "Notes", "Table 1", "Table 2", "Table 5",
+                 "Table 6", "Table 7",
                  "Table 10", "Table 11", "Table 15", "Table 16" ),
-  sheet_types = c("cover", "contents", "notes", "tables", "tables", "tables", 
-                  "tables", "tables", "tables", "tables"),
+  sheet_types = c("cover", "contents", "notes", rep("tables", 9)),
   sheet_titles = c(
     "Family Court Tables",
     "Table of contents",
@@ -46,13 +48,17 @@ fcsq_a11y <- new_a11ytable(
     contents_df$`Sheet title`[5],
     contents_df$`Sheet title`[6],
     contents_df$`Sheet title`[7],
-    contents_df$`Sheet title`[8]
+    contents_df$`Sheet title`[8],
+    contents_df$`Sheet title`[9],
+    contents_df$`Sheet title`[10]
   ),
   sources = c(
     NA_character_,
     NA_character_,
     NA_character_,
     "HMCTS FamilyMan and Core Case Data",
+    "HMCTS FamilyMan",
+    "HMCTS FamilyMan",
     "HMCTS FamilyMan",
     "HMCTS FamilyMan",
     "HMCTS FamilyMan and Core Case Data",
@@ -67,6 +73,8 @@ fcsq_a11y <- new_a11ytable(
     "Overall_Family_Court_Summary",
     "Children_Act_Summary",
     "Children_Act_Individual_Children_Age",
+    "Children_Act_Parties",
+    "Children_Act_High_Court",
     "Overall_time_to_first_disposal",
     "Overall_Legal_Representation",
     "Financial_Remedy_Summary",
@@ -79,6 +87,8 @@ fcsq_a11y <- new_a11ytable(
     t1_accessible,
     t2_accessible,
     t5_accessible,
+    t6_accessible,
+    t7_accessible,
     t10_accessible,
     t11_accessible,
     t15_accessible,

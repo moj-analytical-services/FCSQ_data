@@ -30,7 +30,16 @@ t5_notes <- c('Some figures may have been revised from previous publications. Mi
               '"Other" includes those who were aged 18 by the time the order was made, or where the age was not correctly recorded.',
               '"Unknown" includes those where the date of birth was not recorded.',
               'Please note that the quarterly number of individual children counts the number of individual children within a given quarter, rather than the quarterly breakdown of the number of individual children within a year. As such, the quarterly totals do not sum to the relevant annual total.')
-  
+
+t6_notes <- c('Counts are for the number of parties listed in the first application of any individual case, the number of parties listed may change with subsequent applications.',
+              'Private law adoptions are not included.',
+              'Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters')  
+
+t7_notes <- c('Counts are for the number of Public or Private law (Children Act) cases indicated as a High court case at application, and do not include cases such as for Wardship or Child Abduction.',
+              'Private law adoptions are not included.',
+              'Central London DFJ includes: Central Family Court (Principal Registry of the Family Division), Clerkenwell & Shoreditch, Inner London FPC, Lambeth and Wandsworth',
+              'Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters')
+
 t10_notes <- c("Self-representation is determined by the field 'legal representation' in Familyman being left blank. Therefore, this is only a proxy measure and parties without a recorded representative are not necessarily self-representing litigants in person.",
                "Adoption timeliness figures cover applications for standard, convention and foreign adoptions. They do not cover placement cases. Q3 2014 figures were inflated by a data cleansing exercise which involved closing old cases, which particularly affected the mean disposal time.",
                "Divorce timeliness figures (measured to decree nisi) include annulments and judicial separations, as well as financial remedies. The representation status may refer to divorce (including civil partnerships) or financial remedy proceedings (formerly known as 'ancillary relief'). Cases involving financial remedies are those which had an application or order made for one or more financial remedies at the time the data was extracted for this publication.",
@@ -96,6 +105,18 @@ notes5 <- c("Source:",
              "",
              "Notes:",
             glue("{seq_along(t5_notes)}) {t5_notes}"))
+
+notes6 <- c("Source:",
+            "HMCTS FamilyMan system",
+            "",
+            "Notes:",
+            glue("{seq_along(t6_notes)}) {t6_notes}"))
+
+notes7 <- c("Source:",
+            "HMCTS FamilyMan system",
+            "",
+            "Notes:",
+            glue("{seq_along(t7_notes)}) {t7_notes}"))
 
 notes10 <- c("Source:",
              "HMCTS FamilyMan and HMCTS Core Case Data",
