@@ -15,10 +15,10 @@ t2_publaw_apps <- full_t2 %>%
             `Applications made` = pub_app_made,
             `Total orders applied for` = pub_ord_appl,
             `Cases starting` = pub_case_start,
-            `Orders made` = 0,
-            `Disposals made` = 0,
-            `Disposal events` = 0,
-            `Cases disposed` = 0)
+            `Orders made` = -1,
+            `Disposals made` = -1,
+            `Disposal events` = -1,
+            `Cases disposed` = -1)
 
 # Public Law Orders made
 t2_publaw_ords <- full_t2 %>% 
@@ -26,10 +26,10 @@ t2_publaw_ords <- full_t2 %>%
             Stage = 'Orders made',
             Year = Year,
             Quarter = replace_na(Qtr, '[z]'),
-            `Individual children` = 0,
-            `Applications made` = 0,
-            `Total orders applied for` = 0,
-            `Cases starting` = 0,
+            `Individual children` = -1,
+            `Applications made` = -1,
+            `Total orders applied for` = -1,
+            `Cases starting` = -1,
             `Orders made` = pub_ord_made,
             `Disposals made` = pub_disp_made,
             `Disposal events` = pub_disp_event,
@@ -45,10 +45,10 @@ t2_privlaw_apps <- full_t2 %>%
             `Applications made` = priv_app_made,
             `Total orders applied for` = priv_ord_appl,
             `Cases starting` = priv_case_start,
-            `Orders made` = 0,
-            `Disposals made` = 0,
-            `Disposal events` = 0,
-            `Cases disposed` = 0)
+            `Orders made` = -1,
+            `Disposals made` = -1,
+            `Disposal events` = -1,
+            `Cases disposed` = -1)
 
 # Private Law Orders made
 t2_privlaw_ords <- full_t2 %>% 
@@ -56,10 +56,10 @@ t2_privlaw_ords <- full_t2 %>%
             Stage = 'Orders made',
             Year = Year,
             Quarter = replace_na(Qtr, '[z]'),
-            `Individual children` = 0,
-            `Applications made` = 0,
-            `Total orders applied for` = 0,
-            `Cases starting` = 0,
+            `Individual children` = -1,
+            `Applications made` = -1,
+            `Total orders applied for` = -1,
+            `Cases starting` = -1,
             `Orders made` = priv_ord_made,
             `Disposals made` = priv_disp_made,
             `Disposal events` = priv_disp_event,

@@ -35,6 +35,7 @@ source(paste0(path_to_project, "Regular_Tables/table5_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table6_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table7_reg.R"))
 #Formula cols
+source(paste0(path_to_project, "Regular_Tables/table3_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table10_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table11_reg.R"))
 
