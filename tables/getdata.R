@@ -82,4 +82,7 @@ if (pub_quarter == 4){
   
 }
 
+#Helpful letter lookup
+letter_lookup <- readr::read_csv(paste0(path_to_project, "letter_lookup.csv"))
+
 

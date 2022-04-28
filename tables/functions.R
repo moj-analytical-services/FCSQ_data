@@ -12,6 +12,44 @@ multiple_cell_merge <- function(wb, sheet, rows, cols) {
                          i)
 }
 
+note_footer <- function(wb, sheet, start_row, notes, col_length){
+  ##Write notes to sheet below last table
+  start_row_notes <- start_row + 2
+  end_row_notes <- start_row_notes + length(notes)
+  openxlsx::writeData(wb = wb,
+                      sheet = sheet,
+                      x = notes,
+                      startRow = start_row_notes,
+                      colNames = F)
+  
+  ##Create style for notes; small font size, left and top aligned
+  note_style <- openxlsx::createStyle(
+    fontName = "Arial",
+    fontSize = "8",
+    halign = "left",
+    valign = "top",
+    wrapText = TRUE
+  )
+  #Format notes; merge and then add style
+  multiple_cell_merge(wb = wb,
+                      sheet = sheet,
+                      rows = start_row_notes:end_row_notes,
+                      cols = seq(col_length))
+  openxlsx::addStyle(wb = wb,
+                     sheet = sheet,
+                     style = note_style,
+                     rows = start_row_notes:end_row_notes,
+                     cols = seq(col_length),
+                     stack = T,
+                     gridExpand = T)
+  
+  
+  #Remove gridlines from sheet
+  openxlsx::showGridLines(wb = wb,
+                          sheet = sheet,
+                          showGridLines = FALSE)
+}
+
 write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_row, quarterly_format = NULL, lookup_flag = NULL) {
   
   #Throw error if not passed a list of tables
@@ -103,40 +141,11 @@ write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_
   }
   
   ##Write notes to sheet below last table
-  start_row_notes <- end_row + 2
-  end_row_notes <- start_row_notes + length(notes)
-  openxlsx::writeData(wb = workbook,
-                      sheet = sheet_name,
-                      x = notes,
-                      startRow = start_row_notes,
-                      colNames = F)
-  
-  ##Create style for notes; small font size, left and top aligned
-  note_style <- openxlsx::createStyle(
-    fontName = "Arial",
-    fontSize = "8",
-    halign = "left",
-    valign = "top",
-    wrapText = TRUE
-  )
-  #Format notes; merge and then add style
-  multiple_cell_merge(wb = workbook,
-                      sheet = sheet_name,
-                      rows = start_row_notes:end_row_notes,
-                      cols = colnum)
-  openxlsx::addStyle(wb = workbook,
-                     sheet = sheet_name,
-                     style = note_style,
-                     rows = start_row_notes:end_row_notes,
-                     cols = colnum,
-                     stack = T,
-                     gridExpand = T)
-  
-  
-  #Remove gridlines from sheet
-  openxlsx::showGridLines(wb = workbook,
-                          sheet = sheet_name,
-                          showGridLines = FALSE)
+  note_footer(wb = workbook, 
+              sheet = sheet_name, 
+              start_row = end_row, 
+              notes = notes, 
+              col_length = colnum)
   
 }
 
@@ -271,7 +280,7 @@ table3_header <- function(wb, sheet, heading, start_row, start_col){
     valign = "bottom",
     wrapText = FALSE,
     border = "bottom",
-    borderStyle = "thin"
+    borderStyle = "medium"
   )
   
   #Columns to merge in the list
@@ -283,11 +292,21 @@ table3_header <- function(wb, sheet, heading, start_row, start_col){
                        cols = cols,
                        rows = start_row)
   
+  # Adding border lines
   openxlsx::addStyle(wb = wb,
                      sheet = sheet,
                      style = heading_style,
                      rows = start_row,
                      cols = cols,
+                     stack = T,
+                     gridExpand = T)
+  
+  openxlsx::addStyle(wb = wb,
+                     sheet = sheet,
+                     style = openxlsx::createStyle(border = "bottom",
+                                                   borderStyle = "none"),
+                     rows = start_row,
+                     cols = start_col + t3_years,
                      stack = T,
                      gridExpand = T)
   
@@ -297,3 +316,14 @@ table3_header <- function(wb, sheet, heading, start_row, start_col){
                           showGridLines = FALSE)
   
 }
+
+
+num_to_letter <- function(number){
+  #Helper function to quickly turn a number into an excel letter
+  letter_lookup %>% filter(`Column Number` == number) %>% 
+    pull(`Column Letter`)
+}
+  
+
+  
+  
