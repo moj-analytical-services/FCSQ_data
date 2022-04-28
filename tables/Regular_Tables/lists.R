@@ -23,8 +23,23 @@ openxlsx::writeData(wb = template,
                     startCol = 37,
                     colNames = F)
 
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_4',
+                    x = dropdown4_df,
+                    startRow = 12,
+                    startCol = 37,
+                    colNames = F)
+
 openxlsx::addStyle(wb = template,
                    sheet = 'Table_3',
+                   openxlsx::createStyle(fontColour = "white"),
+                   rows = 12:13,
+                   cols = 37,
+                   stack = T,
+                   gridExpand = T)
+
+openxlsx::addStyle(wb = template,
+                   sheet = 'Table_4',
                    openxlsx::createStyle(fontColour = "white"),
                    rows = 12:13,
                    cols = 37,
@@ -37,6 +52,13 @@ dataValidation(wb = template,
                rows = 7,
                type = "list",
                value = "'Table_3'!$AK$12:$AK$13")
+
+dataValidation(wb = template,
+               sheet = 'Table_4',
+               cols = 1,
+               rows = 7,
+               type = "list",
+               value = "'Table_4'!$AK$12:$AK$13")
 # table 10
 openxlsx::writeData(wb = template,
                     sheet = 'Table_10',
