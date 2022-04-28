@@ -229,3 +229,71 @@ na_adder <- function(wb, sheet, value, cols, lengths, start_row ){
   }
   
 }
+
+table3_header <- function(wb, sheet, heading, start_row, start_col){
+  # This function adds the headers to Table 3 and Table 4.
+  #Start row here is the first row of the table
+  
+  # Years included in the table
+  t3_year_head <- 2011:annual_year
+  
+  # Last four quarters
+  t3_qtr_head <- child_act_csv %>% distinct(Year, Qtr) %>% 
+    filter(!is.na(Year), Qtr != '') %>% mutate(Quarter = paste0(Year, " Q", Qtr)) %>% 
+    tail(4) %>% pull(-1)
+  
+  #Combining and taking the transpose to have in row format
+  t3_head <- c(t3_year_head, NA, t3_qtr_head)
+  
+  tran_t3_head <- t(t3_head)
+  
+  #Writing the years and quarters
+  openxlsx::writeData(wb = wb,
+                      sheet = sheet,
+                      x = tran_t3_head,
+                      startRow = start_row + 1,
+                      startCol = start_col,
+                      colNames = F)
+  
+  #Adding the Public Law or Private Law heading to the right row
+  openxlsx::writeData(wb = wb,
+                      sheet = sheet,
+                      x = heading,
+                      startRow = start_row,
+                      startCol = start_col,
+                      colNames = F)
+  
+  ##Create style for heading; centered and bottom aligned
+  heading_style <- openxlsx::createStyle(
+    fontName = "Arial",
+    fontSize = "10",
+    halign = "center",
+    valign = "bottom",
+    wrapText = FALSE,
+    border = "bottom",
+    borderStyle = "thin"
+  )
+  
+  #Columns to merge in the list
+  cols <- seq(start_col, start_col + length(t3_head) - 1)
+  
+  # Merging cells. Columns are the number of full years plus 5 additional ones (blank space and four quarters)
+  openxlsx::mergeCells(wb = wb,
+                       sheet = sheet,
+                       cols = cols,
+                       rows = start_row)
+  
+  openxlsx::addStyle(wb = wb,
+                     sheet = sheet,
+                     style = heading_style,
+                     rows = start_row,
+                     cols = cols,
+                     stack = T,
+                     gridExpand = T)
+  
+  #Remove gridlines from sheet
+  openxlsx::showGridLines(wb = wb,
+                          sheet = sheet,
+                          showGridLines = FALSE)
+  
+}
