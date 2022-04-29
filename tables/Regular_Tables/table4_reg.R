@@ -9,6 +9,7 @@ head_row <- 9
 start_row <- 11
 end_row <- 69
 start_col <- 2
+t4_priv_row_start <- 29
 
 t4_years <- annual_year - 2010  #Number of full years in the table
 lookup_row <- nrow(table_3_lookup) + 1
@@ -40,7 +41,19 @@ for (i in t4_pub_rows) {
   }
 }
 
+#Interim Orders are blank for now as currently not being copied to FamilyMan from 2021 onward.
+# 2021 is 12
+after_2021 <- seq(12, 12 + annual_year - 2021) # Annual Columns from 2021 onwards
+latest_four <- t4_pub_columns %>% tail(4)  # Latest four quarters
 
+after_2021_all <- c(after_2021, latest_four) # Combining the two
+
+na_adder(wb = template,
+         sheet = 'Table_4',
+         value = "..",
+         cols =  after_2021_all,
+         lengths = rep(6, length(after_2021_all)),
+         start_row = 61)
 
 #Adding Public Law headings
 table3_header(wb = template,
@@ -56,7 +69,6 @@ table3_header(wb = template,
 pri_start_col <- start_col + t4_years + 6
 #Setting private columns and rows
 t4_priv_columns <- pri_start_col + t4_columns - 1
-t4_priv_row_start <- 29
 t4_na_rownum <- t4_priv_row_start - start_row
 t4_priv_rows <- setdiff(seq(t4_priv_row_start, end_row), t4_empty)
 
@@ -99,6 +111,13 @@ for (i in t4_priv_rows) {
   }
 }
 
+# Final Row is na
+na_adder(wb = template,
+         sheet = 'Table_4',
+         value = "..",
+         cols = t4_priv_columns,
+         lengths = rep(1, length(t4_priv_columns)),
+         start_row = 69)
 
 #Total number of cols
 t4_total_cols <- (t4_years + 6) * 2 

@@ -9,6 +9,7 @@ head_row <- 9
 start_row <- 11
 end_row <- 48
 start_col <- 2
+t3_priv_row_start <- 35
 
 t3_years <- annual_year - 2010  #Number of full years in the table
 lookup_row <- nrow(table_3_lookup) + 1
@@ -70,7 +71,6 @@ table3_header(wb = template,
 pri_start_col <- start_col + t3_years + 6
 #Setting private columns and rows
 t3_priv_columns <- pri_start_col + t3_columns - 1
-t3_priv_row_start <- 35
 t3_na_rownum <- t3_priv_row_start - start_row
 t3_priv_rows <- setdiff(seq(t3_priv_row_start, end_row), t3_empty)
 
