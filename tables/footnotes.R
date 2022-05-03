@@ -40,6 +40,7 @@ t4_notes <- c('These figures cover orders made only. Figures for other disposal 
                 - disposals in one year may relate to applications made in earlier years; and,
               - an application for one type of order may result in another type of order.',
               'These orders refer to sections 33 and 34 of the Family Law Act 1986 and relate to children taken, or missing, from a parent or guardian granted a residence order.',
+              "These orders refer to section 50 of the Children Act 1989 and relate to children missing from care or emergency protection.",
               'These orders relate to surrogacy and are made under the Human Fertilisation and Embryology Act.',
               'These figures include renewals of interim orders and it is likely that many individual children and cases are counted multiple times. To note that data on interim orders in 2021 is deemed not to be robust enough for publication whilst Family Public Law is undergoing HMCTS Reform (denoted by :). These series will be reinstated as soon as possible.',
               'These orders have been made relating to the same children on the same day. They are not distinct from the individual Supervision and Special Guardianship Order figures elsewhere in the table.',
@@ -119,6 +120,18 @@ notes2 <- c("Source:",
              "",
              "Notes:",
             glue("{seq_along(t2_notes)}) {t2_notes}"))
+
+notes3 <- c("Source:",
+            "HMCTS FamilyMan system",
+            "",
+            "Notes:",
+            glue("{seq_along(t3_notes)}) {t3_notes}"))
+
+notes4 <- c("Source:",
+            "HMCTS FamilyMan system",
+            "",
+            "Notes:",
+            glue("{seq_along(t4_notes)}) {t4_notes}"))
 
 notes5 <- c("Source:",
              "HMCTS FamilyMan system",

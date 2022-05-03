@@ -136,5 +136,5 @@ openxlsx::addStyle(template,
 note_footer(wb = template,
             sheet = 'Table_4',
             start_row = end_row,
-            notes = notes5,
+            notes = notes4,
             col_length = t4_total_cols)
