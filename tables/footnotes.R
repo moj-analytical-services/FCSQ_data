@@ -25,6 +25,26 @@ t2_notes <-  c('A CSV file accompanies this table, which provides data in a mach
              'There was a one-off increase in the number of Private law cases in quarter 3 (July to September) 2014 due to an audit by HMCTS of all open private law cases.',
              'Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters.')
 
+t3_notes <- c('These figures include renewals of interim orders and it is likely that many individual children and cases are counted multiple times.',
+              'The number of disposals shown table 4 are not equal to the corresponding number of applications made during the year, because:
+     - disposals in one year may relate to applications made in earlier years; and,
+     - an application for one type of order may result in another type of order.',
+              'These orders refer to section 50 of the Children Act 1989 and relate to children missing from care or emergency protection.',
+              'These orders are related to surrogacy and made under the Human Fertilisation and Embryology Act.',
+              'Some applications under the Adoption and Children Act 2002 relating to the removal of a child from the UK and change of surname were incorrectly published within Private Law Children Act statistics. These applications are now correctly reported under the adoption act. Applications under the Children Act for ‘leave to remove a child from the UK’ and ‘leave to change surname’ are recorded within ‘post separation support and dispute resolution’ applications and cannot be separately identified.',
+              'The figures for enforcement applications include applications for breach of an enforcement order, as it is not possible to separately identify these from applications for breach of a child arrangement order. The figures also include applications to amend existing orders: to either increase/reduce hours to unpaid work or to change the area where you do unpaid work due to moving house',
+              'Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters')
+
+t4_notes <- c('These figures cover orders made only. Figures for other disposal types (Applications withdrawn, Orders refused and Orders of no order) are given in the CSV file that accompanies this publication.',
+              'The number of disposals shown in the table above are not equal to the corresponding number of applications made during the year, because:
+                - disposals in one year may relate to applications made in earlier years; and,
+              - an application for one type of order may result in another type of order.',
+              'These orders refer to sections 33 and 34 of the Family Law Act 1986 and relate to children taken, or missing, from a parent or guardian granted a residence order.',
+              'These orders relate to surrogacy and are made under the Human Fertilisation and Embryology Act.',
+              'These figures include renewals of interim orders and it is likely that many individual children and cases are counted multiple times. To note that data on interim orders in 2021 is deemed not to be robust enough for publication whilst Family Public Law is undergoing HMCTS Reform (denoted by :). These series will be reinstated as soon as possible.',
+              'These orders have been made relating to the same children on the same day. They are not distinct from the individual Supervision and Special Guardianship Order figures elsewhere in the table.',
+              'Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters')
+
 t5_notes <- c('Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters',
               'Private law adoptions are not included.',
               '"Other" includes those who were aged 18 by the time the order was made, or where the age was not correctly recorded.',
