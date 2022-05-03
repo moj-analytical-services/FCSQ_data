@@ -83,6 +83,10 @@ if (pub_quarter == 4){
 }
 
 #Helpful letter lookup
-letter_lookup <- readr::read_csv(paste0(path_to_project, "letter_lookup.csv"))
+letter_lookup <- readr::read_csv(paste0(path_to_project, "Lookups/letter_lookup.csv"))
+ca_order_lookup <- readr::read_csv(paste0(path_to_project, "Lookups/t3_order_lookup.csv"), col_types = cols(
+  Order_type_code = col_character(),
+  `Order type` = col_character(),
+  Table = col_integer()))
 
 
