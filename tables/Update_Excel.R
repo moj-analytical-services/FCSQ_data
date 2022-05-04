@@ -36,6 +36,7 @@ source(paste0(path_to_project, "Regular_Tables/table6_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table7_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table8_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table9_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table12_reg.R"))
 #Formula cols
 source(paste0(path_to_project, "Regular_Tables/table3_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table4_reg.R"))
@@ -210,6 +211,32 @@ write_formatted_table(workbook = template,
                       notes = notes9, 
                       starting_row = 5, 
                       quarterly_format = c(2))
+####################################################################
+#Matrimonial matters proceedings
+#Table 12
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_12',
+                    x = timeperiod12,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_12', 
+                      tables = list(t12_reg_year, t12_reg_qtr), 
+                      notes = notes12, 
+                      starting_row = 12, 
+                      quarterly_format = c(2))
+
+na_adder(wb = template,
+         sheet = 'Table_12',
+         value = ".",
+         cols = c(6, 7, 9, 10),
+         lengths = rep(3, 4),
+         start_row = 12)
 ####################################################################
 #Financial Remedy
 #Table 15

@@ -98,7 +98,14 @@ t11_notes <- c("Self-representation is determined by the field 'legal representa
              "Please note the latest quarters will likely change in future as more cases are included – for example the proportion of unrepresented parties in divorce cases in Q1 2020 was 23% in the previous bulletin but is now 26%.",
              "Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters")
 
-
+t12_notes <- c("More detailed statistics on divorces in England and Wales are available from the Office for National Statistics (ONS) at: http://www.ons.gov.uk/ons/taxonomy/index.html?nscl=Divorces. Data in ONS publications are based on marriage and adoption data provided by the General Register Office and divorce data (including civil partnerships) provided by the HM Courts and Tribunals Service.",
+               "Following the Children and Families Act 2014, couples divorcing are no longer required to provide information on children as part of the divorce process. We have thus decided to remove this field from the accompanying relevant csv file in order to avoid misleading conclusions being made.",
+               "Note that when the 'digital' case type filter is selected, the data for for all categories under 'dissolution of marriage' refers only to those that are digital at all stages (i.e. handled by the Courts and Tribunals Service Centres) and excludes any made via a Regional Divorce Centre that may have had petitions made digitally that were subsequently completed via the traditional paper route.",
+               "The average timeliness figures are produced by calculating the time from petition (which may be from an earlier period) to the Decree Nisi or Decree Absolute made in that period.",
+               "The large volume of decrees nisi seen in Q1 2016 is due to the clearance of the backlog following the creation of the new centralised divorce centre for London and the South East Region during 2015.",
+               "Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters",
+               "Due to recording errors for some paper petitions, the date when the petition was issued have been incorrectly recorded as the date the petition was received by HMCTS from September 2020. This has resulted in the receipt and issue date being the same and it is estimated to affect around 48% of paper petitions to December 2021. This means that some petitions recorded as been received in one quarter may have actually been received in an earlier quarter, and this would also shorten times to decree nisi and absolute (by around a week).",
+               "Please note that there are around 165 cases missing in 2021 and 45 missing across 2020 and 2019 due to data entry issues.")
 
 t15_notes <- c("The types of financial remedy included are as follows: lump sum, maintenance pending suit, property adjustment, periodical payment, pension sharing, pension attachment, secure provision orders and application dismissed.",
                "The HMCTS Reform programme has been rolled out to cover financial remedy cases, with data being entered on the new Core Case Data (CCD) system. Such cases are being copied into FamilyMan (the data source for financial remedy) but please be aware that there are around 2,100 cases that have yet to be copied across. The MoJ and HMCTS are working towards a combined data source that uses both FamilyMan and CCD systems, which will address this existing gap in the data.",
@@ -184,6 +191,11 @@ notes11 <- c("Source:",
              "Notes:",
              glue("{seq_along(t11_notes)}) {t11_notes}"))
 
+notes12 <- c("Source:",
+             "HMCTS FamilyMan and HMCTS Core Case Data",
+             "",
+             "Notes:",
+             glue("{seq_along(t12_notes)}) {t12_notes}"))
 
 notes15 <- c("Source:",
              "HMCTS FamilyMan system",

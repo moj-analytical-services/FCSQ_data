@@ -12,6 +12,9 @@ dropdown10_df <- data.frame(c("Adoption", "Divorce (incl. annulment and FR)", "D
 # table 11
 dropdown11_df <- data.frame(c("Adoption", "Divorce (incl. FR)", "Domestic Violence", "Financial Remedy", "Private Law", "Public Law"))
 
+# table 12
+dropdown12_df <- data.frame(c("All", "Paper", "Digital"))
+
 #table 16
 dropdown16_df <- tibble(c('All', 'Exparte', 'On notice'))
 # Output ##########################################################################################
@@ -103,6 +106,29 @@ dataValidation(wb = template,
                rows = 6,
                type = "list",
                value = "'Table_11'!$N$11:$N$16")
+
+# table 12
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_12',
+                    x = dropdown12_df,
+                    startRow = 12,
+                    startCol = 22,
+                    colNames = F)
+
+openxlsx::addStyle(wb = template,
+                   sheet = 'Table_12',
+                   openxlsx::createStyle(fontColour = "white"),
+                   rows = 12:14,
+                   cols = 22,
+                   stack = T,
+                   gridExpand = T)
+
+dataValidation(wb = template,
+               sheet = 'Table_12',
+               cols = 2,
+               rows = 7,
+               type = "list",
+               value = "'Table_12'!$V$12:$V$14")
 # table 16
 openxlsx::writeData(wb = template,
                     sheet = 'Table_16',
