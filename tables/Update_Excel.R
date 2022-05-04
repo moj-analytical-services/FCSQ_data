@@ -34,6 +34,8 @@ source(paste0(path_to_project, "Regular_Tables/table2_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table5_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table6_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table7_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table8_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table9_reg.R"))
 #Formula cols
 source(paste0(path_to_project, "Regular_Tables/table3_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table4_reg.R"))
@@ -167,6 +169,46 @@ write_formatted_table(workbook = template,
                       tables = list(t7_reg_year, t7_reg_qtr), 
                       notes = notes2, 
                       starting_row = 7, 
+                      quarterly_format = c(2))
+
+####################################################################
+#Care and Supervision
+#Table 8
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_8',
+                    x = timeperiod8,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_8', 
+                      tables = list(t8_reg_year, t8_reg_qtr), 
+                      notes = notes8, 
+                      starting_row = 5, 
+                      quarterly_format = c(2))
+
+####################################################################
+#Private Law Disposal
+#Table 9
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_9',
+                    x = timeperiod9,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_9', 
+                      tables = list(t9_reg_year, t9_reg_qtr), 
+                      notes = notes9, 
+                      starting_row = 5, 
                       quarterly_format = c(2))
 ####################################################################
 #Financial Remedy

@@ -20,6 +20,8 @@ contents_df <- tribble(
   "Table 5", "Number of individual children involved in Public and Private (Children Act) applications made in the Family courts in England and Wales by age",
   "Table 6", "Number of individual parties involved in Public and Private (Children Act) cases in England and Wales",
   "Table 7", "Number of Public and Private (Children Act) cases started in England and Wales by High court indicator and area",
+  "Table 8", "Summary statistics on the time to first definitive disposal for care proceedings in the Family courts of England and Wales",
+  "Table 9", "Summary statistics on the timeliness of Private law cases from issue to final order in the Family courts of England and Wales",
   "Table 10", "Number of disposals and average time to first definitve disposal in courts in England and Wales by case type and legal representaion of parties",
   "Table 11", "Legal representation status of applicants and respondents in cases with at least one hearing in Family courts in England and Wales",
   "Table 15", "Number of applications and disposals made for one or more types of financial remedy (formerly ancillary relief) orders, in England and Wales",
@@ -28,7 +30,7 @@ contents_df <- tribble(
 
 # A notes page, notes_all is made from the update excel file
 source(paste0(path_to_project, "footnotes.R"))
-
+source(paste0(path_to_project, "Accessible_Notes.R"))
 
 notes_df2 <- tribble(
   ~"Note number", ~"Note text", ~"Table number",
@@ -43,18 +45,21 @@ fcsq_a11y <- new_a11ytable(
                  "Table 3a", "Table 3b", "Table 4a", "Table 4b",
                  "Table 5",
                  "Table 6", "Table 7",
+                 "Table 8", "Table 9",
                  "Table 10", "Table 11", "Table 15", "Table 16" ),
-  sheet_types = c("cover", "contents", "notes", rep("tables", 13)),
+  sheet_types = c("cover", "contents", "notes", rep("tables", 15)),
   sheet_titles = c(
     "Family Court Tables",
     "Table of contents",
     "Notes",
-    contents_df$`Sheet title`[2:14]),
+    contents_df$`Sheet title`[2:16]),
   sources = c(
     NA_character_,
     NA_character_,
     NA_character_,
     "HMCTS FamilyMan and Core Case Data",
+    "HMCTS FamilyMan",
+    "HMCTS FamilyMan",
     "HMCTS FamilyMan",
     "HMCTS FamilyMan",
     "HMCTS FamilyMan",
@@ -81,6 +86,8 @@ fcsq_a11y <- new_a11ytable(
     "Children_Act_Individual_Children_Age",
     "Children_Act_Parties",
     "Children_Act_High_Court",
+    "Care_Disposal_Summary",
+    "Private_Law_Disposal_Summary",
     "Overall_time_to_first_disposal",
     "Overall_Legal_Representation",
     "Financial_Remedy_Summary",
@@ -99,6 +106,8 @@ fcsq_a11y <- new_a11ytable(
     t5_accessible,
     t6_accessible,
     t7_accessible,
+    t8_accessible,
+    t9_accessible,
     t10_accessible,
     t11_accessible,
     t15_accessible,

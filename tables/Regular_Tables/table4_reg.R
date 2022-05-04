@@ -138,3 +138,21 @@ note_footer(wb = template,
             start_row = end_row,
             notes = notes4,
             col_length = t4_total_cols)
+
+# Content #########################################################################################
+
+# time period
+if(pub_quarter==4){
+  
+  timeperiod4 <- paste0("Annually 2011 - ", pub_year, " and quarterly Q1 2011 - Q", pub_quarter," ", pub_year)
+  
+} else {
+  
+  timeperiod4 <- paste0("Annually 2011 - ", pub_year-1, " and quarterly Q1 2011 - Q", pub_quarter," ", pub_year)
+}
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_4',
+                    x = timeperiod4,
+                    startRow = 4,
+                    colNames = F)

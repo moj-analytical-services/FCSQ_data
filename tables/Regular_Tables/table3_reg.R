@@ -26,7 +26,6 @@ t3_pub_columns <- start_col + t3_columns - 1
 
 
 #Main Public Law formulae
-glue("=VLOOKUP($AJ{i}&$A$7&$B$9&$AJ$6,'Table 3_4_source'!$A$2:$Q${lookup_row},{lookup_col},FALSE)")
 for (i in t3_pub_rows) {
   lookup_col <- 2
   for (j in t3_pub_columns) {
@@ -133,3 +132,21 @@ note_footer(wb = template,
             start_row = end_row,
             notes = notes3,
             col_length = t3_total_cols)
+
+# Content #########################################################################################
+
+# time period
+if(pub_quarter==4){
+  
+  timeperiod3 <- paste0("Annually 2011 - ", pub_year, " and quarterly Q1 2011 - Q", pub_quarter," ", pub_year)
+  
+} else {
+  
+  timeperiod3 <- paste0("Annually 2011 - ", pub_year-1, " and quarterly Q1 2011 - Q", pub_quarter," ", pub_year)
+}
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_3',
+                    x = timeperiod3,
+                    startRow = 4,
+                    colNames = F)

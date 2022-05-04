@@ -61,6 +61,15 @@ t7_notes <- c('Counts are for the number of Public or Private law (Children Act)
               'Central London DFJ includes: Central Family Court (Principal Registry of the Family Division), Clerkenwell & Shoreditch, Inner London FPC, Lambeth and Wandsworth',
               'Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters')
 
+t8_notes <- c('The number of disposals relate to the number of children subject to each order, where an application for a Care or Supervision Order was made. This number is not the same as any numbers given in the Public law CSV file because it covers applications for a Care or Supervision order which can have been made in that or any earlier quarter, and only considers a restricted range of disposal events',
+              'Valid disposal types are Care orders, Supervision orders, Residence orders, Special Guardianship orders, Orders refused, Orders of No Order and Applications withdrawn.',
+              'The median duration is the time within which half the cases reach a disposal, and provides a more representative measure of how long cases take compared with the average (mean) in situations where the data are skewed, with a few very long-duration cases.',
+              'Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters')
+
+t9_notes <- c('Only Private law (Children Act) cases which have been marked as "closed" or with a "final" order have been included in these figures, and so will not match the figures in Tables 1 and 2.',
+              'The median duration is the time within which half the cases reach a disposal, and provides a more representative measure of how long cases take compared with the average (mean) in situations where the data are skewed, with a few very long-duration cases.',
+              'Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters')
+
 t10_notes <- c("Self-representation is determined by the field 'legal representation' in Familyman being left blank. Therefore, this is only a proxy measure and parties without a recorded representative are not necessarily self-representing litigants in person.",
                "Adoption timeliness figures cover applications for standard, convention and foreign adoptions. They do not cover placement cases. Q3 2014 figures were inflated by a data cleansing exercise which involved closing old cases, which particularly affected the mean disposal time.",
                "Divorce timeliness figures (measured to decree nisi) include annulments and judicial separations, as well as financial remedies. The representation status may refer to divorce (including civil partnerships) or financial remedy proceedings (formerly known as 'ancillary relief'). Cases involving financial remedies are those which had an application or order made for one or more financial remedies at the time the data was extracted for this publication.",
@@ -150,6 +159,18 @@ notes7 <- c("Source:",
             "",
             "Notes:",
             glue("{seq_along(t7_notes)}) {t7_notes}"))
+
+notes8 <- c("Source:",
+            "HMCTS FamilyMan system",
+            "",
+            "Notes:",
+            glue("{seq_along(t8_notes)}) {t8_notes}"))
+
+notes9 <- c("Source:",
+            "HMCTS FamilyMan system",
+            "",
+            "Notes:",
+            glue("{seq_along(t9_notes)}) {t9_notes}"))
 
 notes10 <- c("Source:",
              "HMCTS FamilyMan and HMCTS Core Case Data",
