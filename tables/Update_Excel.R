@@ -37,6 +37,7 @@ source(paste0(path_to_project, "Regular_Tables/table7_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table8_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table9_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table12_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table13_reg.R"))
 #Formula cols
 source(paste0(path_to_project, "Regular_Tables/table3_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table4_reg.R"))
@@ -237,6 +238,27 @@ na_adder(wb = template,
          cols = c(6, 7, 9, 10),
          lengths = rep(3, 4),
          start_row = 12)
+
+####################################################################
+#Divorce Progression
+#Table 13
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_13',
+                    x = timeperiod13,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_13', 
+                      tables = list(t13_reg_year, t13_reg_qtr), 
+                      notes = notes13, 
+                      starting_row = 8, 
+                      quarterly_format = c(2))
+
 ####################################################################
 #Financial Remedy
 #Table 15

@@ -107,6 +107,16 @@ t12_notes <- c("More detailed statistics on divorces in England and Wales are av
                "Due to recording errors for some paper petitions, the date when the petition was issued have been incorrectly recorded as the date the petition was received by HMCTS from September 2020. This has resulted in the receipt and issue date being the same and it is estimated to affect around 48% of paper petitions to December 2021. This means that some petitions recorded as been received in one quarter may have actually been received in an earlier quarter, and this would also shorten times to decree nisi and absolute (by around a week).",
                "Please note that there are around 165 cases missing in 2021 and 45 missing across 2020 and 2019 due to data entry issues.")
 
+t13_notes <- c("Annulments and Judicial Separations are not included. In this table only events that occurred after 1 January 2003 are counted - any financial remedy, hearing and injunction events in the case prior to filing the divorce petition are not counted.",
+               "Figures for the more recent quarterly periods will be revised upwards over time as cases progress through the courts",
+               "Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters",
+               "Not all applications for financial remedies are correctly recorded on the FamilyMan database. In about 15% of cases with a disposal, no preceding application has been recorded on the system. Most of the 'missing' applications occur in cases where the application was uncontested.",
+               "These financial remedy figures cover all types of application and disposal, and are not confined to the types shown in the financial remedy table where only a selected range is used.",
+               "These figures include both matrimonial (including civil partnership) and financial remedy hearings.",
+               "The number of petitions started in the equivalent quarter which has reached this stage by the date of the most recent quarter (e.g for divorce cases starting in Q4 2021, it is what stage they reached by the end of Q4 2021)",
+               "Due to recording errors for some paper petitions, the date when the petition was issued have been incorrectly recorded as the date the petition was received by HMCTS from September 2020. This has resulted in the receipt and issue date being the same and it is estimated to affect around 48% of paper petitions to December 2021. This means that some petitions recorded as been received in one quarter may have actually been received in an earlier quarter, and this would also shorten times to decree nisi and absolute (by around a week).")
+
+
 t15_notes <- c("The types of financial remedy included are as follows: lump sum, maintenance pending suit, property adjustment, periodical payment, pension sharing, pension attachment, secure provision orders and application dismissed.",
                "The HMCTS Reform programme has been rolled out to cover financial remedy cases, with data being entered on the new Core Case Data (CCD) system. Such cases are being copied into FamilyMan (the data source for financial remedy) but please be aware that there are around 2,100 cases that have yet to be copied across. The MoJ and HMCTS are working towards a combined data source that uses both FamilyMan and CCD systems, which will address this existing gap in the data.",
                "Not all applications for financial remedy are correctly recorded in the Familyman database. Analysis of data between 2007/08 and 2010/11 suggest actual figures to be at least 10% higher than those shown above. Most of the 'missing' applications occur in cases where the financial remedy is not contested.",
@@ -196,6 +206,12 @@ notes12 <- c("Source:",
              "",
              "Notes:",
              glue("{seq_along(t12_notes)}) {t12_notes}"))
+
+notes13 <- c("Source:",
+             "HMCTS FamilyMan and HMCTS Core Case Data",
+             "",
+             "Notes:",
+             glue("{seq_along(t13_notes)}) {t13_notes}"))
 
 notes15 <- c("Source:",
              "HMCTS FamilyMan system",
