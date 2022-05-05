@@ -88,7 +88,8 @@ t13_reg_year <- div_prog_joined_year %>%
             blank7 = NA,
             injord_num,
             injord_perc = injord_num/div_case_start
-            )
+            ) %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, 0))) 
   
 # Quarterly ############
 #Divorce cases started
@@ -174,7 +175,8 @@ t13_reg_qtr <- div_prog_joined_qtr %>%
             blank7 = NA,
             injord_num,
             injord_perc = injord_num/div_case_start
-  )
+  ) %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, 0))) 
 
 # time period
 if(pub_quarter==4){

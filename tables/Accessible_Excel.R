@@ -25,6 +25,7 @@ contents_df <- tribble(
   "Table 10", "Number of disposals and average time to first definitve disposal in courts in England and Wales by case type and legal representaion of parties",
   "Table 11", "Legal representation status of applicants and respondents in cases with at least one hearing in Family courts in England and Wales",
   "Table 12", "Number of cases relating to matrimonial proceedings (including civil partnerships), with selected average times, in England and Wales",
+  "Table 13", "Progression of divorce cases (including civil partnerships) started for England and Wales",
   "Table 15", "Number of applications and disposals made for one or more types of financial remedy (formerly ancillary relief) orders, in England and Wales",
   "Table 16", "Applications and orders made for domestic violence remedies in England and Wales"
 )
@@ -48,14 +49,14 @@ fcsq_a11y <- new_a11ytable(
                  "Table 6", "Table 7",
                  "Table 8", "Table 9",
                  "Table 10", "Table 11",
-                 "Table 12",
+                 "Table 12", "Table 13",
                  "Table 15", "Table 16" ),
-  sheet_types = c("cover", "contents", "notes", rep("tables", 16)),
+  sheet_types = c("cover", "contents", "notes", rep("tables", 17)),
   sheet_titles = c(
     "Family Court Tables",
     "Table of contents",
     "Notes",
-    contents_df$`Sheet title`[2:17]),
+    contents_df$`Sheet title`[2:18]),
   sources = c(
     NA_character_,
     NA_character_,
@@ -71,6 +72,7 @@ fcsq_a11y <- new_a11ytable(
     "HMCTS FamilyMan",
     "HMCTS FamilyMan",
     "HMCTS FamilyMan",
+    "HMCTS FamilyMan and Core Case Data",
     "HMCTS FamilyMan and Core Case Data",
     "HMCTS FamilyMan and Core Case Data",
     "HMCTS FamilyMan and Core Case Data",
@@ -95,6 +97,7 @@ fcsq_a11y <- new_a11ytable(
     "Overall_time_to_first_disposal",
     "Overall_Legal_Representation",
     "Divorce_Summary",
+    "Divorce_Progression",
     "Financial_Remedy_Summary",
     "Domestic_Violence_Summary"
   ),
@@ -116,6 +119,7 @@ fcsq_a11y <- new_a11ytable(
     t10_accessible,
     t11_accessible,
     t12_accessible,
+    t13_accessible,
     t15_accessible,
     t16_accessible
   )

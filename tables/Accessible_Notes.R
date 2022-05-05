@@ -70,6 +70,11 @@ t12_note_len <- length(t12_notes)
 t12_note_section <- note_section(t12_notes, 'Table 12', note_number)
 note_number <- note_number + t12_note_len
 
+#Table 13 notes
+t13_note_len <- length(t13_notes)
+t13_note_section <- note_section(t13_notes, 'Table 13', note_number)
+note_number <- note_number + t13_note_len
+
 #Table 15 notes
 t15_note_len <- length(t15_notes)
 t15_note_section <- note_section(t15_notes, 'Table 15', note_number)
