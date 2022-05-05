@@ -182,3 +182,8 @@ class(dv_qtr$Nmo_ords) <- c(class(dv_qtr$Nmo_ords), 'formula')
 class(dv_qtr$Oo_ords) <- c(class(dv_qtr$Oo_ords), 'formula')
 class(dv_qtr$Ords_total) <- c(class(dv_qtr$Ords_total), 'formula')
 class(dv_qtr$Case_close) <- c(class(dv_qtr$Case_start), 'formula')
+
+# Adding source
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_16_source',
+                    x = dv_csv)

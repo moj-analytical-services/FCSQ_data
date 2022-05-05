@@ -65,3 +65,7 @@ write_formatted_table(workbook = template,
                       quarterly_format = c(2),
                       lookup_flag = 16)
 
+# Adding source
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_10_source',
+                    x = table_10_lookup)

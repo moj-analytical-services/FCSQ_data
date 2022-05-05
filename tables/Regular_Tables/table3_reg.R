@@ -150,3 +150,8 @@ openxlsx::writeData(wb = template,
                     x = timeperiod3,
                     startRow = 4,
                     colNames = F)
+
+# Adding source
+openxlsx::writeData(wb = template,
+                    sheet = 'Table 3_4_source',
+                    x = table_3_lookup)
