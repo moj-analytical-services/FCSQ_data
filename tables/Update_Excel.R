@@ -38,6 +38,7 @@ source(paste0(path_to_project, "Regular_Tables/table8_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table9_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table12_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table13_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table14_reg.R"))
 #Formula cols
 source(paste0(path_to_project, "Regular_Tables/table3_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table4_reg.R"))
@@ -259,6 +260,25 @@ write_formatted_table(workbook = template,
                       starting_row = 8, 
                       quarterly_format = c(2))
 
+####################################################################
+#Divorce Progression Percentages
+#Table 13
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_14',
+                    x = timeperiod14,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_14', 
+                      tables = list(t14_reg), 
+                      notes = notes14, 
+                      starting_row = 7, 
+                      quarterly_format = c(2))
 ####################################################################
 #Financial Remedy
 #Table 15

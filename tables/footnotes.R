@@ -116,6 +116,9 @@ t13_notes <- c("Annulments and Judicial Separations are not included. In this ta
                "The number of petitions started in the equivalent quarter which has reached this stage by the date of the most recent quarter (e.g for divorce cases starting in Q4 2021, it is what stage they reached by the end of Q4 2021)",
                "Due to recording errors for some paper petitions, the date when the petition was issued have been incorrectly recorded as the date the petition was received by HMCTS from September 2020. This has resulted in the receipt and issue date being the same and it is estimated to affect around 48% of paper petitions to December 2021. This means that some petitions recorded as been received in one quarter may have actually been received in an earlier quarter, and this would also shorten times to decree nisi and absolute (by around a week).")
 
+t14_notes <- c('Figures are calculated for all petitions made since 1 January 2011. For example, for all the divorce petitions made between Q1 2011 and Q4 2021, 30% reached Decree Nisi within 3 months (or one quarter) after petition.',
+               'Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters',
+               'Due to recording errors for some paper petitions, the date when the petition was issued have been incorrectly recorded as the date the petition was received by HMCTS from September 2020. This has resulted in the receipt and issue date being the same and it is estimated to affect around 48% of paper petitions to December 2021. This means that some petitions recorded as been received in one quarter may have actually been received in an earlier quarter, and this would also shorten times to decree nisi and absolute (by around a week).')
 
 t15_notes <- c("The types of financial remedy included are as follows: lump sum, maintenance pending suit, property adjustment, periodical payment, pension sharing, pension attachment, secure provision orders and application dismissed.",
                "The HMCTS Reform programme has been rolled out to cover financial remedy cases, with data being entered on the new Core Case Data (CCD) system. Such cases are being copied into FamilyMan (the data source for financial remedy) but please be aware that there are around 2,100 cases that have yet to be copied across. The MoJ and HMCTS are working towards a combined data source that uses both FamilyMan and CCD systems, which will address this existing gap in the data.",
@@ -212,6 +215,13 @@ notes13 <- c("Source:",
              "",
              "Notes:",
              glue("{seq_along(t13_notes)}) {t13_notes}"))
+
+notes14 <- c("Source:",
+             "HMCTS FamilyMan system",
+             "",
+             "Notes:",
+             glue("{seq_along(t14_notes)}) {t14_notes}"))
+
 
 notes15 <- c("Source:",
              "HMCTS FamilyMan system",
