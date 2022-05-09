@@ -4,45 +4,48 @@
 #####################################################
 #Public Law Annual
 ######################################################
+child_act_pub <- child_act_csv %>% 
+  filter(Public_private == 'Public law')
+
 # Total cases staring
-pub_case_start_year <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Public law') %>% 
+pub_case_start_year <- child_act_pub %>%
+  filter(Count_type == 'Cases starting') %>%
   group_by(Year) %>% 
   summarise(pub_case_start = sum(Count))
 
 # 1 Applicant
-pub_applicant_one_year <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Public law', Applicants_in_case == '1') %>% 
+pub_applicant_one_year <- child_act_pub %>%
+  filter(Count_type == 'Cases starting', Applicants_in_case == '1') %>% 
   group_by(Year) %>% 
   summarise(pub_appl_one = sum(Count))
 
 # 2 or more Applicants
-pub_applicant_two_year <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Public law', Applicants_in_case == '2+') %>% 
+pub_applicant_two_year <- child_act_pub %>%
+  filter(Count_type == 'Cases starting', Applicants_in_case == '2+') %>% 
   group_by(Year) %>% 
   summarise(pub_appl_two = sum(Count))
 
 # 1 Respondents
-pub_respondent_one_year <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Public law', Respondents_in_case == '1') %>% 
+pub_respondent_one_year <- child_act_pub %>%
+  filter(Count_type == 'Cases starting', Respondents_in_case == '1') %>% 
   group_by(Year) %>% 
   summarise(pub_resp_one = sum(Count))
 
 # 2 Respondents
-pub_respondent_two_year <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Public law', Respondents_in_case == '2') %>% 
+pub_respondent_two_year <- child_act_pub %>%
+  filter(Count_type == 'Cases starting', Respondents_in_case == '2') %>% 
   group_by(Year) %>% 
   summarise(pub_resp_two = sum(Count))
 
 # 3 Respondents
-pub_respondent_three_year <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Public law', Respondents_in_case == '3') %>% 
+pub_respondent_three_year <- child_act_pub %>%
+  filter(Count_type == 'Cases starting', Respondents_in_case == '3') %>% 
   group_by(Year) %>% 
   summarise(pub_resp_three = sum(Count))
 
 # 4+ Respondents
-pub_respondent_four_year <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Public law', Respondents_in_case == '4+') %>% 
+pub_respondent_four_year <- child_act_pub %>%
+  filter(Count_type == 'Cases starting', Respondents_in_case == '4+') %>% 
   group_by(Year) %>% 
   summarise(pub_resp_four = sum(Count))
 
@@ -55,45 +58,49 @@ pub_t6_join_year <- reduce(pub_t6_annual_tables, left_join, by = 'Year')
 #####################################################
 #Private Law Annual
 ######################################################
+
+child_act_priv <- child_act_csv %>% 
+  filter(Public_private == 'Private law')
+
 # Total cases staring
-priv_case_start_year <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Private law') %>% 
+priv_case_start_year <- child_act_priv %>%
+  filter(Count_type == 'Cases starting') %>% 
   group_by(Year) %>% 
   summarise(priv_case_start = sum(Count))
 
 # 1 Applicant
-priv_applicant_one_year <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Private law', Applicants_in_case == '1') %>% 
+priv_applicant_one_year <- child_act_priv %>%
+  filter(Count_type == 'Cases starting', Applicants_in_case == '1') %>% 
   group_by(Year) %>% 
   summarise(priv_appl_one = sum(Count))
 
 # 2 or more Applicants
-priv_applicant_two_year <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Private law', Applicants_in_case == '2+') %>% 
+priv_applicant_two_year <- child_act_priv %>%
+  filter(Count_type == 'Cases starting', Applicants_in_case == '2+') %>% 
   group_by(Year) %>% 
   summarise(priv_appl_two = sum(Count))
 
 # 1 Respondents
-priv_respondent_one_year <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Private law', Respondents_in_case == '1') %>% 
+priv_respondent_one_year <- child_act_priv %>%
+  filter(Count_type == 'Cases starting', Respondents_in_case == '1') %>% 
   group_by(Year) %>% 
   summarise(priv_resp_one = sum(Count))
 
 # 2 Respondents
-priv_respondent_two_year <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Private law', Respondents_in_case == '2') %>% 
+priv_respondent_two_year <- child_act_priv %>%
+  filter(Count_type == 'Cases starting', Respondents_in_case == '2') %>% 
   group_by(Year) %>% 
   summarise(priv_resp_two = sum(Count))
 
 # 3 Respondents
-priv_respondent_three_year <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Private law', Respondents_in_case == '3') %>% 
+priv_respondent_three_year <- child_act_priv %>%
+  filter(Count_type == 'Cases starting', Respondents_in_case == '3') %>% 
   group_by(Year) %>% 
   summarise(priv_resp_three = sum(Count))
 
 # 4+ Respondents
-priv_respondent_four_year <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Private law', Respondents_in_case == '4+') %>% 
+priv_respondent_four_year <- child_act_priv %>%
+  filter(Count_type == 'Cases starting', Respondents_in_case == '4+') %>% 
   group_by(Year) %>% 
   summarise(priv_resp_four = sum(Count))
 
@@ -120,44 +127,44 @@ t6_reg_year <- pub_t6_join_year %>% left_join(priv_t6_join_year, by = 'Year') %>
 #Public Law Quarterly
 ######################################################
 # Total cases staring
-pub_case_start_qtr <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Public law') %>% 
+pub_case_start_qtr <- child_act_pub %>%
+  filter(Count_type == 'Cases starting') %>% 
   group_by(Year, Qtr) %>% 
   summarise(pub_case_start = sum(Count))
 
 # 1 Applicant
-pub_applicant_one_qtr <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Public law', Applicants_in_case == '1') %>% 
+pub_applicant_one_qtr <- child_act_pub %>%
+  filter(Count_type == 'Cases starting', Applicants_in_case == '1') %>% 
   group_by(Year, Qtr) %>% 
   summarise(pub_appl_one = sum(Count))
 
 # 2 or more Applicants
-pub_applicant_two_qtr <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Public law', Applicants_in_case == '2+') %>% 
+pub_applicant_two_qtr <- child_act_pub %>%
+  filter(Count_type == 'Cases starting', Applicants_in_case == '2+') %>% 
   group_by(Year, Qtr) %>% 
   summarise(pub_appl_two = sum(Count))
 
 # 1 Respondents
-pub_respondent_one_qtr <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Public law', Respondents_in_case == '1') %>% 
+pub_respondent_one_qtr <- child_act_pub %>%
+  filter(Count_type == 'Cases starting', Respondents_in_case == '1') %>% 
   group_by(Year, Qtr) %>% 
   summarise(pub_resp_one = sum(Count))
 
 # 2 Respondents
-pub_respondent_two_qtr <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Public law', Respondents_in_case == '2') %>% 
+pub_respondent_two_qtr <- child_act_pub %>%
+  filter(Count_type == 'Cases starting', Respondents_in_case == '2') %>% 
   group_by(Year, Qtr) %>% 
   summarise(pub_resp_two = sum(Count))
 
 # 3 Respondents
-pub_respondent_three_qtr <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Public law', Respondents_in_case == '3') %>% 
+pub_respondent_three_qtr <- child_act_pub %>%
+  filter(Count_type == 'Cases starting', Respondents_in_case == '3') %>% 
   group_by(Year, Qtr) %>% 
   summarise(pub_resp_three = sum(Count))
 
 # 4+ Respondents
-pub_respondent_four_qtr <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Public law', Respondents_in_case == '4+') %>% 
+pub_respondent_four_qtr <- child_act_pub %>%
+  filter(Count_type == 'Cases starting', Respondents_in_case == '4+') %>% 
   group_by(Year, Qtr) %>% 
   summarise(pub_resp_four = sum(Count))
 
@@ -171,44 +178,44 @@ pub_t6_join_qtr <- reduce(pub_t6_qtr_tables, left_join, by = c('Year', 'Qtr'))
 #Private Law Quarterly
 ######################################################
 # Total cases staring
-priv_case_start_qtr <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Private law') %>% 
+priv_case_start_qtr <- child_act_priv %>%
+  filter(Count_type == 'Cases starting') %>% 
   group_by(Year, Qtr) %>% 
   summarise(priv_case_start = sum(Count))
 
 # 1 Applicant
-priv_applicant_one_qtr <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Private law', Applicants_in_case == '1') %>% 
+priv_applicant_one_qtr <- child_act_priv %>%
+  filter(Count_type == 'Cases starting', Applicants_in_case == '1') %>% 
   group_by(Year, Qtr) %>% 
   summarise(priv_appl_one = sum(Count))
 
 # 2 or more Applicants
-priv_applicant_two_qtr <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Private law', Applicants_in_case == '2+') %>% 
+priv_applicant_two_qtr <- child_act_priv %>%
+  filter(Count_type == 'Cases starting', Applicants_in_case == '2+') %>% 
   group_by(Year, Qtr) %>% 
   summarise(priv_appl_two = sum(Count))
 
 # 1 Respondents
-priv_respondent_one_qtr <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Private law', Respondents_in_case == '1') %>% 
+priv_respondent_one_qtr <- child_act_priv %>%
+  filter(Count_type == 'Cases starting', Respondents_in_case == '1') %>% 
   group_by(Year, Qtr) %>% 
   summarise(priv_resp_one = sum(Count))
 
 # 2 Respondents
-priv_respondent_two_qtr <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Private law', Respondents_in_case == '2') %>% 
+priv_respondent_two_qtr <- child_act_priv %>%
+  filter(Count_type == 'Cases starting', Respondents_in_case == '2') %>% 
   group_by(Year, Qtr) %>% 
   summarise(priv_resp_two = sum(Count))
 
 # 3 Respondents
-priv_respondent_three_qtr <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Private law', Respondents_in_case == '3') %>% 
+priv_respondent_three_qtr <- child_act_priv %>%
+  filter(Count_type == 'Cases starting', Respondents_in_case == '3') %>% 
   group_by(Year, Qtr) %>% 
   summarise(priv_resp_three = sum(Count))
 
 # 4+ Respondents
-priv_respondent_four_qtr <- child_act_csv %>%
-  filter(Count_type == 'Cases starting', Public_private == 'Private law', Respondents_in_case == '4+') %>% 
+priv_respondent_four_qtr <- child_act_priv %>%
+  filter(Count_type == 'Cases starting', Respondents_in_case == '4+') %>% 
   group_by(Year, Qtr) %>% 
   summarise(priv_resp_four = sum(Count))
 

@@ -3,27 +3,30 @@
 #####################################################
 #Public Law Annual
 ######################################################
+child_act_pub <- child_act_csv %>% 
+  filter(Public_private == 'Public law')
+
 #Cases starting
-pub_ca_case_start_year <- child_act_csv %>%
-  filter(Type == 'Cases', Count_type == 'Cases starting', Public_private == 'Public law') %>% 
+pub_ca_case_start_year <- child_act_pub %>%
+  filter(Type == 'Cases', Count_type == 'Cases starting') %>% 
   group_by(Year) %>% 
   summarise(pub_case_start = sum(Count))
 
 # Cases started in the High Court
-pub_high_court_year <- child_act_csv %>%
-  filter(Public_private == 'Public law', Hc_indicator %in% c('Central London DFJ','Not central London DFJ')) %>% 
+pub_high_court_year <- child_act_pub %>%
+  filter(Hc_indicator %in% c('Central London DFJ','Not central London DFJ')) %>% 
   group_by(Year) %>% 
   summarise(pub_all_hc = sum(Count))
   
 # High Court in Central London DFJ
-pub_central_lond_year <- child_act_csv %>%
-  filter(Public_private == 'Public law', Hc_indicator == 'Central London DFJ') %>% 
+pub_central_lond_year <- child_act_pub %>%
+  filter(Hc_indicator == 'Central London DFJ') %>% 
   group_by(Year) %>% 
   summarise(pub_london_hc = sum(Count))
 
 # High Court outside Central London DFJ
-pub_outside_lond_year <- child_act_csv %>%
-  filter(Public_private == 'Public law', Hc_indicator == 'Not central London DFJ') %>% 
+pub_outside_lond_year <- child_act_pub %>%
+  filter(Hc_indicator == 'Not central London DFJ') %>% 
   group_by(Year) %>% 
   summarise(pub_outside_london_hc = sum(Count))
 
@@ -36,27 +39,30 @@ pub_t7_join_year <- reduce(pub_t7_annual_tables, left_join, by = 'Year')
 #####################################################
 #Private Law Annual
 ######################################################
+child_act_priv <- child_act_csv %>% 
+  filter(Public_private == 'Private law')
+
 #Cases starting
-priv_ca_case_start_year <- child_act_csv %>%
-  filter(Type == 'Cases', Count_type == 'Cases starting', Public_private == 'Private law') %>% 
+priv_ca_case_start_year <- child_act_priv %>%
+  filter(Type == 'Cases', Count_type == 'Cases starting') %>% 
   group_by(Year) %>% 
   summarise(priv_case_start = sum(Count))
 
 # Cases started in the High Court
-priv_high_court_year <- child_act_csv %>%
-  filter(Public_private == 'Private law', Hc_indicator %in% c('Central London DFJ','Not central London DFJ')) %>% 
+priv_high_court_year <- child_act_priv %>%
+  filter(Hc_indicator %in% c('Central London DFJ','Not central London DFJ')) %>% 
   group_by(Year) %>% 
   summarise(priv_all_hc = sum(Count))
 
 # High Court in Central London DFJ
-priv_central_lond_year <- child_act_csv %>%
-  filter(Public_private == 'Private law', Hc_indicator == 'Central London DFJ') %>% 
+priv_central_lond_year <- child_act_priv %>%
+  filter(Hc_indicator == 'Central London DFJ') %>% 
   group_by(Year) %>% 
   summarise(priv_london_hc = sum(Count))
 
 # High Court outside Central London DFJ
-priv_outside_lond_year <- child_act_csv %>%
-  filter(Public_private == 'Private law', Hc_indicator == 'Not central London DFJ') %>% 
+priv_outside_lond_year <- child_act_priv %>%
+  filter(Hc_indicator == 'Not central London DFJ') %>% 
   group_by(Year) %>% 
   summarise(priv_outside_london_hc = sum(Count))
 
@@ -79,26 +85,26 @@ t7_reg_year <- pub_t7_join_year %>% left_join(priv_t7_join_year, by = 'Year') %>
 #Public Law Quarterly
 ######################################################
 #Cases starting
-pub_ca_case_start_qtr <- child_act_csv %>%
-  filter(Type == 'Cases', Count_type == 'Cases starting', Public_private == 'Public law') %>% 
+pub_ca_case_start_qtr <- child_act_pub %>%
+  filter(Type == 'Cases', Count_type == 'Cases starting') %>% 
   group_by(Year, Qtr) %>% 
   summarise(pub_case_start = sum(Count))
 
 # Cases started in the High Court
-pub_high_court_qtr <- child_act_csv %>%
-  filter(Public_private == 'Public law', Hc_indicator %in% c('Central London DFJ','Not central London DFJ')) %>% 
+pub_high_court_qtr <- child_act_pub %>%
+  filter(Hc_indicator %in% c('Central London DFJ','Not central London DFJ')) %>% 
   group_by(Year, Qtr) %>% 
   summarise(pub_all_hc = sum(Count))
 
 # High Court in Central London DFJ
-pub_central_lond_qtr <- child_act_csv %>%
-  filter(Public_private == 'Public law', Hc_indicator == 'Central London DFJ') %>% 
+pub_central_lond_qtr <- child_act_pub %>%
+  filter(Hc_indicator == 'Central London DFJ') %>% 
   group_by(Year, Qtr) %>% 
   summarise(pub_london_hc = sum(Count))
 
 # High Court outside Central London DFJ
-pub_outside_lond_qtr <- child_act_csv %>%
-  filter(Public_private == 'Public law', Hc_indicator == 'Not central London DFJ') %>% 
+pub_outside_lond_qtr <- child_act_pub %>%
+  filter(Hc_indicator == 'Not central London DFJ') %>% 
   group_by(Year, Qtr) %>% 
   summarise(pub_outside_london_hc = sum(Count))
 
@@ -112,26 +118,26 @@ pub_t7_join_qtr <- reduce(pub_t7_qtr_tables, left_join, by = c('Year', 'Qtr'))
 #Private Law Quarterly
 ######################################################
 #Cases starting
-priv_ca_case_start_qtr <- child_act_csv %>%
-  filter(Type == 'Cases', Count_type == 'Cases starting', Public_private == 'Private law') %>% 
+priv_ca_case_start_qtr <- child_act_priv %>%
+  filter(Type == 'Cases', Count_type == 'Cases starting') %>% 
   group_by(Year, Qtr) %>% 
   summarise(priv_case_start = sum(Count))
 
 # Cases started in the High Court
-priv_high_court_qtr <- child_act_csv %>%
-  filter(Public_private == 'Private law', Hc_indicator %in% c('Central London DFJ','Not central London DFJ')) %>% 
+priv_high_court_qtr <- child_act_priv %>%
+  filter(Hc_indicator %in% c('Central London DFJ','Not central London DFJ')) %>% 
   group_by(Year, Qtr) %>% 
   summarise(priv_all_hc = sum(Count))
 
 # High Court in Central London DFJ
-priv_central_lond_qtr <- child_act_csv %>%
-  filter(Public_private == 'Private law', Hc_indicator == 'Central London DFJ') %>% 
+priv_central_lond_qtr <- child_act_priv %>%
+  filter(Hc_indicator == 'Central London DFJ') %>% 
   group_by(Year, Qtr) %>% 
   summarise(priv_london_hc = sum(Count))
 
 # High Court outside Central London DFJ
-priv_outside_lond_qtr <- child_act_csv %>%
-  filter(Public_private == 'Private law', Hc_indicator == 'Not central London DFJ') %>% 
+priv_outside_lond_qtr <- child_act_priv %>%
+  filter(Hc_indicator == 'Not central London DFJ') %>% 
   group_by(Year, Qtr) %>% 
   summarise(priv_outside_london_hc = sum(Count))
 
