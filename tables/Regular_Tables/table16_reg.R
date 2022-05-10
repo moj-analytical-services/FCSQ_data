@@ -12,6 +12,7 @@ dv_hard_code <- tibble(Year = 2003:2010,
                        Appl_total = glue('IF($B$6="All",Table_16_source!Q{dv_hard_code_seq},"-")'),
                        App_made = '-',
                        Case_start = '-',
+                       blank1 = NA,
                        Nmo_ords = glue('IF($B$6="All",Table_16_source!T{dv_hard_code_seq},"-")'),
                        Oo_ords = glue('IF($B$6="All",Table_16_source!U{dv_hard_code_seq},"-")'),
                        Ords_total = glue('IF($B$6="All",Table_16_source!V{dv_hard_code_seq},"-")'),
@@ -56,21 +57,22 @@ dv_year <- tibble(Year = current_dv_year,
                                     
                   Case_start = glue('IF($B$6="All",SUMIFS(Table_16_source!$H:$H,Table_16_source!$A:$A,$A{dv_year_row_seq}\\
                                       ,Table_16_source!$D:$D,LEFT(G$8, LEN(G$8)-1)),"-")'),
+                  blank1 = NA,
                                       
                   Nmo_ords = glue('IF($B$6="All",SUMIFS(Table_16_source!$H:$H,Table_16_source!$A:$A,$A{dv_year_row_seq}\\
-                                    ,Table_16_source!$D:$D,$H$8,Table_16_source!$E:$E,H$9)\\
+                                    ,Table_16_source!$D:$D,$I$8,Table_16_source!$E:$E,I$9)\\
                                     ,SUMIFS(Table_16_source!$H:$H,Table_16_source!$A:$A,$A{dv_year_row_seq}\\
-                                    ,Table_16_source!$D:$D,$H$8,Table_16_source!$E:$E,H$9,Table_16_source!$F:$F,$B$6))'),
+                                    ,Table_16_source!$D:$D,$I$8,Table_16_source!$E:$E,I$9,Table_16_source!$F:$F,$B$6))'),
                   
                   Oo_ords = glue('IF($B$6="All",SUMIFS(Table_16_source!$H:$H,Table_16_source!$A:$A,$A{dv_year_row_seq}\\
-                                   ,Table_16_source!$D:$D,$H$8,Table_16_source!$E:$E,I$9)\\
+                                   ,Table_16_source!$D:$D,$I$8,Table_16_source!$E:$E,J$9)\\
                                    ,SUMIFS(Table_16_source!$H:$H,Table_16_source!$A:$A,$A{dv_year_row_seq}\\
-                                   ,Table_16_source!$D:$D,$H$8,Table_16_source!$E:$E,I$9,Table_16_source!$F:$F,$B$6))'),
+                                   ,Table_16_source!$D:$D,$I$8,Table_16_source!$E:$E,J$9,Table_16_source!$F:$F,$B$6))'),
                   
-                  Ords_total = glue('H{dv_year_row_seq}+I{dv_year_row_seq}'),
+                  Ords_total = glue('I{dv_year_row_seq}+J{dv_year_row_seq}'),
                   
                   Case_close = glue('IF($B$6="All",SUMIFS(Table_16_source!$H:$H,Table_16_source!$A:$A,$A{dv_year_row_seq}\\
-                                      ,Table_16_source!$D:$D,LEFT(K$8, LEN(K$8)-1)),"-")'))
+                                      ,Table_16_source!$D:$D,LEFT(L$8, LEN(L$8)-1)),"-")'))
 
 #Marking formula columns. This is so write data writes the column as a formula.
 class(dv_year$Nmo_app) <- c(class(dv_year$Nmo_app), 'formula')
@@ -94,6 +96,7 @@ dv_hard_code_qtr <- tibble(Year = rep(c(2009, 2010), each = 4),
                        Appl_total = glue('IF($B$6="All",Table_16_source!Q{dv_hard_code_qtr_seq},"-")'),
                        App_made = '-',
                        Case_start = '-',
+                       blank1 = NA,
                        Nmo_ords = glue('IF($B$6="All",Table_16_source!T{dv_hard_code_qtr_seq},"-")'),
                        Oo_ords = glue('IF($B$6="All",Table_16_source!U{dv_hard_code_qtr_seq},"-")'),
                        Ords_total = glue('IF($B$6="All",Table_16_source!V{dv_hard_code_qtr_seq},"-")'),
@@ -150,25 +153,26 @@ dv_qtr <- tibble(Year = current_dv_years,
                                       ,Table_16_source!$D:$D,LEFT(G$8, LEN(G$8)-1)\\
                                       ,Table_16_source!$B:$B,MID($B{dv_qtr_row_seq},2,1))\\
                                       ,"-")'),
+                 blank1 = NA,
                   
                   Nmo_ords = glue('IF($B$6="All",SUMIFS(Table_16_source!$H:$H,Table_16_source!$A:$A,$A{dv_qtr_row_seq}\\
-                                    ,Table_16_source!$D:$D,$H$8,Table_16_source!$E:$E,H$9\\
+                                    ,Table_16_source!$D:$D,$I$8,Table_16_source!$E:$E,I$9\\
                                     ,Table_16_source!$B:$B,MID($B{dv_qtr_row_seq},2,1))\\
                                     ,SUMIFS(Table_16_source!$H:$H,Table_16_source!$A:$A,$A{dv_qtr_row_seq}\\
-                                    ,Table_16_source!$D:$D,$H$8,Table_16_source!$E:$E,H$9,Table_16_source!$F:$F,$B$6\\
+                                    ,Table_16_source!$D:$D,$I$8,Table_16_source!$E:$E,I$9,Table_16_source!$F:$F,$B$6\\
                                     ,Table_16_source!$B:$B,MID($B{dv_qtr_row_seq},2,1)))'),
                   
                   Oo_ords = glue('IF($B$6="All",SUMIFS(Table_16_source!$H:$H,Table_16_source!$A:$A,$A{dv_qtr_row_seq}\\
-                                   ,Table_16_source!$D:$D,$H$8,Table_16_source!$E:$E,I$9\\
+                                   ,Table_16_source!$D:$D,$I$8,Table_16_source!$E:$E,J$9\\
                                    ,Table_16_source!$B:$B,MID($B{dv_qtr_row_seq},2,1))\\
                                    ,SUMIFS(Table_16_source!$H:$H,Table_16_source!$A:$A,$A{dv_qtr_row_seq}\\
-                                   ,Table_16_source!$D:$D,$H$8,Table_16_source!$E:$E,I$9,Table_16_source!$F:$F,$B$6\\
+                                   ,Table_16_source!$D:$D,$I$8,Table_16_source!$E:$E,J$9,Table_16_source!$F:$F,$B$6\\
                                    ,Table_16_source!$B:$B,MID($B{dv_qtr_row_seq},2,1)))'),
                   
-                  Ords_total = glue('H{dv_qtr_row_seq}+I{dv_qtr_row_seq}'),
+                  Ords_total = glue('I{dv_qtr_row_seq}+J{dv_qtr_row_seq}'),
                   
                   Case_close = glue('IF($B$6="All",SUMIFS(Table_16_source!$H:$H,Table_16_source!$A:$A,$A{dv_qtr_row_seq}\\
-                                      ,Table_16_source!$D:$D,LEFT(K$8, LEN(K$8)-1)\\
+                                      ,Table_16_source!$D:$D,LEFT(L$8, LEN(L$8)-1)\\
                                       ,Table_16_source!$B:$B,MID($B{dv_qtr_row_seq},2,1))\\
                                       ,"-")'))
 
