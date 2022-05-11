@@ -40,6 +40,7 @@ source(paste0(path_to_project, "Regular_Tables/table12_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table13_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table14_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table17_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table18_reg.R"))
 #Formula cols
 source(paste0(path_to_project, "Regular_Tables/table3_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table4_reg.R"))
@@ -342,6 +343,19 @@ write_formatted_table(workbook = template,
                       starting_row = t17_start, 
                       quarterly_format = c(2, 3))
 
+# Removing unnecessary border lines
+openxlsx::addStyle(wb = template,
+                   sheet = 'Table_17',
+                   style = openxlsx::createStyle(
+                     border = "top",
+                     borderStyle = "none"),
+                   rows = t17_start + nrow(t17_reg_year) + nrow(t17_reg_qtr_a),
+                   cols = ncol(t17_reg_year),
+                   stack = T,
+                   gridExpand = T)
+
+
+
 # adding all the nas for this table
 fmpo_dash_columns <- c(3, 4, 7, 8, 9, 10)
 na_adder(wb = template,
@@ -372,6 +386,39 @@ na_adder(wb = template,
          cols = fmpo_dot_columns,
          lengths = rep(nrow(t17_reg_qtr) - 23, length(fmpo_dot_columns)),
          start_row = t17_start + nrow(t17_reg_year) + 23)
+
+####################################################################
+#Female Genital Mutilation Protection Orders
+#Table 18
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_18',
+                    x = timeperiod18,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+t18_start <- 7
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_18', 
+                      tables = list(t18_reg_year, t18_reg_qtr_a, t18_reg_qtr_b), 
+                      notes = notes18, 
+                      starting_row = t18_start, 
+                      quarterly_format = c(2, 3))
+
+# Removing unnecessary border lines
+openxlsx::addStyle(wb = template,
+                   sheet = 'Table_18',
+                   style = openxlsx::createStyle(
+                     border = "top",
+                     borderStyle = "none"),
+                   rows = t18_start + nrow(t18_reg_year) + nrow(t18_reg_qtr_a),
+                   cols = ncol(t18_reg_year),
+                   stack = T,
+                   gridExpand = T)
+
 
 # Export ##########################################################################################
 

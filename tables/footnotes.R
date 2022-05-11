@@ -150,7 +150,17 @@ t17_notes <- c("Forced Marriage Protection Orders (FMPOs) were introduced by the
                "Note that the number of cases concluded counts any case that includes those which has an FMPO order made. The vast majority of these are Family Law Act cases (which FMPOs sit under) but there are a small number of Children Act and adoption cases included as well",
                "Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters")
 
-               
+t18_notes <- c("Female Genital Mutilation Protection Orders (FGMPOs) came into effect on 17th July 2015.",
+               "Person to be protected includes applicants in person as well as those with legal representation.",
+               "Relevant 3rd party applicants are those that can apply on behalf of the Person to be protected (PTBP). Only local authorities have been granted this status.",
+               "Other 3rd party applicants include those from the police, family, Official Solicitor/Next Friend/Guardian ad litem and voluntary sector.",
+               "Note that the number of cases started counts any case that includes a FGMPO application. The vast majority of these are Family Law Act cases (which FGMPOs sit under) but there are a small number of Children Act and adoption cases included as well",
+               "As the breach of an FGMPO is a criminal offence, the courts do not need to attach a power of arrest in relation to FGMPOs.",
+               "'Other disposals' include those withdrawn, refused, transferred or where an undertaking was accepted.",
+               "For FGMPO cases there is no widely used marker for the conclusion of a case; here cases are considered to be concluded in the quarter of the last definitive order in the case.",
+               "Note that the number of cases concluded counts any case that includes a FGMPO order made. The vast majority of these are Family Law Act cases (which FGMPOs sit under) but there are a small number of Children Act and adoption cases included as well",
+               "Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters")
+
 # notes added to regular tables
 
 notes1 <- c("Source:",
@@ -256,3 +266,9 @@ notes17 <- c("Source:",
              "",
              "Notes:",
              glue("{seq_along(t17_notes)}) {t17_notes}"))
+
+notes18 <- c("Source:",
+             "HMCTS FamilyMan system",
+             "",
+             "Notes:",
+             glue("{seq_along(t18_notes)}) {t18_notes}"))
