@@ -39,6 +39,7 @@ source(paste0(path_to_project, "Regular_Tables/table9_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table12_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table13_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table14_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table17_reg.R"))
 #Formula cols
 source(paste0(path_to_project, "Regular_Tables/table3_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table4_reg.R"))
@@ -65,11 +66,12 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # data
+t1_start <- 6
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_1', 
                       tables = list(table1_pivot_annual, table1_pivot_qtr), 
                       notes = notes1, 
-                      starting_row = 6, 
+                      starting_row = t1_start, 
                       quarterly_format = c(2))
 
 na_cols <- c(3, 4, 7, 10, 11, 13, 14, 17, 20, 21)
@@ -78,7 +80,7 @@ na_adder(wb = template,
          value = "-",
          cols = na_cols,
          lengths = rep(5, length(na_cols)),
-         start_row = 6)
+         start_row = t1_start)
 
 na_cols_fmpo_fgm <- c(8, 9, 18, 19)
 na_adder(wb = template,
@@ -86,14 +88,14 @@ na_adder(wb = template,
          value = "..",
          cols = na_cols_fmpo_fgm,
          lengths = c(3, 9, 3, 9),
-         start_row = 6)
+         start_row = t1_start)
 
 na_adder(wb = template,
          sheet = 'Table_1',
          value = "..",
          cols = c(9, 19),
          lengths = c(18, 18),
-         start_row = 22)
+         start_row = t1_start + nrow(table1_pivot_annual))
 ####################################################################
 #Children Act Summary
 #Table 2
@@ -262,7 +264,7 @@ write_formatted_table(workbook = template,
 
 ####################################################################
 #Divorce Progression Percentages
-#Table 13
+#Table 14
 
 ####################################################################
 
@@ -318,6 +320,58 @@ write_formatted_table(workbook = template,
                       notes = notes16, 
                       starting_row = 10, 
                       quarterly_format = c(3, 4))
+
+####################################################################
+#Forced Marriage Protection Orders
+#Table 17
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_17',
+                    x = timeperiod17,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+t17_start <- 7
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_17', 
+                      tables = list(t17_reg_year, t17_reg_qtr_a, t17_reg_qtr_b), 
+                      notes = notes17, 
+                      starting_row = t17_start, 
+                      quarterly_format = c(2, 3))
+
+# adding all the nas for this table
+fmpo_dash_columns <- c(3, 4, 7, 8, 9, 10)
+na_adder(wb = template,
+         sheet = 'Table_17',
+         value = "-",
+         cols = fmpo_dash_columns,
+         lengths = rep(1, length(fmpo_dash_columns)),
+         start_row = t17_start)
+
+na_adder(wb = template,
+         sheet = 'Table_17',
+         value = "-",
+         cols = fmpo_dash_columns,
+         lengths = rep(5, length(fmpo_dash_columns)),
+         start_row = t17_start + nrow(t17_reg_year))
+
+fmpo_dot_columns <- c(14, 15)
+na_adder(wb = template,
+         sheet = 'Table_17',
+         value = "..",
+         cols = fmpo_dot_columns,
+         lengths = rep(annual_year - 2013, length(fmpo_dot_columns)),
+         start_row = t17_start + 5)
+
+na_adder(wb = template,
+         sheet = 'Table_17',
+         value = "..",
+         cols = fmpo_dot_columns,
+         lengths = rep(nrow(t17_reg_qtr) - 23, length(fmpo_dot_columns)),
+         start_row = t17_start + nrow(t17_reg_year) + 23)
 
 # Export ##########################################################################################
 

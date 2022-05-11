@@ -135,6 +135,22 @@ t16_notes <- c(" '-' indicates data is not available.",
                "Some non molestation and occupation orders are applied for and granted in Children Act and Adoption cases rather than domestic violence cases. Only domestic violence cases are included within the cases started/concluded figures.",
                "For domestic violence cases there is no widely used marker for the conclusion of a case; here cases are considered to be concluded in the quarter of the last definitive order in the case.") 
 
+t17_notes <- c("Forced Marriage Protection Orders (FMPOs) were introduced by the Forced Marriage (Civil Protection) Act on 25 November 2008.",
+               " '-' indicates data not available due to changes in data collection and recording procedures.",
+               "Breakdown by age of the applicant was not collected centrally until 2010.",
+               "Breakdown by type of applicant was revised and expanded as from 2010.",
+               "Person be to protected includes applicants in person as well as those with legal representation.",
+               "Relevant 3rd party applicants are those that can apply on behalf of the Person to be protected (PTBP). As of November 2009 only local authorities have been granted this status.",
+               "Other 3rd party applicants include those from the police, family, Official Solicitor/Next Friend/Guardian ad litem and voluntary sector",
+               "Note that the number of cases started counts any case that includes a FMPO application. The vast majority of these are Family Law Act cases (which FMPOs sit under) but there are a small number of Children Act and adoption cases included as well",
+               "The number of orders made generally exceed the number of applications as FMPOs are sometimes made during the course of applications for other family orders, and there is no differentiation between interim orders and final orders.",
+               "Since breach of an FMPO became a criminal offence in June 2014, courts can no longer attach a power of arrest to an FMPO so orders issued after June 2014 should not be considered as having powers of arrest attached to them.",
+               "'Other disposals' include those withdrawn, refused, transferred or where an undertaking was accepted.",
+               "For forced marriage protection cases there is no widely used marker for the conclusion of a case; here cases are considered to be concluded in the quarter of the last definitive order in the case.",
+               "Note that the number of cases concluded counts any case that includes those which has an FMPO order made. The vast majority of these are Family Law Act cases (which FMPOs sit under) but there are a small number of Children Act and adoption cases included as well",
+               "Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters")
+
+               
 # notes added to regular tables
 
 notes1 <- c("Source:",
@@ -234,3 +250,9 @@ notes16 <- c("Source:",
              "",
              "Notes:",
              glue("{seq_along(t16_notes)}) {t16_notes}"))
+
+notes17 <- c("Source:",
+             "HMCTS FamilyMan system",
+             "",
+             "Notes:",
+             glue("{seq_along(t17_notes)}) {t17_notes}"))

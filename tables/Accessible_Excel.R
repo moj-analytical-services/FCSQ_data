@@ -28,7 +28,8 @@ contents_df <- tribble(
   "Table 13", "Progression of divorce cases (including civil partnerships) started for England and Wales",
   "Table 14", "Percentage of divorce cases (including civil partnerships) reaching certain stages, by the number of quarters since petition and stage, England and Wales",
   "Table 15", "Number of applications and disposals made for one or more types of financial remedy (formerly ancillary relief) orders, in England and Wales",
-  "Table 16", "Applications and orders made for domestic violence remedies in England and Wales"
+  "Table 16", "Applications and orders made for domestic violence remedies in England and Wales",
+  "Table 17", "Applications and disposals of Forced Marriage Protection Orders made in the High Court and county courts, England and Wales"
 )
 
 # A notes page, notes_all is made from the update excel file
@@ -51,13 +52,14 @@ fcsq_a11y <- new_a11ytable(
                  "Table 8", "Table 9",
                  "Table 10", "Table 11",
                  "Table 12", "Table 13", "Table 14",
-                 "Table 15", "Table 16" ),
-  sheet_types = c("cover", "contents", "notes", rep("tables", 18)),
+                 "Table 15", "Table 16",
+                 "Table 17"),
+  sheet_types = c("cover", "contents", "notes", rep("tables", 19)),
   sheet_titles = c(
     "Family Court Tables",
     "Table of contents",
     "Notes",
-    contents_df$`Sheet title`[2:19]),
+    contents_df$`Sheet title`[2:20]),
   sources = c(
     NA_character_,
     NA_character_,
@@ -79,7 +81,8 @@ fcsq_a11y <- new_a11ytable(
     "HMCTS FamilyMan and Core Case Data",
     "HMCTS FamilyMan and Core Case Data",
     "HMCTS FamilyMan and Core Case Data",
-    "HMCTS FamilyMan"
+    "HMCTS FamilyMan",
+    "HMCTS One Performance Truth (OPT) system"
   ),
   table_names = c(
     "cover_sheet",
@@ -102,7 +105,8 @@ fcsq_a11y <- new_a11ytable(
     "Divorce_Progression",
     "Divorce_Progression_Stage_Percentage",
     "Financial_Remedy_Summary",
-    "Domestic_Violence_Summary"
+    "Domestic_Violence_Summary",
+    "FMPO_Summary"
   ),
   tables = list(
     cover_df,
@@ -125,7 +129,8 @@ fcsq_a11y <- new_a11ytable(
     t13_accessible,
     t14_accessible,
     t15_accessible,
-    t16_accessible
+    t16_accessible,
+    t17_accessible
   )
 )
 
