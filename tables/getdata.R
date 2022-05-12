@@ -9,10 +9,10 @@ library(readr)
 library(tidyr)
 library(purrr)
 library(stringr)
-library(tidyverse)
-library(xltabr)
+#library(tidyverse)
+#library(xltabr)
 library(a11ytables)
-library(mojtable)
+#library(mojtable)
 # Variables #######################################################################################
 
 pub_year <- 2021                                                              # Specify the publication year and quarter for the output name
