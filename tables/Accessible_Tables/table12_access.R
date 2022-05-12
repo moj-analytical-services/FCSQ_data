@@ -120,7 +120,9 @@ t12_diss_part <- t12_diss %>%
             `Median time (weeks) to decree Nisi` = d_med_nisi_weeks,
             `Decrees Absolute` = d_decrees_abs,
             `Mean time (weeks) to decree Absolute` = d_avg_absolute_weeks,
-            `Median time (weeks) to decree Absolute` = d_med_absolute_weeks
+            `Median time (weeks) to decree Absolute` = d_med_absolute_weeks,
+            `Decree Granted` = -1,
+            `Decree Absolute/Granted` = -1
             ) %>% 
   arrange(`Case Type`) %>% 
   mutate(across(where(is.numeric), ~replace_na(.x, -1))) 
@@ -141,7 +143,10 @@ t12_nullity_part <- full_t12 %>%
             `Median time (weeks) to decree Nisi` = -1,
             `Decrees Absolute` = n_decrees_abs,
             `Mean time (weeks) to decree Absolute` = -1,
-            `Median time (weeks) to decree Absolute` = -1
+            `Median time (weeks) to decree Absolute` = -1,
+            `Decree Granted` = -1,
+            `Decree Absolute/Granted` = -1
+            
 )
 
 #Judicial separation
@@ -154,9 +159,11 @@ t12_judicial_part <- full_t12 %>%
             `Decrees Nisi` = -1,
             `Mean time (weeks) to decree Nisi` = -1,
             `Median time (weeks) to decree Nisi` = -1,
-            `Decrees Absolute` = j_decrees_granted,
+            `Decrees Absolute` = -1,
             `Mean time (weeks) to decree Absolute` = -1,
-            `Median time (weeks) to decree Absolute` = -1
+            `Median time (weeks) to decree Absolute` = -1,
+            `Decree Granted` = j_decrees_granted,
+            `Decree Absolute/Granted` = -1
   )
 
 #Total
@@ -169,9 +176,11 @@ t12_total_part <- full_t12 %>%
             `Decrees Nisi` = all_decrees_nisi,
             `Mean time (weeks) to decree Nisi` = -1,
             `Median time (weeks) to decree Nisi` = -1,
-            `Decrees Absolute` = all_decrees_abs,
+            `Decrees Absolute` = -1,
             `Mean time (weeks) to decree Absolute` = -1,
-            `Median time (weeks) to decree Absolute` = -1
+            `Median time (weeks) to decree Absolute` = -1,
+            `Decree Granted` = -1,
+            `Decree Absolute/Granted` = all_decrees_abs
   )
 
 t12_accessible <- bind_rows(t12_diss_part, t12_nullity_part, t12_judicial_part, t12_total_part)
