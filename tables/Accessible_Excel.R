@@ -31,6 +31,8 @@ contents_df <- tribble(
   "Table 16", "Applications and orders made for domestic violence remedies in England and Wales",
   "Table 17", "Applications and disposals of Forced Marriage Protection Orders made in the High Court and county courts, England and Wales",
   "Table 18", "Applications and disposals of Female Genital Mutilation Protection Orders, England and Wales",
+  "Table 19", "Applications for adoption and related orders made in courts in England and Wales",
+  "Table 20", "Orders issued for adoption and related orders in courts in England and Wales"
   
 )
 
@@ -40,8 +42,8 @@ source(paste0(path_to_project, "Accessible_Notes.R"))
 
 notes_df2 <- tribble(
   ~"Note number", ~"Note text", ~"Table number",
-  "[c]", "Confidential: suppressed.", '[z]',
-  "[z]", "Not applicable.", '[z]')
+  "[c]", "Confidential: suppressed.", NA,
+  "[z]", "Not applicable.", NA)
 
 notes_df <- bind_rows(notes_df2, notes_all)
 
@@ -55,13 +57,14 @@ fcsq_a11y <- new_a11ytable(
                  "Table 10", "Table 11",
                  "Table 12", "Table 13", "Table 14",
                  "Table 15", "Table 16",
-                 "Table 17", "Table 18"),
-  sheet_types = c("cover", "contents", "notes", rep("tables", 20)),
+                 "Table 17", "Table 18",
+                 "Table 19", "Table 20"),
+  sheet_types = c("cover", "contents", "notes", rep("tables", 22)),
   sheet_titles = c(
     "Family Court Tables",
     "Table of contents",
     "Notes",
-    contents_df$`Sheet title`[2:21]),
+    contents_df$`Sheet title`[2:23]),
   sources = c(
     NA_character_,
     NA_character_,
@@ -85,7 +88,9 @@ fcsq_a11y <- new_a11ytable(
     "HMCTS FamilyMan and Core Case Data",
     "HMCTS FamilyMan",
     "HMCTS One Performance Truth (OPT) system",
-    "HMCTS One Performance Truth (OPT) system"
+    "HMCTS One Performance Truth (OPT) system",
+    "HMCTS FamilyMan",
+    "HMCTS FamilyMan"
   ),
   table_names = c(
     "cover_sheet",
@@ -110,7 +115,9 @@ fcsq_a11y <- new_a11ytable(
     "Financial_Remedy_Summary",
     "Domestic_Violence_Summary",
     "FMPO_Summary",
-    "FGMPO_Summary"
+    "FGMPO_Summary",
+    "Adopt_Apps",
+    "Adopt_Ords"
   ),
   tables = list(
     cover_df,
@@ -135,7 +142,9 @@ fcsq_a11y <- new_a11ytable(
     t15_accessible,
     t16_accessible,
     t17_accessible,
-    t18_accessible
+    t18_accessible,
+    t19_accessible,
+    t20_accessible
   )
 )
 

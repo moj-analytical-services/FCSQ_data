@@ -46,7 +46,10 @@ comma_cols <- list(4:ncol(table_list[[1]]),
                      4:ncol(table_list[[18]]),
                      #FMPO AND FGM don't require anything either
                      99,
-                     99)
+                     99,
+                   3:ncol(table_list[[21]]),
+                   3:ncol(table_list[[22]])
+                   )
                         
 
 

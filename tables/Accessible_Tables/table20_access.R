@@ -1,0 +1,25 @@
+# Table 19 accessible
+full_t20 <- bind_rows(t20_reg_year, t20_reg_qtr)
+
+t20_accessible <- full_t20 %>% transmute(Year,
+                                         Quarter,
+                                         `Adopter - Male/female couple` = m_f_couple,
+                                         `Adopter - Sole applicant` = sole_appl,
+                                         `Adopter - Step parent` = step_parent,
+                                         `Adopter - Same sex couple` = same_sex,
+                                         `Adopter - Other or not stated` = other_adopter,
+                                         `Adopted Child Sex - Male` = male_child,
+                                         `Adopted Child Sex - Female` = female_child,
+                                         `Adopted Child Age - Less than 1 years old` = less_than_one,
+                                         `Adopted Child Age - 1-4 years old` = one_to_four,
+                                         `Adopted Child Age - 5-9 years old` = five_to_nine,
+                                         `Adopted Child Age - 10-14 years old` = ten_to_fourteen,
+                                         `Adopted Child Age - 15-17 years old` = fifteen_to_seventeen,
+                                         `Adopted Child Age - Other` = other_age,
+                                         `Adopted Child Age - Unknown` = unknown_age,
+                                         `Total adoption orders` = total_adopt_ords,
+                                         `Non Adoption Orders - Placement orders` = placement_ords,
+                                         `Non Adoption Orders - Other orders` = other_orders,
+                                         `Other disposals of Adoption and Children Act 2002 cases` = other_disps,
+                                         `Total disposals under the Adoption and Children Act 2002` = total_disps,
+                                         `Total cases disposed under the Adoption and Children Act 2002` = case_close)
