@@ -19,6 +19,7 @@ colnames(t10_accessible_year) <- c('Category',
                                    'All - Mean duration in weeks'
 )
 
+
 #Quarterly T10
 t10_accessible_qtr <- table10_alt %>% filter(Quarter != '') %>% select(!contains('Unknown'))
 
@@ -37,4 +38,6 @@ colnames(t10_accessible_qtr) <- c('Category',
                                   'All - Mean duration in weeks'
 )
 
-t10_accessible <- bind_rows(t10_accessible_year, t10_accessible_qtr) %>% arrange(Category)
+#Binds rows together and rounds all week columns to one decimal place
+t10_accessible <- bind_rows(t10_accessible_year, t10_accessible_qtr) %>% arrange(Category) %>% 
+   mutate(across(seq(from = 5, to = ncol(.), by = 2), ~ round(.x, 1)))
