@@ -21,6 +21,7 @@ comma_style <- openxlsx::createStyle(numFmt = 'COMMA')
 table_names <- fcsq_a11y %>% filter(sheet_type == 'tables') %>% pull(tab_title)
 table_list <- fcsq_a11y %>% filter(sheet_type == 'tables') %>% pull(table)
 
+# List of columns that have comma formtting applied in each table. 99 represents no formatting applied
 comma_cols <- list(4:ncol(table_list[[1]]),
                      5:ncol(table_list[[2]]),
                      3:ncol(table_list[[3]]),
@@ -39,13 +40,13 @@ comma_cols <- list(4:ncol(table_list[[1]]),
                      # Divorce has a mixture of columns. Subject to change
                      c(5, 6, 9, 12, 13),
                      c(3, seq(from = 4, to = ncol(table_list[[15]]), by = 2)),
-                     #Divorce Progression does not need
-                     1,
+                     #Divorce Progression does not need any 
+                     99,
                      3:ncol(table_list[[17]]),
                      4:ncol(table_list[[18]]),
-                     #FMPO AND FGM don't requre anythung either
-                     5,
-                     5)
+                     #FMPO AND FGM don't require anything either
+                     99,
+                     99)
                         
 
 

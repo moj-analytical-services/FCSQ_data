@@ -161,6 +161,29 @@ t18_notes <- c("Female Genital Mutilation Protection Orders (FGMPOs) came into e
                "Note that the number of cases concluded counts any case that includes a FGMPO order made. The vast majority of these are Family Law Act cases (which FGMPOs sit under) but there are a small number of Children Act and adoption cases included as well",
                "Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters")
 
+t19_notes <- c("These figures includes Standard and 'Other' adoptions (convention adoptions, foreign adoptions and standard adoptions with a foreign element).",
+               "Since April 2011 the data no longer distinguishes married and unmarried mixed-sex couples.",
+               "'Not stated' refers to applications where the adopter was not recorded.",
+               "These are other non-adoption orders made under the Adoption and Children Act 2002, including revocation of placement, change of surname and removal from the UK.",
+               "Applications made by a mixed gender couple with one step-parent and one natural parent are categorised as 'Male/female couple'.",
+               "Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters",
+               "A CSV file accompanies this table, which provides data in a machine-readable format that allows a wider range of breakdowns to be produced, for example by type of order. If you require assistance on using this CSV file, please contact the Statistics team using the details provided at the end of the bulletin.")
+
+t20_notes <- c("Some statistics on adoptions in England and Wales are available from the Office for National Statistics (ONS) at: http://www.ons.gov.uk/ons/taxonomy/index.html?nscl=Adoptions. Data in ONS publications are based on adoption data provided by the General Register Office, which maintains the Adopted Child Register using copies of adoption orders issued by courts. There are small differences between the number of adoptions as recorded by the two sets of statistics. Please see the joint statement produced by MoJ, ONS and GRO on the differences in these adoption statistics attached to the 2012 Q4 edition of Court Statistics Quarterly for further details.",
+               "These figures includes Standard and 'Other' adoptions (convention adoptions, foreign adoptions and standard adoptions with a foreign element).",
+               "Since April 2011 the data no longer distinguishes married and unmarried mixed-sex couples.",
+               "'Not stated' refers to applications where the adopter was not recorded.",
+               "In a small number of cases the child's sex is not known, so these figures may not sum exactly to the total.",
+               "'Other' includes those who were aged 18 by the time the order was made, or where the age was recorded as under 0.",
+               "'Unknown' includes those where the date of birth was not recorded.",
+               "These are other non-adoption orders made under the Adoption and Children Act 2002, including revocation of placement, change of surname and removal from the UK.",
+               "'Other disposals' include those withdrawn, refused and orders of no order.",
+               "A CSV file accompanies this table, which provides data in a machine-readable format that allows a wider range of breakdowns to be produced, for example by type of order. If you require assistance on using this CSV file, please contact the Statistics team using the details provided at the end of the bulletin.",
+               "Orders for which applications were made by a mixed gender couple with one step-parent and one natural parent are categorised as 'Male/female couple'.",
+               "Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters")
+               
+
+
 # notes added to regular tables
 
 notes1 <- c("Source:",
@@ -272,3 +295,15 @@ notes18 <- c("Source:",
              "",
              "Notes:",
              glue("{seq_along(t18_notes)}) {t18_notes}"))
+
+notes19 <- c("Source:",
+             "HMCTS FamilyMan system",
+             "",
+             "Notes:",
+             glue("{seq_along(t19_notes)}) {t19_notes}"))
+
+notes20 <- c("Source:",
+             "HMCTS FamilyMan system",
+             "",
+             "Notes:",
+             glue("{seq_along(t20_notes)}) {t20_notes}"))

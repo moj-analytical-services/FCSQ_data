@@ -4,6 +4,9 @@
 
 # template Excel sheet
 options(digits = 15) # Set the number of significant figure to 15 (same as excel)
+
+# Turn off summarise warnings
+options(dplyr.summarise.inform = FALSE)
 path <- "styles_pub.xlsx"
 xltabr::set_style_path(paste0(path_to_project,path))
 xltabr::set_cell_format_path(paste0(path_to_project,"number_formats.csv"))
@@ -41,6 +44,8 @@ source(paste0(path_to_project, "Regular_Tables/table13_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table14_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table17_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table18_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table19_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table20_reg.R"))
 #Formula cols
 source(paste0(path_to_project, "Regular_Tables/table3_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table4_reg.R"))
@@ -418,6 +423,48 @@ openxlsx::addStyle(wb = template,
                    cols = ncol(t18_reg_year),
                    stack = T,
                    gridExpand = T)
+
+####################################################################
+#Adoption Applications
+#Table 19
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_19',
+                    x = timeperiod19,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+t19_start <- 7
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_19', 
+                      tables = list(t19_reg_year, t19_reg_qtr), 
+                      notes = notes19, 
+                      starting_row = t19_start, 
+                      quarterly_format = c(2))
+
+####################################################################
+#Adoption Orders
+#Table 20
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_20',
+                    x = timeperiod20,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+t20_start <- 7
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_20', 
+                      tables = list(t20_reg_year, t20_reg_qtr), 
+                      notes = notes20, 
+                      starting_row = t20_start, 
+                      quarterly_format = c(2))
 
 
 # Export ##########################################################################################
