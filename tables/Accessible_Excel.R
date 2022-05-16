@@ -32,7 +32,9 @@ contents_df <- tribble(
   "Table 17", "Applications and disposals of Forced Marriage Protection Orders made in the High Court and county courts, England and Wales",
   "Table 18", "Applications and disposals of Female Genital Mutilation Protection Orders, England and Wales",
   "Table 19", "Applications for adoption and related orders made in courts in England and Wales",
-  "Table 20", "Orders issued for adoption and related orders in courts in England and Wales"
+  "Table 20", "Orders issued for adoption and related orders in courts in England and Wales",
+  "Table 21", "Court of Protection Applications made in England and Wales",
+  "Table 22", "Court of Protection Orders made in England and Wales"
   
 )
 
@@ -58,13 +60,14 @@ fcsq_a11y <- new_a11ytable(
                  "Table 12", "Table 13", "Table 14",
                  "Table 15", "Table 16",
                  "Table 17", "Table 18",
-                 "Table 19", "Table 20"),
-  sheet_types = c("cover", "contents", "notes", rep("tables", 22)),
+                 "Table 19", "Table 20",
+                 "Table 21", "Table 22"),
+  sheet_types = c("cover", "contents", "notes", rep("tables", 24)),
   sheet_titles = c(
     "Family Court Tables",
     "Table of contents",
     "Notes",
-    contents_df$`Sheet title`[2:23]),
+    contents_df$`Sheet title`[2:25]),
   sources = c(
     NA_character_,
     NA_character_,
@@ -90,7 +93,9 @@ fcsq_a11y <- new_a11ytable(
     "HMCTS One Performance Truth (OPT) system",
     "HMCTS One Performance Truth (OPT) system",
     "HMCTS FamilyMan",
-    "HMCTS FamilyMan"
+    "HMCTS FamilyMan",
+    "Court of Protection data management system",
+    "Court of Protection data management system"
   ),
   table_names = c(
     "cover_sheet",
@@ -117,7 +122,9 @@ fcsq_a11y <- new_a11ytable(
     "FMPO_Summary",
     "FGMPO_Summary",
     "Adopt_Apps",
-    "Adopt_Ords"
+    "Adopt_Ords",
+    "COP_Apps",
+    "COP_Ords"
   ),
   tables = list(
     cover_df,
@@ -144,7 +151,9 @@ fcsq_a11y <- new_a11ytable(
     t17_accessible,
     t18_accessible,
     t19_accessible,
-    t20_accessible
+    t20_accessible,
+    t21_accessible,
+    t22_accessible
   )
 )
 

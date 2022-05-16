@@ -46,6 +46,7 @@ source(paste0(path_to_project, "Regular_Tables/table17_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table18_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table19_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table20_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table21_22_reg.R"))
 #Formula cols
 source(paste0(path_to_project, "Regular_Tables/table3_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table4_reg.R"))
@@ -466,6 +467,64 @@ write_formatted_table(workbook = template,
                       starting_row = t20_start, 
                       quarterly_format = c(2))
 
+
+####################################################################
+#Applications under the Mental Capacity Act
+#Table 21
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_21',
+                    x = timeperiod21,
+                    startRow = 4,
+                    colNames = F)
+
+# data
+t21_start <- 6
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_21', 
+                      tables = list(t21_reg_year, t21_reg_qtr), 
+                      notes = notes21, 
+                      starting_row = t21_start, 
+                      quarterly_format = c(2))
+
+# Adding dot to table
+na_adder(wb = template,
+         sheet = 'Table_21',
+         value = "..",
+         cols = 16,
+         lengths = 1,
+         start_row = t21_start)
+
+####################################################################
+#Orders under the Mental Capacity Act
+#Table 22
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_22',
+                    x = timeperiod22,
+                    startRow = 4,
+                    colNames = F)
+
+# data
+t22_start <- 6
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_22', 
+                      tables = list(t22_reg_year, t22_reg_qtr), 
+                      notes = notes22, 
+                      starting_row = t22_start, 
+                      quarterly_format = c(2))
+
+# Adding dot to table
+na_adder(wb = template,
+         sheet = 'Table_22',
+         value = "..",
+         cols = 16,
+         lengths = 1,
+         start_row = t22_start)
 
 # Export ##########################################################################################
 

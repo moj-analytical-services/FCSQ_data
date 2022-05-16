@@ -183,6 +183,21 @@ t20_notes <- c("Some statistics on adoptions in England and Wales are available 
                "Some figures may have been revised from previous publications. Minimal changes may be observed in earlier years, whilst larger changes may be seen in more recent quarters")
                
 
+t21_notes <- c("Hybrid is where the applicant is applying for both a property and affairs deputy and a personal welfare deputy.",
+               "Applications made under sections 36(9), 54 and 96(1)(k) of the Trustee Act 1925, and section 20(2)(c) of the Trusts of Land and Appointment of Trustees Act 1996.",
+               "Includes objections to registration and applications to determine of the validity of the EPA or LPA document.",
+               "Includes applications within proceedings.",
+               "Where the person under the courts jurisdiction ceases to lack capacity/the deputy wishes to retire/the deputy is no longer suitable to act.",
+               "The Mental Capacity Act Deprivation of Liberty Safeguards came into effect on 1st April 2009. For Quarter 4 2021, the 1,687 Deprivation of Liberty applications are broken down as follows: 115 for Section 16, 476 for Section 21A and 1096 for ReX process.")
+
+t22_notes <- c("Hybrid is where the applicant is applying for both a property and affairs deputy and a personal welfare deputy.",
+               "Applications made under sections 36(9), 54 and 96(1)(k) of the Trustee Act 1925, and section 20(2)(c) of the Trusts of Land and Appointment of Trustees Act 1996.",
+               "Includes objections to registration and applications to determine of the validity of the EPA or LPA document.",
+               "Includes applications within proceedings.",
+               "Where the person under the courts jurisdiction ceases to lack capacity/the deputy wishes to retire/the deputy is no longer suitable to act.",
+               "The sharp increase seen in Q1 2017 is primarily due to the concerted effort to clear a backlog of about 2000 orders.",
+               "The increase in orders made in Q2 2017 is due to a change in recording processes, with regional courts now recording orders made onto the central system.")
+
 
 # notes added to regular tables
 
@@ -307,3 +322,15 @@ notes20 <- c("Source:",
              "",
              "Notes:",
              glue("{seq_along(t20_notes)}) {t20_notes}"))
+
+notes21 <- c("Source:",
+             "HMCTS FamilyMan system",
+             "",
+             "Notes:",
+             glue("{seq_along(t21_notes)}) {t21_notes}"))
+
+notes22 <- c("Source:",
+             "HMCTS FamilyMan system",
+             "",
+             "Notes:",
+             glue("{seq_along(t22_notes)}) {t22_notes}"))

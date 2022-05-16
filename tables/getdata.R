@@ -23,6 +23,10 @@ next_pub_date <- "30th June 2022"
 path_to_project = '~/FCSQ_data/tables/'                                       # UPDATE ONLY IF YOU CHANGE THE LOCATION OF THE PROJECT FILES
 csv_folder <- paste0("alpha-family-data/CSVs/Table_Creation/", pub_year, " Q",pub_quarter,"/") # location in the S3 bucket to import CSVs from
 
+# to disable botor debug warning messages
+library(logger) 
+log_threshold(WARN, namespace = 'botor')
+
 #Loading Data
 
 na_keys <- c(":", ".", "..", "*", "#REF!", "-")

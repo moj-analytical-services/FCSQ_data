@@ -48,7 +48,9 @@ comma_cols <- list(4:ncol(table_list[[1]]),
                      99,
                      99,
                    3:ncol(table_list[[21]]),
-                   3:ncol(table_list[[22]])
+                   3:ncol(table_list[[22]]),
+                   3:ncol(table_list[[23]]),
+                   3:ncol(table_list[[24]])
                    )
                         
 
