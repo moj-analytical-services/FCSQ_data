@@ -47,6 +47,7 @@ source(paste0(path_to_project, "Regular_Tables/table18_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table19_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table20_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table21_22_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table23_reg.R"))
 #Formula cols
 source(paste0(path_to_project, "Regular_Tables/table3_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table4_reg.R"))
@@ -526,6 +527,46 @@ na_adder(wb = template,
          lengths = 1,
          start_row = t22_start)
 
+####################################################################
+#OPG
+#Table 23
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_23',
+                    x = timeperiod23,
+                    startRow = 4,
+                    colNames = F)
+
+# data
+t23_start <- 8
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_23', 
+                      tables = list(t23_reg_year, t23_reg_qtr), 
+                      notes = notes23, 
+                      starting_row = t23_start, 
+                      quarterly_format = c(2))
+
+# Adding stars to table
+for (i in seq_len(nrow(full_t23))){
+  
+  for (j in seq_len(ncol(full_t23))){
+    # If column isn't numeric then skip
+    if (!is.numeric(full_t23[[j]])){
+      next
+    }
+    # If -1 then replace with *
+    if ((full_t23[[i, j]] == -1)){
+      openxlsx::writeData(wb = template,
+                          sheet = 'Table_23', 
+                          x = '*',
+                          startRow = t23_start + i - 1,
+                          startCol = j,
+                          colNames = F)
+    }
+  }
+}
 # Export ##########################################################################################
 
 openxlsx::saveWorkbook(template, paste0(path_to_project,"test_output.xlsx"), overwrite = TRUE)

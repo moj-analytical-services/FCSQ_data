@@ -198,6 +198,18 @@ t22_notes <- c("Hybrid is where the applicant is applying for both a property an
                "The sharp increase seen in Q1 2017 is primarily due to the concerted effort to clear a backlog of about 2000 orders.",
                "The increase in orders made in Q2 2017 is due to a change in recording processes, with regional courts now recording orders made onto the central system.")
 
+t23_notes <- c("Power of Attorney applications that are accurate and not withdrawn are subsequently registered with the OPG, so that the attorney is able to make decisions for the donor.",
+               "Data is provided for all PoAs applied and registered, regardless of the home location of the donor. The accompanying csv 'CSV OPG Powers of Attorney by country, region and Local Authority YYYY QQ' provides breakdowns by donor home location (by country, region and local authority). The current LPA rules set out that anoyone can make an LPA irrespective of where they live as long as they have assets in England/Wales.",
+               "An Enduring Power of Attorney allows the person creating it to nominate someone they trust (often a spouse or close family member) to manage their finances, should they themselves lose the mental capacity to do so in the future.",
+               "A Lasting Powers of Attorney allows the person creating it (the Donor) to nominate someone now (the Attorney) that they trust to make decisions on their behalf about things such as property, affairs or personal welfare at a time in the future when they no longer wish to make those decisions or they may lack the mental capacity to make those decisions themselves.",
+               "There are two types of LPAs (Property & Finance and Health & Wellbeing) and one type of EPA (Property & Finance). Further details on these subtypes can be found in the accompanying guide.",
+               "Gender is inferred from the donor's title. Cases within the 'other' category relate to titles which cannot clearly be categorised as male or female (i.e. Dr, Professor etc), and where titles have additional characters/errors (i.e. Mrs., Mr' etc).  Possible non-binary also appear in this category as it is unclear if these are non-binary titles or mistakes in spelling of a male/female title (i.e. Mx.)",
+               "Suppression has been applied for quarterly counts below 10 and marked with '*'. Secondary suppression has also been applied to larger figures when they could be used to calculate other suppressed figures.",
+               "'Unknown' is where the relevant data field (e.g. title, date of birth) has a missing value and so cannot be categorised",
+               "Age as at registration",
+               "The '85+' category goes up to 120 years maximum. Anyone recorded as being older is grouped into the 'Other' category (see footnote 11)",
+               "'Other' age is where the date of birth is recorded but we are unable to infer accurately (e.g. under 18 years old, over 120 years old, has a negative age).",
+               "Deputyships - A Deputy is legally responsible for acting and making decisions on behalf of a person who lacks capacity to make decisions for themselves. The Deputy order sets out specific powers in relation to the person who lacks capacity.")
 
 # notes added to regular tables
 
@@ -334,3 +346,9 @@ notes22 <- c("Source:",
              "",
              "Notes:",
              glue("{seq_along(t22_notes)}) {t22_notes}"))
+
+notes23 <- c("Source:",
+             "HMCTS FamilyMan system",
+             "",
+             "Notes:",
+             glue("{seq_along(t23_notes)}) {t23_notes}"))
