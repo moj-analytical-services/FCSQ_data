@@ -79,7 +79,8 @@ t7_reg_year <- pub_t7_join_year %>% left_join(priv_t7_join_year, by = 'Year') %>
   filter(Year <= annual_year, !is.na(Year)) %>% 
   mutate(Qtr = NA, blank1 = NA) %>% 
   relocate(Qtr, .after = Year) %>% 
-  relocate(blank1, .after = pub_outside_london_hc)
+  relocate(blank1, .after = pub_outside_london_hc) %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, 0)))
 
 #####################################################
 #Public Law Quarterly
@@ -153,7 +154,8 @@ t7_reg_qtr <- pub_t7_join_qtr %>% left_join(priv_t7_join_qtr, by = c('Year', 'Qt
   filter(!is.na(Year)) %>% 
   mutate(Qtr = paste0('Q', Qtr), blank1 = NA) %>% 
   relocate(Qtr, .after = Year) %>% 
-  relocate(blank1, .after = pub_outside_london_hc)
+  relocate(blank1, .after = pub_outside_london_hc) %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, 0)))
 
 # Content #########################################################################################
 

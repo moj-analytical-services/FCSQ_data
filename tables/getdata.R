@@ -22,6 +22,7 @@ pub_date <- "31st March 2022"
 next_pub_date <- "30th June 2022"
 path_to_project = '~/FCSQ_data/tables/'                                       # UPDATE ONLY IF YOU CHANGE THE LOCATION OF THE PROJECT FILES
 csv_folder <- paste0("alpha-family-data/CSVs/Table_Creation/", pub_year, " Q",pub_quarter,"/") # location in the S3 bucket to import CSVs from
+lookup_folder <- "alpha-family-data/CSVs/lookups/"
 
 # to disable botor debug warning messages
 library(logger) 
@@ -29,7 +30,7 @@ log_threshold(WARN, namespace = 'botor')
 
 #Loading Data
 
-na_keys <- c(":", ".", "..", "*", "#REF!", "-")
+na_keys <- c(":", ".", "..", "*", "#REF!", "-", "**")
 
 child_act_csv <- read_using(readr::read_csv, paste0(csv_folder, "CSV Children Act", " ", pub_year, " Q", pub_quarter, ".csv" ), na = na_keys,
                             col_types = cols(
@@ -82,6 +83,10 @@ cop_table_22 <- read_using(openxlsx::read.xlsx, cop_link, sheet = "Table 22", ch
 cafcass <- read_using(readr::read_csv, paste0(csv_folder, 'CSV Private law cases CAFCASS and MoJ', " ", pub_year, " Q", pub_quarter, ".csv") )%>% 
   rename_with(str_to_title) %>% select(1:5)
 
+# OPG Table. This is the spreadsheet given by the OPG team. Start row is the first row of data. The row under the column headings
+opg_table <- read_using(openxlsx::read.xlsx, paste0(csv_folder, 'OPG Tables', " ", pub_year, " Q", pub_quarter, ".xlsx"), sheet = "Table_23", 
+                        check.names = TRUE, na.strings = na_keys,  startRow = 9, skipEmptyRows = FALSE, skipEmptyCols = FALSE, colNames = FALSE)
+
 #Annual only.
 
 if (pub_quarter == 4){
@@ -90,8 +95,10 @@ if (pub_quarter == 4){
 }
 
 #Helpful letter lookup
-letter_lookup <- readr::read_csv(paste0(path_to_project, "Lookups/letter_lookup.csv"))
-ca_order_lookup <- readr::read_csv(paste0(path_to_project, "Lookups/t3_order_lookup.csv"), col_types = cols(
+
+letter_lookup <- read_using(readr::read_csv, (paste0(lookup_folder, "letter_lookup.csv")))
+
+ca_order_lookup <- read_using(readr::read_csv, (paste0(lookup_folder, "Lookups/t3_order_lookup.csv")), col_types = cols(
   Order_type_code = col_character(),
   `Order type` = col_character(),
   Table = col_integer()))

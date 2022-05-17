@@ -132,7 +132,8 @@ t5_reg_year <- pub_child_join_year %>% left_join(priv_child_join_year, by = 'Yea
   mutate(Qtr = NA, blank1 = NA, blank2 = NA) %>% 
   relocate(Qtr, .after = Year) %>% 
   relocate(blank1, .after = pub_total_apps) %>% 
-  relocate(blank2, .after = Qtr)
+  relocate(blank2, .after = Qtr) %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, 0)))
 
 ## Now doing the same for quarterly data
 ###########################################
@@ -304,7 +305,8 @@ t5_reg_qtr <- pub_child_join_qtr %>% left_join(priv_child_join_qtr, by = c('Year
   mutate(Qtr = paste0('Q', Qtr), blank1 = NA, blank2 = NA) %>% 
   relocate(Qtr, .after = Year) %>% 
   relocate(blank1, .after = pub_total_apps) %>% 
-  relocate(blank2, .after = Qtr)
+  relocate(blank2, .after = Qtr) %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, 0)))
 
 # Content #########################################################################################
 

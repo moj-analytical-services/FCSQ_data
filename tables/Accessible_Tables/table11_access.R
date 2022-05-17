@@ -31,4 +31,5 @@ colnames(t11_accessible_qtr) <- c('Category',
                                    'Total number of parties'
 )
 
-t11_accessible <- bind_rows(t11_accessible_year, t11_accessible_qtr) %>% arrange(Category)
+t11_accessible <- bind_rows(t11_accessible_year, t11_accessible_qtr) %>% arrange(Category) %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, -1)))

@@ -34,7 +34,8 @@ contents_df <- tribble(
   "Table 19", "Applications for adoption and related orders made in courts in England and Wales",
   "Table 20", "Orders issued for adoption and related orders in courts in England and Wales",
   "Table 21", "Court of Protection Applications made in England and Wales",
-  "Table 22", "Court of Protection Orders made in England and Wales"
+  "Table 22", "Court of Protection Orders made in England and Wales",
+  "Table 23", "Office of the Public Guardian applications registered in England and Wales"
   
 )
 
@@ -61,13 +62,14 @@ fcsq_a11y <- new_a11ytable(
                  "Table 15", "Table 16",
                  "Table 17", "Table 18",
                  "Table 19", "Table 20",
-                 "Table 21", "Table 22"),
-  sheet_types = c("cover", "contents", "notes", rep("tables", 24)),
+                 "Table 21", "Table 22", 
+                 "Table 23"),
+  sheet_types = c("cover", "contents", "notes", rep("tables", 25)),
   sheet_titles = c(
     "Family Court Tables",
     "Table of contents",
     "Notes",
-    contents_df$`Sheet title`[2:25]),
+    contents_df$`Sheet title`[2:26]),
   sources = c(
     NA_character_,
     NA_character_,
@@ -95,7 +97,8 @@ fcsq_a11y <- new_a11ytable(
     "HMCTS FamilyMan",
     "HMCTS FamilyMan",
     "Court of Protection data management system",
-    "Court of Protection data management system"
+    "Court of Protection data management system",
+    "Office of the Public Guardian data management systems SIRIUS and Casrec"
   ),
   table_names = c(
     "cover_sheet",
@@ -124,7 +127,8 @@ fcsq_a11y <- new_a11ytable(
     "Adopt_Apps",
     "Adopt_Ords",
     "COP_Apps",
-    "COP_Ords"
+    "COP_Ords",
+    "OPG_Apps"
   ),
   tables = list(
     cover_df,
@@ -153,7 +157,8 @@ fcsq_a11y <- new_a11ytable(
     t19_accessible,
     t20_accessible,
     t21_accessible,
-    t22_accessible
+    t22_accessible,
+    t23_accessible
   )
 )
 

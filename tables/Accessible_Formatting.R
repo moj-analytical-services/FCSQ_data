@@ -16,6 +16,29 @@ comma_formatter <- function(wb, sheet, data, cols){
                      stack = TRUE)
   
 }
+
+na_formatter <- function(wb, sheet, table){
+  # Replacing all -1 with [z]
+  for (i in seq_len(nrow(table))){
+    
+    for (j in seq_len(ncol(table))){
+      # If column isn't numeric then skip
+      if (!is.numeric(table[[j]])){
+        next
+      }
+      # If -1 then replace with [z]
+      if ((table[[i, j]] == -1)){
+        openxlsx::writeData(wb = wb,
+                            sheet = sheet, 
+                            x = '[z]',
+                            startRow = 5 + i,
+                            startCol = j,
+                            colNames = F)
+      }
+    }
+  }
+}
+# Creates a function to replace NA with [z]
 comma_style <- openxlsx::createStyle(numFmt = 'COMMA')
 
 table_names <- fcsq_a11y %>% filter(sheet_type == 'tables') %>% pull(tab_title)
@@ -50,14 +73,19 @@ comma_cols <- list(4:ncol(table_list[[1]]),
                    3:ncol(table_list[[21]]),
                    3:ncol(table_list[[22]]),
                    3:ncol(table_list[[23]]),
-                   3:ncol(table_list[[24]])
+                   3:ncol(table_list[[24]]),
+                   3:ncol(table_list[[25]])
                    )
                         
 
 
-for (i in seq_along(table_names)){
-  comma_formatter(accessible_tables, table_names[[i]], table_list[[i]], comma_cols[[i]])
-}
+# Adds commas at the thousand separator and changes any -1 into z
+pwalk(list(table_names, table_list, comma_cols), ~comma_formatter(accessible_tables, ..1, ..2, ..3))
+pwalk(list(table_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2))
+
+# for (i in seq_along(table_names)){
+#   comma_formatter(accessible_tables, table_names[[i]], table_list[[i]], comma_cols[[i]])
+# }
 
 
 
