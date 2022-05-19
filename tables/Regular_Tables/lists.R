@@ -17,8 +17,12 @@ dropdown12_df <- data.frame(c("All", "Paper", "Digital"))
 
 #table 16
 dropdown16_df <- tibble(c('All', 'Exparte', 'On notice'))
+
+#table 24
+dropdown24a_df <- tibble(c("All", "Paper", "Digital"))
+dropdown24b_df <- tibble(c("All", "Personal", "Solictor"))
 # Output ##########################################################################################
-# table 3/4
+# table 3/4 #####################################
 openxlsx::writeData(wb = template,
                     sheet = 'Table_3',
                     x = dropdown3_df,
@@ -62,7 +66,7 @@ dataValidation(wb = template,
                rows = 7,
                type = "list",
                value = "'Table_4'!$AK$12:$AK$13")
-# table 10
+# table 10 ###############################
 openxlsx::writeData(wb = template,
                     sheet = 'Table_10',
                     x = dropdown10_df,
@@ -84,7 +88,7 @@ dataValidation(wb = template,
                rows = 6,
                type = "list",
                value = "'Table_10'!$R$12:$R$17")
-# table 11
+# table 11 #############################
 openxlsx::writeData(wb = template,
                     sheet = 'Table_11',
                     x = dropdown11_df,
@@ -107,7 +111,7 @@ dataValidation(wb = template,
                type = "list",
                value = "'Table_11'!$N$11:$N$16")
 
-# table 12
+# table 12 ######################
 openxlsx::writeData(wb = template,
                     sheet = 'Table_12',
                     x = dropdown12_df,
@@ -129,7 +133,7 @@ dataValidation(wb = template,
                rows = 7,
                type = "list",
                value = "'Table_12'!$V$12:$V$14")
-# table 16
+# table 16 ###################
 openxlsx::writeData(wb = template,
                     sheet = 'Table_16',
                     x = dropdown16_df,
@@ -151,3 +155,23 @@ dataValidation(wb = template,
                rows = 6,
                type = "list",
                value = "'Table_16'!$N$10:$N$12")
+
+# table 24 ###################
+list_add(wb = template,
+         sheet = 'Table_24',
+         list = dropdown24a_df,
+         listRow = 6,
+         listCol = 3,
+         startRow = 12,
+         startCol = 16)
+
+
+list_add(wb = template,
+         sheet = 'Table_24',
+         list = dropdown24b_df,
+         listRow = 7,
+         listCol = 3,
+         startRow = 12,
+         startCol = 17)
+
+

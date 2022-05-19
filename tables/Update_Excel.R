@@ -48,6 +48,8 @@ source(paste0(path_to_project, "Regular_Tables/table19_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table20_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table21_22_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table23_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table24_reg.R"))
+
 #Formula cols
 source(paste0(path_to_project, "Regular_Tables/table3_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table4_reg.R"))
@@ -567,6 +569,44 @@ for (i in seq_len(nrow(full_t23))){
     }
   }
 }
+
+####################################################################
+#Probate
+#Table 24
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_24',
+                    x = timeperiod24,
+                    startRow = 4,
+                    colNames = F)
+
+t24_start <- 12
+# data
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_24', 
+                      tables = list(t24_reg_year, t24_reg_qtr_a, t24_reg_qtr_b), 
+                      notes = notes24, 
+                      starting_row = t24_start, 
+                      quarterly_format = c(2, 3))
+
+# Applications made NA
+na_adder(wb = template,
+         sheet = 'Table_24',
+         value = "-",
+         cols = c(3, 4, 5),
+         lengths = rep(7, 3),
+         start_row = t24_start)
+
+# Contested Probate NA
+na_adder(wb = template,
+         sheet = 'Table_24',
+         value = "-",
+         cols = 15,
+         lengths = nrow(t24_reg_qtr_a) + nrow(t24_reg_qtr_b),
+         start_row = t24_start + nrow(t24_reg_year))
+
 # Export ##########################################################################################
 
 openxlsx::saveWorkbook(template, paste0(path_to_project,"test_output.xlsx"), overwrite = TRUE)

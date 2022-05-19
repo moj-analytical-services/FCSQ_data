@@ -323,7 +323,82 @@ num_to_letter <- function(number){
   letter_lookup %>% filter(`Column Number` == number) %>% 
     pull(`Column Letter`)
 }
-  
 
+letter_to_num <- function(letter){
+  #Helper function to quickly turn a number into an excel letter
+  letter_lookup %>% filter(`Column Letter` == str_to_upper(letter)) %>% 
+    pull(`Column Number`)
+}
+
+
+# Adds the class formula to column of data frame. Use with mutate and across
+formula_add <- function(col){
+  class(col) <- c(class(col), 'formula')
+  col
+}  
+
+# Formatting Functions ##########################
+#Creates a style to separate thousands
+comma_formatter <- function(wb, sheet, data, cols){
+  comma_style <- openxlsx::createStyle(numFmt = 'COMMA')
+  openxlsx::addStyle(wb = wb,
+                     sheet = sheet,
+                     style = comma_style,
+                     rows = seq(nrow(data)) + 5,
+                     cols = cols,
+                     gridExpand = TRUE,
+                     stack = TRUE)
   
+}
+
+na_formatter <- function(wb, sheet, table, value = '[z]', startRow = 5, skipCols = 0){
+  # Replacing all -1 with [z]
+  for (i in seq_len(nrow(table))){
+    
+    for (j in seq_len(ncol(table))){
+      # If column isn't numeric then skip
+      if (!is.numeric(table[[j]]) || j %in% skipCols){
+        next
+      }
+      # If -1 then replace with value representing NA
+      if ((table[[i, j]] == -1)){
+        openxlsx::writeData(wb = wb,
+                            sheet = sheet, 
+                            x = value,
+                            startRow = startRow + i,
+                            startCol = j,
+                            colNames = F)
+      }
+    }
+  }
+}
+
+list_add <- function(wb, sheet, list, listRow, listCol, startRow, startCol){
   
+  endRow = startRow + nrow(list) - 1
+  data_rows <- seq(from = startRow, to = endRow)
+  letter_start <- num_to_letter(startCol)
+  
+  openxlsx::writeData(wb = wb,
+                      sheet = sheet,
+                      x = list,
+                      startRow = startRow,
+                      startCol = startCol,
+                      colNames = F)
+  
+  openxlsx::addStyle(wb = wb,
+                     sheet = sheet,
+                     openxlsx::createStyle(fontColour = "white"),
+                     rows = data_rows,
+                     cols = startCol,
+                     stack = T,
+                     gridExpand = T)
+  
+  dataValidation(wb = wb,
+                 sheet = sheet,
+                 cols = listCol,
+                 rows = listRow,
+                 type = "list",
+                 value = glue("'{sheet}'!${letter_start}${startRow}:${letter_start}{endRow}"))
+  
+}

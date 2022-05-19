@@ -211,6 +211,17 @@ t23_notes <- c("Power of Attorney applications that are accurate and not withdra
                "'Other' age is where the date of birth is recorded but we are unable to infer accurately (e.g. under 18 years old, over 120 years old, has a negative age).",
                "Deputyships - A Deputy is legally responsible for acting and making decisions on behalf of a person who lacks capacity to make decisions for themselves. The Deputy order sets out specific powers in relation to the person who lacks capacity.")
 
+t24_notes <- c("Grants are awarded in the following circumstances:														
+Probate - when the deceased person left a valid will and an executor is acting;														
+Letters of administration with will annexed - when a person has left a valid will but no executor is acting;														
+Letters of administration - usually when there is no valid will.",
+               "Data for grants split by registry type to Q4 2019 is available in Family Courts Statistics Quarterly: October to December 2019 at https://www.gov.uk/government/statistics/family-court-statistics-quarterly-october-to-december-2019",
+               "Digital applications were introduced from Q2 2019. All applications and grants before this date are paper.",
+               "Before 2019 the breakdown of applications by application type is not available, denoted by '-'. ",
+               "Note that total applications do not include edge cases or where the grant type is not specified. Also, a small number of applications are awaiting confirmation of the type of application made. As such, the breakdown of application types may not sum to the total of all grant types",
+               "Due to quality issues in the transition between data systems during Q2 2019, the breakdown by type of grants of representation by application type and by digital/paper cases for 2019 has not been provided here, indicated by ':'.",
+               "The digital system cannot be used to apply for standing searches or revocations. The applicant type is also not available for standing searches, revocations and contested probate cases. Data previously published on grant reseals are no longer collected by HMCTS and we are working to collect this data moving forward.",
+               "Where a probate case is contested, the Chancery Division of the High Court deals with the matter. Figures for contested probate cases are not available quarterly and so '-' is shown. The breakdown by digital and paper applications, and by applicant is also unavailable.")
 # notes added to regular tables
 
 notes1 <- c("Source:",
@@ -352,3 +363,9 @@ notes23 <- c("Source:",
              "",
              "Notes:",
              glue("{seq_along(t23_notes)}) {t23_notes}"))
+
+notes24 <- c("Source:",
+             "HMCTS FamilyMan system",
+             "",
+             "Notes:",
+             glue("{seq_along(t24_notes)}) {t24_notes}"))

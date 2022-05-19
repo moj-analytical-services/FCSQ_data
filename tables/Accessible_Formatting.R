@@ -4,40 +4,6 @@
 
 accessible_tables <- openxlsx::loadWorkbook(file=paste0("fcsq_accessible.xlsx"))
 
-#Creates a style to separate thousands
-comma_formatter <- function(wb, sheet, data, cols){
-  comma_style <- openxlsx::createStyle(numFmt = 'COMMA')
-  openxlsx::addStyle(wb = wb,
-                     sheet = sheet,
-                     style = comma_style,
-                     rows = seq(nrow(data)) + 5,
-                     cols = cols,
-                     gridExpand = TRUE,
-                     stack = TRUE)
-  
-}
-
-na_formatter <- function(wb, sheet, table){
-  # Replacing all -1 with [z]
-  for (i in seq_len(nrow(table))){
-    
-    for (j in seq_len(ncol(table))){
-      # If column isn't numeric then skip
-      if (!is.numeric(table[[j]])){
-        next
-      }
-      # If -1 then replace with [z]
-      if ((table[[i, j]] == -1)){
-        openxlsx::writeData(wb = wb,
-                            sheet = sheet, 
-                            x = '[z]',
-                            startRow = 5 + i,
-                            startCol = j,
-                            colNames = F)
-      }
-    }
-  }
-}
 # Creates a function to replace NA with [z]
 comma_style <- openxlsx::createStyle(numFmt = 'COMMA')
 
@@ -74,7 +40,9 @@ comma_cols <- list(4:ncol(table_list[[1]]),
                    3:ncol(table_list[[22]]),
                    3:ncol(table_list[[23]]),
                    3:ncol(table_list[[24]]),
-                   3:ncol(table_list[[25]])
+                   3:ncol(table_list[[25]]),
+                   3:ncol(table_list[[26]])
+                   
                    )
                         
 
