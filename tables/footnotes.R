@@ -222,6 +222,15 @@ Letters of administration - usually when there is no valid will.",
                "Due to quality issues in the transition between data systems during Q2 2019, the breakdown by type of grants of representation by application type and by digital/paper cases for 2019 has not been provided here, indicated by ':'.",
                "The digital system cannot be used to apply for standing searches or revocations. The applicant type is also not available for standing searches, revocations and contested probate cases. Data previously published on grant reseals are no longer collected by HMCTS and we are working to collect this data moving forward.",
                "Where a probate case is contested, the Chancery Division of the High Court deals with the matter. Figures for contested probate cases are not available quarterly and so '-' is shown. The breakdown by digital and paper applications, and by applicant is also unavailable.")
+
+t25_notes <- c("HMCTS Core Case Data came into effect at the end of March 2019, following a transition between data systems recording information regarding The Probate Service",
+               "The average timeliness figures are produced by calculating the time from application/document receipt (which may be from an earlier period) to the grant issued made in that period. Currently grants being issued on the same day as the application submission/document receipt are being calculated as 0 days. This is being reviewed as to whether it is an accurate reflection of workload and may be adjusted in future.",
+               "Some averages presented here may be based on a small number of grants. Where this occurs, any conclusion drawn from these will be limited.",
+               "Please note that for some grant types, the time from application to submission to grant issue will be the same as the time from document receipt to grant issue. This is mainly due to the document receipt functionality (see footnote 5) is only applicable for where the application is submitted online and post the Will later. If you send the application and Will together, there is delayed receipt, and if there’s no Will, the process doesn’t apply.",
+               "Document receipt occurs after payment has been made and all accompanying paperwork has been received by HMCTS. As such, it does not reflect the entire case journey from when an application is submitted by the user to when a grant is received. Instead these figures reflect the timeliness from when HMCTS staff are able to start working on the case. The aspects not included in these timeliness measures include (but are not limited to); time taken to scan and upload documents to the management system (for paper items), and check that these items are of good enough quality to proceed. For the timeliness figures for stopped cases, the figures will further exclude time taken to resolve those issues mentioned in footnote 6 below.",
+               "Due to quality issues in the transition between data systems, the breakdown by type of grant has not been published for Q2 2019",
+               "A probate application can be stopped for several reasons: a caveat can be entered when there’s a dispute about either who can apply for probate or issues with a will or proposed will, or if an error is identified and a request for further information is made")
+
 # notes added to regular tables
 
 notes1 <- c("Source:",
@@ -369,3 +378,9 @@ notes24 <- c("Source:",
              "",
              "Notes:",
              glue("{seq_along(t24_notes)}) {t24_notes}"))
+
+notes25 <- c("Source:",
+             "HMCTS FamilyMan system",
+             "",
+             "Notes:",
+             glue("{seq_along(t25_notes)}) {t25_notes}"))

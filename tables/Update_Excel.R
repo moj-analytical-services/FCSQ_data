@@ -49,6 +49,7 @@ source(paste0(path_to_project, "Regular_Tables/table20_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table21_22_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table23_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table24_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table25_reg.R"))
 
 #Formula cols
 source(paste0(path_to_project, "Regular_Tables/table3_reg.R"))
@@ -606,6 +607,37 @@ na_adder(wb = template,
          cols = 15,
          lengths = nrow(t24_reg_qtr_a) + nrow(t24_reg_qtr_b),
          start_row = t24_start + nrow(t24_reg_year))
+
+####################################################################
+#Probate Timeliness
+#Table 25
+
+####################################################################
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_25',
+                    x = timeperiod25,
+                    startRow = 4,
+                    colNames = F)
+
+t25_start <- 12
+# data
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_25', 
+                      tables = list(t25_reg_year, t25_reg_qtr_a, t25_reg_qtr_b), 
+                      notes = notes25, 
+                      starting_row = t25_start, 
+                      quarterly_format = c(2, 3))
+
+# 2019 Q2 NA
+# Everything before All Grants is NA
+probate_time_na_columns <- setdiff(seq(from = 3, to = 23), probate_time_blank_cols)
+na_adder(wb = template,
+         sheet = 'Table_25',
+         value = ":",
+         cols = probate_time_na_columns,
+         lengths = rep(1, length(probate_time_na_columns)),
+         start_row = t25_start + nrow(t25_reg_year))
 
 # Export ##########################################################################################
 

@@ -21,6 +21,12 @@ dropdown16_df <- tibble(c('All', 'Exparte', 'On notice'))
 #table 24
 dropdown24a_df <- tibble(c("All", "Paper", "Digital"))
 dropdown24b_df <- tibble(c("All", "Personal", "Solictor"))
+
+#table 25
+dropdown25a_df <- tibble(c("All", "Paper", "Digital"))
+dropdown25b_df <- tibble(c("All", "Stopped", "Not Stopped"))
+
+
 # Output ##########################################################################################
 # table 3/4 #####################################
 openxlsx::writeData(wb = template,
@@ -175,3 +181,20 @@ list_add(wb = template,
          startCol = 17)
 
 
+# table 24 ###################
+list_add(wb = template,
+         sheet = 'Table_25',
+         list = dropdown25a_df,
+         listRow = 6,
+         listCol = 3,
+         startRow = 12,
+         startCol = 30)
+
+
+list_add(wb = template,
+         sheet = 'Table_25',
+         list = dropdown25b_df,
+         listRow = 7,
+         listCol = 3,
+         startRow = 12,
+         startCol = 31)

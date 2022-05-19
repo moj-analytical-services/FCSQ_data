@@ -130,6 +130,11 @@ t24_note_len <- length(t24_notes)
 t24_note_section <- note_section(t24_notes, 'Table 24', note_number)
 note_number <- note_number + t24_note_len
 
+#Table 25 notes
+t25_note_len <- length(t25_notes)
+t25_note_section <- note_section(t25_notes, 'Table 25', note_number)
+note_number <- note_number + t25_note_len
+
 notes_all <- bind_rows(t1_note_section, t2_note_section,
                        t3_note_section, t4_note_section,
                        t5_note_section, t6_note_section,
@@ -142,4 +147,4 @@ notes_all <- bind_rows(t1_note_section, t2_note_section,
                        t17_note_section, t18_note_section,
                        t19_note_section, t20_note_section,
                        t21_note_section, t22_note_section,
-                       t23_note_section, t24_note_section)
+                       t23_note_section, t24_note_section, t25_note_section)

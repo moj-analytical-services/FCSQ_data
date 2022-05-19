@@ -36,7 +36,8 @@ contents_df <- tribble(
   "Table 21", "Court of Protection Applications made in England and Wales",
   "Table 22", "Court of Protection Orders made in England and Wales",
   "Table 23", "Office of the Public Guardian applications registered in England and Wales",
-  "Table 24", "Number of applications made and grants issued for grants of representation in probate proceedings, by type and method of application, and grant revocations, standings searches and contested probate cases"
+  "Table 24", "Number of applications made and grants issued for grants of representation in probate proceedings, by type and method of application, and grant revocations, standings searches and contested probate cases",
+  "Table 25", "Average time to grant issue for grants of representation in probate proceedings, England and Wales"
   
 )
 
@@ -64,13 +65,13 @@ fcsq_a11y <- new_a11ytable(
                  "Table 17", "Table 18",
                  "Table 19", "Table 20",
                  "Table 21", "Table 22", 
-                 "Table 23", "Table 24"),
-  sheet_types = c("cover", "contents", "notes", rep("tables", 26)),
+                 "Table 23", "Table 24", "Table 25"),
+  sheet_types = c("cover", "contents", "notes", rep("tables", 27)),
   sheet_titles = c(
     "Family Court Tables",
     "Table of contents",
     "Notes",
-    contents_df$`Sheet title`[2:27]),
+    contents_df$`Sheet title`[2:28]),
   sources = c(
     NA_character_,
     NA_character_,
@@ -100,7 +101,9 @@ fcsq_a11y <- new_a11ytable(
     "Court of Protection data management system",
     "Court of Protection data management system",
     "Office of the Public Guardian data management systems SIRIUS and Casrec",
-    "HMCTS ProbateMan system to Q1 2019, HMCTS Core Case Data from Q2 2019, HMCTS E-Filing service (contested cases only)"
+    "HMCTS ProbateMan system to Q1 2019, HMCTS Core Case Data from Q2 2019, HMCTS E-Filing service (contested cases only)",
+    "HMCTS Core Case Data"
+    
   ),
   table_names = c(
     "cover_sheet",
@@ -131,7 +134,8 @@ fcsq_a11y <- new_a11ytable(
     "COP_Apps",
     "COP_Ords",
     "OPG_Apps",
-    "Probate_Summary"
+    "Probate_Summary",
+    "Probate_Timeliness"
   ),
   tables = list(
     cover_df,
@@ -162,7 +166,8 @@ fcsq_a11y <- new_a11ytable(
     t21_accessible,
     t22_accessible,
     t23_accessible,
-    t24_accessible
+    t24_accessible,
+    t25_accessible
   )
 )
 

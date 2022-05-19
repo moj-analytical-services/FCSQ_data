@@ -5,10 +5,10 @@ probate_lookup <- probate_csv %>%
   relocate(Lookup)
 
 # Getting the distinct Years and Quarters
-probate_dates_annual <- probate_lookup %>% distinct(Year) %>% mutate(Quarter = NA) %>% filter(Year <= annual_year)
+probate_dates_annual <- probate_lookup %>% distinct(Year) %>% mutate(Quarter = NA) %>% filter(Year <= annual_year) %>% arrange(Year)
 
 probate_dates_quarter <- probate_lookup %>% distinct(Year, Quarter) %>% filter(Year > 2019 | Year == 2019 & Quarter %in% c(3, 4), !is.na(Quarter))  %>% 
-  mutate(Quarter = paste0('Q', Quarter))
+  mutate(Quarter = paste0('Q', Quarter)) %>% arrange(Year, Quarter)
 
 probate_dates <- bind_rows(probate_dates_annual, probate_dates_quarter)
 
