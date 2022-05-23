@@ -21,7 +21,7 @@ t1_access_annual <- table1_annual_access %>%
   values_from = Count) %>% 
   transmute(Category = str_replace_all(Category, t1_rename),
   Year = Year,
-  Quarter = '[z]',
+  Quarter = NA,
   `Cases starting`= `Cases started`,
   `Cases reaching a final disposal`= `Cases closed`)
 

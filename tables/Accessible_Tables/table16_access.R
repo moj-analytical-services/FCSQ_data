@@ -25,7 +25,7 @@ colnames(dv_hard_full) <- c('Year',
 
 # Hard coded annual section
 dv_hard_annual_part <- dv_hard_full %>% filter(is.na(Quarter)) %>% transmute(Year = Year,
-                                 Quarter = '[z]',
+                                 Quarter = NA,
                                  `Application Type` = 'All',
                                  `Non-Molestation Orders applied for`,
                                  `Occupation Orders applied for`,
@@ -175,7 +175,7 @@ dv_tables <- list(dv_exp_apps_nmo_year, dv_on_apps_nmo_year, dv_apps_nmo_year,
 # combined
 dv_joined_year <- reduce(dv_tables, left_join, by = 'Year')
 dv_accessible_year <- dv_joined_year %>% 
-  mutate(Quarter = '[z]') %>% 
+  mutate(Quarter = NA) %>% 
   relocate(Quarter, .after = Year)
  
 
@@ -344,7 +344,7 @@ t16_all_part <- full_t16 %>% transmute(Year = Year,
                                        `Cases concluding`)
 
 #Combining with the earlier hard coded data
-t16_complete_all_part <- bind_rows(dv_hard_annual_part, t16_all_part %>% filter(Quarter == '[z]'), 
-                                   dv_hard_qtr_part, t16_all_part %>% filter(Quarter != '[z]'))
+t16_complete_all_part <- bind_rows(dv_hard_annual_part, t16_all_part %>% filter(is.na(Quarter)), 
+                                   dv_hard_qtr_part, t16_all_part %>% filter(!is.na(Quarter)))
 
 t16_accessible <- bind_rows(t16_complete_all_part, t16_exparte_part, t16_onnotice_part)

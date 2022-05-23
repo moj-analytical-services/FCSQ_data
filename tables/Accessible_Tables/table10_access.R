@@ -2,7 +2,7 @@
 
 #Annual T10, removing Unknown which isn't in the table
 t10_accessible_year <- table10_alt %>% filter(Quarter == '') %>% 
-  mutate(Quarter = '[z]') %>% select(!contains('Unknown'))
+  mutate(Quarter = NA) %>% select(!contains('Unknown'))
 
 colnames(t10_accessible_year) <- c('Category',
                                    'Year',

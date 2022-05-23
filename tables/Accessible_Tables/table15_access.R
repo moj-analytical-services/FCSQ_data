@@ -5,7 +5,7 @@
 ################################################################################
 
 t15_accessible_year <- fr_joined_year %>% 
-  mutate(Qtr = '[z]') %>% 
+  mutate(Qtr = NA) %>% 
   relocate(Qtr, .after = Year)
 
 colnames(t15_accessible_year) <- c('Year', 'Quarter' ,'Uncontested Applications', 'Contested Applications',

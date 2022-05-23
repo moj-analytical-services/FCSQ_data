@@ -2,7 +2,7 @@
 
 #Annual T11
 t11_accessible_year <- table11_alt %>% filter(Quarter == '') %>% 
-  mutate(Quarter = '[z]')
+  mutate(Quarter = NA)
 
 colnames(t11_accessible_year) <- c('Category',
                                    'Year',

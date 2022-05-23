@@ -5,7 +5,7 @@ full_t6 <- bind_rows(t6_reg_year, t6_reg_qtr)
 t6_pub_law <- full_t6 %>% 
   transmute(Category = 'Public law',
             Year = Year,
-            Quarter = replace_na(Qtr, '[z]'),
+            Quarter = Qtr,
             `Cases starting` = pub_case_start,
             `Number of cases with one applicant` = pub_appl_one,
             `Number of cases with two or more applicants` = pub_appl_two,
@@ -17,7 +17,7 @@ t6_pub_law <- full_t6 %>%
 t6_priv_law <- full_t6 %>% 
   transmute(Category = 'Private law',
             Year = Year,
-            Quarter = replace_na(Qtr, '[z]'),
+            Quarter = Qtr,
             `Cases starting` = priv_case_start,
             `Number of cases with one applicant` = priv_appl_one,
             `Number of cases with two or more applicants` = priv_appl_two,

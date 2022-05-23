@@ -28,10 +28,10 @@ t17_accessible <- full_t17 %>% transmute(Year,
                        `Total applications made` = total_apps,
                        `Total cases started` = case_start,
                        `Disposals: Orders made with power of arrest attached` = case_when(
-                         (Year > 2014) | (Year == 2014 & Quarter %in% c('Q3', 'Q4', '[z]'))  ~ -1,
+                         (Year > 2014) | (Year == 2014 & (Quarter %in% c('Q3', 'Q4') | is.na(Quarter)))  ~ -1,
                          TRUE ~ ord_poa),
                        `Disposals: Orders made without power of arrest attached` = case_when(
-                         (Year > 2014) | (Year == 2014 & Quarter %in% c('Q3', 'Q4', '[z]'))  ~ -1,
+                         (Year > 2014) | (Year == 2014 & (Quarter %in% c('Q3', 'Q4') | is.na(Quarter)))  ~ -1,
                          TRUE ~ ord_nopoa),
                        `Disposals: Total orders made` = total_ords,
                        `Disposals: Other disposals` = other_disps,

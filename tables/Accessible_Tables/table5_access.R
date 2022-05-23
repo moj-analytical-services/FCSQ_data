@@ -5,7 +5,7 @@ full_t5 <- bind_rows(t5_reg_year, t5_reg_qtr)
 t5_pub_law <- full_t5 %>% 
   transmute(Category = 'Public law',
             Year = Year,
-            Quarter = replace_na(Qtr, '[z]'),
+            Quarter = Qtr,
             `Less than 1 years old` = pub_less_than_one,
             `1-4 years old` = pub_one_to_four,
             `5-9 years old` = pub_five_to_nine,
@@ -18,7 +18,7 @@ t5_pub_law <- full_t5 %>%
 t5_priv_law <- full_t5 %>% 
   transmute(Category = 'Private law',
             Year = Year,
-            Quarter = replace_na(Qtr, '[z]'),
+            Quarter = Qtr,
             `Less than 1 years old` = priv_less_than_one,
             `1-4 years old` = priv_one_to_four,
             `5-9 years old` = priv_five_to_nine,

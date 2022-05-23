@@ -98,9 +98,11 @@ if (pub_quarter == 4){
 
 letter_lookup <- read_using(readr::read_csv, (paste0(lookup_folder, "letter_lookup.csv")))
 
-ca_order_lookup <- read_using(readr::read_csv, (paste0(lookup_folder, "Lookups/t3_order_lookup.csv")), col_types = cols(
+ca_order_lookup <- read_using(readr::read_csv, (paste0(lookup_folder, "t3_order_lookup.csv")), col_types = cols(
   Order_type_code = col_character(),
   `Order type` = col_character(),
-  Table = col_integer()))
+  Table = col_integer(),
+  Order_category = col_character(),
+  Public_or_Private = col_character()))
 
 

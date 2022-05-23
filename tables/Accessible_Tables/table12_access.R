@@ -111,7 +111,7 @@ t12_diss <- bind_rows(diss_joined_year, diss_joined_qtr)
 
 t12_diss_part <- t12_diss %>% 
   transmute(Year = Year,
-            Quarter = replace_na(Quarter, '[z]'),
+            Quarter,
             `Proceeding Type` = 'Dissolution of marriage',
             `Case Type` = Case_type,
             `Petitions filed` = d_pet_filed,
@@ -134,7 +134,7 @@ full_t12 <- bind_rows(t12_reg_year, t12_reg_qtr)
 #Nullity of Marriage
 t12_nullity_part <- full_t12 %>% 
   transmute(Year = Year,
-            Quarter = replace_na(Quarter, '[z]'),
+            Quarter,
             `Proceeding Type` = 'Nullity of marriage',
             `Case Type` = '[z]',
             `Petitions filed` = n_pet_filed,
@@ -152,7 +152,7 @@ t12_nullity_part <- full_t12 %>%
 #Judicial separation
 t12_judicial_part <- full_t12 %>% 
   transmute(Year = Year,
-            Quarter = replace_na(Quarter, '[z]'),
+            Quarter,
             `Proceeding Type` = 'Judicial separation',
             `Case Type` = '[z]',
             `Petitions filed` = j_pet_filed,
@@ -169,7 +169,7 @@ t12_judicial_part <- full_t12 %>%
 #Total
 t12_total_part <- full_t12 %>% 
   transmute(Year = Year,
-            Quarter = replace_na(Quarter, '[z]'),
+            Quarter,
             `Proceeding Type` = 'All',
             `Case Type` = '[z]',
             `Petitions filed` = all_pet_filed,
