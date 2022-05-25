@@ -1,9 +1,15 @@
-#Quarterly Table 1
-#Summing up for yearly total
+# Table 1
+# Table 1 shows the total amount of cases started and cases disposed for each of the major Family Court categories
+# This script is run after table_1_change which creates a tidy version of Table 1 from each categories appropriate csv
+# This script creates the data and the sets the time period
+
+#Summing up for yearly total as initial input only has quarterly data available
 table1_annual <- table_1_alt %>% group_by(Year, Category, Stage) %>% summarise(Count = sum(Count)) %>% ungroup() %>% 
   filter(Year > 2005, Year <= annual_year)
 
 #Pivoting and reordering the columns
+# Pivot Wider makes creates separate columns for each category and stage
+# This is then ordered, and blank rows added to match the format of the template
 table1_pivot_annual <- table1_annual %>%
   pivot_wider(names_from = c(Category, Stage),
               names_sep = ' ',
@@ -34,7 +40,7 @@ table1_pivot_annual <- table1_annual %>%
   relocate(blank1, .after = `Total Cases started`)
 
 
-#Now doing the same figures for the quarterly version
+#Now doing the same as above but for the quarterly information
 table1_quarterly <- table_1_alt %>% 
   filter(Year > 2010) %>% 
   arrange(Year, Quarter)

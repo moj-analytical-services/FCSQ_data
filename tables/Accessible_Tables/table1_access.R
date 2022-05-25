@@ -4,10 +4,11 @@
 table1_annual_access <- table_1_alt %>% group_by(Category, Year, Stage) %>% summarise(Count = sum(Count)) %>% ungroup() %>% 
   filter(Year > 2005, Year <= annual_year)
 
-#Renaming the categories
+#Renaming the categories. Keep the categories in the order they should be in the final table
 t1_rename <- c(
   'Public Law' = 'Children Act - Public Law',
   'Private Law' = 'Children Act - Private Law',
+  'Matrinomial Matters' = 'Matrinomial Matters',
   'Financial Remedy' = 'Financial remedies',
   'Domestic Violence' = 'Domestic violence remedy orders',
   'Forced Marriage Protection' = 'Forced marriage protection',
@@ -16,6 +17,7 @@ t1_rename <- c(
   'Total'= 'Total cases started'
 )
 
+# The two stages are pivoted to separate columns and categories are renamed 
 t1_access_annual <- table1_annual_access %>% 
   pivot_wider(names_from = Stage,
   values_from = Count) %>% 
@@ -26,7 +28,7 @@ t1_access_annual <- table1_annual_access %>%
   `Cases reaching a final disposal`= `Cases closed`)
 
 
-#Doing quarterly version of data
+#Doing the same but for quarterly data
 table1_quarterly <- table_1_alt %>% 
   filter(Year > 2010) %>% 
   arrange(Year, Quarter)
@@ -42,17 +44,11 @@ t1_access_qtr <- table1_quarterly %>%
 
 
 #Writing the correct order of categories
-lookup_order = tribble(~Category, ~Order,
-                       'Children Act - Public Law', 1,
-                       'Children Act - Private Law', 2,
-                       'Matrinomial Matters', 3,
-                       'Financial remedies', 4,
-                       'Domestic violence remedy orders', 5,
-                       'Forced marriage protection', 6,
-                       'Female genital mutilation protection', 7,
-                       'All Adoption Act', 8,
-                       'Total cases started', 9)
+lookup_order <- tibble(Category = t1_rename,
+                       Order = seq_along(t1_rename))
 
+
+# Joining the annual and quarterly data into a single table. This is joined by the lookup order table which is used to get the orders correct
 t1_accessible <- bind_rows(t1_access_annual, t1_access_qtr) %>% left_join(lookup_order, by = 'Category') %>% 
   arrange(Order) %>% 
   select(!Order)

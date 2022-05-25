@@ -12,7 +12,7 @@ multiple_cell_merge <- function(wb, sheet, rows, cols) {
                          i)
 }
 
-note_footer <- function(wb, sheet, start_row, notes, col_length){
+note_footer <- function(wb, sheet, start_row, notes, col_length, row_heights = NULL){
   ##Write notes to sheet below last table
   start_row_notes <- start_row + 2
   end_row_notes <- start_row_notes + length(notes)
@@ -30,6 +30,16 @@ note_footer <- function(wb, sheet, start_row, notes, col_length){
     valign = "top",
     wrapText = TRUE
   )
+  
+  # Setting the row heights if available
+  if (!is.null(row_heights)){
+    openxlsx::setRowHeights(wb = wb,
+                            sheet = sheet,
+                            rows = start_row_notes:end_row_notes,
+                            heights = row_heights)
+    
+    
+  }
   #Format notes; merge and then add style
   multiple_cell_merge(wb = wb,
                       sheet = sheet,
@@ -43,6 +53,8 @@ note_footer <- function(wb, sheet, start_row, notes, col_length){
                      stack = T,
                      gridExpand = T)
   
+
+
   
   #Remove gridlines from sheet
   openxlsx::showGridLines(wb = wb,
@@ -50,7 +62,7 @@ note_footer <- function(wb, sheet, start_row, notes, col_length){
                           showGridLines = FALSE)
 }
 
-write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_row, quarterly_format = NULL, lookup_flag = NULL) {
+write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_row, quarterly_format = NULL, lookup_flag = NULL, note_row_heights = NULL) {
   
   #Throw error if not passed a list of tables
   if(inherits(tables, "list") == FALSE) {stop("Tables must be provided as a list")}
@@ -145,7 +157,8 @@ write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_
               sheet = sheet_name, 
               start_row = end_row, 
               notes = notes, 
-              col_length = colnum)
+              col_length = colnum,
+              row_heights = note_row_heights)
   
 }
 

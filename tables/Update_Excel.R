@@ -78,12 +78,15 @@ openxlsx::writeData(wb = template,
 
 # data
 t1_start <- 6
+t1_note_heights <- rep(14.3, length(notes1))
+t1_note_heights[6] = 21
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_1', 
                       tables = list(table1_pivot_annual, table1_pivot_qtr), 
                       notes = notes1, 
                       starting_row = t1_start, 
-                      quarterly_format = c(2))
+                      quarterly_format = c(2),
+                      note_row_heights = t1_note_heights)
 
 na_cols <- c(3, 4, 7, 10, 11, 13, 14, 17, 20, 21)
 na_adder(wb = template,

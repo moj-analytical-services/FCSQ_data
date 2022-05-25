@@ -125,7 +125,12 @@ t3a_accessible_priv_qtr <- t3_priv_order_template_qtr %>% left_join(t3_child_pri
 
 t3a_accessible_priv <- left_join(t3a_accessible_priv_year, t3a_accessible_priv_qtr, by = c("Category", "Order type", "Order category"))
 
-t3a_accessible <- bind_rows(t3a_accessible_pub, t3a_accessible_priv)
+t3a_accessible <- bind_rows(t3a_accessible_pub, t3a_accessible_priv) %>% 
+  mutate(Notes = case_when(`Order type` == 'Parental order' ~ '[note 26]',
+                           `Order category` == 'Return of Missing or Taken Children' ~ '[note 25]',
+                           `Order category` == 'Post Separation Support and Dispute Resolution' ~ '[note 27]',
+                           `Order type` == 'Enforcement' ~ '[note 28]')) %>% 
+  rename(`Order type [note 23]` = `Order type`)
 
 ####### Table 3b ##############################################################
 #Public Law Child Count Applications Year
