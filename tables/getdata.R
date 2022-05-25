@@ -87,12 +87,10 @@ cafcass <- read_using(readr::read_csv, paste0(csv_folder, 'CSV Private law cases
 opg_table <- read_using(openxlsx::read.xlsx, paste0(csv_folder, 'OPG Tables', " ", pub_year, " Q", pub_quarter, ".xlsx"), sheet = "Table_23", 
                         check.names = TRUE, na.strings = na_keys,  startRow = 9, skipEmptyRows = FALSE, skipEmptyCols = FALSE, colNames = FALSE)
 
-#Annual only.
 
-if (pub_quarter == 4){
-  contest_probate <- read_using(readr::read_csv, paste0(csv_folder, 'Contested_Probate', " ", pub_year, " Q", pub_quarter,'.csv'), na = na_keys) %>% rename_with(str_to_title)
+contest_probate <- read_using(readr::read_csv, paste0(csv_folder, 'Contested_Probate', " ", pub_year, " Q", pub_quarter,'.csv'), na = na_keys) %>% rename_with(str_to_title)
   
-}
+notes_import <- read_using(readr::read_csv, paste0(csv_folder, 'Notes.csv'), na = na_keys)
 
 #Helpful letter lookup
 

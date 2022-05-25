@@ -52,6 +52,8 @@ comma_cols <- list(4:ncol(table_list[[1]]),
 pwalk(list(table_names, table_list, comma_cols), ~comma_formatter(accessible_tables, ..1, ..2, ..3))
 pwalk(list(table_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2))
 
+#pwalk(list(table_names, table_list), ~ colwidth_format(accessible_tables, ..1, ..2))
+
 # for (i in seq_along(table_names)){
 #   comma_formatter(accessible_tables, table_names[[i]], table_list[[i]], comma_cols[[i]])
 # }

@@ -402,3 +402,11 @@ list_add <- function(wb, sheet, list, listRow, listCol, startRow, startCol){
                  value = glue("'{sheet}'!${letter_start}${startRow}:${letter_start}{endRow}"))
   
 }
+
+colwidth_format <- function(wb, sheet, data, widths = 'auto'){
+ openxlsx::setColWidths(wb = wb,
+                        sheet = sheet,
+                        cols = 1:ncol(data),
+                        widths = widths)
+  
+}

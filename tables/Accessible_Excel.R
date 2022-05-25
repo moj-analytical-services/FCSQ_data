@@ -1,11 +1,44 @@
 # Accessible Tables 
 
+# Number of Data Table
+table_num <- 27
+
 # A cover page, with subheaded sections of information
 cover_df <- tribble(
   ~"Subsection title", ~"Subsection body",
-  "Description", "A set of tables relating to Family Court Statistics",
-  "Format", "A set of tables."
+  "Description", "This spreadsheet contains the Family Court Tables which have been edited to meet the legal accessibility requirements",
+  "Format", "A set of tables. Each tab contains only one table. This means that some tables like Table 3 and 4 are split into two tables each",
+  "Publication dates", glue("This data was originally published at 9:30am on {pub_date}. The next publication will be published at 9:30 am on {next_pub_date}."),
+  "Contact details", "Carly Gray\nHead of Access to Justice Data and Statistics\n 0778 427 5495"
 )
+
+table_sources <- c("HMCTS FamilyMan and Core Case Data",
+             "HMCTS FamilyMan",
+             "HMCTS FamilyMan",
+             "HMCTS FamilyMan",
+             "HMCTS FamilyMan",
+             "HMCTS FamilyMan",
+             "HMCTS FamilyMan",
+             "HMCTS FamilyMan",
+             "HMCTS FamilyMan",
+             "HMCTS FamilyMan",
+             "HMCTS FamilyMan",
+             "HMCTS FamilyMan and Core Case Data",
+             "HMCTS FamilyMan and Core Case Data",
+             "HMCTS FamilyMan and Core Case Data",
+             "HMCTS FamilyMan and Core Case Data",
+             "HMCTS FamilyMan and Core Case Data",
+             "HMCTS FamilyMan and Core Case Data",
+             "HMCTS FamilyMan",
+             "HMCTS One Performance Truth (OPT) system",
+             "HMCTS One Performance Truth (OPT) system",
+             "HMCTS FamilyMan",
+             "HMCTS FamilyMan",
+             "Court of Protection data management system",
+             "Court of Protection data management system",
+             "Office of the Public Guardian data management systems SIRIUS and Casrec",
+             "HMCTS ProbateMan system to Q1 2019, HMCTS Core Case Data from Q2 2019, HMCTS E-Filing service (contested cases only)",
+             "HMCTS Core Case Data")
 
 # A contents page, with the sheet names and titles
 contents_df <- tribble(
@@ -41,6 +74,9 @@ contents_df <- tribble(
   
 )
 
+# Adding Sources
+contents_df <- contents_df %>% mutate(Source = c(NA, table_sources))
+
 # A notes page, notes_all is made from the update excel file
 source(paste0(path_to_project, "footnotes.R"))
 source(paste0(path_to_project, "Accessible_Notes.R"))
@@ -66,43 +102,17 @@ fcsq_a11y <- new_a11ytable(
                  "Table 19", "Table 20",
                  "Table 21", "Table 22", 
                  "Table 23", "Table 24", "Table 25"),
-  sheet_types = c("cover", "contents", "notes", rep("tables", 27)),
+  sheet_types = c("cover", "contents", "notes", rep("tables", table_num)),
   sheet_titles = c(
     "Family Court Tables",
     "Table of contents",
     "Notes",
-    contents_df$`Sheet title`[2:28]),
+    contents_df$`Sheet title`[2:(table_num + 1)]),
   sources = c(
     NA_character_,
     NA_character_,
     NA_character_,
-    "HMCTS FamilyMan and Core Case Data",
-    "HMCTS FamilyMan",
-    "HMCTS FamilyMan",
-    "HMCTS FamilyMan",
-    "HMCTS FamilyMan",
-    "HMCTS FamilyMan",
-    "HMCTS FamilyMan",
-    "HMCTS FamilyMan",
-    "HMCTS FamilyMan",
-    "HMCTS FamilyMan",
-    "HMCTS FamilyMan",
-    "HMCTS FamilyMan and Core Case Data",
-    "HMCTS FamilyMan and Core Case Data",
-    "HMCTS FamilyMan and Core Case Data",
-    "HMCTS FamilyMan and Core Case Data",
-    "HMCTS FamilyMan and Core Case Data",
-    "HMCTS FamilyMan and Core Case Data",
-    "HMCTS FamilyMan",
-    "HMCTS One Performance Truth (OPT) system",
-    "HMCTS One Performance Truth (OPT) system",
-    "HMCTS FamilyMan",
-    "HMCTS FamilyMan",
-    "Court of Protection data management system",
-    "Court of Protection data management system",
-    "Office of the Public Guardian data management systems SIRIUS and Casrec",
-    "HMCTS ProbateMan system to Q1 2019, HMCTS Core Case Data from Q2 2019, HMCTS E-Filing service (contested cases only)",
-    "HMCTS Core Case Data"
+    table_sources
     
   ),
   table_names = c(
