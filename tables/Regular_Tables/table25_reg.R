@@ -17,45 +17,45 @@ probate_time_dates <- bind_rows(probate_time_dates_annual, probate_time_dates_qu
 probate_time_rowcount <- nrow(probate_time_dates)
 
 # formulae
-start_row <- 12
+t25_start <- 13
 start_col <- 3
 
 #Columns in Excel sheet. There are blank columns that are missed out.
 probate_time_blank_cols <- c(6, 9, 13, 16, 20, 23, 27)
 probate_time_columns_all <- seq(from = 3, to = 29)
 probate_time_columns <- setdiff(probate_time_columns_all, probate_time_blank_cols)
-probate_time_rows <- seq(probate_time_rowcount) + start_row - 1
+probate_time_rows <- seq(probate_time_rowcount) + t25_start - 1
 
 #Data
 full_t25 <- tibble(Year = probate_time_dates$Year,
                    Quarter = probate_time_dates$Quarter,
-                   probate_grants_issued = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$C$9,\'Table 25 source\'!$A:$K,7,FALSE)'),
-                   probate_sub_to_iss_mean = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$C$9,\'Table 25 source\'!$A:$K,8,FALSE)'),
-                   probate_sub_to_iss_median = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$C$9,\'Table 25 source\'!$A:$K,9,FALSE)'),
+                   probate_grants_issued = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$C$10,\'Table 25 source\'!$A:$K,7,FALSE)'),
+                   probate_sub_to_iss_mean = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$C$10,\'Table 25 source\'!$A:$K,8,FALSE)'),
+                   probate_sub_to_iss_median = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$C$10,\'Table 25 source\'!$A:$K,9,FALSE)'),
                    blank1 = NA,
-                   probate_doc_to_iss_mean = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$C$9,\'Table 25 source\'!$A:$K,10,FALSE)'),
-                   probate_doc_to_iss_median = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$C$9,\'Table 25 source\'!$A:$K,11,FALSE)'),
+                   probate_doc_to_iss_mean = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$C$10,\'Table 25 source\'!$A:$K,10,FALSE)'),
+                   probate_doc_to_iss_median = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$C$10,\'Table 25 source\'!$A:$K,11,FALSE)'),
                    blank2 = NA,
-                   admin_will_grants_issued = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$J$9,\'Table 25 source\'!$A:$K,7,FALSE)'),
-                   admin_will_sub_to_iss_mean = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$J$9,\'Table 25 source\'!$A:$K,8,FALSE)'),
-                   admin_will_sub_to_iss_median = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$J$9,\'Table 25 source\'!$A:$K,9,FALSE)'),
+                   admin_will_grants_issued = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$J$10,\'Table 25 source\'!$A:$K,7,FALSE)'),
+                   admin_will_sub_to_iss_mean = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$J$10,\'Table 25 source\'!$A:$K,8,FALSE)'),
+                   admin_will_sub_to_iss_median = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$J$10,\'Table 25 source\'!$A:$K,9,FALSE)'),
                    blank3 = NA,
-                   admin_will_doc_to_iss_mean = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$J$9,\'Table 25 source\'!$A:$K,10,FALSE)'),
-                   admin_will_doc_to_iss_median = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$J$9,\'Table 25 source\'!$A:$K,11,FALSE)'),
+                   admin_will_doc_to_iss_mean = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$J$10,\'Table 25 source\'!$A:$K,10,FALSE)'),
+                   admin_will_doc_to_iss_median = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$J$10,\'Table 25 source\'!$A:$K,11,FALSE)'),
                    blank4 = NA,
-                   admin_grants_issued = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$Q$9,\'Table 25 source\'!$A:$K,7,FALSE)'),
-                   admin_sub_to_iss_mean = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$Q$9,\'Table 25 source\'!$A:$K,8,FALSE)'),
-                   admin_sub_to_iss_median = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$Q$9,\'Table 25 source\'!$A:$K,9,FALSE)'),
+                   admin_grants_issued = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$Q$10,\'Table 25 source\'!$A:$K,7,FALSE)'),
+                   admin_sub_to_iss_mean = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$Q$10,\'Table 25 source\'!$A:$K,8,FALSE)'),
+                   admin_sub_to_iss_median = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$Q$10,\'Table 25 source\'!$A:$K,9,FALSE)'),
                    blank5 = NA,
-                   admin_doc_to_iss_mean = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$Q$9,\'Table 25 source\'!$A:$K,10,FALSE)'),
-                   admin_doc_to_iss_median = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$Q$9,\'Table 25 source\'!$A:$K,11,FALSE)'),
+                   admin_doc_to_iss_mean = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$Q$10,\'Table 25 source\'!$A:$K,10,FALSE)'),
+                   admin_doc_to_iss_median = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$Q$10,\'Table 25 source\'!$A:$K,11,FALSE)'),
                    blank6 = NA,
-                   all_grants_grants_issued = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$X$9,\'Table 25 source\'!$A:$K,7,FALSE)'),
-                   all_grants_sub_to_iss_mean = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$X$9,\'Table 25 source\'!$A:$K,8,FALSE)'),
-                   all_grants_sub_to_iss_median = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$X$9,\'Table 25 source\'!$A:$K,9,FALSE)'),
+                   all_grants_grants_issued = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$X$10,\'Table 25 source\'!$A:$K,7,FALSE)'),
+                   all_grants_sub_to_iss_mean = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$X$10,\'Table 25 source\'!$A:$K,8,FALSE)'),
+                   all_grants_sub_to_iss_median = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$X$10,\'Table 25 source\'!$A:$K,9,FALSE)'),
                    blank7 = NA,
-                   all_grants_doc_to_iss_mean = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$X$9,\'Table 25 source\'!$A:$K,10,FALSE)'),
-                   all_grants_doc_to_iss_median = glue('=VLOOKUP($C$6&$A{probate_time_rows}&$B{probate_time_rows}&$C$7&$X$9,\'Table 25 source\'!$A:$K,11,FALSE)'),
+                   all_grants_doc_to_iss_mean = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$X$10,\'Table 25 source\'!$A:$K,10,FALSE)'),
+                   all_grants_doc_to_iss_median = glue('=VLOOKUP($C$7&$A{probate_time_rows}&$B{probate_time_rows}&$C$8&$X$10,\'Table 25 source\'!$A:$K,11,FALSE)'),
                   
 )
                    

@@ -2,10 +2,10 @@
 # This table contains both formulas and raw data
 
 #Keeping track of row to start with
-start_t12 <- 12
+t12_start <- 12
 
 current_div_year <- divorce_csv %>% distinct(Year) %>% pull(Year)
-div_year_row_seq <- seq(from = start_t12, to = start_t12 + length(current_div_year) - 1)
+div_year_row_seq <- seq(from = t12_start, to = t12_start + length(current_div_year) - 1)
 
 
 #Remaining annual data
@@ -103,24 +103,17 @@ t12_reg_year <- div_joined_year %>%
   relocate(blank1, .after = Quarter) %>% 
   relocate(blank2, .after = d_median_abs) %>% 
   relocate(blank3, .after = n_decrees_abs) %>% 
-  relocate(blank4, .after = j_decrees_granted)
+  relocate(blank4, .after = j_decrees_granted) %>% 
+  mutate(across(starts_with('d_'), .fns = formula_add))
 
-# Marking formula columns
-class(t12_reg_year$d_pet_filed) <- c(class(t12_reg_year$d_pet_filed), 'formula')
-class(t12_reg_year$d_decrees_nisi) <- c(class(t12_reg_year$d_decrees_nisi), 'formula')
-class(t12_reg_year$d_mean_nisi) <- c(class(t12_reg_year$d_mean_nisi), 'formula')
-class(t12_reg_year$d_median_nisi) <- c(class(t12_reg_year$d_median_nisi), 'formula')
-class(t12_reg_year$d_decrees_abs) <- c(class(t12_reg_year$d_decrees_abs), 'formula')
-class(t12_reg_year$d_mean_abs) <- c(class(t12_reg_year$d_mean_abs), 'formula')
-class(t12_reg_year$d_median_abs) <- c(class(t12_reg_year$d_median_abs), 'formula')
 
 #####################
 #Quarterly
 #####################
-start_t12_qtr <- start_t12 + length(current_div_year)
+t12_start_qtr <- t12_start + length(current_div_year)
 
 current_div_qtr <- divorce_csv %>% filter(Year > 2010) %>% distinct(Year, Quarter)
-div_qtr_row_seq <- seq(from = start_t12_qtr, to = start_t12_qtr + nrow(current_div_qtr) - 1)
+div_qtr_row_seq <- seq(from = t12_start_qtr, to = t12_start_qtr + nrow(current_div_qtr) - 1)
 
 glue('Table_12_source!$B:$B,$A{div_qtr_row_seq}&" "&LEFT($B{div_qtr_row_seq},2)')
 
@@ -219,16 +212,9 @@ t12_reg_qtr <- div_joined_qtr %>%
   relocate(blank1, .after = Quarter) %>% 
   relocate(blank2, .after = d_median_abs) %>% 
   relocate(blank3, .after = n_decrees_abs) %>% 
-  relocate(blank4, .after = j_decrees_granted)
+  relocate(blank4, .after = j_decrees_granted) %>% 
+  mutate(across(starts_with('d_'), .fns = formula_add))
 
-# Marking formula columns
-class(t12_reg_qtr$d_pet_filed) <- c(class(t12_reg_qtr$d_pet_filed), 'formula')
-class(t12_reg_qtr$d_decrees_nisi) <- c(class(t12_reg_qtr$d_decrees_nisi), 'formula')
-class(t12_reg_qtr$d_mean_nisi) <- c(class(t12_reg_qtr$d_mean_nisi), 'formula')
-class(t12_reg_qtr$d_median_nisi) <- c(class(t12_reg_qtr$d_median_nisi), 'formula')
-class(t12_reg_qtr$d_decrees_abs) <- c(class(t12_reg_qtr$d_decrees_abs), 'formula')
-class(t12_reg_qtr$d_mean_abs) <- c(class(t12_reg_qtr$d_mean_abs), 'formula')
-class(t12_reg_qtr$d_median_abs) <- c(class(t12_reg_qtr$d_median_abs), 'formula')
 # time period
 if(pub_quarter==4){
   

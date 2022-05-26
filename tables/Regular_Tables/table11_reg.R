@@ -14,7 +14,7 @@ legrep_dates_quarter <- table11_alt %>% distinct(Year, Quarter) %>% filter(Quart
 legrep_rowcount <- nrow(legrep_dates_annual) + nrow(legrep_dates_quarter)
 
 # formulae
-start_row <- 11
+start_row <- 12
 start_col <- 3
 columns <- c(1,2,4,5,7,8,10)
 
@@ -23,7 +23,7 @@ for (i in 1:legrep_rowcount) {
   lookup_col <- 2
   
   for (j in columns) {
-    formula <- paste0('=VLOOKUP($B$6&"|"&$A', i+start_row-1, '&"|"&$B', i+start_row-1, ',Table_11_source!$A:$H,', lookup_col, ')')
+    formula <- paste0('=VLOOKUP($B$7&"|"&$A', i+start_row-1, '&"|"&$B', i+start_row-1, ',Table_11_source!$A:$H,', lookup_col, ',FALSE',  ')')
     writeFormula(wb=template,
                  sheet='Table_11',
                  x=formula,
@@ -60,7 +60,7 @@ write_formatted_table(workbook = template,
                       notes = notes11, 
                       starting_row = start_row, 
                       quarterly_format = c(2),
-                      lookup_flag = 12)
+                      col_num = 12)
 # Adding source
 openxlsx::writeData(wb = template,
                     sheet = 'Table_11_source',

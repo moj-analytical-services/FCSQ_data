@@ -11,12 +11,17 @@ end_row <- 69
 start_col <- 2
 t4_priv_row_start <- 29
 
+# Setting heights of notes
+t4_row_heights <- rep(14.3, length(notes3))
+t4_row_heights[6] = 33
+
+t4_empty <- c(11, 15, 16, 24, 25, 32, 33, 37, 38, 43, 44, 51, 52, 55, 56, 59, 60, 67, 68) #rows excluded because they are blank
+
 t4_years <- annual_year - 2010  #Number of full years in the table
 lookup_row <- nrow(table_3_lookup) + 1
 
 #Setting row information for Table 3
 t4_rows_all <- seq(start_row, end_row) #full set of rows in the table
-t4_empty <- c(11, 15, 16, 24, 25, 32, 33, 37, 38, 43, 44, 51, 52, 55, 56, 59, 60, 67, 68) #rows excluded because they are blank
 t4_pub_rows <- setdiff(t4_rows_all, t4_empty) #rows that have formulas in them
 
 #Number of Columns to add. Years since 2010 have their own column then a space for four quarters
@@ -26,11 +31,11 @@ t4_pub_columns <- start_col + t4_columns - 1
 
 
 #Main Public Law formulae
-glue("=VLOOKUP($AJ{i}&$A$7&$B$9&$AJ$6,'Table 3_4_source'!$A$2:$Q${lookup_row},{lookup_col},FALSE)")
+glue("=VLOOKUP($BA{i}&$A$7&$B$9&$BA$6,'Table 3_4_source'!$A$2:$Q${lookup_row},{lookup_col},FALSE)")
 for (i in t4_pub_rows) {
   lookup_col <- 2
   for (j in t4_pub_columns) {
-    formula <- glue("=VLOOKUP($AJ{i}&$A$8&$B$9&$AJ$7,'Table 3_4_source'!$A$2:$Q${lookup_row},{lookup_col},FALSE)")
+    formula <- glue("=VLOOKUP($BA{i}&$A$8&$B$9&$BA$7,'Table 3_4_source'!$A$2:$Q${lookup_row},{lookup_col},FALSE)")
     writeFormula(wb=template,
                  sheet='Table_4',
                  x=formula,
@@ -100,7 +105,7 @@ pri_start_letter <- num_to_letter(pri_start_col)
 for (i in t4_priv_rows) {
   lookup_col <- 2
   for (j in t4_priv_columns) {
-    formula <- glue("=VLOOKUP($AJ{i}&$A$8&${pri_start_letter}$9&$AJ$7,'Table 3_4_source'!$A$2:$Q${lookup_row},{lookup_col},FALSE)")
+    formula <- glue("=VLOOKUP($BA{i}&$A$8&${pri_start_letter}$9&$BA$7,'Table 3_4_source'!$A$2:$Q${lookup_row},{lookup_col},FALSE)")
     writeFormula(wb=template,
                  sheet='Table_4',
                  x=formula,
@@ -137,7 +142,8 @@ note_footer(wb = template,
             sheet = 'Table_4',
             start_row = end_row,
             notes = notes4,
-            col_length = t4_total_cols)
+            col_length = t4_total_cols,
+            row_heights = t4_row_heights)
 
 # Content #########################################################################################
 
@@ -154,5 +160,5 @@ if(pub_quarter==4){
 openxlsx::writeData(wb = template,
                     sheet = 'Table_4',
                     x = timeperiod4,
-                    startRow = 4,
+                    startRow = 3,
                     colNames = F)

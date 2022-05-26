@@ -3,7 +3,7 @@
 #Starting with the Hard Coded Data
 #Pre 2011
 
-start_t16 <- 10
+t16_start <- 10
 dv_hard_code_seq <- seq(from = 3, to = 10)
 dv_hard_code <- tibble(Year = 2003:2010,
                        Quarter = NA_character_,
@@ -27,7 +27,7 @@ class(dv_hard_code$Oo_ords) <- c(class(dv_hard_code$Oo_ords), 'formula')
 class(dv_hard_code$Ords_total) <- c(class(dv_hard_code$Ords_total), 'formula')
 
 #Keeping track of row to start with
-current_t16 <- start_t16 + nrow(dv_hard_code)
+current_t16 <- t16_start + nrow(dv_hard_code)
 dv_label <- dv_csv %>% distinct(Year, Quarter) %>% filter(Year > 2010)
 current_dv_year <- dv_label %>% distinct(Year) %>% pull(Year)
 dv_year_row_seq <- seq(from = current_t16, to = current_t16 + length(current_dv_year) - 1)

@@ -31,6 +31,7 @@ note_footer <- function(wb, sheet, start_row, notes, col_length, row_heights = N
     wrapText = TRUE
   )
   
+  
   # Setting the row heights if available
   if (!is.null(row_heights)){
     openxlsx::setRowHeights(wb = wb,
@@ -53,7 +54,14 @@ note_footer <- function(wb, sheet, start_row, notes, col_length, row_heights = N
                      stack = T,
                      gridExpand = T)
   
-
+  #Making the word Source and Notes which are usually the first and fourth element of the notes bold
+  openxlsx::addStyle(wb = wb,
+                     sheet = sheet,
+                     style = openxlsx::createStyle(textDecoration = 'bold'),
+                     rows = c(start_row_notes, start_row_notes + 3),
+                     cols = seq(col_length),
+                     stack = T,
+                     gridExpand = T)
 
   
   #Remove gridlines from sheet
@@ -62,7 +70,7 @@ note_footer <- function(wb, sheet, start_row, notes, col_length, row_heights = N
                           showGridLines = FALSE)
 }
 
-write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_row, quarterly_format = NULL, lookup_flag = NULL, note_row_heights = NULL) {
+write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_row, quarterly_format = NULL, col_num = NULL, note_row_heights = NULL) {
   
   #Throw error if not passed a list of tables
   if(inherits(tables, "list") == FALSE) {stop("Tables must be provided as a list")}
@@ -70,11 +78,11 @@ write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_
   if(is.vector(notes) == FALSE | inherits(notes, "list") == TRUE) {stop("Notes must be provided as a vector")}
   
   #setting column numbers
-  if (is.null(lookup_flag)){
+  if (is.null(col_num)){
     colnum <- seq_len(ncol(tables[[1]]))
     
   } else{
-    colnum <- seq_len(lookup_flag)
+    colnum <- seq_len(col_num)
   }
   ##Set starting row parameters
   start_row <- starting_row
@@ -364,7 +372,7 @@ comma_formatter <- function(wb, sheet, data, cols){
   
 }
 
-na_formatter <- function(wb, sheet, table, value = '[z]', startRow = 5, skipCols = 0){
+na_formatter <- function(wb, sheet, table, value = '[z]', startRow = 6, skipCols = 0){
   # Replacing all -1 with [z]
   for (i in seq_len(nrow(table))){
     
@@ -378,7 +386,7 @@ na_formatter <- function(wb, sheet, table, value = '[z]', startRow = 5, skipCols
         openxlsx::writeData(wb = wb,
                             sheet = sheet, 
                             x = value,
-                            startRow = startRow + i,
+                            startRow = startRow + i - 1,
                             startCol = j,
                             colNames = F)
       }

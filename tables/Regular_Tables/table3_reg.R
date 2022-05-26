@@ -11,12 +11,19 @@ end_row <- 48
 start_col <- 2
 t3_priv_row_start <- 35
 
+# Setting heights of notes
+t3_row_heights <- rep(14.3, length(notes3))
+t3_row_heights[6] = 33
+
+# Empty rows in Table 3
+t3_empty <- c(11, 15, 16, 24, 25, 29, 30, 33, 34, 38, 39, 45, 46)
+
 t3_years <- annual_year - 2010  #Number of full years in the table
 lookup_row <- nrow(table_3_lookup) + 1
 
 #Setting row information for Table 3
 t3_rows_all <- seq(start_row, end_row) #full set of rows in the table
-t3_empty <- c(11, 15, 16, 24, 25, 29, 30, 33, 34, 38, 39, 45, 46) #rows excluded because they are blank
+ #rows excluded because they are blank
 t3_pub_rows <- setdiff(t3_rows_all, t3_empty) #rows that have formulas in them
 
 #Number of Columns to add. Years since 2010 have their own column then a space for four quarters
@@ -29,7 +36,7 @@ t3_pub_columns <- start_col + t3_columns - 1
 for (i in t3_pub_rows) {
   lookup_col <- 2
   for (j in t3_pub_columns) {
-    formula <- glue("=VLOOKUP($AJ{i}&$A$8&$B$9&$AJ$7,'Table 3_4_source'!$A$2:$Q${lookup_row},{lookup_col},FALSE)")
+    formula <- glue("=VLOOKUP($BA{i}&$A$8&$B$9&$BA$7,'Table 3_4_source'!$A$2:$Q${lookup_row},{lookup_col},FALSE)")
     writeFormula(wb=template,
                  sheet='Table_3',
                  x=formula,
@@ -41,11 +48,11 @@ for (i in t3_pub_rows) {
 }
 
 #Some orders have errors without this addition
-glue("=VLOOKUP($AJ{i}&$A$7&$B$9&$AJ$6,'Table 3_4_source'!$A$2:$Q${lookup_row},{lookup_col},FALSE)")
+glue("=VLOOKUP($BA{i}&$A$7&$B$9&$BA$6,'Table 3_4_source'!$A$2:$Q${lookup_row},{lookup_col},FALSE)")
 for (i in c(37, 44)) {
   lookup_col <- 2
   for (j in t3_pub_columns) {
-    formula <- glue("=IFERROR(VLOOKUP($AJ{i}&$A$8&$B$9&$AJ$7,'Table 3_4_source'!$A$2:$Q${lookup_row},{lookup_col},FALSE),0)")
+    formula <- glue("=IFERROR(VLOOKUP($BA{i}&$A$8&$B$9&$BA$7,'Table 3_4_source'!$A$2:$Q${lookup_row},{lookup_col},FALSE),0)")
     writeFormula(wb=template,
                  sheet='Table_3',
                  x=formula,
@@ -101,7 +108,7 @@ pri_start_letter <- num_to_letter(pri_start_col)
 for (i in t3_priv_rows) {
   lookup_col <- 2
   for (j in t3_priv_columns) {
-    formula <- glue("=VLOOKUP($AJ{i}&$A$8&${pri_start_letter}$9&$AJ$7,'Table 3_4_source'!$A$2:$Q${lookup_row},{lookup_col},FALSE)")
+    formula <- glue("=VLOOKUP($BA{i}&$A$8&${pri_start_letter}$9&$BA$7,'Table 3_4_source'!$A$2:$Q${lookup_row},{lookup_col},FALSE)")
     writeFormula(wb=template,
                  sheet='Table_3',
                  x=formula,
@@ -131,7 +138,8 @@ note_footer(wb = template,
             sheet = 'Table_3',
             start_row = end_row,
             notes = notes3,
-            col_length = t3_total_cols)
+            col_length = t3_total_cols,
+            row_heights = t3_row_heights)
 
 # Content #########################################################################################
 
@@ -148,7 +156,7 @@ if(pub_quarter==4){
 openxlsx::writeData(wb = template,
                     sheet = 'Table_3',
                     x = timeperiod3,
-                    startRow = 4,
+                    startRow = 3,
                     colNames = F)
 
 # Adding source

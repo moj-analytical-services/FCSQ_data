@@ -44,7 +44,6 @@ timeperiod <- data.frame(c(paste0("2008 - ", pub_year, " (", pub_months_short, "
                            paste0("2008 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2008 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2012 - ", pub_year, " (", pub_months_short, ")"),
-                           paste0("2007 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2019 (Apr-Jun) - ", pub_year, " (", pub_months_short, ")")))
 
 publish_dates <- data.frame(c(paste0("Published ", pub_date), paste0("Next update ", next_pub_date)))

@@ -14,7 +14,7 @@ time_dates_quarter <- table10_alt %>% distinct(Year, Quarter) %>% filter(Quarter
 time_rowcount <- nrow(time_dates_annual) + nrow(time_dates_quarter)
 
 # formulae
-start_row <- 12
+start_row <- 13
 start_col <- 3
 #Columns in Excel sheet. There are blank columns that are missed out.
 columns <- c(1,2,4,5,7,8,10,11,13,14)
@@ -26,7 +26,7 @@ for (i in 1:time_rowcount) {
   col_count <- 1
   for (j in columns) {
     lookup_col <- lookup_cols[col_count]
-    formula <- paste0('=VLOOKUP($B$6&"|"&$A', i+start_row-1, '&"|"&$B', i+start_row-1, ',Table_10_source!$A:$M,', lookup_col, ',FALSE', ')')
+    formula <- paste0('=VLOOKUP($B$7&"|"&$A', i+start_row-1, '&"|"&$B', i+start_row-1, ',Table_10_source!$A:$M,', lookup_col, ',FALSE', ')')
     writeFormula(wb=template,
                  sheet='Table_10',
                  x=formula,
@@ -63,7 +63,7 @@ write_formatted_table(workbook = template,
                       notes = notes10, 
                       starting_row = start_row, 
                       quarterly_format = c(2),
-                      lookup_flag = 16)
+                      col_num = 16)
 
 # Adding source
 openxlsx::writeData(wb = template,

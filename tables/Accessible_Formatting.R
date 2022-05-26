@@ -47,7 +47,7 @@ comma_cols <- list(4:ncol(table_list[[1]]),
                    )
                         
 
-
+#column_widths <- 
 # Adds commas at the thousand separator and changes any -1 into z
 pwalk(list(table_names, table_list, comma_cols), ~comma_formatter(accessible_tables, ..1, ..2, ..3))
 pwalk(list(table_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2))

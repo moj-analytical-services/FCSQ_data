@@ -32,33 +32,35 @@ source(paste0(path_to_project, "footnotes.R"))
 # tables
 source(paste0(path_to_project, "table_1_change.R"))
 source(paste0(path_to_project, "Regular_Tables/table1_reg.R"))
-#Children Act
+
+#No Formula Tables
 source(paste0(path_to_project, "Regular_Tables/table2_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table5_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table6_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table7_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table8_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table9_reg.R"))
-source(paste0(path_to_project, "Regular_Tables/table12_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table13_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table14_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table15.R"))
 source(paste0(path_to_project, "Regular_Tables/table17_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table18_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table19_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table20_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table21_22_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table23_reg.R"))
-source(paste0(path_to_project, "Regular_Tables/table24_reg.R"))
-source(paste0(path_to_project, "Regular_Tables/table25_reg.R"))
+
 
 #Formula cols
 source(paste0(path_to_project, "Regular_Tables/table3_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table4_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table10_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table11_reg.R"))
-
-source(paste0(path_to_project, "Regular_Tables/table15.R"))
+source(paste0(path_to_project, "Regular_Tables/table12_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table16_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table24_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table25_reg.R"))
+
 
 
 # dropdowns
@@ -77,7 +79,9 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # data
-t1_start <- 6
+t1_start <- 7
+
+# Adjusting row height for notes. Actual footnotes do not start until row 5 
 t1_note_heights <- rep(14.3, length(notes1))
 t1_note_heights[6] = 21
 write_formatted_table(workbook = template, 
@@ -88,6 +92,7 @@ write_formatted_table(workbook = template,
                       quarterly_format = c(2),
                       note_row_heights = t1_note_heights)
 
+# Adding expressions for missing values. As these are strings they have to be added separately from the numbers
 na_cols <- c(3, 4, 7, 10, 11, 13, 14, 17, 20, 21)
 na_adder(wb = template,
          sheet = 'Table_1',
@@ -123,18 +128,24 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # data
+t2_start <- 9
+t2_note_heights <- rep(14.3, length(notes2))
+t2_note_heights[5] = 21.8
+
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_2', 
                       tables = list(t2_reg_year, t2_reg_qtr), 
                       notes = notes2, 
-                      starting_row = 10, 
-                      quarterly_format = c(2))
+                      starting_row = t2_start, 
+                      quarterly_format = c(2),
+                      note_row_heights = t2_note_heights)
 
 ####################################################################
 #Children Act Individual children
 #Table 5
 
 ####################################################################
+t5_start <- 8
 
 openxlsx::writeData(wb = template,
                     sheet = 'Table_5',
@@ -146,8 +157,8 @@ openxlsx::writeData(wb = template,
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_5', 
                       tables = list(t5_reg_year, t5_reg_qtr), 
-                      notes = notes2, 
-                      starting_row = 7, 
+                      notes = notes5, 
+                      starting_row = t5_start, 
                       quarterly_format = c(2))
 
 ####################################################################
@@ -155,7 +166,7 @@ write_formatted_table(workbook = template,
 #Table 6
 
 ####################################################################
-
+t6_start <- 8
 openxlsx::writeData(wb = template,
                     sheet = 'Table_6',
                     x = timeperiod6,
@@ -167,7 +178,7 @@ write_formatted_table(workbook = template,
                       sheet_name = 'Table_6', 
                       tables = list(t6_reg_year, t6_reg_qtr), 
                       notes = notes2, 
-                      starting_row = 7, 
+                      starting_row = 8, 
                       quarterly_format = c(2))
 
 ####################################################################
@@ -175,6 +186,7 @@ write_formatted_table(workbook = template,
 #Table 7
 
 ####################################################################
+t7_start <- 8
 
 openxlsx::writeData(wb = template,
                     sheet = 'Table_7',
@@ -187,7 +199,7 @@ write_formatted_table(workbook = template,
                       sheet_name = 'Table_7', 
                       tables = list(t7_reg_year, t7_reg_qtr), 
                       notes = notes2, 
-                      starting_row = 7, 
+                      starting_row = t7_start, 
                       quarterly_format = c(2))
 
 ####################################################################
@@ -195,7 +207,7 @@ write_formatted_table(workbook = template,
 #Table 8
 
 ####################################################################
-
+t8_start <- 6
 openxlsx::writeData(wb = template,
                     sheet = 'Table_8',
                     x = timeperiod8,
@@ -207,7 +219,7 @@ write_formatted_table(workbook = template,
                       sheet_name = 'Table_8', 
                       tables = list(t8_reg_year, t8_reg_qtr), 
                       notes = notes8, 
-                      starting_row = 5, 
+                      starting_row = t8_start, 
                       quarterly_format = c(2))
 
 ####################################################################
@@ -215,7 +227,7 @@ write_formatted_table(workbook = template,
 #Table 9
 
 ####################################################################
-
+t9_start <- 6
 openxlsx::writeData(wb = template,
                     sheet = 'Table_9',
                     x = timeperiod9,
@@ -227,7 +239,7 @@ write_formatted_table(workbook = template,
                       sheet_name = 'Table_9', 
                       tables = list(t9_reg_year, t9_reg_qtr), 
                       notes = notes9, 
-                      starting_row = 5, 
+                      starting_row = t9_start, 
                       quarterly_format = c(2))
 ####################################################################
 #Matrimonial matters proceedings
@@ -246,7 +258,7 @@ write_formatted_table(workbook = template,
                       sheet_name = 'Table_12', 
                       tables = list(t12_reg_year, t12_reg_qtr), 
                       notes = notes12, 
-                      starting_row = 12, 
+                      starting_row = t12_start, 
                       quarterly_format = c(2))
 
 na_adder(wb = template,
@@ -254,14 +266,14 @@ na_adder(wb = template,
          value = ".",
          cols = c(6, 7, 9, 10),
          lengths = rep(3, 4),
-         start_row = 12)
+         start_row = t12_start)
 
 ####################################################################
 #Divorce Progression
 #Table 13
 
 ####################################################################
-
+t13_start <- 9
 openxlsx::writeData(wb = template,
                     sheet = 'Table_13',
                     x = timeperiod13,
@@ -273,7 +285,7 @@ write_formatted_table(workbook = template,
                       sheet_name = 'Table_13', 
                       tables = list(t13_reg_year, t13_reg_qtr), 
                       notes = notes13, 
-                      starting_row = 8, 
+                      starting_row = t13_start, 
                       quarterly_format = c(2))
 
 ####################################################################
@@ -281,7 +293,7 @@ write_formatted_table(workbook = template,
 #Table 14
 
 ####################################################################
-
+t14_start <- 7
 openxlsx::writeData(wb = template,
                     sheet = 'Table_14',
                     x = timeperiod14,
@@ -293,14 +305,14 @@ write_formatted_table(workbook = template,
                       sheet_name = 'Table_14', 
                       tables = list(t14_reg), 
                       notes = notes14, 
-                      starting_row = 7, 
+                      starting_row = t14_start, 
                       quarterly_format = c(2))
 ####################################################################
 #Financial Remedy
 #Table 15
 
 ####################################################################
-
+t15_start <- 7
 openxlsx::writeData(wb = template,
                     sheet = 'Table_15',
                     x = timeperiod15,
@@ -312,7 +324,7 @@ write_formatted_table(workbook = template,
                       sheet_name = 'Table_15', 
                       tables = list(t15_year, t15_qtr), 
                       notes = notes15, 
-                      starting_row = 6, 
+                      starting_row = t15_start, 
                       quarterly_format = c(2))
 
 ####################################################################
@@ -332,7 +344,7 @@ write_formatted_table(workbook = template,
                       sheet_name = 'Table_16', 
                       tables = list(dv_hard_code, dv_year, dv_hard_code_qtr, dv_qtr), 
                       notes = notes16, 
-                      starting_row = 10, 
+                      starting_row = t16_start, 
                       quarterly_format = c(3, 4))
 
 ####################################################################
@@ -348,7 +360,7 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # data
-t17_start <- 7
+t17_start <- 8
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_17', 
                       tables = list(t17_reg_year, t17_reg_qtr_a, t17_reg_qtr_b), 
@@ -413,7 +425,7 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # data
-t18_start <- 7
+t18_start <- 8
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_18', 
                       tables = list(t18_reg_year, t18_reg_qtr_a, t18_reg_qtr_b), 
@@ -437,7 +449,6 @@ openxlsx::addStyle(wb = template,
 #Table 19
 
 ####################################################################
-
 openxlsx::writeData(wb = template,
                     sheet = 'Table_19',
                     x = timeperiod19,
@@ -445,7 +456,7 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # data
-t19_start <- 7
+t19_start <- 8
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_19', 
                       tables = list(t19_reg_year, t19_reg_qtr), 
@@ -466,7 +477,7 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # data
-t20_start <- 7
+t20_start <- 8
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_20', 
                       tables = list(t20_reg_year, t20_reg_qtr), 
@@ -488,7 +499,7 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # data
-t21_start <- 6
+t21_start <- 7
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_21', 
                       tables = list(t21_reg_year, t21_reg_qtr), 
@@ -517,7 +528,7 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # data
-t22_start <- 6
+t22_start <- 7
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_22', 
                       tables = list(t22_reg_year, t22_reg_qtr), 
@@ -546,7 +557,7 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # data
-t23_start <- 8
+t23_start <- 9
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_23', 
                       tables = list(t23_reg_year, t23_reg_qtr), 
@@ -555,24 +566,12 @@ write_formatted_table(workbook = template,
                       quarterly_format = c(2))
 
 # Adding stars to table
-for (i in seq_len(nrow(full_t23))){
-  
-  for (j in seq_len(ncol(full_t23))){
-    # If column isn't numeric then skip
-    if (!is.numeric(full_t23[[j]])){
-      next
-    }
-    # If -1 then replace with *
-    if ((full_t23[[i, j]] == -1)){
-      openxlsx::writeData(wb = template,
-                          sheet = 'Table_23', 
-                          x = '*',
-                          startRow = t23_start + i - 1,
-                          startCol = j,
-                          colNames = F)
-    }
-  }
-}
+na_formatter(wb = template,
+             sheet = 'Table_23',
+             table = full_t23,
+             value = '*',
+             startRow = t23_start)
+
 
 ####################################################################
 #Probate
@@ -586,7 +585,6 @@ openxlsx::writeData(wb = template,
                     startRow = 4,
                     colNames = F)
 
-t24_start <- 12
 # data
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_24', 
@@ -623,7 +621,6 @@ openxlsx::writeData(wb = template,
                     startRow = 4,
                     colNames = F)
 
-t25_start <- 12
 # data
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_25', 

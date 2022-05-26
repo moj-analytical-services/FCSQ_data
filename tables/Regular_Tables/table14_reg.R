@@ -58,5 +58,5 @@ t14_reg <- divorce_progress_a %>%
   select(!Order)
   
 # time period
-timeperiod14 <- paste0 ("Q1 2011 - Q", pub_quarter," ", pub_year)
+timeperiod14 <- paste0 ("Quarters from Q1 2011 - Q", pub_quarter," ", pub_year)
   
