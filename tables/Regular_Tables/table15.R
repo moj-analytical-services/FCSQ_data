@@ -68,6 +68,7 @@ fr_tables <- list(fr_uncon_apps_year, fr_con_apps_year, fr_all_apps_year, fr_cas
 fr_joined_year <- reduce(fr_tables, left_join, by = 'Year')
 
 t15_year <- fr_joined_year %>% 
+  filter(Year <= annual_year) %>% 
   mutate(Qtr = NA, blank1 = NA) %>% 
   relocate(Qtr, .after = Year) %>% 
   relocate(blank1, .after = total_case_start)

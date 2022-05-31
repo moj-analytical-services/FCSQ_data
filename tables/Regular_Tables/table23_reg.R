@@ -19,7 +19,7 @@ opg_deputyship_qtr <- opg_csv %>%
   summarise(deputyships = sum(Count))
 
 # Replacing with Na with -1. These are overwritten with * when Excel is updated
-t23_reg_year <- t23_data %>% filter(is.na(Quarter)) %>% 
+t23_reg_year <- t23_data %>% filter(is.na(Quarter), Year <= annual_year) %>% 
   left_join(opg_deputyship_year, by = 'Year') %>% 
   mutate(blank5 = NA) %>% 
   relocate(blank5, .after = X25) %>% 

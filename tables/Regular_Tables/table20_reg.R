@@ -134,6 +134,7 @@ adopt_ords_annual_tables <- list(adopt_ords_male_female_year, adopt_ords_sole_ye
 adopt_ords_joined_year <- reduce(adopt_ords_annual_tables, left_join, by = 'Year')
 
 t20_reg_year <- adopt_ords_joined_year %>% 
+  filter(Year <= annual_year) %>% 
   mutate(Quarter = NA, 
          blank1 = NA,
          blank2 = NA,

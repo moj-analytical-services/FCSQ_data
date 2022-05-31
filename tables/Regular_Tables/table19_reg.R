@@ -70,6 +70,7 @@ adopt_apps_annual_tables <- list(adopt_apps_male_female_year, adopt_apps_sole_ye
 adopt_apps_joined_year <- reduce(adopt_apps_annual_tables, left_join, by = 'Year')
 
 t19_reg_year <- adopt_apps_joined_year %>% 
+  filter(Year <= annual_year) %>% 
   mutate(Quarter = NA, 
          blank1 = NA,
          blank2 = NA) %>% 

@@ -12,7 +12,7 @@ table_list <- fcsq_a11y %>% filter(sheet_type == 'tables') %>% pull(table)
 
 # List of columns that have comma formtting applied in each table. 99 represents no formatting applied
 comma_cols <- list(4:ncol(table_list[[1]]),
-                     5:ncol(table_list[[2]]),
+                     4:ncol(table_list[[2]]),
                      3:ncol(table_list[[3]]),
                      3:ncol(table_list[[4]]),
                      3:ncol(table_list[[5]]),

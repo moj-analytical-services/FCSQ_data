@@ -42,7 +42,7 @@ t24_accessible_b <- t24_accessible_a %>% left_join(contest_probate_access, by = 
   mutate(Quarter = as.character(Quarter)) %>% arrange(Year, Quarter)
 
 # Now ordering properly. NAs are replaced with -1 as usual
-t24_accessible <- bind_rows(t24_accessible_b %>% filter(is.na(Quarter)), 
+t24_accessible <- bind_rows(t24_accessible_b %>% filter(is.na(Quarter), Year <= annual_year), 
                             t24_accessible_b %>% filter(!is.na(Quarter)) %>% 
                               mutate(Quarter = paste0('Q', Quarter))) %>% 
   filter(!(Year == 2019 & Quarter %in% c('Q1', 'Q2'))) %>% 

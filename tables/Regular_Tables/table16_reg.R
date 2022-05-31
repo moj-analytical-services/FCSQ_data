@@ -25,7 +25,7 @@ dv_hard_code <- dv_hard_code %>% mutate(across(.cols = c(Nmo_app, Oo_app, Appl_t
 
 #Keeping track of row to start with
 current_t16 <- t16_start + nrow(dv_hard_code)
-dv_label <- dv_csv %>% distinct(Year, Quarter) %>% filter(Year > 2010)
+dv_label <- dv_csv %>% distinct(Year, Quarter) %>% filter(Year > 2010, Year <= annual_year)
 current_dv_year <- dv_label %>% distinct(Year) %>% pull(Year)
 dv_year_row_seq <- seq(from = current_t16, to = current_t16 + length(current_dv_year) - 1)
 

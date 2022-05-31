@@ -64,6 +64,7 @@ div_prog_joined_year <- reduce(div_prog_annual_tables, left_join, by = 'Year')
 
 # Now adding percentages and blanks
 t13_reg_year <- div_prog_joined_year %>%
+  filter(Year <= annual_year) %>% 
   transmute(Year,
             Quarter = NA,
             div_case_start,

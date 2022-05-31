@@ -174,7 +174,8 @@ dv_tables <- list(dv_exp_apps_nmo_year, dv_on_apps_nmo_year, dv_apps_nmo_year,
                   dv_ords_all_year, dv_case_disps_year)
 # combined
 dv_joined_year <- reduce(dv_tables, left_join, by = 'Year')
-dv_accessible_year <- dv_joined_year %>% 
+dv_accessible_year <- dv_joined_year %>%
+  filter(Year <= annual_year) %>% 
   mutate(Quarter = NA) %>% 
   relocate(Quarter, .after = Year)
  

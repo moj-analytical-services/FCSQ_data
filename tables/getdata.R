@@ -15,11 +15,11 @@ library(a11ytables)
 #library(mojtable)
 # Variables #######################################################################################
 
-pub_year <- 2021                                                              # Specify the publication year and quarter for the output name
-pub_quarter <- 4
+pub_year <- 2022                                                              # Specify the publication year and quarter for the output name
+pub_quarter <- 1
 annual_year <- 2021
-pub_date <- "31st March 2022"
-next_pub_date <- "30th June 2022"
+pub_date <- "30th June 2022"
+next_pub_date <- "29th September 2022"
 path_to_project = '~/FCSQ_data/tables/'                                       # UPDATE ONLY IF YOU CHANGE THE LOCATION OF THE PROJECT FILES
 csv_folder <- paste0("alpha-family-data/CSVs/Table_Creation/", pub_year, " Q",pub_quarter,"/") # location in the S3 bucket to import CSVs from
 lookup_folder <- "alpha-family-data/CSVs/lookups/"
@@ -80,8 +80,8 @@ cop_link <- paste0(csv_folder, "COP Tables ", pub_year, " Q", pub_quarter, ".xls
 cop_table_21 <- read_using(openxlsx::read.xlsx, cop_link, sheet = "Table 21", check.names = TRUE, na.strings = na_keys)
 cop_table_22 <- read_using(openxlsx::read.xlsx, cop_link, sheet = "Table 22", check.names = TRUE, na.strings = na_keys)
 
-cafcass <- read_using(readr::read_csv, paste0(csv_folder, 'CSV Private law cases CAFCASS and MoJ', " ", pub_year, " Q", pub_quarter, ".csv") )%>% 
-  rename_with(str_to_title) %>% select(1:5)
+#cafcass <- read_using(readr::read_csv, paste0(csv_folder, 'CSV Private law cases CAFCASS and MoJ', " ", pub_year, " Q", pub_quarter, ".csv") )%>% 
+  #rename_with(str_to_title) %>% select(1:5)
 
 # OPG Table. This is the spreadsheet given by the OPG team. Start row is the first row of data. The row under the column headings
 opg_table <- read_using(openxlsx::read.xlsx, paste0(csv_folder, 'OPG Tables', " ", pub_year, " Q", pub_quarter, ".xlsx"), sheet = "Table_23", 

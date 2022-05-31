@@ -4,7 +4,7 @@
 #Keeping track of row to start with
 t12_start <- 12
 
-current_div_year <- divorce_csv %>% distinct(Year) %>% pull(Year)
+current_div_year <- divorce_csv %>% distinct(Year) %>% filter(Year <= annual_year) %>% pull(Year)
 div_year_row_seq <- seq(from = t12_start, to = t12_start + length(current_div_year) - 1)
 
 

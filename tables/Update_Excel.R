@@ -434,7 +434,7 @@ na_adder(wb = template,
          sheet = 'Table_17',
          value = "..",
          cols = fmpo_dot_columns,
-         lengths = rep(nrow(t17_reg_qtr) - 23, length(fmpo_dot_columns)),
+         lengths = rep(nrow(t17_reg_qtr_all) - 23, length(fmpo_dot_columns)),
          start_row = t17_start + nrow(t17_reg_year) + 23)
 
 ####################################################################
@@ -687,4 +687,4 @@ na_adder(wb = template,
 
 # Export ##########################################################################################
 
-openxlsx::saveWorkbook(template, paste0(path_to_project,"test_output.xlsx"), overwrite = TRUE)
+openxlsx::saveWorkbook(template, paste0(path_to_project,"test_output_2022_q1.xlsx"), overwrite = TRUE)

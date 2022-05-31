@@ -5,6 +5,7 @@
 ################################################################################
 
 t15_accessible_year <- fr_joined_year %>% 
+  filter(Year <= annual_year) %>% 
   mutate(Qtr = NA) %>% 
   relocate(Qtr, .after = Year)
 
