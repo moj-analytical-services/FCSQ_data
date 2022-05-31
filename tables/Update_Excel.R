@@ -83,7 +83,7 @@ t1_start <- 7
 
 # Adjusting row height for notes. Actual footnotes do not start until row 5 
 t1_note_heights <- rep(14.3, length(notes1))
-t1_note_heights[6] = 21
+t1_note_heights[6] = 23.25
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_1', 
                       tables = list(table1_pivot_annual, table1_pivot_qtr), 
@@ -177,7 +177,7 @@ openxlsx::writeData(wb = template,
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_6', 
                       tables = list(t6_reg_year, t6_reg_qtr), 
-                      notes = notes2, 
+                      notes = notes6, 
                       starting_row = 8, 
                       quarterly_format = c(2))
 
@@ -198,7 +198,7 @@ openxlsx::writeData(wb = template,
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_7', 
                       tables = list(t7_reg_year, t7_reg_qtr), 
-                      notes = notes2, 
+                      notes = notes7, 
                       starting_row = t7_start, 
                       quarterly_format = c(2))
 
@@ -208,6 +208,9 @@ write_formatted_table(workbook = template,
 
 ####################################################################
 t8_start <- 6
+t8_row_heights <- rep(15, length(notes8))
+t8_row_heights[c(5, 6, 7, 8)] <- c(46.5, 25.5, 37.5, 25.5)
+
 openxlsx::writeData(wb = template,
                     sheet = 'Table_8',
                     x = timeperiod8,
@@ -220,7 +223,8 @@ write_formatted_table(workbook = template,
                       tables = list(t8_reg_year, t8_reg_qtr), 
                       notes = notes8, 
                       starting_row = t8_start, 
-                      quarterly_format = c(2))
+                      quarterly_format = c(2),
+                      note_row_heights = t8_row_heights)
 
 ####################################################################
 #Private Law Disposal
@@ -228,6 +232,10 @@ write_formatted_table(workbook = template,
 
 ####################################################################
 t9_start <- 6
+
+t9_row_heights <- rep(15, length(notes9))
+t9_row_heights[c(5, 6, 7)] <- c(25.5, 36.75, 25.5)
+
 openxlsx::writeData(wb = template,
                     sheet = 'Table_9',
                     x = timeperiod9,
@@ -254,12 +262,16 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # data
+t12_row_heights <- rep(15, length(notes12))
+t12_row_heights[seq(from = 5, to = length(notes12))] <- c(24, 24, 22.5, 11.25, 12.75, 12.75, 24.75, 12.75)
+
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_12', 
                       tables = list(t12_reg_year, t12_reg_qtr), 
                       notes = notes12, 
                       starting_row = t12_start, 
-                      quarterly_format = c(2))
+                      quarterly_format = c(2),
+                      note_row_heights = t12_row_heights)
 
 na_adder(wb = template,
          sheet = 'Table_12',
@@ -274,6 +286,8 @@ na_adder(wb = template,
 
 ####################################################################
 t13_start <- 9
+t13_row_heights <- rep(15, length(notes13))
+t13_row_heights[[12]] <- 34.5
 openxlsx::writeData(wb = template,
                     sheet = 'Table_13',
                     x = timeperiod13,
@@ -286,7 +300,8 @@ write_formatted_table(workbook = template,
                       tables = list(t13_reg_year, t13_reg_qtr), 
                       notes = notes13, 
                       starting_row = t13_start, 
-                      quarterly_format = c(2))
+                      quarterly_format = c(2),
+                      note_row_heights = t13_row_heights)
 
 ####################################################################
 #Divorce Progression Percentages
@@ -294,6 +309,8 @@ write_formatted_table(workbook = template,
 
 ####################################################################
 t14_start <- 7
+t14_row_heights <- rep(15, length(notes14))
+t14_row_heights[seq(from = 5, to = length(notes14))] <- c(24, 12.75, 40.5)
 openxlsx::writeData(wb = template,
                     sheet = 'Table_14',
                     x = timeperiod14,
@@ -306,13 +323,17 @@ write_formatted_table(workbook = template,
                       tables = list(t14_reg), 
                       notes = notes14, 
                       starting_row = t14_start, 
-                      quarterly_format = c(2))
+                      quarterly_format = c(2),
+                      note_row_heights = t14_row_heights)
 ####################################################################
 #Financial Remedy
 #Table 15
 
 ####################################################################
 t15_start <- 7
+t15_row_heights <- rep(15, length(notes15))
+t15_row_heights[seq(from = 5, to = length(notes15))] <- c(24.75, 34.5, 24.75, 24.75, 24.75, 12.75)
+
 openxlsx::writeData(wb = template,
                     sheet = 'Table_15',
                     x = timeperiod15,
@@ -325,17 +346,20 @@ write_formatted_table(workbook = template,
                       tables = list(t15_year, t15_qtr), 
                       notes = notes15, 
                       starting_row = t15_start, 
-                      quarterly_format = c(2))
+                      quarterly_format = c(2),
+                      note_row_heights = t15_row_heights)
 
 ####################################################################
 #Domestic Violence
 #Table 16
 
 ####################################################################
+t16_row_heights <- rep(15, length(notes16))
+t16_row_heights[seq(from = 5, to = length(notes16))] <- c(12.75, 36, 12.75, 12.75, 22.5, 22.5, 15)
 
 openxlsx::writeData(wb = template,
                     sheet = 'Table_16',
-                    x = timeperiod15,
+                    x = timeperiod16,
                     startRow = 3,
                     colNames = F)
 
@@ -345,7 +369,8 @@ write_formatted_table(workbook = template,
                       tables = list(dv_hard_code, dv_year, dv_hard_code_qtr, dv_qtr), 
                       notes = notes16, 
                       starting_row = t16_start, 
-                      quarterly_format = c(3, 4))
+                      quarterly_format = c(3, 4),
+                      note_row_heights = t16_row_heights)
 
 ####################################################################
 #Forced Marriage Protection Orders
@@ -426,12 +451,15 @@ openxlsx::writeData(wb = template,
 
 # data
 t18_start <- 8
+t18_row_heights <- rep(15, length(notes18))
+t18_row_heights[c(9, 13)] <- c(24.75, 24.75)
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_18', 
                       tables = list(t18_reg_year, t18_reg_qtr_a, t18_reg_qtr_b), 
                       notes = notes18, 
                       starting_row = t18_start, 
-                      quarterly_format = c(2, 3))
+                      quarterly_format = c(2, 3),
+                      note_row_heights = t18_row_heights)
 
 # Removing unnecessary border lines
 openxlsx::addStyle(wb = template,
@@ -457,12 +485,15 @@ openxlsx::writeData(wb = template,
 
 # data
 t19_start <- 8
+t19_row_heights <- rep(15, length(notes19))
+t19_row_heights[[11]] <- 24.75
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_19', 
                       tables = list(t19_reg_year, t19_reg_qtr), 
                       notes = notes19, 
                       starting_row = t19_start, 
-                      quarterly_format = c(2))
+                      quarterly_format = c(2),
+                      note_row_heights = t19_row_heights)
 
 ####################################################################
 #Adoption Orders
@@ -478,12 +509,15 @@ openxlsx::writeData(wb = template,
 
 # data
 t20_start <- 8
+t20_row_heights <- rep(15, length(notes20))
+t20_row_heights[[5]] <- 24.75
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_20', 
                       tables = list(t20_reg_year, t20_reg_qtr), 
                       notes = notes20, 
                       starting_row = t20_start, 
-                      quarterly_format = c(2))
+                      quarterly_format = c(2),
+                      note_row_heights = t20_row_heights)
 
 
 ####################################################################
@@ -558,12 +592,16 @@ openxlsx::writeData(wb = template,
 
 # data
 t23_start <- 9
+
+t23_row_heights <- rep(15, length(notes23))
+t23_row_heights[[6]] <- 23.25
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_23', 
                       tables = list(t23_reg_year, t23_reg_qtr), 
                       notes = notes23, 
                       starting_row = t23_start, 
-                      quarterly_format = c(2))
+                      quarterly_format = c(2),
+                      note_row_heights = t23_row_heights)
 
 # Adding stars to table
 na_formatter(wb = template,
@@ -586,12 +624,16 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # data
+
+t24_row_heights <- rep(15, length(notes24))
+t24_row_heights[c(5, 11, 12)] <- c(48, 24, 23.25)
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_24', 
                       tables = list(t24_reg_year, t24_reg_qtr_a, t24_reg_qtr_b), 
                       notes = notes24, 
                       starting_row = t24_start, 
-                      quarterly_format = c(2, 3))
+                      quarterly_format = c(2, 3),
+                      note_row_heights = t24_row_heights)
 
 # Applications made NA
 na_adder(wb = template,
@@ -622,12 +664,16 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # data
+
+t25_row_heights <- rep(15, length(notes25))
+t25_row_heights[[9]] <- 23.25
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_25', 
                       tables = list(t25_reg_year, t25_reg_qtr_a, t25_reg_qtr_b), 
                       notes = notes25, 
                       starting_row = t25_start, 
-                      quarterly_format = c(2, 3))
+                      quarterly_format = c(2, 3),
+                      note_row_heights = t25_row_heights)
 
 # 2019 Q2 NA
 # Everything before All Grants is NA

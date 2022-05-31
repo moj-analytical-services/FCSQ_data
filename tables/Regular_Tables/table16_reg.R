@@ -19,12 +19,9 @@ dv_hard_code <- tibble(Year = 2003:2010,
                        Case_close = '-')
 
 #Marking formula columns. This is so write data writes the column as a formula.
-class(dv_hard_code$Nmo_app) <- c(class(dv_hard_code$Nmo_app), 'formula')
-class(dv_hard_code$Oo_app) <- c(class(dv_hard_code$Oo_app), 'formula')
-class(dv_hard_code$Appl_total) <- c(class(dv_hard_code$Appl_total), 'formula')
-class(dv_hard_code$Nmo_ords) <- c(class(dv_hard_code$Nmo_ords), 'formula')
-class(dv_hard_code$Oo_ords) <- c(class(dv_hard_code$Oo_ords), 'formula')
-class(dv_hard_code$Ords_total) <- c(class(dv_hard_code$Ords_total), 'formula')
+#marking columns as formula
+dv_hard_code <- dv_hard_code %>% mutate(across(.cols = c(Nmo_app, Oo_app, Appl_total, Nmo_ords, Oo_ords, Ords_total), .fns = formula_add))
+
 
 #Keeping track of row to start with
 current_t16 <- t16_start + nrow(dv_hard_code)
@@ -75,15 +72,8 @@ dv_year <- tibble(Year = current_dv_year,
                                       ,Table_16_source!$D:$D,LEFT(L$8, LEN(L$8)-1)),"-")'))
 
 #Marking formula columns. This is so write data writes the column as a formula.
-class(dv_year$Nmo_app) <- c(class(dv_year$Nmo_app), 'formula')
-class(dv_year$Oo_app) <- c(class(dv_year$Oo_app), 'formula')
-class(dv_year$Appl_total) <- c(class(dv_year$Appl_total), 'formula')
-class(dv_year$App_made) <- c(class(dv_year$App_made), 'formula')
-class(dv_year$Case_start) <- c(class(dv_year$Case_start), 'formula')
-class(dv_year$Nmo_ords) <- c(class(dv_year$Nmo_ords), 'formula')
-class(dv_year$Oo_ords) <- c(class(dv_year$Oo_ords), 'formula')
-class(dv_year$Ords_total) <- c(class(dv_year$Ords_total), 'formula')
-class(dv_year$Case_close) <- c(class(dv_year$Case_start), 'formula')
+dv_year <- dv_year %>% mutate(across(.cols = 3:ncol(.), .fns = formula_add))
+
 
 
 #Hard Coded Quarter
@@ -104,13 +94,7 @@ dv_hard_code_qtr <- tibble(Year = rep(c(2009, 2010), each = 4),
 
 
 #Marking formula columns. This is so write data writes the column as a formula.
-class(dv_hard_code_qtr$Nmo_app) <- c(class(dv_hard_code_qtr$Nmo_app), 'formula')
-class(dv_hard_code_qtr$Oo_app) <- c(class(dv_hard_code_qtr$Oo_app), 'formula')
-class(dv_hard_code_qtr$Appl_total) <- c(class(dv_hard_code_qtr$Appl_total), 'formula')
-class(dv_hard_code_qtr$Nmo_ords) <- c(class(dv_hard_code_qtr$Nmo_ords), 'formula')
-class(dv_hard_code_qtr$Oo_ords) <- c(class(dv_hard_code_qtr$Oo_ords), 'formula')
-class(dv_hard_code_qtr$Ords_total) <- c(class(dv_hard_code_qtr$Ords_total), 'formula')
-
+dv_hard_code_qtr <- dv_hard_code_qtr %>% mutate(across(.cols = c(Nmo_app, Oo_app, Appl_total, Nmo_ords, Oo_ords, Ords_total), .fns = formula_add))
 
 #Remaining Quarterly data.
 #Keeping track of current row
@@ -177,15 +161,17 @@ dv_qtr <- tibble(Year = current_dv_years,
                                       ,"-")'))
 
 #Marking formula columns. This is so write data writes the column as a formula.
-class(dv_qtr$Nmo_app) <- c(class(dv_qtr$Nmo_app), 'formula')
-class(dv_qtr$Oo_app) <- c(class(dv_qtr$Oo_app), 'formula')
-class(dv_qtr$Appl_total) <- c(class(dv_qtr$Appl_total), 'formula')
-class(dv_qtr$App_made) <- c(class(dv_qtr$App_made), 'formula')
-class(dv_qtr$Case_start) <- c(class(dv_qtr$Case_start), 'formula')
-class(dv_qtr$Nmo_ords) <- c(class(dv_qtr$Nmo_ords), 'formula')
-class(dv_qtr$Oo_ords) <- c(class(dv_qtr$Oo_ords), 'formula')
-class(dv_qtr$Ords_total) <- c(class(dv_qtr$Ords_total), 'formula')
-class(dv_qtr$Case_close) <- c(class(dv_qtr$Case_start), 'formula')
+dv_qtr <- dv_qtr %>% mutate(across(.cols = 3:ncol(.), .fns = formula_add))
+
+# time period
+if(pub_quarter==4){
+  
+  timeperiod16 <- paste0("Annually 2003 - ", pub_year, " and quarterly Q1 2009 - Q", pub_quarter," ", pub_year)
+  
+} else {
+  
+  timeperiod16 <- paste0("Annually 2003 - ", pub_year-1, " and quarterly Q1 2009 - Q", pub_quarter," ", pub_year)
+}
 
 # Adding source
 openxlsx::writeData(wb = template,

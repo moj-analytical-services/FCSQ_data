@@ -12,6 +12,11 @@ multiple_cell_merge <- function(wb, sheet, rows, cols) {
                          i)
 }
 
+### Notes functions #####################################################################
+
+# This function adds footnotes to the table. 
+#col_length is how many columns are merged together - a number
+# Row height provides an option to adjust row heights for each row containing a note - a numerical vector
 note_footer <- function(wb, sheet, start_row, notes, col_length, row_heights = NULL){
   ##Write notes to sheet below last table
   start_row_notes <- start_row + 2
@@ -70,6 +75,7 @@ note_footer <- function(wb, sheet, start_row, notes, col_length, row_heights = N
                           showGridLines = FALSE)
 }
 
+# This function takes a list of tables, notes and the starting row and adds the data to the spreadsheet properly formatted.
 write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_row, quarterly_format = NULL, col_num = NULL, note_row_heights = NULL) {
   
   #Throw error if not passed a list of tables

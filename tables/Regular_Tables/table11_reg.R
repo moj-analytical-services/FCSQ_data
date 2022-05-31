@@ -54,13 +54,17 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # table
+t11_row_heights <- rep(15, length(notes11))
+t11_row_heights[seq(from = 5, to = length(notes11))] <- c(46.5, 12.75, 21, 12.75, 12.75, 33.75, 37.5, 30, 21, 21, 21, 43.5, 48, 27, 27)
+
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_11', 
                       tables = list(legrep_dates_annual, legrep_dates_quarter), 
                       notes = notes11, 
                       starting_row = start_row, 
                       quarterly_format = c(2),
-                      col_num = 12)
+                      col_num = 12,
+                      note_row_heights = t11_row_heights)
 # Adding source
 openxlsx::writeData(wb = template,
                     sheet = 'Table_11_source',
