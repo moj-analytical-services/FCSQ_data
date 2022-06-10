@@ -7,7 +7,8 @@ accessible_tables <- openxlsx::loadWorkbook(file=paste0("fcsq_accessible.xlsx"))
 # Creates a function to replace NA with [z]
 comma_style <- openxlsx::createStyle(numFmt = 'COMMA')
 
-table_names <- fcsq_a11y %>% filter(sheet_type == 'tables') %>% pull(tab_title)
+#Pulling tab names and the data frames. Each table has 
+sheet_names <- fcsq_a11y %>% filter(sheet_type == 'tables') %>% pull(tab_title)
 table_list <- fcsq_a11y %>% filter(sheet_type == 'tables') %>% pull(table)
 
 # List of columns that have comma formtting applied in each table. 99 represents no formatting applied
@@ -47,17 +48,27 @@ comma_cols <- list(4:ncol(table_list[[1]]),
                    )
                         
 
-#column_widths <- 
 # Adds commas at the thousand separator and changes any -1 into z
-pwalk(list(table_names, table_list, comma_cols), ~comma_formatter(accessible_tables, ..1, ..2, ..3))
-pwalk(list(table_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2))
+pwalk(list(sheet_names, table_list, comma_cols), ~comma_formatter(accessible_tables, ..1, ..2, ..3))
+pwalk(list(sheet_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2))
 
-#pwalk(list(table_names, table_list), ~ colwidth_format(accessible_tables, ..1, ..2))
 
-# for (i in seq_along(table_names)){
-#   comma_formatter(accessible_tables, table_names[[i]], table_list[[i]], comma_cols[[i]])
-# }
+# Adds hyperlinks to the Contents Page
+add_content_link <- function(sheet_name, startRow){
+  openxlsx::writeFormula(wb = accessible_tables, 
+                         "Contents",
+                         startRow = startRow,
+                         x = makeHyperlinkString(sheet = sheet_name, 
+                                                 row = 1, col = 1, 
+                                                 text = sheet_name))
+}
 
+# A list containing vectors for the worksheets used to add hyperlinks to the Contents Page
+content_list <- list(c('Notes', table_names), 
+             seq(4, nrow(contents_df) + 3))
+
+
+pwalk(content_list, add_content_link)
 
 
 openxlsx::saveWorkbook(accessible_tables, paste0(path_to_project,"test_output_access.xlsx"), overwrite = TRUE)
