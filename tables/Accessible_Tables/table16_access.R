@@ -2,15 +2,14 @@
 
 # Import ##########################################################################################
 
-
-#dv_hard_code_csv <- read_using(readr::read_csv, glue("{csv_folder}DV_Hard_Code.csv")) %>% rename_with(str_to_title)
-
-#Tidying the hard code data. Dashes are replaced with -1 and everybody excep Year and Quarter made numeric
+#Tidying the hard code data. Dashes are replaced with -1 and everybody except Year and Quarter made numeric.
+# Removing Quarter column used in Excel
 dv_hard_full <- dv_hard_code_csv %>% filter(!is.na(Year)) %>% 
-  mutate(across(c(6, 11), ~ str_replace(.x, "-", "-1"))) %>% 
-  mutate(across(c(3:11), ~ as.numeric(.x)))
+  mutate(across(c(7, 12), ~ str_replace(.x, "-", "-1"))) %>% 
+  mutate(across(c(4:12), ~ as.numeric(.x)))
   
-colnames(dv_hard_full) <- c('Year',
+colnames(dv_hard_full) <- c('num_quarter', 
+                            'Year',
                             'Quarter',
                             'Non-Molestation Orders applied for',
                             'Occupation Orders applied for',

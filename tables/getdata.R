@@ -29,6 +29,7 @@ library(logger)
 log_threshold(WARN, namespace = 'botor')
 
 #Loading Data
+source(paste0(path_to_project, "functions.R"))
 
 na_keys <- c(":", ".", "..", "*", "#REF!", "-", "**")
 
@@ -103,4 +104,4 @@ ca_order_lookup <- read_using(readr::read_csv, (paste0(lookup_folder, "t3_order_
   Order_category = col_character(),
   Public_or_Private = col_character()))
 
-
+dv_hard_code_csv <- read_using(readr::read_csv, (paste0(lookup_folder, "DV_Hard_Code.csv"))) %>% rename_with(str_to_title)

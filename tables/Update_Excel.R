@@ -7,9 +7,9 @@ options(digits = 15) # Set the number of significant figure to 15 (same as excel
 
 # Turn off summarise warnings
 options(dplyr.summarise.inform = FALSE)
-path <- "styles_pub.xlsx"
-xltabr::set_style_path(paste0(path_to_project,path))
-xltabr::set_cell_format_path(paste0(path_to_project,"number_formats.csv"))
+#path <- "styles_pub.xlsx"
+#xltabr::set_style_path(paste0(path_to_project,path))
+#xltabr::set_cell_format_path(paste0(path_to_project,"number_formats.csv"))
 
 #xltabr::set_style_path()
 #xltabr::set_cell_format_path()
@@ -248,7 +248,8 @@ write_formatted_table(workbook = template,
                       tables = list(t9_reg_year, t9_reg_qtr), 
                       notes = notes9, 
                       starting_row = t9_start, 
-                      quarterly_format = c(2))
+                      quarterly_format = c(2),
+                      note_row_heights = t9_row_heights)
 ####################################################################
 #Matrimonial matters proceedings
 #Table 12
