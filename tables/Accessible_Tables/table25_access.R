@@ -38,10 +38,10 @@ t25_accessible_qtr <- t25_accessible_b %>% filter(!is.na(Quarter)) %>%
 
 
 # Accounting for poor data quality and making NA -1
-t25_accessible_qtr <- t25_accessible_qtr %>% mutate(across(5:18, ~ case_when(Year == 2019 & Quarter == 'Q2' ~ -1,
+t25_accessible_qtr <- t25_accessible_qtr %>% mutate(across(5:18, ~ case_when(Year == 2019 & Quarter == 'Q2' ~ na_value,
                                                        TRUE ~ .x)))
 
 t25_accessible <- bind_rows(t25_accessible_year, t25_accessible_qtr) %>% 
   arrange(`Digital or paper`, `Stopped or Not Stopped`) %>% 
-  mutate(across(where(is.numeric), ~replace_na(.x, -1)))
+  mutate(across(where(is.numeric), ~replace_na(.x, na_value)))
   

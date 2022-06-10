@@ -2,10 +2,10 @@
 
 # Import ##########################################################################################
 
-#Tidying the hard code data. Dashes are replaced with -1 and everybody except Year and Quarter made numeric.
+#Tidying the hard code data. Dashes are replaced with na_value and everybody except Year and Quarter made numeric.
 # Removing Quarter column used in Excel
 dv_hard_full <- dv_hard_code_csv %>% filter(!is.na(Year)) %>% 
-  mutate(across(c(7, 12), ~ str_replace(.x, "-", "-1"))) %>% 
+  mutate(across(c(7, 12), ~ str_replace(.x, "-", as.character(na_value)))) %>% 
   mutate(across(c(4:12), ~ as.numeric(.x)))
   
 colnames(dv_hard_full) <- c('num_quarter', 
@@ -29,8 +29,8 @@ dv_hard_annual_part <- dv_hard_full %>% filter(is.na(Quarter)) %>% transmute(Yea
                                  `Non-Molestation Orders applied for`,
                                  `Occupation Orders applied for`,
                                  `Orders applied for`,
-                                 `Applications made` = -1,
-                                 `Cases started` = -1,
+                                 `Applications made` = na_value,
+                                 `Cases started` = na_value,
                                  `Non-Molestation Orders made`,
                                  `Occupation Orders made`,
                                  `Orders made`,
@@ -44,8 +44,8 @@ dv_hard_qtr_part <- dv_hard_full %>% filter(!is.na(Quarter)) %>%
           `Non-Molestation Orders applied for`,
            `Occupation Orders applied for`,
           `Orders applied for`,
-           `Applications made` = -1,
-           `Cases started` = -1,
+           `Applications made` = na_value,
+           `Cases started` = na_value,
            `Non-Molestation Orders made`,
            `Occupation Orders made`,
           `Orders made`,
@@ -55,14 +55,12 @@ dv_hard_qtr_part <- dv_hard_full %>% filter(!is.na(Quarter)) %>%
 
 # annual ########################################
 
-#Hard Code Annual #############
-
 
 #Regular Annual #############
 
 # Exparte Non Molestation Applications
 dv_exp_apps_nmo_year <- dv_csv %>%
-  filter(Type == 'Orders applied for', Order_type =='Non-Molestation', Exparte_or_on_notice == 'Exparte') %>%
+  filter(Type == 'Orders applied for', Order_type == 'Non-Molestation', Exparte_or_on_notice == 'Exparte') %>%
   group_by(Year) %>%
   summarise(`Exparte Non-Molestation Orders applied for`= sum(Total))
 
@@ -136,25 +134,25 @@ dv_ords_nmo_year <- dv_csv %>%
 
 # Exparte Occupation Orders
 dv_exp_ords_oo_year <- dv_csv %>%
-  filter(Type=='Orders made', Order_type=='Occupation', Exparte_or_on_notice == 'Exparte') %>%
+  filter(Type == 'Orders made', Order_type == 'Occupation', Exparte_or_on_notice == 'Exparte') %>%
   group_by(Year) %>%
   summarise(`Exparte Occupation Orders made`= sum(Total))
 
 # On Notice Occupation Orders
 dv_on_ords_oo_year <- dv_csv %>%
-  filter(Type=='Orders made', Order_type=='Occupation', Exparte_or_on_notice == 'On Notice') %>%
+  filter(Type == 'Orders made', Order_type == 'Occupation', Exparte_or_on_notice == 'On Notice') %>%
   group_by(Year) %>%
   summarise(`On Notice Occupation Orders made`= sum(Total))
 
 # All Occupation Orders
 dv_ords_oo_year <- dv_csv %>%
-  filter(Type=='Orders made', Order_type=='Occupation') %>%
+  filter(Type == 'Orders made', Order_type == 'Occupation') %>%
   group_by(Year) %>%
   summarise(`Total Occupation Orders made`= sum(Total))
 
 # All Orders made
 dv_ords_all_year <- dv_csv %>%
-  filter(Type=='Orders made') %>%
+  filter(Type == 'Orders made') %>%
   group_by(Year) %>%
   summarise(`Total Orders made` = sum(Total))
 
@@ -183,7 +181,7 @@ dv_accessible_year <- dv_joined_year %>%
 
 # Exparte Non Molestation Applications
 dv_exp_apps_nmo_qtr <- dv_csv %>%
-  filter(Type == 'Orders applied for', Order_type =='Non-Molestation', Exparte_or_on_notice == 'Exparte') %>%
+  filter(Type == 'Orders applied for', Order_type == 'Non-Molestation', Exparte_or_on_notice == 'Exparte') %>%
   group_by(Year, Quarter) %>%
   summarise(`Exparte Non-Molestation Orders applied for`= sum(Total))
 
@@ -257,25 +255,25 @@ dv_ords_nmo_qtr <- dv_csv %>%
 
 # Exparte Occupation Orders
 dv_exp_ords_oo_qtr <- dv_csv %>%
-  filter(Type=='Orders made', Order_type=='Occupation', Exparte_or_on_notice == 'Exparte') %>%
+  filter(Type == 'Orders made', Order_type == 'Occupation', Exparte_or_on_notice == 'Exparte') %>%
   group_by(Year, Quarter) %>%
   summarise(`Exparte Occupation Orders made`= sum(Total))
 
 # On Notice Occupation Orders
 dv_on_ords_oo_qtr <- dv_csv %>%
-  filter(Type=='Orders made', Order_type=='Occupation', Exparte_or_on_notice == 'On Notice') %>%
+  filter(Type == 'Orders made', Order_type == 'Occupation', Exparte_or_on_notice == 'On Notice') %>%
   group_by(Year, Quarter) %>%
   summarise(`On Notice Occupation Orders made`= sum(Total))
 
 # All Occupation Orders
 dv_ords_oo_qtr <- dv_csv %>%
-  filter(Type=='Orders made', Order_type=='Occupation') %>%
+  filter(Type == 'Orders made', Order_type == 'Occupation') %>%
   group_by(Year, Quarter) %>%
   summarise(`Total Occupation Orders made`= sum(Total))
 
 # All Orders made
 dv_ords_all_qtr <- dv_csv %>%
-  filter(Type=='Orders made') %>%
+  filter(Type == 'Orders made') %>%
   group_by(Year, Quarter) %>%
   summarise(`Total Orders made` = sum(Total))
 
@@ -310,12 +308,12 @@ t16_exparte_part <- full_t16 %>% transmute(Year = Year,
                        `Non-Molestation Orders applied for` = `Exparte Non-Molestation Orders applied for`,
                        `Occupation Orders applied for` = `Exparte Occupation Orders applied for`,
                        `Orders applied for` = `Non-Molestation Orders applied for` + `Occupation Orders applied for`,
-                       `Applications made` = -1,
-                       `Cases started` = -1,
+                       `Applications made` = na_value,
+                       `Cases started` = na_value,
                        `Non-Molestation Orders made` = `Exparte Non-Molestation Orders made`,
                        `Occupation Orders made` = `Exparte Occupation Orders made`,
                        `Orders made` = `Non-Molestation Orders made` + `Occupation Orders made`,
-                       `Cases concluding` = -1)
+                       `Cases concluding` = na_value)
 
 t16_onnotice_part <- full_t16 %>% transmute(Year = Year,
                                            Quarter = Quarter,
@@ -323,12 +321,12 @@ t16_onnotice_part <- full_t16 %>% transmute(Year = Year,
                                            `Non-Molestation Orders applied for` = `On Notice Non-Molestation Orders applied for`,
                                            `Occupation Orders applied for` = `On Notice Occupation Orders applied for`,
                                            `Orders applied for` = `Non-Molestation Orders applied for` + `Occupation Orders applied for`,
-                                           `Applications made` = -1,
-                                           `Cases started` = -1,
+                                           `Applications made` = na_value,
+                                           `Cases started` = na_value,
                                            `Non-Molestation Orders made` = `On Notice Non-Molestation Orders made`,
                                            `Occupation Orders made` = `On Notice Occupation Orders made`,
                                            `Orders made` = `Non-Molestation Orders made` + `Occupation Orders made`,
-                                           `Cases concluding` = -1)
+                                           `Cases concluding` = na_value)
 
 t16_all_part <- full_t16 %>% transmute(Year = Year,
                                        Quarter = Quarter,

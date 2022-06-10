@@ -1,14 +1,13 @@
 #Table 2
 
-#Uncontested Applications
-#YEAR	Qtr	Type	Count_type	Public_private	Disposal_type	Order_type	Order_type_code	Gender	age_band	Applicants_in_case	Respondents_in_case	HC_INDICATOR	Count
 #####################################################
 #Public Law Annual
 ######################################################
-#Individual children (includes 2022 and NA. Filter both out)
+#Starting with Public law, the table is built column by column
 child_act_pub <- child_act_csv %>% 
   filter(Public_private == 'Public law')
 
+#Number of individual children involved in Applications
 pub_ca_ind_child_year <- child_act_pub %>%
   filter(Type == 'Application', Count_type == 'Individual children') %>% 
   group_by(Year) %>% 
@@ -56,7 +55,7 @@ pub_ca_case_close_year <- child_act_pub %>%
   group_by(Year) %>% 
   summarise(pub_case_close = sum(Count))
 
-#Gathering the public law annual tables and joining them together
+#Gathering the public law annual tables and joining them together into one data frame
 pub_annual_tables <- list(pub_ca_ind_child_year, pub_ca_app_made_year, pub_ca_ord_appl_year, pub_ca_case_start_year,
                           pub_ca_ord_made_year, pub_ca_disp_made_year, pub_ca_disp_event_year, pub_ca_case_close_year)
 
@@ -69,7 +68,7 @@ pub_join_year <- reduce(pub_annual_tables, left_join, by = 'Year')
 child_act_priv <- child_act_csv %>% 
   filter(Public_private == 'Private law')
 
-#Individual children (includes 2022 and NA. Filter both out)
+#Individual children
 priv_ca_ind_child_year <- child_act_priv %>%
   filter(Type == 'Application', Count_type == 'Individual children') %>% 
   group_by(Year) %>% 
@@ -139,7 +138,7 @@ t2_reg_year <- pub_join_year %>% left_join(priv_join_year, by = 'Year') %>%
 #####################################################
 #Public Law Quarterly
 ######################################################
-#Individual children, Quarter works differently for this section
+#Individual children, Quarter works differently for this section so extra steps are needed
 pub_ca_ind_child_qtr <- child_act_pub %>%
   filter(Type == 'Application', Count_type == 'Individual children') %>% 
   group_by(Qtr) %>% 

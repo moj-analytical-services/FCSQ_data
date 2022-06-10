@@ -24,6 +24,10 @@ path_to_project = '~/FCSQ_data/tables/'                                       # 
 csv_folder <- paste0("alpha-family-data/CSVs/Table_Creation/", pub_year, " Q",pub_quarter,"/") # location in the S3 bucket to import CSVs from
 lookup_folder <- "alpha-family-data/CSVs/lookups/"
 
+# Numerical values that will be used for na and suppressed values. Numerical values must be used to keep numerical columns numerical
+na_value <- -1
+suppress_value <- -2
+
 # to disable botor debug warning messages
 library(logger) 
 log_threshold(WARN, namespace = 'botor')

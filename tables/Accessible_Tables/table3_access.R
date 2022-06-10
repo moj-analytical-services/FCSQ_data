@@ -2,7 +2,7 @@
 t3_orders <- ca_order_lookup %>% filter(Table == 3)
 
 
-
+#Getting a list of years
 t3_years <- child_act_csv %>% filter(Year <= annual_year, !is.na(Year)) %>% distinct(Year) %>% 
   arrange(Year)
 
@@ -16,6 +16,8 @@ t3_quarter <- child_act_csv %>% distinct(Year, Qtr) %>%
 ##############################################################################
 #Public Law Child Count Applications Year
 ###############################################################################
+
+#Getting the Counts for each Order by grouped Categories
 t3_child_pub_year <- child_act_csv %>% 
   filter(Type == 'Application', Count_type == 'Children', Public_private == 'Public law', Year <= annual_year) %>% 
   inner_join(t3_orders, by = 'Order_type_code') %>% 
@@ -23,7 +25,7 @@ t3_child_pub_year <- child_act_csv %>%
   summarise(Count = sum(Count)) %>% ungroup()
 
 #Putting together a template of all the years and orders in the right order.
-#Full join on character() emulates a cross join
+#Full join on character() emulates a cross join. Each year should have the listed orders in the lookup even when 0
 t3_pub_order_template_year <- t3_orders %>% filter(Public_or_Private != 'Private law') %>% 
   full_join(t3_years, by = character())%>% 
   arrange(as.numeric(Order_type_code)) %>% distinct(Year, `Order type`, Order_category)

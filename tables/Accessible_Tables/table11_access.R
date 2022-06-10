@@ -32,4 +32,4 @@ colnames(t11_accessible_qtr) <- c('Category',
 )
 
 t11_accessible <- bind_rows(t11_accessible_year, t11_accessible_qtr) %>% arrange(Category) %>% 
-  mutate(across(where(is.numeric), ~replace_na(.x, -1)))
+  mutate(across(where(is.numeric), ~replace_na(.x, na_value)))

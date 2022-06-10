@@ -48,9 +48,10 @@ comma_cols <- list(4:ncol(table_list[[1]]),
                    )
                         
 
-# Adds commas at the thousand separator and changes any -1 into z
+# Adds commas at the thousand separator and changes any na and suppressed values with their replacements
 pwalk(list(sheet_names, table_list, comma_cols), ~comma_formatter(accessible_tables, ..1, ..2, ..3))
-pwalk(list(sheet_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2))
+pwalk(list(sheet_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2, na_value = na_value))
+pwalk(list(sheet_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2, na_value = suppress_value, value = '[c]'))
 
 
 # Adds hyperlinks to the Contents Page

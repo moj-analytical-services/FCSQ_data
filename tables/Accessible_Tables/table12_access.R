@@ -121,11 +121,11 @@ t12_diss_part <- t12_diss %>%
             `Decrees Absolute` = d_decrees_abs,
             `Mean time (weeks) to decree Absolute` = d_avg_absolute_weeks,
             `Median time (weeks) to decree Absolute` = d_med_absolute_weeks,
-            `Decree Granted` = -1,
-            `Decree Absolute/Granted` = -1
+            `Decree Granted` = na_value,
+            `Decree Absolute/Granted` = na_value
             ) %>% 
   arrange(`Case Type`) %>% 
-  mutate(across(where(is.numeric), ~replace_na(.x, -1))) 
+  mutate(across(where(is.numeric), ~replace_na(.x, na_value))) 
 
 # Nullity of Marriage and Judicial separation are calculated in the regular version of Table 12
 
@@ -139,13 +139,13 @@ t12_nullity_part <- full_t12 %>%
             `Case Type` = '[z]',
             `Petitions filed` = n_pet_filed,
             `Decrees Nisi` = n_decrees_nisi,
-            `Mean time (weeks) to decree Nisi` = -1,
-            `Median time (weeks) to decree Nisi` = -1,
+            `Mean time (weeks) to decree Nisi` = na_value,
+            `Median time (weeks) to decree Nisi` = na_value,
             `Decrees Absolute` = n_decrees_abs,
-            `Mean time (weeks) to decree Absolute` = -1,
-            `Median time (weeks) to decree Absolute` = -1,
-            `Decree Granted` = -1,
-            `Decree Absolute/Granted` = -1
+            `Mean time (weeks) to decree Absolute` = na_value,
+            `Median time (weeks) to decree Absolute` = na_value,
+            `Decree Granted` = na_value,
+            `Decree Absolute/Granted` = na_value
             
 )
 
@@ -156,14 +156,14 @@ t12_judicial_part <- full_t12 %>%
             `Proceeding Type` = 'Judicial separation',
             `Case Type` = '[z]',
             `Petitions filed` = j_pet_filed,
-            `Decrees Nisi` = -1,
-            `Mean time (weeks) to decree Nisi` = -1,
-            `Median time (weeks) to decree Nisi` = -1,
-            `Decrees Absolute` = -1,
-            `Mean time (weeks) to decree Absolute` = -1,
-            `Median time (weeks) to decree Absolute` = -1,
+            `Decrees Nisi` = na_value,
+            `Mean time (weeks) to decree Nisi` = na_value,
+            `Median time (weeks) to decree Nisi` = na_value,
+            `Decrees Absolute` = na_value,
+            `Mean time (weeks) to decree Absolute` = na_value,
+            `Median time (weeks) to decree Absolute` = na_value,
             `Decree Granted` = j_decrees_granted,
-            `Decree Absolute/Granted` = -1
+            `Decree Absolute/Granted` = na_value
   )
 
 #Total
@@ -174,12 +174,12 @@ t12_total_part <- full_t12 %>%
             `Case Type` = '[z]',
             `Petitions filed` = all_pet_filed,
             `Decrees Nisi` = all_decrees_nisi,
-            `Mean time (weeks) to decree Nisi` = -1,
-            `Median time (weeks) to decree Nisi` = -1,
-            `Decrees Absolute` = -1,
-            `Mean time (weeks) to decree Absolute` = -1,
-            `Median time (weeks) to decree Absolute` = -1,
-            `Decree Granted` = -1,
+            `Mean time (weeks) to decree Nisi` = na_value,
+            `Median time (weeks) to decree Nisi` = na_value,
+            `Decrees Absolute` = na_value,
+            `Mean time (weeks) to decree Absolute` = na_value,
+            `Median time (weeks) to decree Absolute` = na_value,
+            `Decree Granted` = na_value,
             `Decree Absolute/Granted` = all_decrees_abs
   )
 

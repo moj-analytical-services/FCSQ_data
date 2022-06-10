@@ -18,18 +18,18 @@ opg_deputyship_qtr <- opg_csv %>%
   group_by(Year, Quarter) %>% 
   summarise(deputyships = sum(Count))
 
-# Replacing with Na with -1. These are overwritten with * when Excel is updated
+# Replacing with Na with Infinity. These are overwritten with * or [c] when Excel is updated
 t23_reg_year <- t23_data %>% filter(is.na(Quarter), Year <= annual_year) %>% 
   left_join(opg_deputyship_year, by = 'Year') %>% 
   mutate(blank5 = NA) %>% 
   relocate(blank5, .after = X25) %>% 
-  mutate(across(where(is.numeric), ~replace_na(.x, -1)))
+  mutate(across(where(is.numeric), ~replace_na(.x, suppress_value)))
 
 t23_reg_qtr <- t23_data %>% filter(!is.na(Quarter)) %>% 
   left_join(opg_deputyship_qtr, by = c('Year', 'Quarter')) %>% 
   mutate(blank5 = NA) %>% 
   relocate(blank5, .after = X25) %>% 
-  mutate(across(where(is.numeric), ~replace_na(.x, -1)))
+  mutate(across(where(is.numeric), ~replace_na(.x, suppress_value)))
 
 full_t23 <- bind_rows(t23_reg_year, t23_reg_qtr)
 

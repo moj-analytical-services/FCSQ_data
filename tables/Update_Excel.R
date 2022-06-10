@@ -609,7 +609,8 @@ na_formatter(wb = template,
              sheet = 'Table_23',
              table = full_t23,
              value = '*',
-             startRow = t23_start)
+             startRow = t23_start,
+             na_value = suppress_value)
 
 
 ####################################################################

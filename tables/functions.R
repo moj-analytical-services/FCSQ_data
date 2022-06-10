@@ -378,7 +378,7 @@ comma_formatter <- function(wb, sheet, data, cols){
   
 }
 
-na_formatter <- function(wb, sheet, table, value = '[z]', startRow = 6, skipCols = 0){
+na_formatter <- function(wb, sheet, table, value = '[z]', startRow = 6, skipCols = 0, na_value = -1){
   # Replacing all -1 with [z]
   for (i in seq_len(nrow(table))){
     
@@ -388,7 +388,7 @@ na_formatter <- function(wb, sheet, table, value = '[z]', startRow = 6, skipCols
         next
       }
       # If -1 then replace with value representing NA
-      if ((table[[i, j]] == -1)){
+      if ((table[[i, j]] == na_value)){
         openxlsx::writeData(wb = wb,
                             sheet = sheet, 
                             x = value,
