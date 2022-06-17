@@ -51,7 +51,8 @@ comma_cols <- list(4:ncol(table_list[[1]]),
 # Adds commas at the thousand separator and changes any na and suppressed values with their replacements
 pwalk(list(sheet_names, table_list, comma_cols), ~comma_formatter(accessible_tables, ..1, ..2, ..3))
 pwalk(list(sheet_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2, na_value = na_value))
-pwalk(list(sheet_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2, na_value = suppress_value, value = '[c]'))
+na_formatter(accessible_tables, 'Table 23', t23_accessible, na_value = suppress_value, value = '[c]' )
+#pwalk(list(sheet_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2, na_value = suppress_value, value = '[c]'))
 
 
 # Adds hyperlinks to the Contents Page
@@ -65,7 +66,7 @@ add_content_link <- function(sheet_name, startRow){
 }
 
 # A list containing vectors for the worksheets used to add hyperlinks to the Contents Page
-content_list <- list(c('Notes', table_names), 
+content_list <- list(c('Notes', sheet_names), 
              seq(4, nrow(contents_df) + 3))
 
 

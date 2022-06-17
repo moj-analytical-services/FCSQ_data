@@ -110,8 +110,8 @@ write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_
                         startRow = start_row,
                         colNames = F)
     
-    ##Add line at end of data (but only if data is a data frame)
-    if(is.data.frame(tables[[i]])) {
+    ##Add line at end of data if last table
+    if(i == length(tables)) {
       openxlsx::addStyle(workbook,
                          sheet_name,
                          style = openxlsx::createStyle(
@@ -121,17 +121,7 @@ write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_
                          cols = colnum,
                          stack = T,
                          gridExpand = T)
-    } else{
-      
-      #If the provided data is not a data frame, just make it bold (used to differentiate headers)
-      openxlsx::addStyle(workbook,
-                         sheet_name,
-                         openxlsx::createStyle(textDecoration = "bold"),
-                         rows = start_row,
-                         cols = 1,
-                         stack = T,
-                         gridExpand = T)
-    }
+    } 
     
     ##Set row heights for quarterly tables; every 4th row is taller to break up data
     #only for tables specified in quarterly_format argument

@@ -13,8 +13,10 @@ options(dplyr.summarise.inform = FALSE)
 
 #xltabr::set_style_path()
 #xltabr::set_cell_format_path()
-template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "My template.xlsx"))
-#template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "FCSQ Template.xlsx"))
+download_file_from_s3(paste0(csv_folder, "FCSQ Template", " ", pub_year, " Q", pub_quarter, ".xlsx"), "tables/FCSQ Template.xlsx", overwrite = TRUE)
+template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "FCSQ Template.xlsx"))
+#template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "My template.xlsx"))
+
 
 #download_file_from_s3("alpha-family-data/Tables/2021 Q4 Template.xls", paste0(path_to_project, "template.xlsx"), overwrite = TRUE)
 #template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "template.xlsx"))
