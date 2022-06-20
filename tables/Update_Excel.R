@@ -7,35 +7,29 @@ options(digits = 15) # Set the number of significant figure to 15 (same as excel
 
 # Turn off summarise warnings
 options(dplyr.summarise.inform = FALSE)
-#path <- "styles_pub.xlsx"
-#xltabr::set_style_path(paste0(path_to_project,path))
-#xltabr::set_cell_format_path(paste0(path_to_project,"number_formats.csv"))
 
-#xltabr::set_style_path()
-#xltabr::set_cell_format_path()
+# Downloads the template from the s3 bucket. This will be filled in with data
 download_file_from_s3(paste0(csv_folder, "FCSQ Template", " ", pub_year, " Q", pub_quarter, ".xlsx"), "tables/FCSQ Template.xlsx", overwrite = TRUE)
 template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "FCSQ Template.xlsx"))
+
 #template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "My template.xlsx"))
 
-
-#download_file_from_s3("alpha-family-data/Tables/2021 Q4 Template.xls", paste0(path_to_project, "template.xlsx"), overwrite = TRUE)
-#template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "template.xlsx"))
 # Editing #########################################################################################
 # data is used for source data where needed for tables with drop downs
 # table is used for the table itself
 
-
-source(paste0(path_to_project, "functions.R"))
+# Fills in time periods for the index page
 source(paste0(path_to_project, "index.R"))
 
-# notes
+# loads the footnotes for each table
 source(paste0(path_to_project, "footnotes.R"))
 
 # tables
+
+
+#No Formula Tables - These tables don't contain formulas so the scripts just create the data frames containing the data
 source(paste0(path_to_project, "table_1_change.R"))
 source(paste0(path_to_project, "Regular_Tables/table1_reg.R"))
-
-#No Formula Tables
 source(paste0(path_to_project, "Regular_Tables/table2_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table5_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table6_reg.R"))
@@ -53,7 +47,7 @@ source(paste0(path_to_project, "Regular_Tables/table21_22_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table23_reg.R"))
 
 
-#Formula cols
+#Formula tables. Formulas are added in the sheet as well
 source(paste0(path_to_project, "Regular_Tables/table3_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table4_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table10_reg.R"))
@@ -63,11 +57,14 @@ source(paste0(path_to_project, "Regular_Tables/table16_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table24_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table25_reg.R"))
 
+# Adding sources for formula tables
+source(paste0(path_to_project, "Regular_Tables/table_sources.R"))
 
-
-# dropdowns
+# dropdowns used for formulas are added here
 source(paste0(path_to_project, "Regular_Tables/lists.R"))
 
+# Now data frames for the non formula tables are added into the excel workbook.
+# Any not applicable and suppressed values are also added here.
 ####################################################################
 #Summary Tables
 #Table 1
@@ -690,5 +687,5 @@ na_adder(wb = template,
          start_row = t25_start + nrow(t25_reg_year))
 
 # Export ##########################################################################################
-
-openxlsx::saveWorkbook(template, paste0(path_to_project,"test_output_2022_q1.xlsx"), overwrite = TRUE)
+openxlsx::saveWorkbook(template, paste0(path_to_project, glue("Family Court Tables ({pub_months_short} {pub_year}).xlsx")), overwrite = TRUE)
+#openxlsx::saveWorkbook(template, paste0(path_to_project,"test_output_2022_q1.xlsx"), overwrite = TRUE)

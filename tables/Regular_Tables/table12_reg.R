@@ -225,7 +225,3 @@ if(pub_quarter==4){
   timeperiod12 <- paste0("Annually 2003 - ", pub_year-1, " and quarterly Q1 2011 - Q", pub_quarter," ", pub_year)
 }
 
-# Adding source
-openxlsx::writeData(wb = template,
-                    sheet = 'Table_12_source',
-                    x = divorce_timeliness_csv)

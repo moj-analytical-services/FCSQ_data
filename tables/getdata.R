@@ -13,21 +13,6 @@ library(stringr)
 #library(xltabr)
 library(a11ytables)
 #library(mojtable)
-# Variables #######################################################################################
-
-pub_year <- 2022                                                              # Specify the publication year and quarter for the output name
-pub_quarter <- 1
-annual_year <- 2021
-pub_date <- "30th June 2022"
-next_pub_date <- "29th September 2022"
-path_to_project = '~/FCSQ_data/tables/'                                       # UPDATE ONLY IF YOU CHANGE THE LOCATION OF THE PROJECT FILES
-csv_folder <- paste0("alpha-family-data/CSVs/Table_Creation/", pub_year, " Q",pub_quarter,"/") # location in the S3 bucket to import CSVs from
-lookup_folder <- "alpha-family-data/CSVs/lookups/"
-
-# Numerical values that will be used for na and suppressed values. Numerical values must be used to keep numerical columns numerical
-na_value <- -1
-suppress_value <- -2
-
 # to disable botor debug warning messages
 library(logger) 
 log_threshold(WARN, namespace = 'botor')

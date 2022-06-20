@@ -1,0 +1,52 @@
+# Adding source for Table 3 and 4
+openxlsx::writeData(wb = template,
+                    sheet = 'Table 3_4_source',
+                    x = table_3_lookup)
+
+# Adding source for Table 10
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_10_source',
+                    x = table_10_lookup)
+
+# Adding source for Table 11
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_11_source',
+                    x = table_11_lookup)
+
+# Adding source for Table 12
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_12_source',
+                    x = divorce_timeliness_csv)
+
+# Adding source for Table 16
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_16_source',
+                    x = dv_csv)
+
+# Creating and adding source for Table 24
+probate_lookup <- probate_lookup %>% mutate(across(where(is.numeric) & !c(Year, Quarter), ~replace_na(.x, na_value)))
+openxlsx::writeData(wb = template,
+                    sheet = 'Table 24 source',
+                    x = probate_lookup)
+
+na_formatter(wb = template,
+             sheet = 'Table 24 source',
+             table = probate_lookup,
+             value = ':',
+             startRow = 1,
+             skipCols = c(2, 3),
+             na_value = na_value)
+
+# Creating and adding source for Table 25
+probate_time_lookup <- probate_time_lookup %>% mutate(across(where(is.numeric) & !c(Year, Quarter), ~replace_na(.x, na_value)))
+openxlsx::writeData(wb = template,
+                    sheet = 'Table 25 source',
+                    x = probate_time_lookup)
+
+na_formatter(wb = template,
+             sheet = 'Table 25 source',
+             table = probate_time_lookup,
+             value = ':',
+             startRow = 1,
+             skipCols = c(2, 3),
+             na_value = na_value)

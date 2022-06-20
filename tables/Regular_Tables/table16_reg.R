@@ -25,8 +25,8 @@ dv_hard_code <- dv_hard_code %>% mutate(across(.cols = c(Nmo_app, Oo_app, Appl_t
 
 #Keeping track of row to start with
 current_t16 <- t16_start + nrow(dv_hard_code)
-dv_label <- dv_csv %>% distinct(Year, Quarter) %>% filter(Year > 2010, Year <= annual_year)
-current_dv_year <- dv_label %>% distinct(Year) %>% pull(Year)
+dv_label <- dv_csv %>% distinct(Year, Quarter) %>% filter(Year > 2010)
+current_dv_year <- dv_label %>% distinct(Year) %>% filter(Year <= annual_year) %>% pull(Year)
 dv_year_row_seq <- seq(from = current_t16, to = current_t16 + length(current_dv_year) - 1)
 
 
@@ -173,7 +173,3 @@ if(pub_quarter==4){
   timeperiod16 <- paste0("Annually 2003 - ", pub_year-1, " and quarterly Q1 2009 - Q", pub_quarter," ", pub_year)
 }
 
-# Adding source
-openxlsx::writeData(wb = template,
-                    sheet = 'Table_16_source',
-                    x = dv_csv)

@@ -1,6 +1,7 @@
 # Table 10 accessible
 
 #Annual T10, removing Unknown which isn't in the table
+table10_alt <- table_10_lookup %>% separate(Lookup, c("Case_type", "Year", "Quarter"), sep = '\\|', convert = TRUE)
 t10_accessible_year <- table10_alt %>% filter(Quarter == '') %>% 
   mutate(Quarter = NA) %>% select(!contains('Unknown'))
 

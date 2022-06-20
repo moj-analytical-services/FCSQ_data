@@ -69,8 +69,3 @@ write_formatted_table(workbook = template,
                       quarterly_format = c(2),
                       col_num = 16,
                       note_row_heights = t10_row_heights)
-
-# Adding source
-openxlsx::writeData(wb = template,
-                    sheet = 'Table_10_source',
-                    x = table_10_lookup)

@@ -1,6 +1,7 @@
 # Table 11 accessible
 
 #Annual T11
+table11_alt <- table_11_lookup %>% separate(Lookup, c("Case_type", "Year", "Quarter"), sep = '\\|', convert = TRUE)
 t11_accessible_year <- table11_alt %>% filter(Quarter == '') %>% 
   mutate(Quarter = NA)
 

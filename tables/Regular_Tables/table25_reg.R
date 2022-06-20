@@ -78,18 +78,3 @@ if(pub_quarter==4){
 }
 
 
-# Adding Source
-
-# Replacing NA with -1
-probate_time_lookup <- probate_time_lookup %>% mutate(across(where(is.numeric) & !c(Year, Quarter), ~replace_na(.x, na_value)))
-openxlsx::writeData(wb = template,
-                    sheet = 'Table 25 source',
-                    x = probate_time_lookup)
-
-na_formatter(wb = template,
-             sheet = 'Table 25 source',
-             table = probate_time_lookup,
-             value = ':',
-             startRow = 1,
-             skipCols = c(2, 3),
-             na_value = na_value)

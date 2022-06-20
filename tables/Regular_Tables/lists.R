@@ -20,7 +20,7 @@ dropdown16_df <- tibble(c('All', 'Exparte', 'On notice'))
 
 #table 24
 dropdown24a_df <- tibble(c("All", "Paper", "Digital"))
-dropdown24b_df <- tibble(c("All", "Personal", "Solictor"))
+dropdown24b_df <- tibble(c("All", "Personal", "Solicitor"))
 
 #table 25
 dropdown25a_df <- tibble(c("All", "Paper", "Digital"))
