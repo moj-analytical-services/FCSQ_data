@@ -24,16 +24,16 @@ openxlsx::writeData(wb = template,
                     x = dv_csv)
 
 # Creating and adding source for Table 24
-probate_lookup <- probate_lookup %>% mutate(across(where(is.numeric) & !c(Year, Quarter), ~replace_na(.x, na_value)))
+probate_lookup_fill <- probate_lookup %>% mutate(across(where(is.numeric) & !c(Year, Quarter), ~replace_na(.x, na_value)))
 openxlsx::writeData(wb = template,
                     sheet = 'Table 24 source',
-                    x = probate_lookup)
+                    x = probate_lookup_fill)
 
 na_formatter(wb = template,
              sheet = 'Table 24 source',
-             table = probate_lookup,
+             table = probate_lookup_fill,
              value = ':',
-             startRow = 1,
+             startRow = 2,
              skipCols = c(2, 3),
              na_value = na_value)
 
@@ -47,6 +47,6 @@ na_formatter(wb = template,
              sheet = 'Table 25 source',
              table = probate_time_lookup,
              value = ':',
-             startRow = 1,
+             startRow = 2,
              skipCols = c(2, 3),
              na_value = na_value)
