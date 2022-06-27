@@ -33,8 +33,8 @@ table1_pivot_annual <- table1_annual %>%
            `Female Genital Mutilation Cases closed`,
            `Adoption Cases closed`,
            `Total Cases closed`) %>%
-  #Tidying up, replacing NA with 0 and adding blank column
-  mutate(across(everything(), ~replace_na(.x, 0))) %>% 
+  #Tidying up, replacing NA and adding blank column
+  mutate(across(everything(), ~replace_na(.x, na_value))) %>% 
   mutate(Quarter = NA, blank1 = NA) %>% 
   relocate(Quarter, .after = Year) %>% 
   relocate(blank1, .after = `Total Cases started`)
@@ -69,8 +69,8 @@ table1_pivot_qtr <- table1_quarterly %>%
            `Female Genital Mutilation Cases closed`,
            `Adoption Cases closed`,
            `Total Cases closed`) %>%
-  #Tidying up, replacing NA with 0 and adding blank column
-  mutate(across(everything(), ~replace_na(.x, 0))) %>% 
+  #Tidying up, replacing NA and adding blank column
+  mutate(across(everything(), ~replace_na(.x, na_value))) %>% 
   mutate(Quarter = paste0('Q', Quarter), blank1 = NA) %>% 
   relocate(blank1, .after = `Total Cases started`)
 

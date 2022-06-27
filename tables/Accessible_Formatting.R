@@ -69,9 +69,14 @@ add_content_link <- function(sheet_name, startRow){
 content_list <- list(c('Notes', sheet_names), 
              seq(4, nrow(contents_df) + 3))
 
-
+# Adding hyperlinks to notes and tables on contents page
 pwalk(content_list, add_content_link)
 
+openxlsx::writeFormula(wb = accessible_tables,
+                       sheet = 'Cover',
+                       startRow = 10,
+                       x = '=HYPERLINK("mailto:familycourt.statistics@gov.uk", "familycourt.statistics@gov.uk")'
+                       )
 
 openxlsx::saveWorkbook(accessible_tables, paste0(path_to_project, glue("Accessible Family Court Tables ({pub_months_short} {pub_year}).xlsx")), overwrite = TRUE)
 #openxlsx::saveWorkbook(accessible_tables, paste0(path_to_project,"test_output_access.xlsx"), overwrite = TRUE)
