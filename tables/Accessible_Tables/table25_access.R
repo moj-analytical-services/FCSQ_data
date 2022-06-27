@@ -37,7 +37,7 @@ t25_accessible_qtr <- t25_accessible_b %>% filter(!is.na(Quarter)) %>%
   mutate(Quarter = paste0('Q', Quarter))
 
 
-# Accounting for poor data quality and making NA -1
+# Accounting for poor data quality and making NA the na_value
 t25_accessible_qtr <- t25_accessible_qtr %>% mutate(across(5:18, ~ case_when(Year == 2019 & Quarter == 'Q2' ~ na_value,
                                                        TRUE ~ .x)))
 

@@ -17,7 +17,7 @@ if (!regular_run){
   source(paste0(path_to_project, "Regular_Tables/table12_reg.R"))
   source(paste0(path_to_project, "Regular_Tables/table13_reg.R"))
   source(paste0(path_to_project, "Regular_Tables/table14_reg.R"))
-  source(paste0(path_to_project, "Regular_Tables/table15.R"))
+  source(paste0(path_to_project, "Regular_Tables/table15_reg.R"))
   source(paste0(path_to_project, "Regular_Tables/table17_reg.R"))
   source(paste0(path_to_project, "Regular_Tables/table18_reg.R"))
   source(paste0(path_to_project, "Regular_Tables/table19_reg.R"))

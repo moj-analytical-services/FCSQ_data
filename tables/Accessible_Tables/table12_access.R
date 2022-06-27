@@ -1,7 +1,6 @@
 # Accessible Version of Table 12
-# Dissolution of Marriage uses formulas in the regular table so necsessary to do work here to get raw data
-#Judicial separation decree granted currently i decree absolute column. Probably best to change later
-#STAGE	YEAR	QUARTER	CASE_TYPE	COUNT	MEAN_WEEKS	MEDIAN_WEEKS
+# Dissolution of Marriage uses formulas in the regular table so necessary to do work here to get raw data
+
 
 # Petitions
 diss_pet_year <- divorce_timeliness_csv %>% 
@@ -109,6 +108,7 @@ t12_diss <- bind_rows(diss_joined_year, diss_joined_qtr)
 
 #diss_pet <- bind_rows(diss_pet_year, diss_pet_qtr)
 
+# NAs are replaced by na_value rather than zero here.
 t12_diss_part <- t12_diss %>% 
   transmute(Year = Year,
             Quarter,
@@ -125,7 +125,7 @@ t12_diss_part <- t12_diss %>%
             `Decree Absolute/Granted` = na_value
             ) %>% 
   arrange(`Case Type`) %>% 
-  mutate(across(where(is.numeric), ~replace_na(.x, na_value))) 
+  mutate(across(where(is.numeric), ~replace_na(.x, na_value))) %>% ungroup() 
 
 # Nullity of Marriage and Judicial separation are calculated in the regular version of Table 12
 
@@ -184,3 +184,11 @@ t12_total_part <- full_t12 %>%
   )
 
 t12_accessible <- bind_rows(t12_diss_part, t12_nullity_part, t12_judicial_part, t12_total_part)
+
+# Alt NA
+# %>%
+#   mutate(across(c(7, 8, 10, 11), function(x){
+#     case_when(Year < 2006 ~ na_value,
+#               TRUE ~ x)
+#   }
+#   ))

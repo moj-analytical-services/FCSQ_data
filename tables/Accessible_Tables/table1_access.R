@@ -29,4 +29,20 @@ t1_accessible_b <- full_t1 %>% select(Year, Quarter, contains('Cases closed')) %
             `Adoption`= `Adoption Cases closed`,
             `Total` = `Total Cases closed`)
 
-t1_accessible <- bind_rows(t1_accessible_a, t1_accessible_b)
+# Adding NA. These tend to remain the same quarter on quarter
+
+# Categories with NA before 2011. This is Public Law, Private Law, Domestic Violence, Adoption and Total
+t1_na_2011 <- c(4, 5, 8, 11, 12)
+
+# Adding the NA values for the categories to be replaced later
+t1_accessible <- bind_rows(t1_accessible_a, t1_accessible_b) %>% 
+  mutate(across(t1_na_2011, function(x){
+    case_when(Year < 2011 ~ na_value,
+              TRUE ~ x)
+  }
+  )) %>%
+  mutate(`Forced Marriage Protection` = case_when(Year < 2009 ~ na_value,
+                                                  TRUE ~ `Forced Marriage Protection`),
+         `Female Genital Mutilation` = case_when((Year < 2015) | (Year == 2015 & Quarter %in% c('Q1', 'Q2')) ~ na_value,
+                                                 TRUE ~ `Female Genital Mutilation`))
+  

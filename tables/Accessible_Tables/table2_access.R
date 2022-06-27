@@ -16,7 +16,6 @@ t2_pub_law <- full_t2 %>%
             `Cases starting` = pub_case_start,
             `Orders made` = pub_ord_made,
             `Disposals made` = pub_disp_made,
-            `Disposal events` = pub_disp_event,
             `Cases disposed` = pub_case_close)
 
 # Private Law
@@ -30,7 +29,6 @@ t2_priv_law <- full_t2 %>%
             `Cases starting` = priv_case_start,
             `Orders made` = priv_ord_made,
             `Disposals made` = priv_disp_made,
-            `Disposal events` = priv_disp_event,
             `Cases disposed` = priv_case_close)
 
 #Combining for the final table

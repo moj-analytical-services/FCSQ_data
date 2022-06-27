@@ -22,10 +22,10 @@ t3_child_pub_year <- child_act_csv %>%
   filter(Type == 'Application', Count_type == 'Children', Public_private == 'Public law', Year <= annual_year) %>% 
   inner_join(t3_orders, by = 'Order_type_code') %>% 
   group_by(Year, Type, Count_type, Public_private, `Order type`, Order_category) %>% 
-  summarise(Count = sum(Count)) %>% ungroup()
+  summarise(Count = sum_na(Count)) %>% ungroup()
 
 #Putting together a template of all the years and orders in the right order.
-#Full join on character() emulates a cross join. Each year should have the listed orders in the lookup even when 0
+#Full join on character() emulates a cross join. Each year should have the listed orders in the lookup even when the amount appearing is 0
 t3_pub_order_template_year <- t3_orders %>% filter(Public_or_Private != 'Private law') %>% 
   full_join(t3_years, by = character())%>% 
   arrange(as.numeric(Order_type_code)) %>% distinct(Year, `Order type`, Order_category)
@@ -48,7 +48,7 @@ t3_child_pub_qtr <- child_act_csv %>%
   filter(Type == 'Application', Count_type == 'Children', Public_private == 'Public law') %>% 
   inner_join(t3_orders, by = 'Order_type_code') %>% 
   group_by(Year, Qtr, Type, Count_type, Public_private, `Order type`, Order_category) %>% 
-  summarise(Count = sum(Count)) %>% ungroup() 
+  summarise(Count = sum_na(Count)) %>% ungroup() 
 
 #Putting together a template of all the quarters and orders in the right order
 t3_pub_order_template_qtr <- t3_orders %>% filter(Public_or_Private != 'Private law') %>% 
@@ -79,7 +79,7 @@ t3_child_priv_year <- child_act_csv %>%
   filter(Type == 'Application', Count_type == 'Children', Public_private == 'Private law', Year <= annual_year) %>% 
   inner_join(t3_orders, by = 'Order_type_code') %>% 
   group_by(Year, Type, Count_type, Public_private, `Order type`, Order_category) %>% 
-  summarise(Count = sum(Count)) %>% ungroup()
+  summarise(Count = sum_na(Count)) %>% ungroup()
 
 #Putting together a template of all the years and orders in the right order
 t3_priv_order_template_year <- t3_orders %>% filter(Public_or_Private != 'Public law') %>% 
@@ -104,7 +104,7 @@ t3_child_priv_qtr <- child_act_csv %>%
   filter(Type == 'Application', Count_type == 'Children', Public_private == 'Private law') %>% 
   inner_join(t3_orders, by = 'Order_type_code') %>% 
   group_by(Year, Qtr, Type, Count_type, Public_private, `Order type`, Order_category) %>% 
-  summarise(Count = sum(Count)) %>% ungroup() 
+  summarise(Count = sum_na(Count)) %>% ungroup() 
 
 #Putting together a template of all the quarters and orders in the right order
 t3_priv_order_template_qtr <- t3_orders %>% filter(Public_or_Private != 'Public law') %>% 
@@ -142,7 +142,7 @@ t3_order_pub_year <- child_act_csv %>%
   filter(Type == 'Application', Count_type == 'Order type', Public_private == 'Public law', Year <= annual_year) %>% 
   inner_join(t3_orders, by = 'Order_type_code') %>% 
   group_by(Year, Type, Count_type, Public_private, `Order type`, Order_category) %>% 
-  summarise(Count = sum(Count)) %>% ungroup()
+  summarise(Count = sum_na(Count)) %>% ungroup()
 
 
 #Joining together and pivoting to get the data in the right shape
@@ -163,7 +163,7 @@ t3_order_pub_qtr <- child_act_csv %>%
   filter(Type == 'Application', Count_type == 'Order type', Public_private == 'Public law') %>% 
   inner_join(t3_orders, by = 'Order_type_code') %>% 
   group_by(Year, Qtr, Type, Count_type, Public_private, `Order type`, Order_category) %>% 
-  summarise(Count = sum(Count)) %>% ungroup() 
+  summarise(Count = sum_na(Count)) %>% ungroup() 
 
 
 #Joining together and pivoting to get the data in the right shape
@@ -190,7 +190,7 @@ t3_order_priv_year <- child_act_csv %>%
   filter(Type == 'Application', Count_type == 'Order type', Public_private == 'Private law', Year <= annual_year) %>% 
   inner_join(t3_orders, by = 'Order_type_code') %>% 
   group_by(Year, Type, Count_type, Public_private, `Order type`, Order_category) %>% 
-  summarise(Count = sum(Count)) %>% ungroup()
+  summarise(Count = sum_na(Count)) %>% ungroup()
 
 
 #Joining together and pivoting to get the data in the right shape
@@ -211,7 +211,7 @@ t3_order_priv_qtr <- child_act_csv %>%
   filter(Type == 'Application', Count_type == 'Order type', Public_private == 'Private law') %>% 
   inner_join(t3_orders, by = 'Order_type_code') %>% 
   group_by(Year, Qtr, Type, Count_type, Public_private, `Order type`, Order_category) %>% 
-  summarise(Count = sum(Count)) %>% ungroup() 
+  summarise(Count = sum_na(Count)) %>% ungroup() 
 
 
 #Joining together and pivoting to get the data in the right shape

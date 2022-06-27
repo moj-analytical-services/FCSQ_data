@@ -19,7 +19,7 @@ t4_child_pub_year <- child_act_csv %>%
   filter(Type == 'Disposal', Count_type == 'Children', Public_private == 'Public law', Year <= annual_year) %>% 
   inner_join(t4_orders, by = 'Order_type_code') %>% 
   group_by(Year, Type, Count_type, Public_private, `Order type`, Order_category) %>% 
-  summarise(Count = sum(Count)) %>% ungroup()
+  summarise(Count = sum_na(Count)) %>% ungroup()
 
 #Putting together a template of all the years and orders in the right order.
 #Full join on character() emulates a cross join
@@ -45,7 +45,7 @@ t4_child_pub_qtr <- child_act_csv %>%
   filter(Type == 'Disposal', Count_type == 'Children', Public_private == 'Public law') %>% 
   inner_join(t4_orders, by = 'Order_type_code') %>% 
   group_by(Year, Qtr, Type, Count_type, Public_private, `Order type`, Order_category) %>% 
-  summarise(Count = sum(Count)) %>% ungroup() 
+  summarise(Count = sum_na(Count)) %>% ungroup() 
 
 #Putting together a template of all the quarters and orders in the right order
 t4_pub_order_template_qtr <- t4_orders %>% filter(Public_or_Private != 'Private law') %>% 
@@ -76,7 +76,7 @@ t4_child_priv_year <- child_act_csv %>%
   filter(Type == 'Disposal', Count_type == 'Children', Public_private == 'Private law', Year <= annual_year) %>% 
   inner_join(t4_orders, by = 'Order_type_code') %>% 
   group_by(Year, Type, Count_type, Public_private, `Order type`, Order_category) %>% 
-  summarise(Count = sum(Count)) %>% ungroup()
+  summarise(Count = sum_na(Count)) %>% ungroup()
 
 #Putting together a template of all the years and orders in the right order
 t4_priv_order_template_year <- t4_orders %>% filter(Public_or_Private != 'Public law') %>% 
@@ -101,7 +101,7 @@ t4_child_priv_qtr <- child_act_csv %>%
   filter(Type == 'Disposal', Count_type == 'Children', Public_private == 'Private law') %>% 
   inner_join(t4_orders, by = 'Order_type_code') %>% 
   group_by(Year, Qtr, Type, Count_type, Public_private, `Order type`, Order_category) %>% 
-  summarise(Count = sum(Count)) %>% ungroup() 
+  summarise(Count = sum_na(Count)) %>% ungroup() 
 
 #Putting together a template of all the quarters and orders in the right order
 t4_priv_order_template_qtr <- t4_orders %>% filter(Public_or_Private != 'Public law') %>% 
@@ -134,7 +134,7 @@ t4_order_pub_year <- child_act_csv %>%
   filter(Type == 'Disposal', Count_type == 'Order type', Public_private == 'Public law', Year <= annual_year) %>% 
   inner_join(t4_orders, by = 'Order_type_code') %>% 
   group_by(Year, Type, Count_type, Public_private, `Order type`, Order_category) %>% 
-  summarise(Count = sum(Count)) %>% ungroup()
+  summarise(Count = sum_na(Count)) %>% ungroup()
 
 
 #Joining together and pivoting to get the data in the right shape
@@ -155,7 +155,7 @@ t4_order_pub_qtr <- child_act_csv %>%
   filter(Type == 'Disposal', Count_type == 'Order type', Public_private == 'Public law') %>% 
   inner_join(t4_orders, by = 'Order_type_code') %>% 
   group_by(Year, Qtr, Type, Count_type, Public_private, `Order type`, Order_category) %>% 
-  summarise(Count = sum(Count)) %>% ungroup() 
+  summarise(Count = sum_na(Count)) %>% ungroup() 
 
 
 #Joining together and pivoting to get the data in the right shape
@@ -182,7 +182,7 @@ t4_order_priv_year <- child_act_csv %>%
   filter(Type == 'Disposal', Count_type == 'Order type', Public_private == 'Private law', Year <= annual_year) %>% 
   inner_join(t4_orders, by = 'Order_type_code') %>% 
   group_by(Year, Type, Count_type, Public_private, `Order type`, Order_category) %>% 
-  summarise(Count = sum(Count)) %>% ungroup()
+  summarise(Count = sum_na(Count)) %>% ungroup()
 
 
 #Joining together and pivoting to get the data in the right shape
@@ -203,7 +203,7 @@ t4_order_priv_qtr <- child_act_csv %>%
   filter(Type == 'Disposal', Count_type == 'Order type', Public_private == 'Private law') %>% 
   inner_join(t4_orders, by = 'Order_type_code') %>% 
   group_by(Year, Qtr, Type, Count_type, Public_private, `Order type`, Order_category) %>% 
-  summarise(Count = sum(Count)) %>% ungroup() 
+  summarise(Count = sum_na(Count)) %>% ungroup() 
 
 
 #Joining together and pivoting to get the data in the right shape
