@@ -4,7 +4,7 @@
 # This script creates the data and the sets the time period
 
 #Summing up for yearly total as initial input only has quarterly data available
-table1_annual <- table_1_alt %>% group_by(Year, Category, Stage) %>% summarise(Count = sum(Count)) %>% ungroup() %>% 
+table1_annual <- table_1_alt %>% group_by(Year, Category, Stage) %>% summarise(Count = sum_na(Count)) %>% ungroup() %>% 
   filter(Year > 2005, Year <= annual_year)
 
 #Pivoting and reordering the columns
@@ -34,7 +34,7 @@ table1_pivot_annual <- table1_annual %>%
            `Adoption Cases closed`,
            `Total Cases closed`) %>%
   #Tidying up, replacing NA and adding blank column
-  mutate(across(everything(), ~replace_na(.x, na_value))) %>% 
+  mutate(across(everything(), ~replace_na(.x, 0))) %>% 
   mutate(Quarter = NA, blank1 = NA) %>% 
   relocate(Quarter, .after = Year) %>% 
   relocate(blank1, .after = `Total Cases started`)
@@ -70,7 +70,7 @@ table1_pivot_qtr <- table1_quarterly %>%
            `Adoption Cases closed`,
            `Total Cases closed`) %>%
   #Tidying up, replacing NA and adding blank column
-  mutate(across(everything(), ~replace_na(.x, na_value))) %>% 
+  mutate(across(everything(), ~replace_na(.x, 0))) %>% 
   mutate(Quarter = paste0('Q', Quarter), blank1 = NA) %>% 
   relocate(blank1, .after = `Total Cases started`)
 

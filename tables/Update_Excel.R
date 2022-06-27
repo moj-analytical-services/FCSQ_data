@@ -38,7 +38,7 @@ source(paste0(path_to_project, "Regular_Tables/table8_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table9_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table13_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table14_reg.R"))
-source(paste0(path_to_project, "Regular_Tables/table15.R"))
+source(paste0(path_to_project, "Regular_Tables/table15_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table17_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table18_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table19_reg.R"))
@@ -343,7 +343,7 @@ openxlsx::writeData(wb = template,
 # data
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_15', 
-                      tables = list(t15_year, t15_qtr), 
+                      tables = list(t15_reg_year, t15_reg_qtr), 
                       notes = notes15, 
                       starting_row = t15_start, 
                       quarterly_format = c(2),

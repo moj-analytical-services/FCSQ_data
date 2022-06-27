@@ -10,73 +10,73 @@ fgm_years <- fgm_csv %>% distinct(Year) %>% filter(Year > 2015)
 fgm_under_17_year <- fgm_csv %>% 
   filter(Type == 'Application', Sub_category == '17 or under') %>% 
   group_by(Year) %>% 
-  summarise(under_17 = sum(Total))
+  summarise(under_17 = sum_na(Total))
 
 # Over 17
 fgm_over_17_year <- fgm_csv %>% 
   filter(Type == 'Application', Sub_category == 'Over 17') %>% 
   group_by(Year) %>% 
-  summarise(over_17 = sum(Total))
+  summarise(over_17 = sum_na(Total))
 
 # Unknown
 fgm_unknown_age_year <- fgm_csv %>% 
   filter(Type == 'Application', Sub_category == 'Unknown') %>% 
   group_by(Year) %>% 
-  summarise(unknown_age = sum(Total))
+  summarise(unknown_age = sum_na(Total))
 
 # Person to be protected app type
 fgm_ptbp_year <- fgm_csv %>% 
   filter(Type == 'Application', Sub_category == 'Person to be protected') %>% 
   group_by(Year) %>% 
-  summarise(ptbp = sum(Total))
+  summarise(ptbp = sum_na(Total))
 
 # Relevant 3rd party
 fgm_rel_third_year <- fgm_csv %>% 
   filter(Type == 'Application', Sub_category == 'Relevant 3rd party') %>% 
   group_by(Year) %>% 
-  summarise(rel_third = sum(Total))
+  summarise(rel_third = sum_na(Total))
 
 # Other 3rd party
 fgm_other_third_year <- fgm_csv %>% 
   filter(Type == 'Application', Sub_category == 'Other 3rd party') %>% 
   group_by(Year) %>% 
-  summarise(other_third = sum(Total))
+  summarise(other_third = sum_na(Total))
 
 # Total Applications made
 fgm_apps_year <- fgm_csv %>% 
   filter(Type == 'Application', Category == 'All') %>% 
   group_by(Year) %>% 
-  summarise(total_apps = sum(Total))
+  summarise(total_apps = sum_na(Total))
 
 # Total cases started
 fgm_case_start_year <- fgm_csv %>% 
   filter(Type == 'Cases started') %>% 
   group_by(Year) %>% 
-  summarise(case_start = sum(Total))
+  summarise(case_start = sum_na(Total))
 
 # Total Orders made
 fgm_ords_year <- fgm_csv %>% 
   filter(Type == 'Disposal', Category == 'Order made') %>% 
   group_by(Year) %>% 
-  summarise(total_ords = sum(Total))
+  summarise(total_ords = sum_na(Total))
 
 # Other disposals
 fgm_other_disp_year <- fgm_csv %>% 
   filter(Type == 'Disposal', Category == 'Other Order') %>% 
   group_by(Year) %>% 
-  summarise(other_disps = sum(Total))
+  summarise(other_disps = sum_na(Total))
 
 # All disposals
 fgm_all_disp_year <- fgm_csv %>% 
   filter(Type == 'Disposal', Category == 'All') %>% 
   group_by(Year) %>% 
-  summarise(total_disps = sum(Total))
+  summarise(total_disps = sum_na(Total))
 
 # Total cases stared
 fgm_case_close_year <- fgm_csv %>% 
   filter(Type == 'Cases concluded') %>% 
   group_by(Year) %>% 
-  summarise(case_close = sum(Total))
+  summarise(case_close = sum_na(Total))
 
 # Joining the columns together
 fgm_annual_tables <- list(fgm_years, fgm_under_17_year, fgm_over_17_year, fgm_unknown_age_year,
@@ -105,75 +105,75 @@ fgm_qtrs <- fgm_csv %>% distinct(Year, Quarter) %>%
 fgm_under_17_qtr <- fgm_csv %>% 
   filter(Type == 'Application', Sub_category == '17 or under') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(under_17 = sum(Total))
+  summarise(under_17 = sum_na(Total))
 
 # Over 17
 fgm_over_17_qtr <- fgm_csv %>% 
   filter(Type == 'Application', Sub_category == 'Over 17') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(over_17 = sum(Total))
+  summarise(over_17 = sum_na(Total))
 
 # Unknown
 fgm_unknown_age_qtr <- fgm_csv %>% 
   filter(Type == 'Application', Sub_category == 'Unknown') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(unknown_age = sum(Total))
+  summarise(unknown_age = sum_na(Total))
 
 # Person to be protected app type
 fgm_ptbp_qtr <- fgm_csv %>% 
   filter(Type == 'Application', Sub_category == 'Person to be protected') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(ptbp = sum(Total))
+  summarise(ptbp = sum_na(Total))
 
 # Relevant 3rd party
 fgm_rel_third_qtr <- fgm_csv %>% 
   filter(Type == 'Application', Sub_category == 'Relevant 3rd party') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(rel_third = sum(Total))
+  summarise(rel_third = sum_na(Total))
 
 # Other 3rd party
 fgm_other_third_qtr <- fgm_csv %>% 
   filter(Type == 'Application', Sub_category == 'Other 3rd party') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(other_third = sum(Total))
+  summarise(other_third = sum_na(Total))
 
 
 # Total Applications made
 fgm_apps_qtr <- fgm_csv %>% 
   filter(Type == 'Application', Category == 'All') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(total_apps = sum(Total))
+  summarise(total_apps = sum_na(Total))
 
 # Total cases started
 fgm_case_start_qtr <- fgm_csv %>% 
   filter(Type == 'Cases started') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(case_start = sum(Total))
+  summarise(case_start = sum_na(Total))
 
 
 # Total Orders made
 fgm_ords_qtr <- fgm_csv %>% 
   filter(Type == 'Disposal', Category == 'Order made') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(total_ords = sum(Total))
+  summarise(total_ords = sum_na(Total))
 
 # Other disposals
 fgm_other_disp_qtr <- fgm_csv %>% 
   filter(Type == 'Disposal', Category == 'Other Order') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(other_disps = sum(Total))
+  summarise(other_disps = sum_na(Total))
 
 # All disposals
 fgm_all_disp_qtr <- fgm_csv %>% 
   filter(Type == 'Disposal', Category == 'All') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(total_disps = sum(Total))
+  summarise(total_disps = sum_na(Total))
 
 # Total cases stared
 fgm_case_close_qtr <- fgm_csv %>% 
   filter(Type == 'Cases concluded') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(case_close = sum(Total))
+  summarise(case_close = sum_na(Total))
 
 # Joining the columns together
 fgm_qtr_tables <- list(fgm_qtrs, fgm_under_17_qtr, fgm_over_17_qtr, fgm_unknown_age_qtr,

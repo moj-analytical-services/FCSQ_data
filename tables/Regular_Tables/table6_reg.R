@@ -11,43 +11,43 @@ child_act_pub <- child_act_csv %>%
 pub_case_start_year <- child_act_pub %>%
   filter(Count_type == 'Cases starting') %>%
   group_by(Year) %>% 
-  summarise(pub_case_start = sum(Count))
+  summarise(pub_case_start = sum_na(Count))
 
 # 1 Applicant
 pub_applicant_one_year <- child_act_pub %>%
   filter(Count_type == 'Cases starting', Applicants_in_case == '1') %>% 
   group_by(Year) %>% 
-  summarise(pub_appl_one = sum(Count))
+  summarise(pub_appl_one = sum_na(Count))
 
 # 2 or more Applicants
 pub_applicant_two_year <- child_act_pub %>%
   filter(Count_type == 'Cases starting', Applicants_in_case == '2+') %>% 
   group_by(Year) %>% 
-  summarise(pub_appl_two = sum(Count))
+  summarise(pub_appl_two = sum_na(Count))
 
 # 1 Respondents
 pub_respondent_one_year <- child_act_pub %>%
   filter(Count_type == 'Cases starting', Respondents_in_case == '1') %>% 
   group_by(Year) %>% 
-  summarise(pub_resp_one = sum(Count))
+  summarise(pub_resp_one = sum_na(Count))
 
 # 2 Respondents
 pub_respondent_two_year <- child_act_pub %>%
   filter(Count_type == 'Cases starting', Respondents_in_case == '2') %>% 
   group_by(Year) %>% 
-  summarise(pub_resp_two = sum(Count))
+  summarise(pub_resp_two = sum_na(Count))
 
 # 3 Respondents
 pub_respondent_three_year <- child_act_pub %>%
   filter(Count_type == 'Cases starting', Respondents_in_case == '3') %>% 
   group_by(Year) %>% 
-  summarise(pub_resp_three = sum(Count))
+  summarise(pub_resp_three = sum_na(Count))
 
 # 4+ Respondents
 pub_respondent_four_year <- child_act_pub %>%
   filter(Count_type == 'Cases starting', Respondents_in_case == '4+') %>% 
   group_by(Year) %>% 
-  summarise(pub_resp_four = sum(Count))
+  summarise(pub_resp_four = sum_na(Count))
 
 #Gathering and joining the columns
 pub_t6_annual_tables <- list(pub_case_start_year, pub_applicant_one_year, pub_applicant_two_year, 
@@ -66,43 +66,43 @@ child_act_priv <- child_act_csv %>%
 priv_case_start_year <- child_act_priv %>%
   filter(Count_type == 'Cases starting') %>% 
   group_by(Year) %>% 
-  summarise(priv_case_start = sum(Count))
+  summarise(priv_case_start = sum_na(Count))
 
 # 1 Applicant
 priv_applicant_one_year <- child_act_priv %>%
   filter(Count_type == 'Cases starting', Applicants_in_case == '1') %>% 
   group_by(Year) %>% 
-  summarise(priv_appl_one = sum(Count))
+  summarise(priv_appl_one = sum_na(Count))
 
 # 2 or more Applicants
 priv_applicant_two_year <- child_act_priv %>%
   filter(Count_type == 'Cases starting', Applicants_in_case == '2+') %>% 
   group_by(Year) %>% 
-  summarise(priv_appl_two = sum(Count))
+  summarise(priv_appl_two = sum_na(Count))
 
 # 1 Respondents
 priv_respondent_one_year <- child_act_priv %>%
   filter(Count_type == 'Cases starting', Respondents_in_case == '1') %>% 
   group_by(Year) %>% 
-  summarise(priv_resp_one = sum(Count))
+  summarise(priv_resp_one = sum_na(Count))
 
 # 2 Respondents
 priv_respondent_two_year <- child_act_priv %>%
   filter(Count_type == 'Cases starting', Respondents_in_case == '2') %>% 
   group_by(Year) %>% 
-  summarise(priv_resp_two = sum(Count))
+  summarise(priv_resp_two = sum_na(Count))
 
 # 3 Respondents
 priv_respondent_three_year <- child_act_priv %>%
   filter(Count_type == 'Cases starting', Respondents_in_case == '3') %>% 
   group_by(Year) %>% 
-  summarise(priv_resp_three = sum(Count))
+  summarise(priv_resp_three = sum_na(Count))
 
 # 4+ Respondents
 priv_respondent_four_year <- child_act_priv %>%
   filter(Count_type == 'Cases starting', Respondents_in_case == '4+') %>% 
   group_by(Year) %>% 
-  summarise(priv_resp_four = sum(Count))
+  summarise(priv_resp_four = sum_na(Count))
 
 #Gathering and joining the columns
 priv_t6_annual_tables <- list(priv_case_start_year, priv_applicant_one_year, priv_applicant_two_year, 
@@ -119,7 +119,8 @@ t6_reg_year <- pub_t6_join_year %>% left_join(priv_t6_join_year, by = 'Year') %>
   relocate(Qtr, .after = Year) %>% 
   relocate(blank1, .after = pub_appl_two) %>% 
   relocate(blank2, .after = pub_resp_four) %>% 
-  relocate(blank3, .after = priv_appl_two)
+  relocate(blank3, .after = priv_appl_two) %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, 0)))
 
 
 ##Now doing the quarterly part of T6
@@ -130,43 +131,43 @@ t6_reg_year <- pub_t6_join_year %>% left_join(priv_t6_join_year, by = 'Year') %>
 pub_case_start_qtr <- child_act_pub %>%
   filter(Count_type == 'Cases starting') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(pub_case_start = sum(Count))
+  summarise(pub_case_start = sum_na(Count))
 
 # 1 Applicant
 pub_applicant_one_qtr <- child_act_pub %>%
   filter(Count_type == 'Cases starting', Applicants_in_case == '1') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(pub_appl_one = sum(Count))
+  summarise(pub_appl_one = sum_na(Count))
 
 # 2 or more Applicants
 pub_applicant_two_qtr <- child_act_pub %>%
   filter(Count_type == 'Cases starting', Applicants_in_case == '2+') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(pub_appl_two = sum(Count))
+  summarise(pub_appl_two = sum_na(Count))
 
 # 1 Respondents
 pub_respondent_one_qtr <- child_act_pub %>%
   filter(Count_type == 'Cases starting', Respondents_in_case == '1') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(pub_resp_one = sum(Count))
+  summarise(pub_resp_one = sum_na(Count))
 
 # 2 Respondents
 pub_respondent_two_qtr <- child_act_pub %>%
   filter(Count_type == 'Cases starting', Respondents_in_case == '2') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(pub_resp_two = sum(Count))
+  summarise(pub_resp_two = sum_na(Count))
 
 # 3 Respondents
 pub_respondent_three_qtr <- child_act_pub %>%
   filter(Count_type == 'Cases starting', Respondents_in_case == '3') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(pub_resp_three = sum(Count))
+  summarise(pub_resp_three = sum_na(Count))
 
 # 4+ Respondents
 pub_respondent_four_qtr <- child_act_pub %>%
   filter(Count_type == 'Cases starting', Respondents_in_case == '4+') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(pub_resp_four = sum(Count))
+  summarise(pub_resp_four = sum_na(Count))
 
 #Gathering and joining the columns
 pub_t6_qtr_tables <- list(pub_case_start_qtr, pub_applicant_one_qtr, pub_applicant_two_qtr, 
@@ -181,43 +182,43 @@ pub_t6_join_qtr <- reduce(pub_t6_qtr_tables, left_join, by = c('Year', 'Qtr'))
 priv_case_start_qtr <- child_act_priv %>%
   filter(Count_type == 'Cases starting') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(priv_case_start = sum(Count))
+  summarise(priv_case_start = sum_na(Count))
 
 # 1 Applicant
 priv_applicant_one_qtr <- child_act_priv %>%
   filter(Count_type == 'Cases starting', Applicants_in_case == '1') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(priv_appl_one = sum(Count))
+  summarise(priv_appl_one = sum_na(Count))
 
 # 2 or more Applicants
 priv_applicant_two_qtr <- child_act_priv %>%
   filter(Count_type == 'Cases starting', Applicants_in_case == '2+') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(priv_appl_two = sum(Count))
+  summarise(priv_appl_two = sum_na(Count))
 
 # 1 Respondents
 priv_respondent_one_qtr <- child_act_priv %>%
   filter(Count_type == 'Cases starting', Respondents_in_case == '1') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(priv_resp_one = sum(Count))
+  summarise(priv_resp_one = sum_na(Count))
 
 # 2 Respondents
 priv_respondent_two_qtr <- child_act_priv %>%
   filter(Count_type == 'Cases starting', Respondents_in_case == '2') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(priv_resp_two = sum(Count))
+  summarise(priv_resp_two = sum_na(Count))
 
 # 3 Respondents
 priv_respondent_three_qtr <- child_act_priv %>%
   filter(Count_type == 'Cases starting', Respondents_in_case == '3') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(priv_resp_three = sum(Count))
+  summarise(priv_resp_three = sum_na(Count))
 
 # 4+ Respondents
 priv_respondent_four_qtr <- child_act_priv %>%
   filter(Count_type == 'Cases starting', Respondents_in_case == '4+') %>% 
   group_by(Year, Qtr) %>% 
-  summarise(priv_resp_four = sum(Count))
+  summarise(priv_resp_four = sum_na(Count))
 
 #Gathering and joining the columns
 priv_t6_qtr_tables <- list(priv_case_start_qtr, priv_applicant_one_qtr, priv_applicant_two_qtr, 
@@ -234,7 +235,8 @@ t6_reg_qtr <- pub_t6_join_qtr %>% left_join(priv_t6_join_qtr, by = c('Year', 'Qt
   relocate(Qtr, .after = Year) %>% 
   relocate(blank1, .after = pub_appl_two) %>% 
   relocate(blank2, .after = pub_resp_four) %>% 
-  relocate(blank3, .after = priv_appl_two)
+  relocate(blank3, .after = priv_appl_two) %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, 0)))
 
 # Content #########################################################################################
 

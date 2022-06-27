@@ -46,49 +46,49 @@ div_year <- tibble(Year = current_div_year,
 null_pets_year <- divorce_csv %>% 
   filter(Type == 'Petitions', Proceeding_type == 'Nullity of Marriage') %>% 
   group_by(Year) %>% 
-  summarise(n_pet_filed = sum(Count))
+  summarise(n_pet_filed = sum_na(Count))
 
 # Nullity of Marriage Decree Nisi
 null_nisi_year <- divorce_csv %>% 
   filter(Order_type == 'Decree Nisi', Proceeding_type == 'Nullity of Marriage') %>% 
   group_by(Year) %>% 
-  summarise(n_decrees_nisi = sum(Count))
+  summarise(n_decrees_nisi = sum_na(Count))
 
 #Nullity of Marriage Decree Abs
 null_abs_year <- divorce_csv %>% 
   filter(Order_type == 'Decree Absolute', Proceeding_type == 'Nullity of Marriage') %>% 
   group_by(Year) %>% 
-  summarise(n_decrees_abs = sum(Count))
+  summarise(n_decrees_abs = sum_na(Count))
 
 #Judicial Separation Petitions
 jud_pets_year <- divorce_csv %>% 
   filter(Type == 'Petitions', Proceeding_type == 'Judicial Separation') %>% 
   group_by(Year) %>% 
-  summarise(j_pet_filed = sum(Count))
+  summarise(j_pet_filed = sum_na(Count))
 
 #Judicial Separation Granted
 jud_granted_year <- divorce_csv %>% 
   filter(Order_type == 'Judicial Separations Granted', Proceeding_type == 'Judicial Separation') %>% 
   group_by(Year) %>% 
-  summarise(j_decrees_granted = sum(Count))
+  summarise(j_decrees_granted = sum_na(Count))
 
 #Total Petitions
 total_pets_year <- divorce_csv %>% 
   filter(Type == 'Petitions') %>% 
   group_by(Year) %>% 
-  summarise(all_pet_filed = sum(Count))
+  summarise(all_pet_filed = sum_na(Count))
 
 #Total Decree Nisi
 total_nisi_year <- divorce_csv %>% 
   filter(Order_type == 'Decree Nisi') %>% 
   group_by(Year) %>% 
-  summarise(all_decrees_nisi = sum(Count))
+  summarise(all_decrees_nisi = sum_na(Count))
 
 #Total Decree Absolutes/granted
 total_abs_year <- divorce_csv %>% 
   filter(Order_type %in% c('Judicial Separations Granted', 'Decree Absolute')) %>% 
   group_by(Year) %>% 
-  summarise(all_decrees_abs = sum(Count))
+  summarise(all_decrees_abs = sum_na(Count))
 
 #Joining all the tables together
 
@@ -104,7 +104,8 @@ t12_reg_year <- div_joined_year %>%
   relocate(blank2, .after = d_median_abs) %>% 
   relocate(blank3, .after = n_decrees_abs) %>% 
   relocate(blank4, .after = j_decrees_granted) %>% 
-  mutate(across(starts_with('d_'), .fns = formula_add))
+  mutate(across(starts_with('d_'), .fns = formula_add)) %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, 0))) 
 
 
 #####################
@@ -155,49 +156,49 @@ div_qtr <- tibble(Year = current_div_qtr$Year,
 null_pets_qtr <- divorce_csv %>% filter(Year > 2010) %>% 
   filter(Type == 'Petitions', Proceeding_type == 'Nullity of Marriage') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(n_pet_filed = sum(Count))
+  summarise(n_pet_filed = sum_na(Count))
 
 # Nullity of Marriage Decree Nisi
 null_nisi_qtr <- divorce_csv %>% filter(Year > 2010) %>% 
   filter(Order_type == 'Decree Nisi', Proceeding_type == 'Nullity of Marriage') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(n_decrees_nisi = sum(Count))
+  summarise(n_decrees_nisi = sum_na(Count))
 
 #Nullity of Marriage Decree Abs
 null_abs_qtr <- divorce_csv %>% filter(Year > 2010) %>% 
   filter(Order_type == 'Decree Absolute', Proceeding_type == 'Nullity of Marriage') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(n_decrees_abs = sum(Count))
+  summarise(n_decrees_abs = sum_na(Count))
 
 #Judicial Separation Petitions
 jud_pets_qtr <- divorce_csv %>% filter(Year > 2010) %>% 
   filter(Type == 'Petitions', Proceeding_type == 'Judicial Separation') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(j_pet_filed = sum(Count))
+  summarise(j_pet_filed = sum_na(Count))
 
 #Judicial Separation Granted
 jud_granted_qtr <- divorce_csv %>% filter(Year > 2010) %>% 
   filter(Order_type == 'Judicial Separations Granted', Proceeding_type == 'Judicial Separation') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(j_decrees_granted = sum(Count))
+  summarise(j_decrees_granted = sum_na(Count))
 
 #Total Petitions
 total_pets_qtr <- divorce_csv %>% filter(Year > 2010) %>% 
   filter(Type == 'Petitions') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(all_pet_filed = sum(Count))
+  summarise(all_pet_filed = sum_na(Count))
 
 #Total Decree Nisi
 total_nisi_qtr <- divorce_csv %>% filter(Year > 2010) %>% 
   filter(Order_type == 'Decree Nisi') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(all_decrees_nisi = sum(Count))
+  summarise(all_decrees_nisi = sum_na(Count))
 
 #Total Decree Absolutes/granted
 total_abs_qtr <- divorce_csv %>% filter(Year > 2010) %>% 
   filter(Order_type %in% c('Judicial Separations Granted', 'Decree Absolute')) %>% 
   group_by(Year, Quarter) %>% 
-  summarise(all_decrees_abs = sum(Count))
+  summarise(all_decrees_abs = sum_na(Count))
 
 #Joining all the tables together
 
@@ -213,7 +214,8 @@ t12_reg_qtr <- div_joined_qtr %>%
   relocate(blank2, .after = d_median_abs) %>% 
   relocate(blank3, .after = n_decrees_abs) %>% 
   relocate(blank4, .after = j_decrees_granted) %>% 
-  mutate(across(starts_with('d_'), .fns = formula_add))
+  mutate(across(starts_with('d_'), .fns = formula_add)) %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, 0))) 
 
 # time period
 if(pub_quarter==4){

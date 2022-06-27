@@ -10,50 +10,50 @@
 div_prog_cases_year <- divorce_progress_csv %>% 
   filter(Stage == 'Petition') %>% 
   group_by(Year) %>% 
-  summarise(div_case_start = sum(Number))
+  summarise(div_case_start = sum_na(Number))
 
 #Decree Nisi Number
 div_prog_nisi_num_year <- divorce_progress_csv %>% 
   filter(Stage == 'Decree Nisi') %>% 
   group_by(Year) %>% 
-  summarise(nisi_num = sum(Number))
+  summarise(nisi_num = sum_na(Number))
 
 # Decree Absolute Number
 div_prog_abs_num_year <- divorce_progress_csv %>% 
   filter(Stage == 'Decree Absolute') %>% 
   group_by(Year) %>% 
-  summarise(abs_num = sum(Number))
+  summarise(abs_num = sum_na(Number))
 
 # Financial remedy applications Number
 div_prog_arapp_num_year <- divorce_progress_csv %>% 
   filter(Stage == 'AR Application') %>% 
   group_by(Year) %>% 
-  summarise(arapp_num = sum(Number))
+  summarise(arapp_num = sum_na(Number))
 
 # Financial remedy orders Number
 div_prog_arord_num_year <- divorce_progress_csv %>% 
   filter(Stage == 'AR Order') %>% 
   group_by(Year) %>% 
-  summarise(arord_num = sum(Number))
+  summarise(arord_num = sum_na(Number))
 
 
 # Hearing Number
 div_prog_hearing_num_year <- divorce_progress_csv %>% 
   filter(Stage == 'Hearing') %>% 
   group_by(Year) %>% 
-  summarise(hearing_num = sum(Number))
+  summarise(hearing_num = sum_na(Number))
 
 # Injunction Application Number
 div_prog_injapp_num_year <- divorce_progress_csv %>% 
   filter(Stage == 'Injunction Application') %>% 
   group_by(Year) %>% 
-  summarise(injapp_num = sum(Number))
+  summarise(injapp_num = sum_na(Number))
 
 # Injunction Order Number
 div_prog_injord_num_year <- divorce_progress_csv %>% 
   filter(Stage == 'Injunction Order') %>% 
   group_by(Year) %>% 
-  summarise(injord_num = sum(Number))
+  summarise(injord_num = sum_na(Number))
 
 #Gathering and joining
 div_prog_annual_tables <- list(div_prog_cases_year, div_prog_nisi_num_year, div_prog_abs_num_year,
@@ -98,50 +98,50 @@ t13_reg_year <- div_prog_joined_year %>%
 div_prog_cases_qtr <- divorce_progress_csv %>% filter(Year >= 2011) %>% 
   filter(Stage == 'Petition') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(div_case_start = sum(Number))
+  summarise(div_case_start = sum_na(Number))
 
 #Decree Nisi Number
 div_prog_nisi_num_qtr <- divorce_progress_csv %>% filter(Year >= 2011) %>% 
   filter(Stage == 'Decree Nisi') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(nisi_num = sum(Number))
+  summarise(nisi_num = sum_na(Number))
 
 # Decree Absolute Number
 div_prog_abs_num_qtr <- divorce_progress_csv %>% filter(Year >= 2011) %>% 
   filter(Stage == 'Decree Absolute') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(abs_num = sum(Number))
+  summarise(abs_num = sum_na(Number))
 
 # Financial remedy applications Number
 div_prog_arapp_num_qtr <- divorce_progress_csv %>% filter(Year >= 2011) %>% 
   filter(Stage == 'AR Application') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(arapp_num = sum(Number))
+  summarise(arapp_num = sum_na(Number))
 
 # Financial remedy orders Number
 div_prog_arord_num_qtr <- divorce_progress_csv %>% filter(Year >= 2011) %>% 
   filter(Stage == 'AR Order') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(arord_num = sum(Number))
+  summarise(arord_num = sum_na(Number))
 
 
 # Hearing Number
 div_prog_hearing_num_qtr <- divorce_progress_csv %>% filter(Year >= 2011) %>% 
   filter(Stage == 'Hearing') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(hearing_num = sum(Number))
+  summarise(hearing_num = sum_na(Number))
 
 # Injunction Application Number
 div_prog_injapp_num_qtr <- divorce_progress_csv %>% filter(Year >= 2011) %>% 
   filter(Stage == 'Injunction Application') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(injapp_num = sum(Number))
+  summarise(injapp_num = sum_na(Number))
 
 # Injunction Order Number
 div_prog_injord_num_qtr <- divorce_progress_csv %>% filter(Year >= 2011) %>% 
   filter(Stage == 'Injunction Order') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(injord_num = sum(Number))
+  summarise(injord_num = sum_na(Number))
 
 #Gathering and joining
 div_prog_qtr_tables <- list(div_prog_cases_qtr, div_prog_nisi_num_qtr, div_prog_abs_num_qtr,

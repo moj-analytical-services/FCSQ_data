@@ -40,7 +40,7 @@ divorce_progress_format <- divorce_progress_csv %>% filter(Year > 2010) %>%
 
 #Groups together, summarises the categories and pivots the columns
 divorce_progress_a <- divorce_progress_format %>% group_by(Stage, Quarters) %>% 
-  summarise(Number = sum(Number)) %>% 
+  summarise(Number = sum_na(Number)) %>% 
   pivot_wider(names_from = Quarters, values_from = Number) %>% 
   relocate(`10+`, .after = `9`)
 

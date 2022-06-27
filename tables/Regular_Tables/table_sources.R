@@ -1,7 +1,16 @@
 # Adding source for Table 3 and 4
+
+table_3_lookup <- table_3_lookup %>% mutate(across(where(is.numeric), ~replace_na(.x, na_value)))
 openxlsx::writeData(wb = template,
                     sheet = 'Table 3_4_source',
                     x = table_3_lookup)
+
+na_formatter(wb = template,
+             sheet = 'Table 3_4_source',
+             table = table_3_lookup,
+             value = ":",
+             startRow = 2,
+             na_value = na_value)
 
 # Adding source for Table 10
 openxlsx::writeData(wb = template,

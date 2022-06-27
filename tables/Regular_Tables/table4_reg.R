@@ -45,20 +45,6 @@ for (i in t4_pub_rows) {
   }
 }
 
-#Interim Orders are blank for now as currently not being copied to FamilyMan from 2021 onward.
-# 2021 is 12
-after_2021 <- seq(12, 12 + annual_year - 2021) # Annual Columns from 2021 onwards
-latest_four <- t4_pub_columns %>% tail(4)  # Latest four quarters
-
-after_2021_all <- c(after_2021, latest_four) # Combining the two
-
-na_adder(wb = template,
-         sheet = 'Table_4',
-         value = "..",
-         cols =  after_2021_all,
-         lengths = rep(6, length(after_2021_all)),
-         start_row = 61)
-
 #Adding Public Law headings
 table3_header(wb = template,
               sheet = 'Table_4',

@@ -10,91 +10,91 @@ fmpo_years <- fmpo_csv %>% distinct(Year) %>% filter(Year > 2008)
 fmpo_under_17_year <- fmpo_csv %>% 
   filter(Type == 'Application', Sub_category == '17 or under') %>% 
   group_by(Year) %>% 
-  summarise(under_17 = sum(Total))
+  summarise(under_17 = sum_na(Total))
 
 # Over 17
 fmpo_over_17_year <- fmpo_csv %>% 
   filter(Type == 'Application', Sub_category == 'Over 17') %>% 
   group_by(Year) %>% 
-  summarise(over_17 = sum(Total))
+  summarise(over_17 = sum_na(Total))
 
 # Unknown
 fmpo_unknown_age_year <- fmpo_csv %>% 
   filter(Type == 'Application', Sub_category == 'Unknown') %>% 
   group_by(Year) %>% 
-  summarise(unknown_age = sum(Total))
+  summarise(unknown_age = sum_na(Total))
 
 # Person to be protected app type
 fmpo_ptbp_year <- fmpo_csv %>% 
   filter(Type == 'Application', Sub_category == 'Person to be protected') %>% 
   group_by(Year) %>% 
-  summarise(ptbp = sum(Total))
+  summarise(ptbp = sum_na(Total))
 
 # Relevant 3rd party
 fmpo_rel_third_year <- fmpo_csv %>% 
   filter(Type == 'Application', Sub_category == 'Relevant 3rd party') %>% 
   group_by(Year) %>% 
-  summarise(rel_third = sum(Total))
+  summarise(rel_third = sum_na(Total))
 
 # Other 3rd party
 fmpo_other_third_year <- fmpo_csv %>% 
   filter(Type == 'Application', Sub_category == 'Other 3rd party') %>% 
   group_by(Year) %>% 
-  summarise(other_third = sum(Total))
+  summarise(other_third = sum_na(Total))
 
 # Other app type
 fmpo_other_apps_year <- fmpo_csv %>% 
   filter(Type == 'Application', Sub_category == 'Other') %>% 
   group_by(Year) %>% 
-  summarise(other = sum(Total))
+  summarise(other = sum_na(Total))
 
 # Total Applications made
 fmpo_apps_year <- fmpo_csv %>% 
   filter(Type == 'Application', Category == 'All') %>% 
   group_by(Year) %>% 
-  summarise(total_apps = sum(Total))
+  summarise(total_apps = sum_na(Total))
 
 # Total cases started
 fmpo_case_start_year <- fmpo_csv %>% 
   filter(Type == 'Cases started') %>% 
   group_by(Year) %>% 
-  summarise(case_start = sum(Total))
+  summarise(case_start = sum_na(Total))
 
 # Orders made with POA
 fmpo_ord_poa_year <- fmpo_csv %>% 
   filter(Type == 'Disposal', Category == 'Order made', Poa == 'Yes') %>% 
   group_by(Year) %>% 
-  summarise(ord_poa = sum(Total))
+  summarise(ord_poa = sum_na(Total))
 
 # Orders made without POA
 fmpo_ord_nopoa_year <- fmpo_csv %>% 
   filter(Type == 'Disposal', Category == 'Order made', Poa == 'No') %>% 
   group_by(Year) %>% 
-  summarise(ord_nopoa = sum(Total))
+  summarise(ord_nopoa = sum_na(Total))
 
 # Total Orders made
 fmpo_ords_year <- fmpo_csv %>% 
   filter(Type == 'Disposal', Category == 'Order made') %>% 
   group_by(Year) %>% 
-  summarise(total_ords = sum(Total))
+  summarise(total_ords = sum_na(Total))
 
 # Other disposals
 fmpo_other_disp_year <- fmpo_csv %>% 
   filter(Type == 'Disposal', Category == 'Other Order') %>% 
   group_by(Year) %>% 
-  summarise(other_disps = sum(Total))
+  summarise(other_disps = sum_na(Total))
 
 # All disposals
 fmpo_all_disp_year <- fmpo_csv %>% 
   filter(Type == 'Disposal', Category == 'All') %>% 
   group_by(Year) %>% 
-  summarise(total_disps = sum(Total))
+  summarise(total_disps = sum_na(Total))
 
 # Total cases stared
 fmpo_case_close_year <- fmpo_csv %>% 
   filter(Type == 'Cases concluded') %>% 
   group_by(Year) %>% 
-  summarise(case_close = sum(Total))
+  summarise(case_close = sum_na(Total))
 
 # Joining the columns together
 fmpo_annual_tables <- list(fmpo_years, fmpo_under_17_year, fmpo_over_17_year, fmpo_unknown_age_year,
@@ -123,91 +123,91 @@ fmpo_qtrs <- fmpo_csv %>% distinct(Year, Quarter) %>%
 fmpo_under_17_qtr <- fmpo_csv %>% 
   filter(Type == 'Application', Sub_category == '17 or under') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(under_17 = sum(Total))
+  summarise(under_17 = sum_na(Total))
 
 # Over 17
 fmpo_over_17_qtr <- fmpo_csv %>% 
   filter(Type == 'Application', Sub_category == 'Over 17') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(over_17 = sum(Total))
+  summarise(over_17 = sum_na(Total))
 
 # Unknown
 fmpo_unknown_age_qtr <- fmpo_csv %>% 
   filter(Type == 'Application', Sub_category == 'Unknown') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(unknown_age = sum(Total))
+  summarise(unknown_age = sum_na(Total))
 
 # Person to be protected app type
 fmpo_ptbp_qtr <- fmpo_csv %>% 
   filter(Type == 'Application', Sub_category == 'Person to be protected') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(ptbp = sum(Total))
+  summarise(ptbp = sum_na(Total))
 
 # Relevant 3rd party
 fmpo_rel_third_qtr <- fmpo_csv %>% 
   filter(Type == 'Application', Sub_category == 'Relevant 3rd party') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(rel_third = sum(Total))
+  summarise(rel_third = sum_na(Total))
 
 # Other 3rd party
 fmpo_other_third_qtr <- fmpo_csv %>% 
   filter(Type == 'Application', Sub_category == 'Other 3rd party') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(other_third = sum(Total))
+  summarise(other_third = sum_na(Total))
 
 # Other app type
 fmpo_other_apps_qtr <- fmpo_csv %>% 
   filter(Type == 'Application', Sub_category == 'Other') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(other = sum(Total))
+  summarise(other = sum_na(Total))
 
 # Total Applications made
 fmpo_apps_qtr <- fmpo_csv %>% 
   filter(Type == 'Application', Category == 'All') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(total_apps = sum(Total))
+  summarise(total_apps = sum_na(Total))
 
 # Total cases started
 fmpo_case_start_qtr <- fmpo_csv %>% 
   filter(Type == 'Cases started') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(case_start = sum(Total))
+  summarise(case_start = sum_na(Total))
 
 # Orders made with POA
 fmpo_ord_poa_qtr <- fmpo_csv %>% 
   filter(Type == 'Disposal', Category == 'Order made', Poa == 'Yes') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(ord_poa = sum(Total))
+  summarise(ord_poa = sum_na(Total))
 
 # Orders made without POA
 fmpo_ord_nopoa_qtr <- fmpo_csv %>% 
   filter(Type == 'Disposal', Category == 'Order made', Poa == 'No') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(ord_nopoa = sum(Total))
+  summarise(ord_nopoa = sum_na(Total))
 
 # Total Orders made
 fmpo_ords_qtr <- fmpo_csv %>% 
   filter(Type == 'Disposal', Category == 'Order made') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(total_ords = sum(Total))
+  summarise(total_ords = sum_na(Total))
 
 # Other disposals
 fmpo_other_disp_qtr <- fmpo_csv %>% 
   filter(Type == 'Disposal', Category == 'Other Order') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(other_disps = sum(Total))
+  summarise(other_disps = sum_na(Total))
 
 # All disposals
 fmpo_all_disp_qtr <- fmpo_csv %>% 
   filter(Type == 'Disposal', Category == 'All') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(total_disps = sum(Total))
+  summarise(total_disps = sum_na(Total))
 
 # Total cases stared
 fmpo_case_close_qtr <- fmpo_csv %>% 
   filter(Type == 'Cases concluded') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(case_close = sum(Total))
+  summarise(case_close = sum_na(Total))
 
 # Joining the columns together
 fmpo_qtr_tables <- list(fmpo_qtrs, fmpo_under_17_qtr, fmpo_over_17_qtr, fmpo_unknown_age_qtr,

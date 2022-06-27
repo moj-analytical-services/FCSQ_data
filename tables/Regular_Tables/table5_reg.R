@@ -13,49 +13,49 @@ child_act_pub <- child_act_csv %>%
 pub_app_one_year <- child_act_pub %>% 
   filter(Count_type == 'Individual children', Age_band == '<1 year') %>% 
   group_by(Year) %>% 
-  summarise(pub_less_than_one = sum(Count))
+  summarise(pub_less_than_one = sum_na(Count))
 
 # 1 to 4 years
 pub_app_four_year <- child_act_pub %>% 
   filter(Count_type == 'Individual children', Age_band == '1-4 years') %>% 
   group_by(Year) %>% 
-  summarise(pub_one_to_four = sum(Count))
+  summarise(pub_one_to_four = sum_na(Count))
 
 # 5 to 9 years
 pub_app_nine_year <- child_act_pub %>% 
   filter(Count_type == 'Individual children', Age_band == '5-9 years') %>% 
   group_by(Year) %>% 
-  summarise(pub_five_to_nine = sum(Count))
+  summarise(pub_five_to_nine = sum_na(Count))
 
 # 10 to 14 years
 pub_app_fourteen_year <- child_act_pub %>% 
   filter(Count_type == 'Individual children', Age_band == '10-14 years') %>% 
   group_by(Year) %>% 
-  summarise(pub_ten_to_fourteen = sum(Count))
+  summarise(pub_ten_to_fourteen = sum_na(Count))
 
 # 15 to 17 years
 pub_app_seventeen_year <- child_act_pub %>% 
   filter(Count_type == 'Individual children', Age_band == '15-17 years') %>% 
   group_by(Year) %>% 
-  summarise(pub_fifteen_to_seventeen = sum(Count))
+  summarise(pub_fifteen_to_seventeen = sum_na(Count))
 
 # other age
 pub_app_other_year <- child_act_pub %>% 
   filter(Count_type == 'Individual children', Age_band == 'Other') %>% 
   group_by(Year) %>% 
-  summarise(pub_other_age = sum(Count))
+  summarise(pub_other_age = sum_na(Count))
 
 # unknown age
 pub_app_unknown_year <- child_act_pub %>% 
   filter(Count_type == 'Individual children', Age_band == 'Unknown') %>% 
   group_by(Year) %>% 
-  summarise(pub_unknown_age = sum(Count))
+  summarise(pub_unknown_age = sum_na(Count))
 
 #Total applications
 pub_app_total <- child_act_pub %>% 
   filter(Count_type == 'Individual children') %>% 
   group_by(Year) %>% 
-  summarise(pub_total_apps = sum(Count))
+  summarise(pub_total_apps = sum_na(Count))
 
 # Gathering each columns then joining them together
 pub_child_annual_tables <- list(pub_app_one_year, pub_app_four_year, pub_app_nine_year,
@@ -75,49 +75,49 @@ child_act_priv <- child_act_csv %>%
 priv_app_one_year <- child_act_priv %>% 
   filter(Count_type == 'Individual children', Age_band == '<1 year') %>% 
   group_by(Year) %>% 
-  summarise(priv_less_than_one = sum(Count))
+  summarise(priv_less_than_one = sum_na(Count))
 
 # 1 to 4 years
 priv_app_four_year <- child_act_priv %>% 
   filter(Count_type == 'Individual children', Age_band == '1-4 years') %>% 
   group_by(Year) %>% 
-  summarise(priv_one_to_four = sum(Count))
+  summarise(priv_one_to_four = sum_na(Count))
 
 # 5 to 9 years
 priv_app_nine_year <- child_act_priv %>% 
   filter(Count_type == 'Individual children', Age_band == '5-9 years') %>% 
   group_by(Year) %>% 
-  summarise(priv_five_to_nine = sum(Count))
+  summarise(priv_five_to_nine = sum_na(Count))
 
 # 10 to 14 years
 priv_app_fourteen_year <- child_act_priv %>% 
   filter(Count_type == 'Individual children', Age_band == '10-14 years') %>% 
   group_by(Year) %>% 
-  summarise(priv_ten_to_fourteen = sum(Count))
+  summarise(priv_ten_to_fourteen = sum_na(Count))
 
 # 15 to 17 years
 priv_app_seventeen_year <- child_act_priv %>% 
   filter(Count_type == 'Individual children', Age_band == '15-17 years') %>% 
   group_by(Year) %>% 
-  summarise(priv_fifteen_to_seventeen = sum(Count))
+  summarise(priv_fifteen_to_seventeen = sum_na(Count))
 
 # other age
 priv_app_other_year <- child_act_priv %>% 
   filter(Count_type == 'Individual children', Age_band == 'Other') %>% 
   group_by(Year) %>% 
-  summarise(priv_other_age = sum(Count))
+  summarise(priv_other_age = sum_na(Count))
 
 # unknown age
 priv_app_unknown_year <- child_act_priv %>% 
   filter(Count_type == 'Individual children', Age_band == 'Unknown') %>% 
   group_by(Year) %>% 
-  summarise(priv_unknown_age = sum(Count))
+  summarise(priv_unknown_age = sum_na(Count))
 
 #Total applications
 priv_app_total <- child_act_priv %>% 
   filter(Count_type == 'Individual children') %>% 
   group_by(Year) %>% 
-  summarise(priv_total_apps = sum(Count))
+  summarise(priv_total_apps = sum_na(Count))
 
 # Gathering each columns then joining them together
 priv_child_annual_tables <- list(priv_app_one_year, priv_app_four_year, priv_app_nine_year,
@@ -146,7 +146,7 @@ t5_reg_year <- pub_child_join_year %>% left_join(priv_child_join_year, by = 'Yea
 pub_app_one_qtr <- child_act_pub %>% 
   filter(Count_type == 'Individual children', Age_band == '<1 year') %>% 
   group_by(Qtr) %>% 
-  summarise(pub_less_than_one = sum(Count)) %>% 
+  summarise(pub_less_than_one = sum_na(Count)) %>% 
   separate(Qtr, c('Year', 'Qtr'), sep = '-') %>% 
   mutate(Year = as.double(Year))
 
@@ -154,7 +154,7 @@ pub_app_one_qtr <- child_act_pub %>%
 pub_app_four_qtr <- child_act_pub %>% 
   filter(Count_type == 'Individual children', Age_band == '1-4 years') %>% 
   group_by(Qtr) %>% 
-  summarise(pub_one_to_four = sum(Count)) %>% 
+  summarise(pub_one_to_four = sum_na(Count)) %>% 
   separate(Qtr, c('Year', 'Qtr'), sep = '-') %>% 
   mutate(Year = as.double(Year))
 
@@ -162,7 +162,7 @@ pub_app_four_qtr <- child_act_pub %>%
 pub_app_nine_qtr <- child_act_pub %>% 
   filter(Count_type == 'Individual children', Age_band == '5-9 years') %>% 
   group_by(Qtr) %>% 
-  summarise(pub_five_to_nine = sum(Count)) %>% 
+  summarise(pub_five_to_nine = sum_na(Count)) %>% 
   separate(Qtr, c('Year', 'Qtr'), sep = '-') %>% 
   mutate(Year = as.double(Year))
 
@@ -170,7 +170,7 @@ pub_app_nine_qtr <- child_act_pub %>%
 pub_app_fourteen_qtr <- child_act_pub %>% 
   filter(Count_type == 'Individual children', Age_band == '10-14 years') %>% 
   group_by(Qtr) %>% 
-  summarise(pub_ten_to_fourteen = sum(Count)) %>% 
+  summarise(pub_ten_to_fourteen = sum_na(Count)) %>% 
   separate(Qtr, c('Year', 'Qtr'), sep = '-') %>% 
   mutate(Year = as.double(Year))
 
@@ -179,7 +179,7 @@ pub_app_fourteen_qtr <- child_act_pub %>%
 pub_app_seventeen_qtr <- child_act_pub %>% 
   filter(Count_type == 'Individual children', Age_band == '15-17 years') %>% 
   group_by(Qtr) %>% 
-  summarise(pub_fifteen_to_seventeen = sum(Count)) %>% 
+  summarise(pub_fifteen_to_seventeen = sum_na(Count)) %>% 
   separate(Qtr, c('Year', 'Qtr'), sep = '-') %>% 
   mutate(Year = as.double(Year))
 
@@ -188,7 +188,7 @@ pub_app_seventeen_qtr <- child_act_pub %>%
 pub_app_other_qtr <- child_act_pub %>% 
   filter(Count_type == 'Individual children', Age_band == 'Other') %>% 
   group_by(Qtr) %>% 
-  summarise(pub_other_age = sum(Count)) %>% 
+  summarise(pub_other_age = sum_na(Count)) %>% 
   separate(Qtr, c('Year', 'Qtr'), sep = '-') %>% 
   mutate(Year = as.double(Year))
 
@@ -197,7 +197,7 @@ pub_app_other_qtr <- child_act_pub %>%
 pub_app_unknown_qtr <- child_act_pub %>% 
   filter(Count_type == 'Individual children', Age_band == 'Unknown') %>% 
   group_by(Qtr) %>% 
-  summarise(pub_unknown_age = sum(Count)) %>% 
+  summarise(pub_unknown_age = sum_na(Count)) %>% 
   separate(Qtr, c('Year', 'Qtr'), sep = '-') %>% 
   mutate(Year = as.double(Year))
 
@@ -206,7 +206,7 @@ pub_app_unknown_qtr <- child_act_pub %>%
 pub_app_total_qtr <- child_act_pub %>% 
   filter(Count_type == 'Individual children') %>% 
   group_by(Qtr) %>% 
-  summarise(pub_total_apps = sum(Count)) %>% 
+  summarise(pub_total_apps = sum_na(Count)) %>% 
   separate(Qtr, c('Year', 'Qtr'), sep = '-') %>% 
   mutate(Year = as.double(Year))
 
@@ -228,7 +228,7 @@ pub_child_join_qtr <-  reduce(pub_child_qtr_tables, left_join, by = c('Year', 'Q
 priv_app_one_qtr <- child_act_priv %>% 
   filter(Count_type == 'Individual children', Age_band == '<1 year') %>% 
   group_by(Qtr) %>% 
-  summarise(priv_less_than_one = sum(Count)) %>% 
+  summarise(priv_less_than_one = sum_na(Count)) %>% 
   separate(Qtr, c('Year', 'Qtr'), sep = '-') %>% 
   mutate(Year = as.double(Year))
 
@@ -236,7 +236,7 @@ priv_app_one_qtr <- child_act_priv %>%
 priv_app_four_qtr <- child_act_priv %>% 
   filter(Count_type == 'Individual children', Age_band == '1-4 years') %>% 
   group_by(Qtr) %>% 
-  summarise(priv_one_to_four = sum(Count)) %>% 
+  summarise(priv_one_to_four = sum_na(Count)) %>% 
   separate(Qtr, c('Year', 'Qtr'), sep = '-') %>% 
   mutate(Year = as.double(Year))
 
@@ -244,7 +244,7 @@ priv_app_four_qtr <- child_act_priv %>%
 priv_app_nine_qtr <- child_act_priv %>% 
   filter(Count_type == 'Individual children', Age_band == '5-9 years') %>% 
   group_by(Qtr) %>% 
-  summarise(priv_five_to_nine = sum(Count)) %>% 
+  summarise(priv_five_to_nine = sum_na(Count)) %>% 
   separate(Qtr, c('Year', 'Qtr'), sep = '-') %>% 
   mutate(Year = as.double(Year))
 
@@ -252,7 +252,7 @@ priv_app_nine_qtr <- child_act_priv %>%
 priv_app_fourteen_qtr <- child_act_priv %>% 
   filter(Count_type == 'Individual children', Age_band == '10-14 years') %>% 
   group_by(Qtr) %>% 
-  summarise(priv_ten_to_fourteen = sum(Count)) %>% 
+  summarise(priv_ten_to_fourteen = sum_na(Count)) %>% 
   separate(Qtr, c('Year', 'Qtr'), sep = '-') %>% 
   mutate(Year = as.double(Year))
 
@@ -261,7 +261,7 @@ priv_app_fourteen_qtr <- child_act_priv %>%
 priv_app_seventeen_qtr <- child_act_priv %>% 
   filter(Count_type == 'Individual children', Age_band == '15-17 years') %>% 
   group_by(Qtr) %>% 
-  summarise(priv_fifteen_to_seventeen = sum(Count)) %>% 
+  summarise(priv_fifteen_to_seventeen = sum_na(Count)) %>% 
   separate(Qtr, c('Year', 'Qtr'), sep = '-') %>% 
   mutate(Year = as.double(Year))
 
@@ -270,7 +270,7 @@ priv_app_seventeen_qtr <- child_act_priv %>%
 priv_app_other_qtr <- child_act_priv %>% 
   filter(Count_type == 'Individual children', Age_band == 'Other') %>% 
   group_by(Qtr) %>% 
-  summarise(priv_other_age = sum(Count)) %>% 
+  summarise(priv_other_age = sum_na(Count)) %>% 
   separate(Qtr, c('Year', 'Qtr'), sep = '-') %>% 
   mutate(Year = as.double(Year))
 
@@ -279,7 +279,7 @@ priv_app_other_qtr <- child_act_priv %>%
 priv_app_unknown_qtr <- child_act_priv %>% 
   filter(Count_type == 'Individual children', Age_band == 'Unknown') %>% 
   group_by(Qtr) %>% 
-  summarise(priv_unknown_age = sum(Count)) %>% 
+  summarise(priv_unknown_age = sum_na(Count)) %>% 
   separate(Qtr, c('Year', 'Qtr'), sep = '-') %>% 
   mutate(Year = as.double(Year))
 
@@ -288,7 +288,7 @@ priv_app_unknown_qtr <- child_act_priv %>%
 priv_app_total_qtr <- child_act_priv %>% 
   filter(Count_type == 'Individual children') %>% 
   group_by(Qtr) %>% 
-  summarise(priv_total_apps = sum(Count)) %>% 
+  summarise(priv_total_apps = sum_na(Count)) %>% 
   separate(Qtr, c('Year', 'Qtr'), sep = '-') %>% 
   mutate(Year = as.double(Year))
 

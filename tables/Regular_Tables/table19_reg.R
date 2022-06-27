@@ -6,61 +6,61 @@
 adopt_apps_male_female_year <- adopt_csv %>% 
   filter(Type == 'Application', Application %in% c('Adoption', 'Adoption+other'), Adopter == 'M/F couple') %>% 
   group_by(Year) %>% 
-  summarise(m_f_couple = sum(Count))
+  summarise(m_f_couple = sum_na(Count))
 
 #Sole applicant
 adopt_apps_sole_year <- adopt_csv %>% 
   filter(Type == 'Application', Application %in% c('Adoption', 'Adoption+other'), Adopter == 'Sole applicant') %>% 
   group_by(Year) %>% 
-  summarise(sole_appl = sum(Count))
+  summarise(sole_appl = sum_na(Count))
 
 #Step parent
 adopt_apps_step_year <- adopt_csv %>% 
   filter(Type == 'Application', Application %in% c('Adoption', 'Adoption+other'), Adopter == 'Step parent') %>% 
   group_by(Year) %>% 
-  summarise(step_parent = sum(Count))
+  summarise(step_parent = sum_na(Count))
 
 #Same sex
 adopt_apps_same_year <- adopt_csv %>% 
   filter(Type == 'Application', Application %in% c('Adoption', 'Adoption+other'), Adopter == 'Same sex couple') %>% 
   group_by(Year) %>% 
-  summarise(same_sex = sum(Count))
+  summarise(same_sex = sum_na(Count))
 
 #Other or not stated
 adopt_apps_other_adopter_year <- adopt_csv %>% 
   filter(Type == 'Application', Application %in% c('Adoption', 'Adoption+other'), Adopter == 'Other or not stated') %>% 
   group_by(Year) %>% 
-  summarise(other_adopter = sum(Count))
+  summarise(other_adopter = sum_na(Count))
 
 #Total adoption applications
 adopt_apps_total_adopt_year <- adopt_csv %>% 
   filter(Type == 'Application', Application %in% c('Adoption', 'Adoption+other')) %>% 
   group_by(Year) %>% 
-  summarise(total_adopt_apps = sum(Count))
+  summarise(total_adopt_apps = sum_na(Count))
 
 #Placement orders
 adopt_apps_placement_year <- adopt_csv %>% 
   filter(Type == 'Application', Application == 'Non-adoption', Order_type == 'Placement') %>% 
   group_by(Year) %>% 
-  summarise(placement_ords = sum(Count))
+  summarise(placement_ords = sum_na(Count))
 
 #Other orders under Act
 adopt_apps_other_orders_year <- adopt_csv %>% 
   filter(Type == 'Application', Application == 'Non-adoption', Order_type != 'Placement') %>% 
   group_by(Year) %>% 
-  summarise(other_orders = sum(Count))
+  summarise(other_orders = sum_na(Count))
 
 #Total applications under Adoption Act
 adopt_apps_total_apps_year <- adopt_csv %>% 
   filter(Type == 'Application') %>% 
   group_by(Year) %>% 
-  summarise(total_apps = sum(Count))
+  summarise(total_apps = sum_na(Count))
 
 #Total applications under Adoption Act
 adopt_apps_case_start_year <- adopt_csv %>% 
   filter(Type == 'Cases started') %>% 
   group_by(Year) %>% 
-  summarise(case_start = sum(Count))
+  summarise(case_start = sum_na(Count))
 
 adopt_apps_annual_tables <- list(adopt_apps_male_female_year, adopt_apps_sole_year, adopt_apps_step_year,
                                adopt_apps_same_year, adopt_apps_other_adopter_year, adopt_apps_total_adopt_year,
@@ -76,7 +76,8 @@ t19_reg_year <- adopt_apps_joined_year %>%
          blank2 = NA) %>% 
   relocate(Quarter, .after = Year) %>% 
   relocate(blank1, .after = total_adopt_apps) %>% 
-  relocate(blank2, .after = other_orders)
+  relocate(blank2, .after = other_orders) %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, 0))) 
 
 
 # Quarterly #####################
@@ -84,61 +85,61 @@ t19_reg_year <- adopt_apps_joined_year %>%
 adopt_apps_male_female_qtr <- adopt_csv %>% 
   filter(Type == 'Application', Application %in% c('Adoption', 'Adoption+other'), Adopter == 'M/F couple') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(m_f_couple = sum(Count))
+  summarise(m_f_couple = sum_na(Count))
 
 #Sole applicant
 adopt_apps_sole_qtr <- adopt_csv %>% 
   filter(Type == 'Application', Application %in% c('Adoption', 'Adoption+other'), Adopter == 'Sole applicant') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(sole_appl = sum(Count))
+  summarise(sole_appl = sum_na(Count))
 
 #Step parent
 adopt_apps_step_qtr <- adopt_csv %>% 
   filter(Type == 'Application', Application %in% c('Adoption', 'Adoption+other'), Adopter == 'Step parent') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(step_parent = sum(Count))
+  summarise(step_parent = sum_na(Count))
 
 #Same sex
 adopt_apps_same_qtr <- adopt_csv %>% 
   filter(Type == 'Application', Application %in% c('Adoption', 'Adoption+other'), Adopter == 'Same sex couple') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(same_sex = sum(Count))
+  summarise(same_sex = sum_na(Count))
 
 #Other or not stated
 adopt_apps_other_adopter_qtr <- adopt_csv %>% 
   filter(Type == 'Application', Application %in% c('Adoption', 'Adoption+other'), Adopter == 'Other or not stated') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(other_adopter = sum(Count))
+  summarise(other_adopter = sum_na(Count))
 
 #Total adoption applications
 adopt_apps_total_adopt_qtr <- adopt_csv %>% 
   filter(Type == 'Application', Application %in% c('Adoption', 'Adoption+other')) %>% 
   group_by(Year, Quarter) %>% 
-  summarise(total_adopt_apps = sum(Count))
+  summarise(total_adopt_apps = sum_na(Count))
 
 #Placement orders
 adopt_apps_placement_qtr <- adopt_csv %>% 
   filter(Type == 'Application', Application == 'Non-adoption', Order_type == 'Placement') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(placement_ords = sum(Count))
+  summarise(placement_ords = sum_na(Count))
 
 #Other orders under Act
 adopt_apps_other_orders_qtr <- adopt_csv %>% 
   filter(Type == 'Application', Application == 'Non-adoption', Order_type != 'Placement') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(other_orders = sum(Count))
+  summarise(other_orders = sum_na(Count))
 
 #Total applications under Adoption Act
 adopt_apps_total_apps_qtr <- adopt_csv %>% 
   filter(Type == 'Application') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(total_apps = sum(Count))
+  summarise(total_apps = sum_na(Count))
 
 #Total applications under Adoption Act
 adopt_apps_case_start_qtr <- adopt_csv %>% 
   filter(Type == 'Cases started') %>% 
   group_by(Year, Quarter) %>% 
-  summarise(case_start = sum(Count))
+  summarise(case_start = sum_na(Count))
 
 adopt_apps_qtr_tables <- list(adopt_apps_male_female_qtr, adopt_apps_sole_qtr, adopt_apps_step_qtr,
                                  adopt_apps_same_qtr, adopt_apps_other_adopter_qtr, adopt_apps_total_adopt_qtr,
@@ -153,7 +154,8 @@ t19_reg_qtr <- adopt_apps_joined_qtr %>%
          blank2 = NA) %>% 
   relocate(Quarter, .after = Year) %>% 
   relocate(blank1, .after = total_adopt_apps) %>% 
-  relocate(blank2, .after = other_orders)
+  relocate(blank2, .after = other_orders) %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, 0))) 
 
 
 # time period
