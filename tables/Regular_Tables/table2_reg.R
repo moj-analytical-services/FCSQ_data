@@ -245,9 +245,9 @@ t2_reg_qtr <- pub_join_qtr %>% left_join(priv_join_qtr, by = c('Year', 'Qtr')) %
 # time period
 if(pub_quarter==4){
   
-  timeperiod2 <- paste0("Annually 2006 - ", pub_year, " and quarterly Q1 2011 - Q", pub_quarter," ", pub_year)
+  timeperiod2 <- paste0("Annually 2011 - ", pub_year, " and quarterly Q1 2011 - Q", pub_quarter," ", pub_year)
   
 } else {
   
-  timeperiod2 <- paste0("Annually 2006 - ", pub_year-1, " and quarterly Q1 2011 - Q", pub_quarter," ", pub_year)
+  timeperiod2 <- paste0("Annually 2011 - ", pub_year-1, " and quarterly Q1 2011 - Q", pub_quarter," ", pub_year)
 }

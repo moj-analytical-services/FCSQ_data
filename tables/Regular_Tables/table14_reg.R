@@ -9,8 +9,8 @@ div_prog_lookup <- tribble(
   ~Order, ~Stage,
   "00", "Decree Nisi",
   "01", "Decree Absolute",
-  "02", "FR Application",
-  "03", "FR Disposal",
+  "02", "Financial Remedy Application",
+  "03", "Financial Remedy Disposal",
   "04", "Hearing",
   "05", "Injunction Application",
   "06", "Injunction Order"
@@ -33,8 +33,8 @@ divorce_progress_format <- divorce_progress_csv %>% filter(Year > 2010) %>%
    
   ),
   Stage = case_when(
-    Stage == 'AR Application' ~ 'FR Application',
-    Stage == 'AR Order' ~ 'FR Disposal',
+    Stage == 'AR Application' ~ 'Financial Remedy Application',
+    Stage == 'AR Order' ~ 'Financial Remedy Disposal',
     TRUE ~ Stage
   ))
 

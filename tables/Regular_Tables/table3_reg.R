@@ -5,6 +5,7 @@
 # End row is the last row of data
 #Start col is the first column where data is added.
 #Head row is the row where the heading starts
+#priv_row_start is where private law data starts. Everything before will be not applicable
 head_row <- 9
 start_row <- 11
 end_row <- 48

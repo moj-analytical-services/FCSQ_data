@@ -97,7 +97,7 @@ diss_med_absolute_weeks_qtr <- divorce_timeliness_csv %>%
 diss_annual_tables <- list(diss_pet_year, diss_nisi_year, diss_avg_nisi_weeks_year, diss_med_nisi_weeks_year,
                        diss_absolute_year, diss_avg_absolute_weeks_year, diss_med_absolute_weeks_year)
 
-diss_joined_year <- reduce(diss_annual_tables, left_join, by = c('Year', 'Case_type'))
+diss_joined_year <- reduce(diss_annual_tables, left_join, by = c('Year', 'Case_type')) %>% ungroup()
 
 diss_qtr_tables <- list(diss_pet_qtr, diss_nisi_qtr, diss_avg_nisi_weeks_qtr, diss_med_nisi_weeks_qtr,
                            diss_absolute_qtr, diss_avg_absolute_weeks_qtr, diss_med_absolute_weeks_qtr)
@@ -125,7 +125,7 @@ t12_diss_part <- t12_diss %>%
             `Decree Absolute/Granted` = na_value
             ) %>% 
   arrange(`Case Type`) %>% 
-  mutate(across(where(is.numeric), ~replace_na(.x, na_value))) %>% ungroup() 
+  mutate(across(where(is.numeric), ~replace_na(.x, na_value)))
 
 # Nullity of Marriage and Judicial separation are calculated in the regular version of Table 12
 

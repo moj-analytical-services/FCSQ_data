@@ -1,7 +1,7 @@
 # Accessible Tables 
 
-# Number of Data Table
-table_num <- 27
+# Number of Data Tables for the accessible table
+table_num_access <- 27
 
 # A cover page, with subheaded sections of information
 cover_df <- tribble(
@@ -12,7 +12,7 @@ cover_df <- tribble(
   "Contact details", "Carly Gray\nHead of Access to Justice Data and Statistics\n 0778 427 5495"
 )
 
-table_sources <- c("HMCTS FamilyMan and Core Case Data",
+table_sources_access <- c("HMCTS FamilyMan and Core Case Data",
              "HMCTS FamilyMan",
              "HMCTS FamilyMan",
              "HMCTS FamilyMan",
@@ -74,8 +74,22 @@ contents_df <- tribble(
   
 )
 
-# Adding Sources
-contents_df <- contents_df %>% mutate(Source = c(NA, table_sources))
+# Adding Sources. timeperiod from index page
+timeperiods_all <- c(timeperiod1, timeperiod2, timeperiod3, timeperiod3, timeperiod4, timeperiod4,
+                     timeperiod5, timeperiod6, timeperiod7, timeperiod8, timeperiod9, timeperiod10,
+                     timeperiod11, timeperiod12, timeperiod13, timeperiod14, timeperiod15, timeperiod16,
+                     timeperiod17, timeperiod18, timeperiod19, timeperiod20, timeperiod21, timeperiod22, timeperiod23, timeperiod24, timeperiod25)
+
+contents_df <- contents_df %>% mutate(Source = c(NA, table_sources_access),
+                                      `Time period` = c(NA, timeperiods_all))
+
+
+# Adding time periods to titles of the data
+table_titles <- contents_df$`Sheet title`[2:(table_num_access + 1)]
+
+
+
+#table_titles <- paste(table_titles, timeperiods_all, sep = ', ')
 
 # A notes page, notes_all is made from the update excel file
 source(paste0(path_to_project, "footnotes.R"))
@@ -102,17 +116,17 @@ fcsq_a11y <- new_a11ytable(
                  "Table 19", "Table 20",
                  "Table 21", "Table 22", 
                  "Table 23", "Table 24", "Table 25"),
-  sheet_types = c("cover", "contents", "notes", rep("tables", table_num)),
+  sheet_types = c("cover", "contents", "notes", rep("tables", table_num_access)),
   sheet_titles = c(
     "Family Court Tables",
     "Table of contents",
     "Notes",
-    contents_df$`Sheet title`[2:(table_num + 1)]),
+    table_titles),
   sources = c(
     NA_character_,
     NA_character_,
     NA_character_,
-    table_sources
+    table_sources_access
     
   ),
   table_names = c(

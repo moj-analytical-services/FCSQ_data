@@ -24,40 +24,65 @@ source(paste0(path_to_project, "index.R"))
 # loads the footnotes for each table
 source(paste0(path_to_project, "footnotes.R"))
 
-#Formula tables. Formulas are added in the sheet as well using write formula.
+# tables
+
+
+#No Formula Tables - These tables don't contain formulas so the scripts just create the data frames containing the data
+source(paste0(path_to_project, "table_1_change.R"))
+source(paste0(path_to_project, "Regular_Tables/table1_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table2_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table5_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table6_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table7_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table8_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table9_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table13_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table14_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table15_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table17_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table18_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table19_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table20_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table21_22_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table23_reg.R"))
+
+
+#Formula tables. Formulas are added in the sheet as well
 source(paste0(path_to_project, "Regular_Tables/table3_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table4_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table10_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table11_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table12_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table16_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table24_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table25_reg.R"))
+
+# Adding sources for formula tables
+source(paste0(path_to_project, "Regular_Tables/table_sources.R"))
+
+# dropdowns used for formulas are added here
+source(paste0(path_to_project, "Regular_Tables/lists.R"))
 
 # Now data frames for the non formula tables are added into the excel workbook.
 # Any not applicable and suppressed values are also added here.
-# tables
-#None Formula Tables - These tables don't contain formulas so the scripts just create the data frames containing the data
 ####################################################################
 #Summary Tables
 #Table 1
 
 ####################################################################
-# Loading the data source
-source(paste0(path_to_project, "table_1_change.R"))
-source(paste0(path_to_project, "Regular_Tables/table1_reg.R"))
 
-# Writing the time period
 openxlsx::writeData(wb = template,
                     sheet = 'Table_1',
                     x = timeperiod1,
                     startRow = 3,
                     colNames = F)
 
-# the start row of the data
+# data
 t1_start <- 7
 
 # Adjusting row height for notes. Actual footnotes do not start until row 5 
 t1_note_heights <- rep(14.3, length(notes1))
 t1_note_heights[6] = 23.25
-
-# Writing the data and notes into the template
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_1', 
                       tables = list(table1_pivot_annual, table1_pivot_qtr), 
@@ -89,15 +114,11 @@ na_adder(wb = template,
          cols = c(9, 19),
          lengths = c(18, 18),
          start_row = t1_start + nrow(table1_pivot_annual))
-
-
 ####################################################################
 #Children Act Summary
 #Table 2
 
 ####################################################################
-# Load the data
-source(paste0(path_to_project, "Regular_Tables/table2_reg.R"))
 
 openxlsx::writeData(wb = template,
                     sheet = 'Table_2',
@@ -105,12 +126,11 @@ openxlsx::writeData(wb = template,
                     startRow = 3,
                     colNames = F)
 
-# setting start row and note heights
+# data
 t2_start <- 9
 t2_note_heights <- rep(14.3, length(notes2))
 t2_note_heights[5] = 21.8
 
-# writing the data and notes
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_2', 
                       tables = list(t2_reg_year, t2_reg_qtr), 
@@ -124,18 +144,15 @@ write_formatted_table(workbook = template,
 #Table 5
 
 ####################################################################
-# Load the data frame
-source(paste0(path_to_project, "Regular_Tables/table5_reg.R"))
-
-
 t5_start <- 8
+
 openxlsx::writeData(wb = template,
                     sheet = 'Table_5',
                     x = timeperiod5,
                     startRow = 3,
                     colNames = F)
 
-# writing the data and notes
+# data
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_5', 
                       tables = list(t5_reg_year, t5_reg_qtr), 
@@ -143,14 +160,11 @@ write_formatted_table(workbook = template,
                       starting_row = t5_start, 
                       quarterly_format = c(2))
 
-
 ####################################################################
 #Children Act Parties
 #Table 6
 
 ####################################################################
-# Loads and writes the data
-source(paste0(path_to_project, "Regular_Tables/table6_reg.R"))
 t6_start <- 8
 openxlsx::writeData(wb = template,
                     sheet = 'Table_6',
@@ -158,6 +172,7 @@ openxlsx::writeData(wb = template,
                     startRow = 3,
                     colNames = F)
 
+# data
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_6', 
                       tables = list(t6_reg_year, t6_reg_qtr), 
@@ -170,8 +185,6 @@ write_formatted_table(workbook = template,
 #Table 7
 
 ####################################################################
-# Loads and writes the data
-source(paste0(path_to_project, "Regular_Tables/table7_reg.R"))
 t7_start <- 8
 
 openxlsx::writeData(wb = template,
@@ -193,8 +206,6 @@ write_formatted_table(workbook = template,
 #Table 8
 
 ####################################################################
-# Loads and writes the data
-source(paste0(path_to_project, "Regular_Tables/table8_reg.R"))
 t8_start <- 6
 t8_row_heights <- rep(15, length(notes8))
 t8_row_heights[c(5, 6, 7, 8)] <- c(46.5, 25.5, 37.5, 25.5)
@@ -219,8 +230,6 @@ write_formatted_table(workbook = template,
 #Table 9
 
 ####################################################################
-# Loads and writes the data
-source(paste0(path_to_project, "Regular_Tables/table9_reg.R"))
 t9_start <- 6
 
 t9_row_heights <- rep(15, length(notes9))
@@ -245,8 +254,7 @@ write_formatted_table(workbook = template,
 #Table 12
 
 ####################################################################
-# Loads and writes the data. Note that this table contains both formulas and raw data
-source(paste0(path_to_project, "Regular_Tables/table12_reg.R"))
+
 openxlsx::writeData(wb = template,
                     sheet = 'Table_12',
                     x = timeperiod12,
@@ -277,8 +285,6 @@ na_adder(wb = template,
 #Table 13
 
 ####################################################################
-# Loads and writes the data
-source(paste0(path_to_project, "Regular_Tables/table13_reg.R"))
 t13_start <- 9
 t13_row_heights <- rep(15, length(notes13))
 t13_row_heights[[12]] <- 34.5
@@ -302,8 +308,6 @@ write_formatted_table(workbook = template,
 #Table 14
 
 ####################################################################
-# Loads and writes the data
-source(paste0(path_to_project, "Regular_Tables/table14_reg.R"))
 t14_start <- 7
 t14_row_heights <- rep(15, length(notes14))
 t14_row_heights[seq(from = 5, to = length(notes14))] <- c(24, 12.75, 40.5)
@@ -326,8 +330,6 @@ write_formatted_table(workbook = template,
 #Table 15
 
 ####################################################################
-# Loads and writes the data
-source(paste0(path_to_project, "Regular_Tables/table15_reg.R"))
 t15_start <- 7
 t15_row_heights <- rep(15, length(notes15))
 t15_row_heights[seq(from = 5, to = length(notes15))] <- c(24.75, 34.5, 24.75, 24.75, 24.75, 12.75)
@@ -352,8 +354,6 @@ write_formatted_table(workbook = template,
 #Table 16
 
 ####################################################################
-# Loads and writes the data frame. This table is all formula
-source(paste0(path_to_project, "Regular_Tables/table16_reg.R"))
 t16_row_heights <- rep(15, length(notes16))
 t16_row_heights[seq(from = 5, to = length(notes16))] <- c(12.75, 36, 12.75, 12.75, 22.5, 22.5, 15)
 
@@ -377,15 +377,14 @@ write_formatted_table(workbook = template,
 #Table 17
 
 ####################################################################
-# Loads the data
-source(paste0(path_to_project, "Regular_Tables/table17_reg.R"))
+
 openxlsx::writeData(wb = template,
                     sheet = 'Table_17',
                     x = timeperiod17,
                     startRow = 3,
                     colNames = F)
 
-# sets the start row and writes the data. Note that since the table doesn't start from a full year, the quarterly data is split for formatting purposes.
+# data
 t17_start <- 8
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_17', 
@@ -394,7 +393,20 @@ write_formatted_table(workbook = template,
                       starting_row = t17_start, 
                       quarterly_format = c(2, 3))
 
-# adding all the nas for this table. This adds dashes for the years and quarters without data
+# Removing unnecessary border lines
+openxlsx::addStyle(wb = template,
+                   sheet = 'Table_17',
+                   style = openxlsx::createStyle(
+                     border = "top",
+                     borderStyle = "none"),
+                   rows = t17_start + nrow(t17_reg_year) + nrow(t17_reg_qtr_a),
+                   cols = ncol(t17_reg_year),
+                   stack = T,
+                   gridExpand = T)
+
+
+
+# adding all the nas for this table
 fmpo_dash_columns <- c(3, 4, 7, 8, 9, 10)
 na_adder(wb = template,
          sheet = 'Table_17',
@@ -410,7 +422,6 @@ na_adder(wb = template,
          lengths = rep(5, length(fmpo_dash_columns)),
          start_row = t17_start + nrow(t17_reg_year))
 
-# adds dots for FMPO with POA from 2014 Q2 to the current year/quarter
 fmpo_dot_columns <- c(14, 15)
 na_adder(wb = template,
          sheet = 'Table_17',
@@ -431,14 +442,14 @@ na_adder(wb = template,
 #Table 18
 
 ####################################################################
-# Loads and writes the data
-source(paste0(path_to_project, "Regular_Tables/table18_reg.R"))
+
 openxlsx::writeData(wb = template,
                     sheet = 'Table_18',
                     x = timeperiod18,
                     startRow = 3,
                     colNames = F)
 
+# data
 t18_start <- 8
 t18_row_heights <- rep(15, length(notes18))
 t18_row_heights[c(9, 13)] <- c(24.75, 24.75)
@@ -450,14 +461,22 @@ write_formatted_table(workbook = template,
                       quarterly_format = c(2, 3),
                       note_row_heights = t18_row_heights)
 
+# Removing unnecessary border lines
+openxlsx::addStyle(wb = template,
+                   sheet = 'Table_18',
+                   style = openxlsx::createStyle(
+                     border = "top",
+                     borderStyle = "none"),
+                   rows = t18_start + nrow(t18_reg_year) + nrow(t18_reg_qtr_a),
+                   cols = ncol(t18_reg_year),
+                   stack = T,
+                   gridExpand = T)
 
 ####################################################################
 #Adoption Applications
 #Table 19
 
 ####################################################################
-# Loads and writes the data
-source(paste0(path_to_project, "Regular_Tables/table19_reg.R"))
 openxlsx::writeData(wb = template,
                     sheet = 'Table_19',
                     x = timeperiod19,
@@ -481,8 +500,7 @@ write_formatted_table(workbook = template,
 #Table 20
 
 ####################################################################
-# Loads and writes the data
-source(paste0(path_to_project, "Regular_Tables/table20_reg.R"))
+
 openxlsx::writeData(wb = template,
                     sheet = 'Table_20',
                     x = timeperiod20,
@@ -507,8 +525,7 @@ write_formatted_table(workbook = template,
 #Table 21
 
 ####################################################################
-# Loads both Table 21 and Table 22 data
-source(paste0(path_to_project, "Regular_Tables/table21_22_reg.R"))
+
 openxlsx::writeData(wb = template,
                     sheet = 'Table_21',
                     x = timeperiod21,
@@ -524,7 +541,7 @@ write_formatted_table(workbook = template,
                       starting_row = t21_start, 
                       quarterly_format = c(2))
 
-# Adding dot to table for first deprivation of liberty
+# Adding dot to table
 na_adder(wb = template,
          sheet = 'Table_21',
          value = "..",
@@ -537,7 +554,7 @@ na_adder(wb = template,
 #Table 22
 
 ####################################################################
-# Data is loaded under Table 21 heading
+
 openxlsx::writeData(wb = template,
                     sheet = 'Table_22',
                     x = timeperiod22,
@@ -553,7 +570,7 @@ write_formatted_table(workbook = template,
                       starting_row = t22_start, 
                       quarterly_format = c(2))
 
-# Adding dot to table for first deprivation of liberty
+# Adding dot to table
 na_adder(wb = template,
          sheet = 'Table_22',
          value = "..",
@@ -566,8 +583,7 @@ na_adder(wb = template,
 #Table 23
 
 ####################################################################
-# Loads and writes the data
-source(paste0(path_to_project, "Regular_Tables/table23_reg.R"))
+
 openxlsx::writeData(wb = template,
                     sheet = 'Table_23',
                     x = timeperiod23,
@@ -601,8 +617,7 @@ na_formatter(wb = template,
 #Table 24
 
 ####################################################################
-# Loads and writes the data
-source(paste0(path_to_project, "Regular_Tables/table24_reg.R"))
+
 openxlsx::writeData(wb = template,
                     sheet = 'Table_24',
                     x = timeperiod24,
@@ -642,8 +657,7 @@ na_adder(wb = template,
 #Table 25
 
 ####################################################################
-# Loads and writes the data
-source(paste0(path_to_project, "Regular_Tables/table25_reg.R"))
+
 openxlsx::writeData(wb = template,
                     sheet = 'Table_25',
                     x = timeperiod25,
@@ -671,14 +685,6 @@ na_adder(wb = template,
          cols = probate_time_na_columns,
          lengths = rep(1, length(probate_time_na_columns)),
          start_row = t25_start + nrow(t25_reg_year))
-############################################################################
-# Extra parts added for formula tables
-
-# Adding sources for formula tables
-source(paste0(path_to_project, "Regular_Tables/table_sources.R"))
-
-# dropdowns used for formulas are added here
-source(paste0(path_to_project, "Regular_Tables/lists.R"))
 
 # Export ##########################################################################################
 openxlsx::saveWorkbook(template, paste0(path_to_project, glue("Family Court Tables ({pub_months_short} {pub_year}).xlsx")), overwrite = TRUE)

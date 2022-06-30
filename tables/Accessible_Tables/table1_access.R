@@ -36,7 +36,7 @@ t1_na_2011 <- c(4, 5, 8, 11, 12)
 
 # Adding the NA values for the categories to be replaced later
 t1_accessible <- bind_rows(t1_accessible_a, t1_accessible_b) %>% 
-  mutate(across(t1_na_2011, function(x){
+  mutate(across(all_of(t1_na_2011), function(x){
     case_when(Year < 2011 ~ na_value,
               TRUE ~ x)
   }

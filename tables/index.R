@@ -20,7 +20,7 @@ if(pub_quarter=="1"){
 
 titleindex <- paste0("Family Court Statistics Quarterly, ", pub_months, " ", pub_year)
 
-timeperiod <- data.frame(c(paste0("2006 - ", pub_year, " (", pub_months_short, ")"),
+timeperiod_col <- data.frame(c(paste0("2006 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
@@ -67,7 +67,7 @@ openxlsx::addStyle(wb = template,
 # time period
 openxlsx::writeData(wb = template,
                     sheet = 'Index',
-                    x = timeperiod,
+                    x = timeperiod_col,
                     startRow = 6,
                     startCol = 4,
                     colNames = F)
