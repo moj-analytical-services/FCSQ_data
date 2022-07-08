@@ -46,14 +46,14 @@ divorce_case <- divorce_csv %>% group_by(Year, Quarter, Type) %>% summarise(Coun
   ungroup()
 
 divorce_case_start <- divorce_case %>% filter(Type == 'Petitions') %>% 
-  transmute(Category = 'Matrinomial Matters', Year = Year, Quarter = Quarter, Stage = 'Cases started', Count = Count)
+  transmute(Category = 'Matrimonial Matters', Year = Year, Quarter = Quarter, Stage = 'Cases started', Count = Count)
 
 divorce_group <- divorce_csv %>% group_by(Year, Quarter, Order_type) %>% summarise(Count = sum_na(Count)) %>% ungroup()
 d1 <- divorce_group %>% filter(Order_type == 'Decree Absolute')
 d2 <- divorce_group %>% filter(Order_type == 'Judicial Separations Granted')
 d_combine <- d1 %>% inner_join(d2, by = c('Year', 'Quarter'))
 divorce_case_close <- d_combine %>% 
-  transmute(Category = 'Matrinomial Matters', Year = Year, Quarter = Quarter, Stage = 'Cases closed', Count = Count.x + Count.y)
+  transmute(Category = 'Matrimonial Matters', Year = Year, Quarter = Quarter, Stage = 'Cases closed', Count = Count.x + Count.y)
 
 divorce_part <- bind_rows(divorce_case_start, divorce_case_close)
 

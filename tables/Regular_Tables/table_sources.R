@@ -1,3 +1,4 @@
+# NAs are stripped when read in R so need to be put back afterwards
 # Adding source for Table 3 and 4
 
 table_3_lookup <- table_3_lookup %>% mutate(across(where(is.numeric), ~replace_na(.x, na_value)))
@@ -13,9 +14,17 @@ na_formatter(wb = template,
              na_value = na_value)
 
 # Adding source for Table 10
+table_10_lookup <- table_10_lookup %>% mutate(across(where(is.numeric), ~replace_na(.x, na_value)))
 openxlsx::writeData(wb = template,
                     sheet = 'Table_10_source',
                     x = table_10_lookup)
+
+na_formatter(wb = template,
+             sheet = 'Table_10_source',
+             table = table_10_lookup,
+             value = "-",
+             startRow = 2,
+             na_value = na_value)
 
 # Adding source for Table 11
 openxlsx::writeData(wb = template,

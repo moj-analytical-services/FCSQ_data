@@ -8,7 +8,7 @@ table1_annual_access <- table_1_alt %>% group_by(Category, Year, Stage) %>% summ
 t1_rename <- c(
   'Public Law' = 'Children Act - Public Law',
   'Private Law' = 'Children Act - Private Law',
-  'Matrinomial Matters' = 'Matrinomial Matters',
+  'Matrimonial Matters' = 'Matrimonial Matters',
   'Financial Remedy' = 'Financial remedies',
   'Domestic Violence' = 'Domestic violence remedy orders',
   'Forced Marriage Protection' = 'Forced marriage protection',
