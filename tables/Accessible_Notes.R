@@ -191,5 +191,20 @@ new_t10_cols <- c(glue('Category\n[notes {note_lookup_selector(note_frame_list, 
 
 t10_accessible <- t10_accessible %>% add_col_notes(table_num = 10, col_nums = t10_col_change, new_cols = new_t10_cols)
 
+# Table 11
+title_note_t11 <- glue('[note {note_lookup_selector(note_frame_list, 11, "01")}][note {note_lookup_selector(note_frame_list, 11, "02")}][note {note_lookup_selector(note_frame_list, 11, "03")}]')
+t11_col_change <- c(1, 7, 9)
+new_t11_cols <- c(glue('Category\n[notes {note_lookup_selector(note_frame_list, 11, "04")},{note_lookup_selector(note_frame_list, 11, "05")}\\
+,{note_lookup_selector(note_frame_list, 11, "06")},{note_lookup_selector(note_frame_list, 11, "07")},{note_lookup_selector(note_frame_list, 11, "08")}\\
+,{note_lookup_selector(note_frame_list, 11, "09")},{note_lookup_selector(note_frame_list, 11, "12")},{note_lookup_selector(note_frame_list, 11, "13")}\\
+,{note_lookup_selector(note_frame_list, 11, "14")}]'),
+                  glue('Applicants - unrepresented parties\n[note {note_lookup_selector(note_frame_list, 11, "10")}]'),
+                  glue('Respondents - unrepresented parties\n[note {note_lookup_selector(note_frame_list, 11, "10")}]')
+                  
+  
+)
+
+t11_accessible <- t11_accessible %>% add_col_notes(table_num = 11, col_nums = t11_col_change, new_cols = new_t11_cols)
+notes_all <- notes_import %>% select(!Lookup)
 #title_notes <- list(title_note_t1, title_note_t2, title_note_t3, title_note_t3, title_note_t4, title_note_t4, title_note_t5,
                     #title_note_t6, title_note_t7, title_note_t8, title_note_t9, title_note_t10, title_note_t11, title_note_t12)
