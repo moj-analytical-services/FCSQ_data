@@ -89,16 +89,13 @@ table_titles <- contents_df$`Sheet title`[2:(table_num_access + 1)]
 
 
 
-#table_titles <- paste(table_titles, timeperiods_all, sep = ', ')
+table_titles <- paste(table_titles, timeperiods_all, sep = ', ')
 
 # A notes page, notes_all is made from the update excel file
-source(paste0(path_to_project, "footnotes.R"))
-source(paste0(path_to_project, "Accessible_Notes.R"))
-
 notes_df2 <- tribble(
-  ~"Note number", ~"Note text", ~"Table number",
-  "[c]", "Confidential: suppressed.", NA,
-  "[z]", "Not applicable.", NA)
+  ~"Table number", ~"Note number", ~"Note text",
+  "All Tables","[c]", "Confidential: suppressed.",
+ "All Tables", "[z]", "Not applicable." )
 
 notes_df <- bind_rows(notes_df2, notes_all)
 

@@ -14,9 +14,9 @@ colnames(t10_accessible_year) <- c('Category',
                                    'Applicant only - Mean duration in weeks',
                                    'Respondent only - Number of Disposals',
                                    'Respondent only - Mean duration in weeks',
-                                   'Neither Applicant nor Respondent - Number of disposals',
+                                   'Neither Applicant nor Respondent - Number of Disposals',
                                    'Neither Applicant nor Respondent - Mean duration in weeks',
-                                   'All - Number of disposals',
+                                   'All - Number of Disposals',
                                    'All - Mean duration in weeks'
 )
 
@@ -33,9 +33,9 @@ colnames(t10_accessible_qtr) <- c('Category',
                                   'Applicant only - Mean duration in weeks',
                                   'Respondent only - Number of Disposals',
                                   'Respondent only - Mean duration in weeks',
-                                  'Neither Applicant nor Respondent - Number of disposals',
+                                  'Neither Applicant nor Respondent - Number of Disposals',
                                   'Neither Applicant nor Respondent - Mean duration in weeks',
-                                  'All - Number of disposals',
+                                  'All - Number of Disposals',
                                   'All - Mean duration in weeks'
 )
 

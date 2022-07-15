@@ -78,6 +78,13 @@ openxlsx::writeFormula(wb = accessible_tables,
                        x = '=HYPERLINK("mailto:familycourt.statistics@gov.uk", "familycourt.statistics@gov.uk")'
                        )
 
+
+# Note Colwidth set
+openxlsx::setColWidths(wb = accessible_tables,
+                       sheet = 'Notes',
+                       cols = c(1, 2, 3),
+                       widths = c(15.11, 15.11, 128) 
+                       )
 openxlsx::saveWorkbook(accessible_tables, paste0(path_to_project, glue("Accessible Family Court Tables ({pub_months_short} {pub_year}).xlsx")), overwrite = TRUE)
 #openxlsx::saveWorkbook(accessible_tables, paste0(path_to_project,"test_output_access.xlsx"), overwrite = TRUE)
 
