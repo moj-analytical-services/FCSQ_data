@@ -13,12 +13,12 @@ colnames(dv_hard_full) <- c('num_quarter',
                             'Quarter',
                             'Non-Molestation Orders applied for',
                             'Occupation Orders applied for',
-                            'Orders applied for',
+                            'Total Orders applied for',
                             'Cases started',
                             'blank',
                             'Non-Molestation Orders made',
                             'Occupation Orders made',
-                            'Orders made',
+                            'Total Orders made',
                             'Cases concluding'
                             )
 
@@ -28,12 +28,12 @@ dv_hard_annual_part <- dv_hard_full %>% filter(is.na(Quarter)) %>% transmute(Yea
                                  `Application Type` = 'All',
                                  `Non-Molestation Orders applied for`,
                                  `Occupation Orders applied for`,
-                                 `Orders applied for`,
+                                 `Total Orders applied for`,
                                  `Applications made` = na_value,
                                  `Cases started` = na_value,
                                  `Non-Molestation Orders made`,
                                  `Occupation Orders made`,
-                                 `Orders made`,
+                                 `Total Orders made`,
                                  `Cases concluding`)
 
 #Hard coded quarterly section
@@ -43,12 +43,12 @@ dv_hard_qtr_part <- dv_hard_full %>% filter(!is.na(Quarter)) %>%
           `Application Type` = 'All',
           `Non-Molestation Orders applied for`,
            `Occupation Orders applied for`,
-          `Orders applied for`,
+          `Total Orders applied for`,
            `Applications made` = na_value,
            `Cases started` = na_value,
            `Non-Molestation Orders made`,
            `Occupation Orders made`,
-          `Orders made`,
+          `Total Orders made`,
           `Cases concluding`)
   
 # Processing ######################################################################################
@@ -307,12 +307,12 @@ t16_exparte_part <- full_t16 %>% transmute(Year = Year,
                        `Application Type` = 'Exparte',
                        `Non-Molestation Orders applied for` = `Exparte Non-Molestation Orders applied for`,
                        `Occupation Orders applied for` = `Exparte Occupation Orders applied for`,
-                       `Orders applied for` = `Non-Molestation Orders applied for` + `Occupation Orders applied for`,
+                       `Total Orders applied for` = `Non-Molestation Orders applied for` + `Occupation Orders applied for`,
                        `Applications made` = na_value,
                        `Cases started` = na_value,
                        `Non-Molestation Orders made` = `Exparte Non-Molestation Orders made`,
                        `Occupation Orders made` = `Exparte Occupation Orders made`,
-                       `Orders made` = `Non-Molestation Orders made` + `Occupation Orders made`,
+                       `Total Orders made` = `Non-Molestation Orders made` + `Occupation Orders made`,
                        `Cases concluding` = na_value)
 
 t16_onnotice_part <- full_t16 %>% transmute(Year = Year,
@@ -320,12 +320,12 @@ t16_onnotice_part <- full_t16 %>% transmute(Year = Year,
                                            `Application Type` = 'On Notice',
                                            `Non-Molestation Orders applied for` = `On Notice Non-Molestation Orders applied for`,
                                            `Occupation Orders applied for` = `On Notice Occupation Orders applied for`,
-                                           `Orders applied for` = `Non-Molestation Orders applied for` + `Occupation Orders applied for`,
+                                           `Total Orders applied for` = `Non-Molestation Orders applied for` + `Occupation Orders applied for`,
                                            `Applications made` = na_value,
                                            `Cases started` = na_value,
                                            `Non-Molestation Orders made` = `On Notice Non-Molestation Orders made`,
                                            `Occupation Orders made` = `On Notice Occupation Orders made`,
-                                           `Orders made` = `Non-Molestation Orders made` + `Occupation Orders made`,
+                                           `Total Orders made` = `Non-Molestation Orders made` + `Occupation Orders made`,
                                            `Cases concluding` = na_value)
 
 t16_all_part <- full_t16 %>% transmute(Year = Year,
@@ -333,12 +333,12 @@ t16_all_part <- full_t16 %>% transmute(Year = Year,
                                        `Application Type` = 'All',
                                        `Non-Molestation Orders applied for` = `Total Non-Molestation Orders applied for`,
                                        `Occupation Orders applied for` = `Total Occupation Orders applied for`,
-                                       `Orders applied for` = `Non-Molestation Orders applied for` + `Occupation Orders applied for`,
+                                       `Total Orders applied for` = `Non-Molestation Orders applied for` + `Occupation Orders applied for`,
                                        `Applications made`,
                                        `Cases started`,
                                        `Non-Molestation Orders made` = `Total Non-Molestation Orders made`,
                                        `Occupation Orders made` = `Total Occupation Orders made`,
-                                       `Orders made` = `Non-Molestation Orders made` + `Occupation Orders made`,
+                                       `Total Orders made` = `Non-Molestation Orders made` + `Occupation Orders made`,
                                        `Cases concluding`)
 
 #Combining with the earlier hard coded data

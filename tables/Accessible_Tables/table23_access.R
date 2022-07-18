@@ -3,7 +3,8 @@
 # Select all non blanks columns
 t23_accessible <- full_t23 %>% select(!starts_with('blank'))
 
-colnames(t23_accessible) <- c('Year',
+# Adding registered applications prefix to all columns other than the last column, year and quarter
+colnames(t23_accessible) <- paste('Registered applications', c('Year',
                               'Quarter',
                               'Application Type: Enduring Power of Attorney',
                               'Application Type: Lasting Power of Attorney',
@@ -25,4 +26,6 @@ colnames(t23_accessible) <- c('Year',
                               'Age of Donor: Unknown',
                               'Total registered applications',
                               'Number of deputyships appointed'
-)
+), sep = ' - ')
+
+colnames(t23_accessible)[c(1, 2, 22)] <- c('Year', 'Quarter', 'Number of deputyships appointed')
