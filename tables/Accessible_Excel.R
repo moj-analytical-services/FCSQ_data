@@ -84,12 +84,10 @@ contents_df <- contents_df %>% mutate(Source = c(NA, table_sources_access),
                                       `Time period` = c(NA, timeperiods_all))
 
 
-# Adding time periods to titles of the data
+# Adding time periods and notes to titles of the data
 table_titles <- contents_df$`Sheet title`[2:(table_num_access + 1)]
 
-
-
-table_titles <- paste(table_titles, timeperiods_all, sep = ', ')
+table_titles <- paste0(table_titles, ', ', timeperiods_all, ' ',  title_notes)
 
 # A notes page, notes_all is made from the update excel file
 notes_df2 <- tribble(

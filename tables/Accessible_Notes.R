@@ -394,10 +394,50 @@ new_t23_cols <- c(glue('Registered applications - Application Type: Enduring Pow
 t23_accessible <- t23_accessible %>% add_col_notes(table_num = 23, col_nums = t23_col_change, new_cols = new_t23_cols)
 
 # Table 24
+title_note_t24 <- glue('[note {note_lookup_selector(note_frame_list, 24, "01")}][note {note_lookup_selector(note_frame_list, 24, "02")}][note {note_lookup_selector(note_frame_list, 24, "03")}]')
+t24_col_change <- 5:15
+new_t24_cols <- c(glue('Applications Made: Grant of Probate\n[note {note_lookup_selector(note_frame_list, 24, "04")}][note {note_lookup_selector(note_frame_list, 24, "05")}][note {note_lookup_selector(note_frame_list, 24, "06")}]'),
+                  glue('Applications Made: Grant of Administration with Will annexed\n[note {note_lookup_selector(note_frame_list, 24, "04")}][note {note_lookup_selector(note_frame_list, 24, "05")}][note {note_lookup_selector(note_frame_list, 24, "06")}]'),
+                  glue('Applications Made: Grant of Administration\n[note {note_lookup_selector(note_frame_list, 24, "04")}][note {note_lookup_selector(note_frame_list, 24, "05")}][note {note_lookup_selector(note_frame_list, 24, "06")}]'),
+                  glue('Applications Made: All grant types\n[note {note_lookup_selector(note_frame_list, 24, "04")}][note {note_lookup_selector(note_frame_list, 24, "05")}][note {note_lookup_selector(note_frame_list, 24, "06")}]'),
+                  glue('Grants issued: Grant of Probate\n[note {note_lookup_selector(note_frame_list, 24, "06")}]'),
+                  glue('Grants issued: Grant of Administration with Will annexed\n[note {note_lookup_selector(note_frame_list, 24, "06")}]'),
+                  glue('Grants issued: Grant of Administration\n[note {note_lookup_selector(note_frame_list, 24, "06")}]'),
+                  glue('Grants issued: All grant types\n[note {note_lookup_selector(note_frame_list, 24, "06")}]'),
+                  glue('Grants revoked\n[note {note_lookup_selector(note_frame_list, 24, "07")}]'),
+                  glue('Standing Search\n[note {note_lookup_selector(note_frame_list, 24, "07")}]'),
+                  glue('Contested Probate cases\n[note {note_lookup_selector(note_frame_list, 24, "07")}][note {note_lookup_selector(note_frame_list, 24, "08")}]')
+                  
+                  
+  
+)
 
+t24_accessible <- t24_accessible %>% add_col_notes(table_num = 24, col_nums = t24_col_change, new_cols = new_t24_cols)
+
+# Table 25
+title_note_t25 <- glue('[note {note_lookup_selector(note_frame_list, 25, "01")}][note {note_lookup_selector(note_frame_list, 25, "02")}][note {note_lookup_selector(note_frame_list, 25, "03")}][note {note_lookup_selector(note_frame_list, 25, "04")}][note {note_lookup_selector(note_frame_list, 25, "07")}]')
+t25_col_change <- c(8, 9, 13, 14, 18, 19, 23, 24)
+
+new_t25_cols <- c(glue('Probate: Document receipt to grant issue - Mean weeks\n[note {note_lookup_selector(note_frame_list, 25, "05")}]'),
+                  glue('Probate: Document receipt to grant issue - Median weeks\n[note {note_lookup_selector(note_frame_list, 25, "05")}]'),
+                  glue('Letter of Administration with will annexed: Document receipt to grant issue - Mean weeks\n[note {note_lookup_selector(note_frame_list, 25, "05")}]'),
+                  glue('Letter of Administration with will annexed: Document receipt to grant issue - Median weeks\n[note {note_lookup_selector(note_frame_list, 25, "05")}]'),
+                  glue('Letter of Administration: Document receipt to grant issue - Mean weeks\n[note {note_lookup_selector(note_frame_list, 25, "05")}]'),
+                  glue('Letter of Administration: Document receipt to grant issue - Median weeks\n[note {note_lookup_selector(note_frame_list, 25, "05")}]'),
+                  glue('All grants: Document receipt to grant issue - Mean weeks\n[note {note_lookup_selector(note_frame_list, 25, "05")}]'),
+                  glue('All grants: Document receipt to grant issue - Median weeks\n[note {note_lookup_selector(note_frame_list, 25, "05")}]')
+                  )
+
+t25_accessible <- t25_accessible %>% add_col_notes(table_num = 25, col_nums = t25_col_change, new_cols = new_t25_cols) %>% 
+  mutate(Notes = case_when(Year == 2019 & Quarter == 'Q2' ~ glue('[note {note_lookup_selector(note_frame_list, 25, "06")}]' )
+                           )
+         )
+
+# Removing the lookup column for the final table
 notes_all <- notes_import %>% select(!Lookup)
 
-#title_notes <- list(title_note_t1, title_note_t2, title_note_t3, title_note_t3, title_note_t4, title_note_t4, title_note_t5,
-                    #title_note_t6, title_note_t7, title_note_t8, title_note_t9, title_note_t10, title_note_t11, title_note_t12,
-#title_note_t13, title_note_t14, title_note_t15,
-#title_note_t16, title_note_t17, title_note_t18, title_note_t19, title_note_t20)
+# Gathering all the title notes
+title_notes <- list(title_note_t1, title_note_t2, title_note_t3, title_note_t3, title_note_t4, title_note_t4, title_note_t5,
+                    title_note_t6, title_note_t7, title_note_t8, title_note_t9, title_note_t10, title_note_t11, title_note_t12, 
+                    title_note_t13, title_note_t14, title_note_t15, title_note_t16, title_note_t17, title_note_t18, title_note_t19,
+                    title_note_t20, title_note_t21, title_note_t22, title_note_t23, title_note_t24, title_note_t25)
