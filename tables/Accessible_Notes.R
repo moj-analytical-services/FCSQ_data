@@ -74,8 +74,9 @@ t1_accessible <- t1_accessible %>% add_col_notes(table_num = 1, col_nums = t1_co
 
 # Table 2
 title_note_t2 <- glue('[note {note_lookup_selector(note_frame_list, 2, "01")}][note {note_lookup_selector(note_frame_list, 2, "02")}]')
-t2_col_change <- c(4, 5, 6, 7, 8, 9, 10)
-new_t2_cols <- c(glue('Individual children involved in Applications\n[note {note_lookup_selector(note_frame_list, 2, "04")}][note {note_lookup_selector(note_frame_list, 2, "05")}]'),
+t2_col_change <- c(1, 4, 5, 6, 7, 8, 9, 10)
+new_t2_cols <- c(glue('Category\n[note {note_lookup_selector(note_frame_list, 2, "03")}]'),
+  glue('Individual children involved in Applications\n[note {note_lookup_selector(note_frame_list, 2, "04")}][note {note_lookup_selector(note_frame_list, 2, "05")}]'),
   glue('Applications made\n[note {note_lookup_selector(note_frame_list, 2, "06")}]'),
   glue('Total orders applied for\n[note {note_lookup_selector(note_frame_list, 2, "07")}]'),
   glue('Cases starting\n[note {note_lookup_selector(note_frame_list, 2, "08")}]'),
