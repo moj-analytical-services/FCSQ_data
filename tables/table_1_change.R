@@ -42,18 +42,20 @@ adopt_case_close <- adopt_case %>% filter(Type == 'Cases closed') %>%
 adopt_part <- bind_rows(adopt_case_start, adopt_case_close)
 
 #Divorce
-divorce_case <- divorce_csv %>% group_by(Year, Quarter, Type) %>% summarise(Count = sum_na(Count)) %>% 
-  ungroup()
+divorce_case <- divorce_t12_input %>% filter(Case_type == 'All', Law == 'All', Quarter!= '') %>% 
+  group_by(Stage, Quarter) %>% summarise(Count = sum(Count)) %>% ungroup() %>% 
+  separate(Quarter, c('Year', 'Quarter'), sep = ' Q') %>% 
+  mutate(Year = as.numeric(Year),
+         Quarter = as.numeric(Quarter))
 
-divorce_case_start <- divorce_case %>% filter(Type == 'Petitions') %>% 
-  transmute(Category = 'Matrimonial Matters', Year = Year, Quarter = Quarter, Stage = 'Cases started', Count = Count)
+divorce_case_start <- divorce_case %>% filter(Stage == 'Petition') %>% 
+  transmute(Category = 'Matrinomial Matters', Year = Year, Quarter = Quarter, Stage = 'Cases started', Count = Count)
 
-divorce_group <- divorce_csv %>% group_by(Year, Quarter, Order_type) %>% summarise(Count = sum_na(Count)) %>% ungroup()
-d1 <- divorce_group %>% filter(Order_type == 'Decree Absolute')
-d2 <- divorce_group %>% filter(Order_type == 'Judicial Separations Granted')
-d_combine <- d1 %>% inner_join(d2, by = c('Year', 'Quarter'))
-divorce_case_close <- d_combine %>% 
-  transmute(Category = 'Matrimonial Matters', Year = Year, Quarter = Quarter, Stage = 'Cases closed', Count = Count.x + Count.y)
+divorce_case_close <- divorce_case %>% filter(Stage %in% c('Decree Absolute', 'Judicial Separations Granted')) %>% 
+  group_by(Year, Quarter) %>% 
+  summarise(Count = sum(Count)) %>% 
+  ungroup() %>% 
+  transmute(Category = 'Matrinomial Matters', Year = Year, Quarter = Quarter, Stage = 'Cases closed', Count = Count)
 
 divorce_part <- bind_rows(divorce_case_start, divorce_case_close)
 

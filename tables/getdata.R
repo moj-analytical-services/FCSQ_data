@@ -59,6 +59,9 @@ probate_timeliness_csv <- read_using(readr::read_csv, paste0(csv_folder, 'CSV Pr
 opg_csv <- read_using(readr::read_csv, paste0(csv_folder, 'CSV OPG Powers of Attorney National', " ", pub_year, " Q", pub_quarter, ".csv"), 
                       na =  na_keys) %>% rename_with(str_to_title) %>% select(1:5)
 
+divorce_t12_input <- read_using(readr::read_csv, paste0(csv_folder, 'DIVORCE_FCSQ_T12.csv'), na = na_keys) %>% rename_with(str_to_title)
+divorce_t12b_input <- read_using(readr::read_csv, paste0(csv_folder, 'DIVORCE_FCSQ_T12b.csv'), na = na_keys) %>% rename_with(str_to_title)
+
 #Additional non csv inputs
 care_disposal_csv <- read_using(readr::read_csv, paste0(csv_folder, 'CARE_FINAL', " ", pub_year, " Q", pub_quarter,'.csv'), na = na_keys) %>% rename_with(str_to_title)
 
