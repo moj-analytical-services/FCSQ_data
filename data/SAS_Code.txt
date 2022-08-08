@@ -1,0 +1,68 @@
+SELECT 'DV_APPS1',count(*) as count from DV_APPS1
+ UNION ALL
+SELECT 'DV_Ords1',count(*) as count from DV_Ords1
+ UNION ALL
+SELECT 'RES_ATTENDANCE_INFO',count(*) as count from RES_ATTENDANCE_INFO
+ UNION ALL
+SELECT 'DV_POA_CASES',count(*) as count from DV_POA_CASES
+ UNION ALL
+SELECT 'DV_Applications_1',count(*) as count from DV_Applications_1
+ UNION ALL
+SELECT 'DV_Applications_2',count(*) as count from DV_Applications_2
+ UNION ALL
+SELECT 'DV_APPLICATION_EVENTS',count(*) as count from DV_APPLICATION_EVENTS
+ UNION ALL
+SELECT 'APP_LOOKUP1',count(*) as count from APP_LOOKUP1
+ UNION ALL
+SELECT 'APP_LOOKUP2',count(*) as count from APP_LOOKUP2
+ UNION ALL
+SELECT 'App_Lookup_3',count(*) as count from App_Lookup_3
+ UNION ALL
+SELECT 'DV_APPS_FINAL',count(*) as count from DV_APPS_FINAL
+ UNION ALL
+SELECT 'DV_APP_CASES',count(*) as count from DV_APP_CASES
+ UNION ALL
+SELECT 'DV_APP_CASES_FINAL',count(*) as count from DV_APP_CASES_FINAL
+ UNION ALL
+SELECT 'Applicants',count(*) as count from Applicants
+ UNION ALL
+SELECT 'DV_APP_GENDER',count(*) as count from DV_APP_GENDER
+ UNION ALL
+SELECT 'APP_COURT_AGG1',count(*) as count from APP_COURT_AGG1
+ UNION ALL
+SELECT 'DV_Orders_2',count(*) as count from DV_Orders_2
+ UNION ALL
+SELECT 'Order_Lookup_1',count(*) as count from Order_Lookup_1
+ UNION ALL
+SELECT 'Order_Lookup_2',count(*) as count from Order_Lookup_2
+ UNION ALL
+SELECT 'Order_Lookup_3',count(*) as count from Order_Lookup_3
+ UNION ALL
+SELECT 'Orders3',count(*) as count from Orders3
+ UNION ALL
+SELECT 'Orders4',count(*) as count from Orders4
+ UNION ALL
+SELECT 'POA_CASE_LIST',count(*) as count from POA_CASE_LIST
+ UNION ALL
+SELECT 'ORD_WITH_POA',count(*) as count from ORD_WITH_POA
+ UNION ALL
+SELECT 'DV_ORDS_FINAL',count(*) as count from DV_ORDS_FINAL
+ UNION ALL
+SELECT 'DV_ORD_CASES',count(*) as count from DV_ORD_CASES
+ UNION ALL
+SELECT 'DV_ORD_CASES_FINAL',count(*) as count from DV_ORD_CASES_FINAL
+ UNION ALL
+SELECT 'DV_APPS',count(*) as count from DV_APPS
+ UNION ALL
+SELECT 'DV_APP_COUNT',count(*) as count from DV_APP_COUNT
+ UNION ALL
+SELECT 'DV_ORDERS',count(*) as count from DV_ORDERS
+ UNION ALL
+SELECT 'DV_CASE_STARTS',count(*) as count from DV_CASE_STARTS
+ UNION ALL
+SELECT 'DV_CASES_Closed',count(*) as count from DV_CASES_Closed
+ UNION ALL
+SELECT 'DV_all_data',count(*) as count from DV_all_data
+ UNION ALL
+SELECT 'DV_CSV',count(*) as count from DV_CSV
+ UNION ALL
