@@ -13,7 +13,12 @@ dropdown10_df <- data.frame(c("Adoption", "Divorce (incl. annulment and FR)", "D
 dropdown11_df <- data.frame(c("Adoption", "Divorce (incl. FR)", "Domestic Violence", "Financial Remedy", "Private Law", "Public Law"))
 
 # table 12
-dropdown12_df <- data.frame(c("All", "Paper", "Digital"))
+dropdown12a_df <- data.frame(c("All", "Old", "New"))
+dropdown12b_df <- data.frame(c("All", "Paper", "Digital"))
+
+# table 12b
+dropdown12ba_df <- data.frame(c("All", "Joint", "Sole"))
+dropdown12bb_df <- data.frame(c("Divorce", "Civil Partnership", "Both"))
 
 #table 16
 dropdown16_df <- tibble(c('All', 'Exparte', 'On notice'))
@@ -69,11 +74,37 @@ list_add(wb = template,
 # table 12 ######################
 list_add(wb = template,
          sheet = 'Table_12',
-         list = dropdown12_df,
-         listRow = 7,
-         listCol = 2,
-         startRow = 12,
+         list = dropdown12a_df,
+         listRow = t12_list_a_row,
+         listCol = t12_list_letter,
+         startRow = t12_start,
          startCol = 22)
+
+list_add(wb = template,
+         sheet = 'Table_12',
+         list = dropdown12b_df,
+         listRow = t12_list_b_row,
+         listCol = t12_list_letter,
+         startRow = t12_start,
+         startCol = 22)
+
+# table 12b ######################
+list_add(wb = template,
+         sheet = 'Table_12b',
+         list = dropdown12ba_df,
+         listRow = t12b_list_a_row,
+         listCol = t12b_list_letter,
+         startRow = t12b_start,
+         startCol = 22)
+
+list_add(wb = template,
+         sheet = 'Table_12b',
+         list = dropdown12bb_df,
+         listRow = t12b_list_b_row,
+         listCol = t12b_list_letter,
+         startRow = t12b_start,
+         startCol = 22)
+
 
 # table 16 ###################
 list_add(wb = template,
