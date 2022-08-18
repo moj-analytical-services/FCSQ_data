@@ -2,7 +2,7 @@
 # This table contains both formulas and raw data
 
 #Keeping track of row to start with
-t12b_start <- 12
+t12b_start <- 14
 
 #List info
 t12b_list_col <- 2
@@ -52,11 +52,10 @@ div_qtr_new <- tibble(Year = current_div_qtr_new$Year,
 )
 
 t12b_reg_qtr <- div_qtr_new %>% 
-  mutate(Quarter = paste0('Q', Quarter), blank1 = NA, blank2 = NA, blank3 = NA, blank4 = NA) %>% 
+  mutate(Quarter = paste0('Q', Quarter), blank1 = NA, blank2 = NA, blank3 = NA) %>% 
   relocate(blank1, .after = Quarter) %>% 
   relocate(blank2, .after = d_median_final) %>% 
-  relocate(blank3, .after = n_final) %>% 
-  relocate(blank4, .after = j_final) %>% 
+  relocate(blank3, .after = n_final) %>%  
   mutate(across(3:ncol(.), .fns = formula_add)) %>% 
   mutate(across(where(is.numeric), ~replace_na(.x, 0))) 
 

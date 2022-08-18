@@ -49,13 +49,13 @@ divorce_case <- divorce_t12_input %>% filter(Case_type == 'All', Law == 'All', Q
          Quarter = as.numeric(Quarter))
 
 divorce_case_start <- divorce_case %>% filter(Stage == 'Petition') %>% 
-  transmute(Category = 'Matrinomial Matters', Year = Year, Quarter = Quarter, Stage = 'Cases started', Count = Count)
+  transmute(Category = 'Matrimonial Matters', Year = Year, Quarter = Quarter, Stage = 'Cases started', Count = Count)
 
 divorce_case_close <- divorce_case %>% filter(Stage %in% c('Decree Absolute', 'Judicial Separations Granted')) %>% 
   group_by(Year, Quarter) %>% 
   summarise(Count = sum(Count)) %>% 
   ungroup() %>% 
-  transmute(Category = 'Matrinomial Matters', Year = Year, Quarter = Quarter, Stage = 'Cases closed', Count = Count)
+  transmute(Category = 'Matrimonial Matters', Year = Year, Quarter = Quarter, Stage = 'Cases closed', Count = Count)
 
 divorce_part <- bind_rows(divorce_case_start, divorce_case_close)
 

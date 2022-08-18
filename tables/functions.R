@@ -75,6 +75,72 @@ note_footer <- function(wb, sheet, start_row, notes, col_length, row_heights = N
                           showGridLines = FALSE)
 }
 
+# note helper functions
+notes_select <- function(notes, table){
+  notes %>% filter(`Table number` == table) %>% 
+    pull(`Note text`)
+}
+
+make_reg_notes <- function(notes, source){
+  notes <- c("Source:",
+             glue(source),
+             "",
+             "Notes:",
+             glue("{seq_along(notes)}) {notes}"))
+}
+
+get_note_frame <- function(table_name){
+  # This gets the note numbers for a particular table after removing all the square brackets
+  notes_import %>% filter(`Table number` == table_name)
+  
+}
+
+
+# Column names are changed by positioning. For each table the number is picked from the note list and the appropriate note number picked.
+# Relative orders of notes for a particular table is therefore the only thing that matters
+
+col_name_check <- function(old_cols, new_cols, table){
+  # This checks that the new columns are referring to the same columns as the original columns
+  # This only works if there are no special characters in the original sequence
+  checker <- str_detect(new_cols, coll(old_cols))
+  if (!all(checker)){
+    # Prints new columns and old columns to check where the names don't match
+    print(old_cols[which(!checker)])
+    print(new_cols[which(!checker)])
+    
+    stop(glue('Names do not match in accessible table {table}'))
+    
+  }
+}
+
+add_col_notes <- function(table, table_num, col_nums, new_cols, skip = FALSE){
+  # Table name: This is the table that is being modified
+  # Table num : The number of the table
+  # col_nums: A numeric vector containing positions of column
+  # new_cols : A character string containing the new column names to replace the old ones
+  # skip lets you skip the check. Only set to TRUE id you are certain there is no error in renaming
+  orig_cols <- colnames(table)[col_nums]
+  
+  if (!skip){
+    col_name_check(orig_cols, new_cols, table = table_num)
+    
+  }
+  colnames(table)[col_nums] <- new_cols
+  table
+  
+  
+}
+
+note_lookup_selector <- function(frame_list, table_num, lookup_code){
+  # Takes the list of data frames and selects the note number based on the numerical lookup code for a particular note.
+  # As note numbers may change, lookup code for a particular note should not. 
+  # The lookup code is usually in the form of - 01 or - 10 or so forth
+  frame_list[[glue('Table {table_num}')]] %>% 
+    filter(str_detect(Lookup, paste('-', lookup_code))) %>% 
+    pull(`Note number`) %>% str_remove_all('[\\[\\]]')
+}
+
+
 # This function takes a list of tables, notes and the starting row and adds the data to the spreadsheet properly formatted.
 write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_row, quarterly_format = NULL, col_num = NULL, note_row_heights = NULL) {
   
@@ -431,4 +497,14 @@ colwidth_format <- function(wb, sheet, data, widths = 'auto'){
 # Sums including na. Easier to have a seprate function than change the keyword arguments
 sum_na <- function(...){
   sum(..., na.rm = TRUE)
+}
+
+# Adds hyperlinks to the Contents Page
+add_content_link <- function(sheet_name, startRow){
+  openxlsx::writeFormula(wb = accessible_tables, 
+                         "Contents",
+                         startRow = startRow,
+                         x = makeHyperlinkString(sheet = sheet_name, 
+                                                 row = 1, col = 1, 
+                                                 text = sheet_name))
 }

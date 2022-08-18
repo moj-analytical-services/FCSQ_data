@@ -1,21 +1,11 @@
-# notes
-notes_select <- function(notes, table){
-  notes %>% filter(`Table number` == table) %>% 
-    pull(`Note text`)
-}
-
-make_reg_notes <- function(notes, source){
-  notes <- c("Source:",
-             glue(source),
-             "",
-             "Notes:",
-             glue("{seq_along(notes)}) {notes}"))
-}
 
 # Number of tables is set and used to get a vector containing the number of the tables
+# There are 26 tables with table 12b but that has the same table number despite being different
 no_tables <- 25
-no_tables_seq <- seq(no_tables)
+no_tables_seq <- append(seq(no_tables), '12b', after = 12)
 table_numbers <- glue('Table {no_tables_seq}')
+
+table_numbers <- notes_import %>% distinct(`Table number`) %>% pull(`Table number`)
 
 # Creates a list of notes that correspond to a particular table
 notes_list <- map(table_numbers, ~ notes_select(notes_import, .x))
@@ -32,6 +22,7 @@ table_sources_reg <- c("HMCTS FamilyMan and Core Case Data",
                    "HMCTS FamilyMan and Core Case Data",
                    "HMCTS FamilyMan and Core Case Data",
                    "HMCTS FamilyMan and Core Case Data",
+                   "Core Case Data",
                    "HMCTS FamilyMan and Core Case Data",
                    "HMCTS FamilyMan and Core Case Data",
                    "HMCTS FamilyMan and Core Case Data",

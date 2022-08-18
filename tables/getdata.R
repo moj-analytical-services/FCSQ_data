@@ -82,9 +82,12 @@ opg_table <- read_using(openxlsx::read.xlsx, paste0(csv_folder, 'OPG Tables', " 
 
 
 contest_probate <- read_using(readr::read_csv, paste0(csv_folder, 'Contested_Probate', " ", pub_year, " Q", pub_quarter,'.csv'), na = na_keys) %>% rename_with(str_to_title)
+
   
 #notes_import <- read_using(readr::read_csv, paste0(csv_folder, 'Notes.csv'), na = na_keys)
-notes_import <- read_using(openxlsx::read.xlsx, paste0(csv_folder, 'Notes Workbook.xlsx'), sheet = 'Notes', na.strings = na_keys, sep.names = ' ') %>% as_tibble()
+#notes_import <- read_using(openxlsx::read.xlsx, paste0(csv_folder, 'Notes Workbook.xlsx'), sheet = 'Notes', na.strings = na_keys, sep.names = ' ') %>% as_tibble()
+
+notes_import <- openxlsx::read.xlsx(paste0(path_to_project, 'Notes Workbook 2022 Q2.xlsx'), sheet = 'Notes', na.strings = na_keys, sep.names = ' ') %>% as_tibble()
 
 #Helpful letter lookup
 

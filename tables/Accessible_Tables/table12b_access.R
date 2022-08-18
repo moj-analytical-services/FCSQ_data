@@ -16,3 +16,5 @@ new_divorce_app_qtr <- new_divorce_applications %>% filter(Quarter != '') %>%
             `Application Type` = Applicant,
             `Applications` = Count) %>% 
   arrange(Case, `Application Type`)
+
+t12b_accessible <- new_divorce_app_qtr

@@ -1,7 +1,5 @@
 # Accessible Tables 
 
-# Number of Data Tables for the accessible table
-table_num_access <- 27
 
 # A cover page, with subheaded sections of information
 cover_df <- tribble(
@@ -26,6 +24,7 @@ table_sources_access <- c("HMCTS FamilyMan and Core Case Data",
              "HMCTS FamilyMan and Core Case Data",
              "HMCTS FamilyMan and Core Case Data",
              "HMCTS FamilyMan and Core Case Data",
+             "HMCTS Core Case Data",
              "HMCTS FamilyMan and Core Case Data",
              "HMCTS FamilyMan and Core Case Data",
              "HMCTS FamilyMan and Core Case Data",
@@ -58,6 +57,7 @@ contents_df <- tribble(
   "Table 10", "Number of disposals and average time to first definitve disposal in courts in England and Wales by case type and legal representaion of parties",
   "Table 11", "Legal representation status of applicants and respondents in cases with at least one hearing in Family courts in England and Wales",
   "Table 12", "Number of cases relating to matrimonial proceedings (including civil partnerships), with selected average times, in England and Wales",
+  "Table 12b", "Number of cases relating to matrimonial proceedings (including civil partnerships), for New Divorce Law, in England and Wales",
   "Table 13", "Progression of divorce cases (including civil partnerships) started for England and Wales",
   "Table 14", "Percentage of divorce cases (including civil partnerships) reaching certain stages, by the number of quarters since petition and stage, England and Wales",
   "Table 15", "Number of applications and disposals made for one or more types of financial remedy (formerly ancillary relief) orders, in England and Wales",
@@ -74,15 +74,19 @@ contents_df <- tribble(
   
 )
 
+
 # Adding Sources. timeperiod from index page
 timeperiods_all <- c(timeperiod1, timeperiod2, timeperiod3, timeperiod3, timeperiod4, timeperiod4,
                      timeperiod5, timeperiod6, timeperiod7, timeperiod8, timeperiod9, timeperiod10,
-                     timeperiod11, timeperiod12, timeperiod13, timeperiod14, timeperiod15, timeperiod16,
+                     timeperiod11, timeperiod12, timeperiod12b, timeperiod13, timeperiod14, timeperiod15, timeperiod16,
                      timeperiod17, timeperiod18, timeperiod19, timeperiod20, timeperiod21, timeperiod22, timeperiod23, timeperiod24, timeperiod25)
 
 contents_df <- contents_df %>% mutate(Source = c(NA, table_sources_access),
                                       `Time period` = c(NA, timeperiods_all))
 
+# Number of tables in the accessible worksheet
+data_table_tabs <- contents_df$`Sheet name`
+table_num_access <- length(data_table_tabs) - 1
 
 # Adding time periods and notes to titles of the data
 table_titles <- contents_df$`Sheet title`[2:(table_num_access + 1)]
@@ -98,19 +102,7 @@ notes_df2 <- tribble(
 notes_df <- bind_rows(notes_df2, notes_all)
 
 fcsq_a11y <- new_a11ytable(
-  tab_titles = c("Cover", "Contents", "Notes", 
-                 "Table 1", "Table 2", 
-                 "Table 3a", "Table 3b", "Table 4a", "Table 4b",
-                 "Table 5",
-                 "Table 6", "Table 7",
-                 "Table 8", "Table 9",
-                 "Table 10", "Table 11",
-                 "Table 12", "Table 13", "Table 14",
-                 "Table 15", "Table 16",
-                 "Table 17", "Table 18",
-                 "Table 19", "Table 20",
-                 "Table 21", "Table 22", 
-                 "Table 23", "Table 24", "Table 25"),
+  tab_titles = c("Cover", "Contents", data_table_tabs),
   sheet_types = c("cover", "contents", "notes", rep("tables", table_num_access)),
   sheet_titles = c(
     "Family Court Tables",
@@ -142,6 +134,7 @@ fcsq_a11y <- new_a11ytable(
     "Overall_time_to_first_disposal",
     "Overall_Legal_Representation",
     "Divorce_Summary",
+    "New_Divorce_Summary",
     "Divorce_Progression",
     "Divorce_Progression_Stage_Percentage",
     "Financial_Remedy_Summary",
@@ -174,6 +167,7 @@ fcsq_a11y <- new_a11ytable(
     t10_accessible,
     t11_accessible,
     t12_accessible,
+    t12b_accessible,
     t13_accessible,
     t14_accessible,
     t15_accessible,

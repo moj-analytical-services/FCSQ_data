@@ -9,10 +9,10 @@ options(digits = 15) # Set the number of significant figure to 15 (same as excel
 options(dplyr.summarise.inform = FALSE)
 
 # Downloads the template from the s3 bucket. This will be filled in with data
-download_file_from_s3(paste0(csv_folder, "FCSQ Template", " ", pub_year, " Q", pub_quarter, ".xlsx"), "tables/FCSQ Template.xlsx", overwrite = TRUE)
-template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "FCSQ Template.xlsx"))
+#download_file_from_s3(paste0(csv_folder, "FCSQ Template", " ", pub_year, " Q", pub_quarter, ".xlsx"), "tables/FCSQ Template.xlsx", overwrite = TRUE)
+#template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "FCSQ Template.xlsx"))
 
-#template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "My template.xlsx"))
+template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "My template.xlsx"))
 
 # Editing #########################################################################################
 # data is used for source data where needed for tables with drop downs
@@ -255,7 +255,7 @@ openxlsx::writeData(wb = template,
 
 # data
 t12_row_heights <- rep(15, length(notes12))
-t12_row_heights[seq(from = 5, to = length(notes12))] <- c(24, 24, 22.5, 11.25, 12.75, 12.75, 24.75, 12.75)
+t12_row_heights[seq(from = 5, to = length(notes12))] <- c(24, 22.5, 11.25, 12.75, 12.75, 24.75, 12.75, 22.5)
 
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_12', 
@@ -271,6 +271,32 @@ na_adder(wb = template,
          cols = c(6, 7, 9, 10),
          lengths = rep(3, 4),
          start_row = t12_start)
+
+####################################################################
+#New Matrimonial matters proceedings
+#Table 12b
+
+####################################################################
+# Loads and writes the data. Note that this table contains both formulas and raw data
+source(paste0(path_to_project, "Regular_Tables/table12b_reg.R"))
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_12b',
+                    x = timeperiod12b,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+t12b_row_heights <- rep(15, length(notes12b))
+t12b_row_heights[seq(from = 5, to = length(notes12b))] <- c(24, 22.5, 11.25, 12.75, 12.75, 24.75, 12.75, 22.5, 12)
+
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_12b', 
+                      tables = list(t12b_reg_qtr), 
+                      notes = notes12b, 
+                      starting_row = t12b_start, 
+                      quarterly_format = c(1),
+                      note_row_heights = t12b_row_heights)
+
 
 ####################################################################
 #Divorce Progression

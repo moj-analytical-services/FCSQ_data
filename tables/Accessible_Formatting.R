@@ -13,6 +13,7 @@ table_list <- fcsq_a11y %>% filter(sheet_type == 'tables') %>% pull(table)
 
 # List of columns that have comma formtting applied in each table. 99 represents no formatting applied
 comma_cols <- list(4:ncol(table_list[[1]]),
+                   #Children Act Tables
                      4:ncol(table_list[[2]]),
                      3:ncol(table_list[[3]]),
                      3:ncol(table_list[[4]]),
@@ -28,9 +29,10 @@ comma_cols <- list(4:ncol(table_list[[1]]),
                      seq(from = 4, to = ncol(table_list[[12]]), by = 2),
                      4:ncol(table_list[[13]]),
                      # Divorce has a mixture of columns. Subject to change
-                     c(5, 6, 9, 12, 13),
+                     c(6, 7, 10),
+                     5,
                      c(3, seq(from = 4, to = ncol(table_list[[15]]), by = 2)),
-                     #Divorce Progression does not need any 
+                     #Divorce Progression by percentage of cases does not need any 
                      99,
                      3:ncol(table_list[[17]]),
                      4:ncol(table_list[[18]]),
@@ -54,16 +56,6 @@ pwalk(list(sheet_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2,
 na_formatter(accessible_tables, 'Table 23', t23_accessible, na_value = suppress_value, value = '[c]' )
 #pwalk(list(sheet_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2, na_value = suppress_value, value = '[c]'))
 
-
-# Adds hyperlinks to the Contents Page
-add_content_link <- function(sheet_name, startRow){
-  openxlsx::writeFormula(wb = accessible_tables, 
-                         "Contents",
-                         startRow = startRow,
-                         x = makeHyperlinkString(sheet = sheet_name, 
-                                                 row = 1, col = 1, 
-                                                 text = sheet_name))
-}
 
 # A list containing vectors for the worksheets used to add hyperlinks to the Contents Page
 content_list <- list(c('Notes', sheet_names), 
