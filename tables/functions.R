@@ -494,7 +494,7 @@ colwidth_format <- function(wb, sheet, data, widths = 'auto'){
   
 }
 
-# Sums including na. Easier to have a seprate function than change the keyword arguments
+# Sums including na. Easier to have a separate function than change the keyword arguments
 sum_na <- function(...){
   sum(..., na.rm = TRUE)
 }

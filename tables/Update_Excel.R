@@ -272,6 +272,17 @@ na_adder(wb = template,
          lengths = rep(3, 4),
          start_row = t12_start)
 
+# Adding a dotted line to separate the old and new divorce law
+dotted_line_style <- openxlsx::createStyle(border = "top",
+                                           borderStyle = "mediumDashed")
+openxlsx::addStyle(wb = template,
+                   sheet = 'Table_12',
+                   style = dotted_line_style,
+                   rows = t12_start + nrow(t12_reg_year) + 45,
+                   cols = seq(ncol(t12_reg_year)),
+                   stack = T,
+                   gridExpand = T)
+
 ####################################################################
 #New Matrimonial matters proceedings
 #Table 12b

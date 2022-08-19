@@ -67,6 +67,7 @@ t12_reg_year <- div_year %>%
 t12_start_qtr <- t12_start + length(current_div_year)
 
 current_div_qtr <- divorce_t12_input %>% distinct(Quarter) %>% separate('Quarter', into = c('Year', 'Quarter'), sep = ' Q') %>% 
+  mutate(Year = as.numeric(Year)) %>% 
   filter(Year > 2010) %>% 
   arrange(Year, Quarter)
 

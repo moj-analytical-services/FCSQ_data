@@ -34,20 +34,20 @@ dropdown25b_df <- tibble(c("All", "Stopped", "Not Stopped"))
 
 # Output ##########################################################################################
 # table 3/4 #####################################
-# List will be added at BB column
+# List will be added at BB column - because BA column contains the hidden values
 list_add(wb = template,
          sheet = 'Table_3',
          list = dropdown3_df,
-         listRow = 7,
-         listCol = 1,
+         listRow = t3_list_row,
+         listCol = t3_list_col,
          startRow = 12,
          startCol = 54)
 
 list_add(wb = template,
          sheet = 'Table_4',
          list = dropdown4_df,
-         listRow = 7,
-         listCol = 1,
+         listRow = t4_list_row,
+         listCol = t4_list_col,
          startRow = 12,
          startCol = 54)
 
@@ -57,98 +57,98 @@ list_add(wb = template,
 list_add(wb = template,
          sheet = 'Table_10',
          list = dropdown10_df,
-         listRow = 7,
-         listCol = 2,
-         startRow = 13,
-         startCol = 18)
+         listRow = t10_list_row,
+         listCol = t10_list_col,
+         startRow = t10_start,
+         startCol = t10_col_length + 1)
 
 # table 11 #############################
 list_add(wb = template,
          sheet = 'Table_11',
          list = dropdown11_df,
-         listRow = 7,
-         listCol = 2,
-         startRow = 12,
-         startCol = 14)
+         listRow = t11_list_row,
+         listCol = t11_list_col,
+         startRow = t11_start,
+         startCol = t11_col_length + 1)
 
 # table 12 ######################
 list_add(wb = template,
          sheet = 'Table_12',
          list = dropdown12a_df,
          listRow = t12_list_a_row,
-         listCol = t12_list_letter,
+         listCol = t12_list_col,
          startRow = t12_start,
-         startCol = 22)
+         startCol = ncol(t12_reg_year) + 1)
 
 list_add(wb = template,
          sheet = 'Table_12',
          list = dropdown12b_df,
          listRow = t12_list_b_row,
-         listCol = t12_list_letter,
+         listCol = t12_list_col,
          startRow = t12_start,
-         startCol = 23)
+         startCol = ncol(t12_reg_year) + 2)
 
 # table 12b ######################
 list_add(wb = template,
          sheet = 'Table_12b',
          list = dropdown12b_a_df,
          listRow = t12b_list_a_row,
-         listCol = t12b_list_letter,
+         listCol = t12b_list_col,
          startRow = t12b_start,
-         startCol = 22)
+         startCol = ncol(t12b_reg_qtr) + 1)
 
 list_add(wb = template,
          sheet = 'Table_12b',
          list = dropdown12b_b_df,
          listRow = t12b_list_b_row,
-         listCol = t12b_list_letter,
+         listCol = t12b_list_col,
          startRow = t12b_start,
-         startCol = 28)
+         startCol = ncol(t12b_reg_qtr) + 2)
 
 
 # table 16 ###################
 list_add(wb = template,
          sheet = 'Table_16',
          list = dropdown16_df,
-         listRow = 6,
-         listCol = 2,
-         startRow = 10,
-         startCol = 14)
+         listRow = t16_list_row,
+         listCol = t16_list_col,
+         startRow = t16_start,
+         startCol = ncol(dv_qtr) + 1)
 
 
 # table 24 ###################
 list_add(wb = template,
          sheet = 'Table_24',
          list = dropdown24a_df,
-         listRow = 7,
-         listCol = 3,
-         startRow = 13,
-         startCol = 16)
+         listRow = t24_list_a_row,
+         listCol = t24_list_col,
+         startRow = t24_start,
+         startCol = ncol(t24_reg_year) + 1)
 
 
 list_add(wb = template,
          sheet = 'Table_24',
          list = dropdown24b_df,
-         listRow = 8,
-         listCol = 3,
-         startRow = 13,
-         startCol = 17)
+         listRow = t24_list_b_row,
+         listCol = t24_list_col,
+         startRow = t24_start,
+         startCol = ncol(t24_reg_year) + 2)
 
 
 # table 25 ###################
 list_add(wb = template,
          sheet = 'Table_25',
          list = dropdown25a_df,
-         listRow = 7,
-         listCol = 3,
-         startRow = 13,
-         startCol = 30)
+         listRow = t25_list_a_row,
+         listCol = t25_list_col,
+         startRow = t25_start,
+         startCol = ncol(t25_reg_year) + 1)
 
 
 list_add(wb = template,
          sheet = 'Table_25',
          list = dropdown25b_df,
-         listRow = 8,
-         listCol = 3,
-         startRow = 13,
-         startCol = 31)
+         listRow = t25_list_b_row,
+         listCol = t25_list_col,
+         startRow = t25_start,
+         startCol = ncol(t25_reg_year) + 2)
