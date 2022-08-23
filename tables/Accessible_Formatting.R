@@ -11,40 +11,44 @@ comma_style <- openxlsx::createStyle(numFmt = 'COMMA')
 sheet_names <- fcsq_a11y %>% filter(sheet_type == 'tables') %>% pull(tab_title)
 table_list <- fcsq_a11y %>% filter(sheet_type == 'tables') %>% pull(table)
 
-# List of columns that have comma formtting applied in each table. 99 represents no formatting applied
-comma_cols <- list(4:ncol(table_list[[1]]),
+# Select digits from sheet names and adding t at the front to use as names for the table list
+access_table_numbers <- paste0('t', contents_df %>% filter(`Sheet name` != 'Notes') %>% pull(`Sheet name`) %>% str_extract('\\d+.?'))
+names(table_list) <- access_table_numbers
+
+# List of columns that have comma formatting applied in each table. 99 represents no formatting applied
+comma_cols <- list(4:ncol(table_list[['t1']]),
                    #Children Act Tables
-                     4:ncol(table_list[[2]]),
-                     3:ncol(table_list[[3]]),
-                     3:ncol(table_list[[4]]),
-                     3:ncol(table_list[[5]]),
-                     3:ncol(table_list[[6]]),
-                     4:ncol(table_list[[7]]),
-                     4:ncol(table_list[[8]]),
-                     4:ncol(table_list[[9]]),
+                     4:ncol(table_list[['t2']]),
+                     3:ncol(table_list[['t3a']]),
+                     3:ncol(table_list[['t3b']]),
+                     3:ncol(table_list[['t4a']]),
+                     3:ncol(table_list[['t4b']]),
+                     4:ncol(table_list[['t5']]),
+                     4:ncol(table_list[['t6']]),
+                     4:ncol(table_list[['t7']]),
                      #Table 8 and 9 only have a single column that is formatted
                      3,
                      3,
                      #Table 10 has every two columns formatted
-                     seq(from = 4, to = ncol(table_list[[12]]), by = 2),
-                     4:ncol(table_list[[13]]),
+                     seq(from = 4, to = ncol(table_list[['t10']]), by = 2),
+                     4:ncol(table_list[['t11']]),
                      # Divorce has a mixture of columns. Subject to change
                      c(6, 7, 10),
                      5,
-                     c(3, seq(from = 4, to = ncol(table_list[[15]]), by = 2)),
-                     #Divorce Progression by percentage of cases does not need any 
+                     c(3, seq(from = 4, to = ncol(table_list[['t13']]), by = 2)),
+                     #T14 does not need any 
                      99,
-                     3:ncol(table_list[[17]]),
-                     4:ncol(table_list[[18]]),
+                     3:ncol(table_list[['t15']]),
+                     4:ncol(table_list[['t16']]),
                      #FMPO AND FGM don't require anything either
                      99,
                      99,
-                   3:ncol(table_list[[21]]),
-                   3:ncol(table_list[[22]]),
-                   3:ncol(table_list[[23]]),
-                   3:ncol(table_list[[24]]),
-                   3:ncol(table_list[[25]]),
-                   3:ncol(table_list[[26]]),
+                   3:ncol(table_list[['t19']]),
+                   3:ncol(table_list[['t20']]),
+                   3:ncol(table_list[['t21']]),
+                   3:ncol(table_list[['t22']]),
+                   3:ncol(table_list[['t23']]),
+                   3:ncol(table_list[['t24']]),
                    seq(from = 5, to = 20, by = 5)
                    
                    )
