@@ -141,3 +141,17 @@ t12_accessible <- bind_rows(t12_accessible_a, filter(t12_accessible_b, Quarter =
   mutate(across(where(is.numeric), ~replace_na(.x, na_value))) %>% 
   arrange(`Proceeding Type`, `Case Type`, `Law`)
 
+
+# Creating a column for digital percentages
+dig_column <- t12_accessible %>% select(1:6) %>% pivot_wider(names_from = `Case Type`, values_from = `Applications`) %>% 
+  mutate(perc = round(100*Digital/All)) %>% 
+  transmute(Year,
+            Quarter,
+            `Proceeding Type`,
+            `Case Type` = "All",
+            Law,
+            `Digital percentage` = perc)
+
+# Adding the column to the table
+t12_accessible <- t12_accessible %>% left_join(dig_column, by = c('Year', 'Quarter', 'Proceeding Type', 'Case Type', 'Law')) %>% 
+  mutate(`Digital percentage` = replace_na(`Digital percentage`, na_value))

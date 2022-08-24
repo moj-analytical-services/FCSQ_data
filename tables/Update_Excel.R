@@ -265,12 +265,29 @@ write_formatted_table(workbook = template,
                       quarterly_format = c(2),
                       note_row_heights = t12_row_heights)
 
+# Pre 2006 Timeliness block
 na_adder(wb = template,
          sheet = 'Table_12',
          value = ".",
          cols = c(6, 7, 9, 10),
          lengths = rep(3, 4),
          start_row = t12_start)
+
+# Digital Column Block
+na_adder(wb = template,
+         sheet = 'Table_12',
+         value = ".",
+         cols = 11,
+         lengths = 16,
+         start_row = t12_start)
+
+# Digital Column Block
+na_adder(wb = template,
+         sheet = 'Table_12',
+         value = ".",
+         cols = 11,
+         lengths = 34,
+         start_row = t12_start + nrow(t12_reg_year))
 
 # Adding a dotted line to separate the old and new divorce law
 dotted_line_style <- openxlsx::createStyle(border = "top",

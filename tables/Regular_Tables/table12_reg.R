@@ -32,6 +32,8 @@ div_year <- tibble(Year = current_div_year,
                   ,
                   d_median_abs = glue('=IF(SUMIFS(Table_12_source!$I:$I,Table_12_source!$C:$C,$A{div_year_row_seq},Table_12_source!$B:$B,H$6,Table_12_source!$A:$A,$D$5,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,${t12_list_letter}${t12_list_b_row})=0,".",SUMIFS(Table_12_source!$I:$I,Table_12_source!$C:$C,$A{div_year_row_seq},Table_12_source!$B:$B,H$6,Table_12_source!$A:$A,$D$5,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,${t12_list_letter}${t12_list_b_row}))')
                   ,
+                  dig_perc = glue('=IF(AND(${t12_list_letter}${t12_list_b_row} = "All", ${t12_list_letter}${t12_list_a_row} <> "New"), SUMIFS(Table_12_source!$G:$G,Table_12_source!$C:$C,$A{div_year_row_seq},Table_12_source!$B:$B,D$6,Table_12_source!$A:$A,$D$5,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,"Digital")/SUMIFS(Table_12_source!$G:$G,Table_12_source!$C:$C,$A{div_year_row_seq},Table_12_source!$B:$B,D$6,Table_12_source!$A:$A,$D$5,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,"All"),".")')
+                  ,
                   n_pet_filed = glue('=IF(SUMIFS(Table_12_source!$G:$G,Table_12_source!$C:$C,$A{div_year_row_seq},Table_12_source!$B:$B,L$6,Table_12_source!$A:$A,$L$13,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,${t12_list_letter}${t12_list_b_row})=0,".",SUMIFS(Table_12_source!$G:$G,Table_12_source!$C:$C,$A{div_year_row_seq},Table_12_source!$B:$B,L$6,Table_12_source!$A:$A,$L$13,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,${t12_list_letter}${t12_list_b_row}))')
                   ,
                   n_decrees_nisi = glue('=IF(SUMIFS(Table_12_source!$G:$G,Table_12_source!$C:$C,$A{div_year_row_seq},Table_12_source!$B:$B,M$6,Table_12_source!$A:$A,$L$13,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,${t12_list_letter}${t12_list_b_row})=0,".",SUMIFS(Table_12_source!$G:$G,Table_12_source!$C:$C,$A{div_year_row_seq},Table_12_source!$B:$B,M$6,Table_12_source!$A:$A,$L$13,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,${t12_list_letter}${t12_list_b_row}))')
@@ -47,6 +49,7 @@ div_year <- tibble(Year = current_div_year,
                   t_decrees_nisi = glue('=IF(${t12_list_letter}${t12_list_a_row}="New",".",IF(${t12_list_letter}${t12_list_b_row} = "Digital", E{div_year_row_seq},E{div_year_row_seq}+M{div_year_row_seq}))')
                   ,
                   t_decrees_abs = glue('=IF(${t12_list_letter}${t12_list_a_row}="New",".",IF(${t12_list_letter}${t12_list_b_row} = "Digital", H{div_year_row_seq}, H{div_year_row_seq}+N{div_year_row_seq}+Q{div_year_row_seq}))')
+                  
                   )
 
 
@@ -54,7 +57,7 @@ div_year <- tibble(Year = current_div_year,
 t12_reg_year <- div_year %>% 
   mutate(blank1 = NA, blank2 = NA, blank3 = NA, blank4 = NA) %>% 
   relocate(blank1, .after = Quarter) %>% 
-  relocate(blank2, .after = d_median_abs) %>% 
+  relocate(blank2, .after = dig_perc) %>% 
   relocate(blank3, .after = n_decrees_abs) %>% 
   relocate(blank4, .after = j_decrees_granted) %>% 
   mutate(across(3:ncol(.), .fns = formula_add)) %>% 
@@ -90,6 +93,9 @@ div_qtr <- tibble(Year = current_div_qtr$Year,
                    ,
                    d_median_abs = glue('=IF(SUMIFS(Table_12_source!$I:$I,Table_12_source!$D:$D,$A{div_qtr_row_seq} & " " &LEFT($B{div_qtr_row_seq},2),Table_12_source!$B:$B,H$6,Table_12_source!$A:$A,$D$5,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,${t12_list_letter}${t12_list_b_row})=0,".",SUMIFS(Table_12_source!$I:$I,Table_12_source!$D:$D,$A{div_qtr_row_seq} & " " &LEFT($B{div_qtr_row_seq},2),Table_12_source!$B:$B,H$6,Table_12_source!$A:$A,$D$5,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,${t12_list_letter}${t12_list_b_row}))')
                    ,
+                  dig_perc = case_when((Year > 2021) & !(Year == 2022 & Quarter == 1) ~ glue('=IF(${t12_list_letter}${t12_list_b_row} = "All",SUMIFS(Table_12_source!$G:$G,Table_12_source!$D:$D,$A{div_qtr_row_seq}&" "&LEFT($B{div_qtr_row_seq},2),Table_12_source!$B:$B,D$6,Table_12_source!$A:$A,$D$5,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,"Digital")/SUMIFS(Table_12_source!$G:$G,Table_12_source!$D:$D,$A{div_qtr_row_seq}&" "&LEFT($B{div_qtr_row_seq},2),Table_12_source!$B:$B,D$6,Table_12_source!$A:$A,$D$5,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,"All"),".")'),
+                                       TRUE ~ glue('=IF(AND(${t12_list_letter}${t12_list_b_row} = "All", ${t12_list_letter}${t12_list_a_row} <> "New"),SUMIFS(Table_12_source!$G:$G,Table_12_source!$D:$D,$A{div_qtr_row_seq}&" "&LEFT($B{div_qtr_row_seq},2),Table_12_source!$B:$B,D$6,Table_12_source!$A:$A,$D$5,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,"Digital")/SUMIFS(Table_12_source!$G:$G,Table_12_source!$D:$D,$A{div_qtr_row_seq}&" "&LEFT($B{div_qtr_row_seq},2),Table_12_source!$B:$B,D$6,Table_12_source!$A:$A,$D$5,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,"All"),".")'))
+                  ,
                    n_pet_filed = glue('=IF(SUMIFS(Table_12_source!$G:$G,Table_12_source!$D:$D,$A{div_qtr_row_seq} & " " &LEFT($B{div_qtr_row_seq},2),Table_12_source!$B:$B,L$6,Table_12_source!$A:$A,$L$13,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,${t12_list_letter}${t12_list_b_row})=0,".",SUMIFS(Table_12_source!$G:$G,Table_12_source!$D:$D,$A{div_qtr_row_seq} & " " &LEFT($B{div_qtr_row_seq},2),Table_12_source!$B:$B,L$6,Table_12_source!$A:$A,$L$13,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,${t12_list_letter}${t12_list_b_row}))')
                    ,
                    n_decrees_nisi = glue('=IF(SUMIFS(Table_12_source!$G:$G,Table_12_source!$D:$D,$A{div_qtr_row_seq} & " " &LEFT($B{div_qtr_row_seq},2),Table_12_source!$B:$B,M$6,Table_12_source!$A:$A,$L$13,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,${t12_list_letter}${t12_list_b_row})=0,".",SUMIFS(Table_12_source!$G:$G,Table_12_source!$D:$D,$A{div_qtr_row_seq} & " " &LEFT($B{div_qtr_row_seq},2),Table_12_source!$B:$B,M$6,Table_12_source!$A:$A,$L$13,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,${t12_list_letter}${t12_list_b_row}))')
@@ -106,12 +112,13 @@ div_qtr <- tibble(Year = current_div_qtr$Year,
                    t_decrees_nisi = glue('=IF(${t12_list_letter}${t12_list_a_row}="New",".",IF(${t12_list_letter}${t12_list_b_row} = "Digital", E{div_qtr_row_seq},E{div_qtr_row_seq}+M{div_qtr_row_seq}))')
                    ,
                    t_decrees_abs = glue('=IF(${t12_list_letter}${t12_list_a_row}="New",".",IF(${t12_list_letter}${t12_list_b_row} = "Digital", H{div_qtr_row_seq}, H{div_qtr_row_seq}+N{div_qtr_row_seq}+Q{div_qtr_row_seq}))')
+          
 )
 
 t12_reg_qtr <- div_qtr %>% 
   mutate(Quarter = paste0('Q', Quarter), blank1 = NA, blank2 = NA, blank3 = NA, blank4 = NA) %>% 
   relocate(blank1, .after = Quarter) %>% 
-  relocate(blank2, .after = d_median_abs) %>% 
+  relocate(blank2, .after = dig_perc) %>% 
   relocate(blank3, .after = n_decrees_abs) %>% 
   relocate(blank4, .after = j_decrees_granted) %>% 
   mutate(across(3:ncol(.), .fns = formula_add)) %>% 
