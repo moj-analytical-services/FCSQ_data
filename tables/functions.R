@@ -434,6 +434,18 @@ comma_formatter <- function(wb, sheet, data, cols){
   
 }
 
+# A more generic style formatter than the comma formatter
+style_formatter <- function(wb, sheet, data, cols, style){
+  openxlsx::addStyle(wb = wb,
+                     sheet = sheet,
+                     style = style,
+                     rows = seq(nrow(data)) + 5,
+                     cols = cols,
+                     gridExpand = TRUE,
+                     stack = TRUE)
+  
+}
+
 na_formatter <- function(wb, sheet, table, value = '[z]', startRow = 6, skipCols = 0, na_value = -1){
   # Replacing all -1 with [z]
   for (i in seq_len(nrow(table))){

@@ -41,5 +41,4 @@ colnames(t10_accessible_qtr) <- c('Category',
 
 #Binds rows together and rounds all week columns to one decimal place
 t10_accessible <- bind_rows(t10_accessible_year, t10_accessible_qtr) %>% arrange(Category) %>% 
-   mutate(across(seq(from = 5, to = ncol(.), by = 2), ~ round(.x, 1))) %>% 
   mutate(across(where(is.numeric), ~replace_na(.x, na_value)))

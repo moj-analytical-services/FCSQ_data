@@ -56,9 +56,33 @@ comma_cols <- list(4:ncol(table_list[['t1']]),
 
 # Adds commas at the thousand separator and changes any na and suppressed values with their replacements
 pwalk(list(sheet_names, table_list, comma_cols), ~comma_formatter(accessible_tables, ..1, ..2, ..3))
+
+# Rounding to 1dp
+round_sheet_names <- c("Table 8", "Table 9", "Table 10", "Table 25" )
+round_cols <- list(c(4, 5), c(4, 5), 
+                   seq(from = 5, to = ncol(t10_accessible), by = 2),
+                   c(6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24)
+                   )
+round_table_list <- list(t8_accessible, t9_accessible, t10_accessible, t24_accessible)
+round_style <- openxlsx::createStyle(numFmt = "0.0")
+
+pwalk(list(round_sheet_names, round_table_list, round_cols), ~style_formatter(accessible_tables, ..1, ..2, ..3, style = round_style))
+
+# Rounding to 0dp percentage
+perc_sheet_names <- c("Table 8", "Table 12", "Table 14" )
+perc_cols <- list(6, 13, 2:ncol(t14_accessible))
+perc_table_list <- list(t8_accessible, t12_accessible, t14_accessible)
+perc_style <- openxlsx::createStyle(numFmt = "0%")
+
+pwalk(list(perc_sheet_names, perc_table_list, perc_cols), ~style_formatter(accessible_tables, ..1, ..2, ..3, style = perc_style))
+
+#Rounding to 1dp pecentage
+style_formatter(accessible_tables, "Table 13", t13_accessible, seq(from = 5, to = ncol(t13_accessible), by = 2), openxlsx::createStyle(numFmt = "0.0%"))
+
+#Dealing with na and suppression
 pwalk(list(sheet_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2, na_value = na_value))
 na_formatter(accessible_tables, 'Table 23', t23_accessible, na_value = suppress_value, value = '[c]' )
-#pwalk(list(sheet_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2, na_value = suppress_value, value = '[c]'))
+
 
 
 # A list containing vectors for the worksheets used to add hyperlinks to the Contents Page
