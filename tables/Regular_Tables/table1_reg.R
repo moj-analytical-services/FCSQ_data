@@ -10,7 +10,7 @@ table1_annual <- table_1_alt %>% group_by(Year, Category, Stage) %>% summarise(C
 #Pivoting and reordering the columns
 # Pivot Wider makes creates separate columns for each category and stage
 # This is then ordered, and blank rows added to match the format of the template
-table1_pivot_annual <- table1_annual %>%
+t1_reg_year <- table1_annual %>%
   pivot_wider(names_from = c(Category, Stage),
               names_sep = ' ',
               values_from = Count) %>% 
@@ -45,7 +45,7 @@ table1_quarterly <- table_1_alt %>%
   filter(Year > 2010) %>% 
   arrange(Year, Quarter)
 
-table1_pivot_qtr <- table1_quarterly %>%
+t1_reg_qtr <- table1_quarterly %>%
   pivot_wider(names_from = c(Category, Stage),
               names_sep = ' ',
               values_from = Count) %>% 

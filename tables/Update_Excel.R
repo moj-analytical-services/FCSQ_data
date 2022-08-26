@@ -60,7 +60,7 @@ t1_note_heights[6] = 23.25
 # Writing the data and notes into the template
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_1', 
-                      tables = list(table1_pivot_annual, table1_pivot_qtr), 
+                      tables = list(t1_reg_year, t1_reg_qtr), 
                       notes = notes1, 
                       starting_row = t1_start, 
                       quarterly_format = c(2),
@@ -88,7 +88,7 @@ na_adder(wb = template,
          value = "..",
          cols = c(9, 19),
          lengths = c(18, 18),
-         start_row = t1_start + nrow(table1_pivot_annual))
+         start_row = t1_start + nrow(t1_reg_year))
 
 
 ####################################################################

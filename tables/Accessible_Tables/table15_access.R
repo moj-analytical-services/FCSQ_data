@@ -15,7 +15,8 @@ colnames(t15_accessible_year) <- c('Year', 'Quarter' ,'Uncontested Applications'
                                    'Total Disposals', 'Cases closed')
 
 
-t15_accessible_qtr <- fr_joined_qtr %>% 
+t15_accessible_qtr <- fr_joined_qtr %>%
+  filter(Year >= 2009) %>% 
   mutate(Qtr = paste0('Q', Qtr)) %>% 
   relocate(Qtr, .after = Year)
 

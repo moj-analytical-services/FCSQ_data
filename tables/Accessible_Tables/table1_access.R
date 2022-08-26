@@ -1,4 +1,4 @@
-full_t1 <- bind_rows(table1_pivot_annual, table1_pivot_qtr)
+full_t1 <- bind_rows(t1_reg_year, t1_reg_qtr)
 
 # Cases started portion of Table 1
 t1_accessible_a <- full_t1 %>% select(Year, Quarter, contains('Cases started')) %>% 

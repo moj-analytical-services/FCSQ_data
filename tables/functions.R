@@ -328,6 +328,7 @@ table3_header <- function(wb, sheet, heading, start_row, start_col){
   
   # Years included in the table
   t3_year_head <- 2011:annual_year
+  num_years <- annual_year - 2010
   
   # Last four quarters
   t3_qtr_head <- child_act_csv %>% distinct(Year, Qtr) %>% 
@@ -339,12 +340,19 @@ table3_header <- function(wb, sheet, heading, start_row, start_col){
   
   tran_t3_head <- t(t3_head)
   
-  #Writing the years and quarters
+  #Writing the years and quarters, there are transposed so they are added row wise.
   openxlsx::writeData(wb = wb,
                       sheet = sheet,
-                      x = tran_t3_head,
+                      x = t(t3_year_head),
                       startRow = start_row + 1,
                       startCol = start_col,
+                      colNames = F)
+  
+  openxlsx::writeData(wb = wb,
+                      sheet = sheet,
+                      x = t(t3_qtr_head),
+                      startRow = start_row + 1,
+                      startCol = start_col + num_years + 1,
                       colNames = F)
   
   #Adding the Public Law or Private Law heading to the right row
