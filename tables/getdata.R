@@ -59,8 +59,8 @@ probate_timeliness_csv <- read_using(readr::read_csv, paste0(csv_folder, 'CSV Pr
 opg_csv <- read_using(readr::read_csv, paste0(csv_folder, 'CSV OPG Powers of Attorney National', " ", pub_year, " Q", pub_quarter, ".csv"), 
                       na =  na_keys) %>% rename_with(str_to_title) %>% select(1:5)
 
-divorce_t12_input <- read_using(readr::read_csv, paste0(csv_folder, 'DIVORCE_FCSQ_T12.csv'), na = na_keys) %>% rename_with(str_to_title)
-divorce_t12b_input <- read_using(readr::read_csv, paste0(csv_folder, 'DIVORCE_FCSQ_T12b.csv'), na = na_keys) %>% rename_with(str_to_title)
+divorce_t12_input <- read_using(readr::read_csv, paste0(csv_folder, 'DIVORCE_FCSQ_T12', " ", pub_year, " Q", pub_quarter, '.csv'), na = na_keys) %>% rename_with(str_to_title)
+divorce_t12b_input <- read_using(readr::read_csv, paste0(csv_folder, 'DIVORCE_FCSQ_T12b', " ", pub_year, " Q", pub_quarter, '.csv'), na = na_keys) %>% rename_with(str_to_title)
 
 #Additional non csv inputs
 care_disposal_csv <- read_using(readr::read_csv, paste0(csv_folder, 'CARE_FINAL', " ", pub_year, " Q", pub_quarter,'.csv'), na = na_keys) %>% rename_with(str_to_title)
@@ -85,7 +85,7 @@ contest_probate <- read_using(readr::read_csv, paste0(csv_folder, 'Contested_Pro
 
   
 #notes_import <- read_using(readr::read_csv, paste0(csv_folder, 'Notes.csv'), na = na_keys)
-notes_import <- read_using(openxlsx::read.xlsx, paste0(csv_folder, 'Notes Workbook.xlsx'), sheet = 'Notes', na.strings = na_keys, sep.names = ' ') %>% as_tibble()
+notes_import <- read_using(openxlsx::read.xlsx, paste0(csv_folder, 'Notes Workbook', " ", pub_year, " Q", pub_quarter, '.xlsx'), sheet = 'Notes', na.strings = na_keys, sep.names = ' ') %>% as_tibble()
 
 #notes_import <- openxlsx::read.xlsx(paste0(path_to_project, 'Notes Workbook 2022 Q2.xlsx'), sheet = 'Notes', na.strings = na_keys, sep.names = ' ') %>% as_tibble()
 
