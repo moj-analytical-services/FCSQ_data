@@ -7,11 +7,6 @@ divorce_applications <- divorce_t12_input %>% filter(Stage == 'Petition')
 divorce_conditional <- divorce_t12_input %>% filter(Stage == 'Decree Nisi')
 divorce_final <- divorce_t12_input %>% filter(Stage %in% c('Decree Absolute', 'Judicial Separations Granted'))
 
-# Helper function to replace zero with a replacement value
-replace_zero <- function(x, replacement){
-  case_when(x == 0 ~ replacement,
-            TRUE ~ x)
-}
 
 #Applications Annually
 divorce_app_year <- divorce_applications %>% filter(Quarter == '') %>%
@@ -123,7 +118,7 @@ t12_accessible_b <- t12_accessible_a %>% group_by(Year, Quarter, `Case Type`, La
             )
 
 # Doing some tidying up. Like with regular divorce 0 values are considered not applicable
-t12_accessible <- bind_rows(t12_accessible_a, filter(t12_accessible_b, Quarter == '', Year > 2002),filter(t12_accessible_b, Quarter != '', Year > 2010))  %>% 
+t12_accessible_c <- bind_rows(t12_accessible_a, filter(t12_accessible_b, Quarter == '', Year > 2002),filter(t12_accessible_b, Quarter != '', Year > 2010))  %>% 
   mutate(`Mean time (weeks) to Conditional Order` = case_when(`Proceeding Type` != 'Divorce' | Year < 2006 ~ na_value,
                                                               TRUE ~ `Mean time (weeks) to Conditional Order`),
          `Median time (weeks) to Conditional Order` = case_when(`Proceeding Type` != 'Divorce' | Year < 2006 ~ na_value,
@@ -143,7 +138,7 @@ t12_accessible <- bind_rows(t12_accessible_a, filter(t12_accessible_b, Quarter =
 
 
 # Creating a column for digital percentages
-dig_column <- t12_accessible %>% select(1:6) %>% pivot_wider(names_from = `Case Type`, values_from = `Applications`) %>% 
+dig_column <- t12_accessible_c %>% select(1:6) %>% pivot_wider(names_from = `Case Type`, values_from = `Applications`) %>% 
   mutate(perc = Digital/All) %>% 
   transmute(Year,
             Quarter,
@@ -153,5 +148,7 @@ dig_column <- t12_accessible %>% select(1:6) %>% pivot_wider(names_from = `Case 
             `Digital percentage` = perc)
 
 # Adding the column to the table
-t12_accessible <- t12_accessible %>% left_join(dig_column, by = c('Year', 'Quarter', 'Proceeding Type', 'Case Type', 'Law')) %>% 
-  mutate(`Digital percentage` = replace_na(`Digital percentage`, na_value))
+t12_accessible <- t12_accessible_c %>% left_join(dig_column, by = c('Year', 'Quarter', 'Proceeding Type', 'Case Type', 'Law')) %>% 
+  mutate(`Digital percentage` = replace_na(`Digital percentage`, na_value)) %>% 
+  mutate(`Case Type` = str_replace(`Case Type`, 'All', 'Digital & Paper'),
+         `Law` = str_replace(`Law`, 'All', 'Old & New'))

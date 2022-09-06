@@ -16,8 +16,8 @@ colnames(t10_accessible_year) <- c('Category',
                                    'Respondent only - Mean duration in weeks',
                                    'Neither Applicant nor Respondent - Number of Disposals',
                                    'Neither Applicant nor Respondent - Mean duration in weeks',
-                                   'All - Number of Disposals',
-                                   'All - Mean duration in weeks'
+                                   'All types of representation - Number of Disposals',
+                                   'All types of representation - Mean duration in weeks'
 )
 
 
@@ -35,8 +35,8 @@ colnames(t10_accessible_qtr) <- c('Category',
                                   'Respondent only - Mean duration in weeks',
                                   'Neither Applicant nor Respondent - Number of Disposals',
                                   'Neither Applicant nor Respondent - Mean duration in weeks',
-                                  'All - Number of Disposals',
-                                  'All - Mean duration in weeks'
+                                  'All types of representation - Number of Disposals',
+                                  'All types of representation - Mean duration in weeks'
 )
 
 #Binds rows together and rounds all week columns to one decimal place

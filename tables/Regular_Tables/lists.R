@@ -51,6 +51,19 @@ list_add(wb = template,
          startRow = 12,
          startCol = 54)
 
+# Adding default option for the tables
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_3',
+                    x = 'Order count',
+                    startRow = t3_list_row,
+                    startCol = t3_list_col)
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_4',
+                    x = 'Order count',
+                    startRow = t4_list_row,
+                    startCol = t4_list_col)
+
 
 
 # table 10 ###############################
@@ -62,6 +75,12 @@ list_add(wb = template,
          startRow = t10_start,
          startCol = t10_col_length + 1)
 
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_10',
+                    x = 'Adoption',
+                    startRow = t10_list_row,
+                    startCol = t10_list_col)
+
 # table 11 #############################
 list_add(wb = template,
          sheet = 'Table_11',
@@ -70,6 +89,12 @@ list_add(wb = template,
          listCol = t11_list_col,
          startRow = t11_start,
          startCol = t11_col_length + 1)
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_11',
+                    x = 'Adoption',
+                    startRow = t11_list_row,
+                    startCol = t11_list_col)
 
 # table 12 ######################
 list_add(wb = template,
@@ -88,6 +113,18 @@ list_add(wb = template,
          startRow = t12_start,
          startCol = ncol(t12_reg_year) + 2)
 
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_12',
+                    x = 'All',
+                    startRow = t12_list_a_row,
+                    startCol = t12_list_col)
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_12',
+                    x = 'All',
+                    startRow = t12_list_b_row,
+                    startCol = t12_list_col)
+
 # table 12b ######################
 list_add(wb = template,
          sheet = 'Table_12b',
@@ -105,6 +142,17 @@ list_add(wb = template,
          startRow = t12b_start,
          startCol = ncol(t12b_reg_qtr) + 2)
 
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_12b',
+                    x = 'All',
+                    startRow = t12b_list_a_row,
+                    startCol = t12b_list_col)
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_12b',
+                    x = 'Divorce',
+                    startRow = t12b_list_b_row,
+                    startCol = t12b_list_col)
 
 # table 16 ###################
 list_add(wb = template,
@@ -114,6 +162,12 @@ list_add(wb = template,
          listCol = t16_list_col,
          startRow = t16_start,
          startCol = ncol(dv_qtr) + 1)
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_16',
+                    x = 'All',
+                    startRow = t16_list_row,
+                    startCol = t16_list_col)
 
 
 # table 24 ###################
@@ -134,6 +188,17 @@ list_add(wb = template,
          startRow = t24_start,
          startCol = ncol(t24_reg_year) + 2)
 
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_24',
+                    x = 'All',
+                    startRow = t24_list_a_row,
+                    startCol = t24_list_col)
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_24',
+                    x = 'All',
+                    startRow = t24_list_b_row,
+                    startCol = t24_list_col)
 
 # table 25 ###################
 list_add(wb = template,
@@ -152,3 +217,15 @@ list_add(wb = template,
          listCol = t25_list_col,
          startRow = t25_start,
          startCol = ncol(t25_reg_year) + 2)
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_25',
+                    x = 'All',
+                    startRow = t25_list_a_row,
+                    startCol = t25_list_col)
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_25',
+                    x = 'All',
+                    startRow = t25_list_b_row,
+                    startCol = t25_list_col)

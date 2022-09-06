@@ -528,3 +528,9 @@ add_content_link <- function(sheet_name, startRow){
                                                  row = 1, col = 1, 
                                                  text = sheet_name))
 }
+
+# Helper function to replace zero with a replacement value
+replace_zero <- function(x, replacement){
+  case_when(x == 0 ~ replacement,
+            TRUE ~ x)
+}

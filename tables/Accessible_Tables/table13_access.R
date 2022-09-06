@@ -11,7 +11,7 @@ t13_accessible <- full_t13 %>%
             `Cases reaching decree absolute to date` = abs_num,
             `% of divorce cases started reaching decree absolute` = abs_perc,
             `Cases reaching a financial remedy application to date` = arapp_num,
-            `% of divorce cases started reaching a financial remedy application ` = arapp_perc,
+            `% of divorce cases started reaching a financial remedy application` = arapp_perc,
             `Cases reaching a financial remedy disposal to date` = arord_num,
             `% of divorce cases started reaching a financial remedy disposal` = arord_perc,
             `Cases reaching a hearing to date` = hearing_num,

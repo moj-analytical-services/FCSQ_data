@@ -32,7 +32,7 @@ table_sources_reg <- c("HMCTS FamilyMan and Core Case Data",
                    "Court of Protection data management system",
                    "Court of Protection data management system",
                    "Office of the Public Guardian data management systems SIRIUS and Casrec",
-                   "HMCTS ProbateMan system to Q1 2019, HMCTS Core Case Data from Q2 2019, HMCTS E-Filing service (contested cases only)",
+                   "HMCTS ProbateMan system to Q1 2019, HMCTS Core Case Data from Q2 2019, HMCTS Pentaho system (contested cases only)",
                    "HMCTS Core Case Data")
 
 # notes added to regular tables

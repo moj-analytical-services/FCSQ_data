@@ -4,7 +4,7 @@ t25_accessible_a <- probate_timeliness_csv %>% pivot_wider(names_from = Applicat
                                        values_from = c(Grants_issued, Sub_to_iss_mean, Sub_to_iss_median, Doc_to_iss_mean, Doc_to_iss_median)) %>% 
                                          transmute(Year,
                                                    Quarter,
-                                                   `Digital or paper` = Digital_paper,
+                                                   `Digital or Paper` = Digital_paper,
                                                    `Stopped or Not Stopped` = str_to_title(Stopped),
                                                    `Probate: Grants issued` = `Grants_issued_Probate`,
                                                    `Probate: Applicant submission to grant issue - Mean weeks` = Sub_to_iss_mean_Probate,
@@ -42,6 +42,8 @@ t25_accessible_qtr <- t25_accessible_qtr %>% mutate(across(5:18, ~ case_when(Yea
                                                        TRUE ~ .x)))
 
 t25_accessible <- bind_rows(t25_accessible_year, t25_accessible_qtr) %>% 
-  arrange(`Digital or paper`, `Stopped or Not Stopped`) %>% 
+  arrange(`Digital or Paper`, `Stopped or Not Stopped`) %>% 
+  mutate(`Digital or Paper` = str_replace(`Digital or Paper`, 'All', 'Digital & Paper'),
+         `Stopped or Not Stopped` = str_replace(`Stopped or Not Stopped`, 'All', 'Stopped & Not Spotted')) %>% 
   mutate(across(where(is.numeric), ~replace_na(.x, na_value)))
   

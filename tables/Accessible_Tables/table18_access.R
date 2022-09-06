@@ -14,7 +14,7 @@ t18_accessible <- full_t18 %>% transmute(Year,
                                          `Applications: Applicant type - Other 3rd party` = other_third,
                                          `Total applications made` = total_apps,
                                          `Total cases started` = case_start,
-                                         `Disposals: Total orders made` = total_ords,
+                                         `Disposals: Total FGMPO orders made` = total_ords,
                                          `Disposals: Other disposals` = other_disps,
                                          `Total disposals` = total_disps,
                                          `Total cases concluded` = case_close)

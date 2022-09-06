@@ -12,7 +12,7 @@ new_divorce_app_qtr <- new_divorce_applications %>% filter(Quarter != '') %>%
   mutate(Year = as.numeric(Year)) %>%
   transmute(Year,
             Quarter,
-            Case,
+            Case = str_replace(Case, 'Both', 'Divorce & Civil Partnership'),
             `Application Type` = Applicant,
             `Applications` = Count) %>% 
   arrange(Case, `Application Type`)

@@ -19,7 +19,7 @@ colnames(dv_hard_full) <- c('num_quarter',
                             'Non-Molestation Orders made',
                             'Occupation Orders made',
                             'Total Orders made',
-                            'Cases concluding'
+                            'Cases concluded'
                             )
 
 # Hard coded annual section
@@ -34,7 +34,7 @@ dv_hard_annual_part <- dv_hard_full %>% filter(is.na(Quarter)) %>% transmute(Yea
                                  `Non-Molestation Orders made`,
                                  `Occupation Orders made`,
                                  `Total Orders made`,
-                                 `Cases concluding`)
+                                 `Cases concluded`)
 
 #Hard coded quarterly section
 dv_hard_qtr_part <- dv_hard_full %>% filter(!is.na(Quarter)) %>% 
@@ -49,7 +49,7 @@ dv_hard_qtr_part <- dv_hard_full %>% filter(!is.na(Quarter)) %>%
            `Non-Molestation Orders made`,
            `Occupation Orders made`,
           `Total Orders made`,
-          `Cases concluding`)
+          `Cases concluded`)
   
 # Processing ######################################################################################
 
@@ -160,7 +160,7 @@ dv_ords_all_year <- dv_csv %>%
 dv_case_disps_year <- dv_csv %>%
   filter(Type == 'Cases concluded') %>%
   group_by(Year) %>%
-  summarise(`Cases concluding`= sum(Total))
+  summarise(`Cases concluded`= sum(Total))
 
 #list of tables in order
 dv_tables <- list(dv_exp_apps_nmo_year, dv_on_apps_nmo_year, dv_apps_nmo_year, 
@@ -281,7 +281,7 @@ dv_ords_all_qtr <- dv_csv %>%
 dv_case_disps_qtr <- dv_csv %>%
   filter(Type == 'Cases concluded') %>%
   group_by(Year, Quarter) %>%
-  summarise(`Cases concluding`= sum(Total))
+  summarise(`Cases concluded`= sum(Total))
 
 #list of tables in order
 dv_qtr_tables <- list(dv_exp_apps_nmo_qtr, dv_on_apps_nmo_qtr, dv_apps_nmo_qtr, 
@@ -313,7 +313,7 @@ t16_exparte_part <- full_t16 %>% transmute(Year = Year,
                        `Non-Molestation Orders made` = `Exparte Non-Molestation Orders made`,
                        `Occupation Orders made` = `Exparte Occupation Orders made`,
                        `Total Orders made` = `Non-Molestation Orders made` + `Occupation Orders made`,
-                       `Cases concluding` = na_value)
+                       `Cases concluded` = na_value)
 
 t16_onnotice_part <- full_t16 %>% transmute(Year = Year,
                                            Quarter = Quarter,
@@ -326,7 +326,7 @@ t16_onnotice_part <- full_t16 %>% transmute(Year = Year,
                                            `Non-Molestation Orders made` = `On Notice Non-Molestation Orders made`,
                                            `Occupation Orders made` = `On Notice Occupation Orders made`,
                                            `Total Orders made` = `Non-Molestation Orders made` + `Occupation Orders made`,
-                                           `Cases concluding` = na_value)
+                                           `Cases concluded` = na_value)
 
 t16_all_part <- full_t16 %>% transmute(Year = Year,
                                        Quarter = Quarter,
@@ -339,7 +339,7 @@ t16_all_part <- full_t16 %>% transmute(Year = Year,
                                        `Non-Molestation Orders made` = `Total Non-Molestation Orders made`,
                                        `Occupation Orders made` = `Total Occupation Orders made`,
                                        `Total Orders made` = `Non-Molestation Orders made` + `Occupation Orders made`,
-                                       `Cases concluding`)
+                                       `Cases concluded`)
 
 #Combining with the earlier hard coded data
 t16_complete_all_part <- bind_rows(dv_hard_annual_part, t16_all_part %>% filter(is.na(Quarter)), 
