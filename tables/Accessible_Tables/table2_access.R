@@ -32,4 +32,8 @@ t2_priv_law <- full_t2 %>%
             `Cases disposed` = priv_case_close)
 
 #Combining for the final table
-t2_accessible <- bind_rows(t2_pub_law, t2_priv_law)
+#Issues with switch to CCD means disposals made is blocked.
+t2_accessible <- bind_rows(t2_pub_law, t2_priv_law) %>% 
+  mutate(`Disposals made` = case_when(Category == 'Public law' & Year == 2022 ~ na_value,
+                                      TRUE ~ `Disposals made`)) %>% 
+  mutate(Quarter = replace_na(Quarter, 'Annual'))

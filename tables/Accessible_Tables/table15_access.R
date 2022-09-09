@@ -11,4 +11,5 @@ colnames(full_t15) <- c('Year', 'Quarter' ,'Uncontested Applications', 'Conteste
                                    'Initially Contested Disposals', 'Contested Disposals',
                                    'Total Disposals', 'Total cases disposed')
 
-t15_accessible <- full_t15
+t15_accessible <- full_t15 %>% 
+  mutate(Quarter = replace_na(Quarter, 'Annual'))

@@ -409,8 +409,14 @@ t25_accessible <- t25_accessible %>% add_col_notes(table_num = 25, col_nums = t2
                            )
          )
 
-# Removing the lookup column for the final table
-notes_all <- notes_import %>% select(!Lookup)
+# Removing the lookup column for the final table. Also editing notes to replace with symbols. Repeated for clarity
+notes_all <- notes_import %>% select(!Lookup) %>% 
+  mutate(`Note text` = str_replace(`Note text`, "'-'", "'[z]'")) %>% 
+  mutate(`Note text` = str_replace(`Note text`, "':'", "'[z]'")) %>% 
+  mutate(`Note text` = str_replace(`Note text`, "'\\*'", "'[c]'"))
+  
+  
+
 
 # Gathering all the title notes
 title_notes <- list(title_note_t1, title_note_t2, title_note_t3, title_note_t3, title_note_t4, title_note_t4, title_note_t5,

@@ -152,7 +152,8 @@ t4b_accessible_priv_qtr <- t4_priv_order_template_qtr %>% left_join(t4_child_pri
 t4b_accessible_priv <- left_join(t4b_accessible_priv_year, t4b_accessible_priv_qtr, by = c("Category", "Order type", "Order type category"))
 
 t4b_accessible <- bind_rows(t4b_accessible_pub, t4b_accessible_priv) %>% 
-  mutate(across(where(is.numeric), ~replace_na(.x, 0)))
+  mutate(across(where(is.numeric), ~replace_na(.x, 0))) %>% 
+  mutate(across(starts_with('2022'), ~ na_value))
 
 
 
@@ -279,4 +280,5 @@ t4a_accessible_priv_qtr <- t4_priv_order_template_qtr %>% left_join(t4_order_pri
 t4a_accessible_priv <- left_join(t4a_accessible_priv_year, t4a_accessible_priv_qtr, by = c('Category', 'Order type', 'Order type category'))
 
 t4a_accessible <- bind_rows(t4a_accessible_pub, t4a_accessible_priv) %>% 
-  mutate(across(where(is.numeric), ~replace_na(.x, 0)))
+  mutate(across(where(is.numeric), ~replace_na(.x, 0))) %>% 
+  mutate(across(starts_with('2022'), ~ na_value))

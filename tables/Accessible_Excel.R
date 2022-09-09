@@ -4,10 +4,11 @@
 # A cover page, with subheaded sections of information
 cover_df <- tribble(
   ~"Subsection title", ~"Subsection body",
-  "Description", "This spreadsheet contains the Family Court Tables which have been edited to meet the legal accessibility requirements",
-  "Format", "A set of tables. Each tab contains only one table. This means that some tables like Table 3 and 4 are split into two tables each",
+  "Description", "Statistics on the types and volume of cases that have passed through the Family Court in an accessible format",
+  "Format", "A set of tables. Each tab contains only one table each. The data for Tables 3 and 4 contain two separate counts so are split into Tables 3a, 3b, 4a and 4b respectively",
   "Publication dates", glue("This data was originally published at 9:30am on {pub_date}. The next publication will be published at 9:30 am on {next_pub_date}."),
-  "Contact details", "Carly Gray\nHead of Access to Justice Data and Statistics\n 0778 427 5495"
+  "Contact details", "Carly Gray\nHead of Access to Justice Data and Statistics\nPhone Number: 0778 427 5495",
+  "Statistical Contact", ""
 )
 
 table_sources_access <- c("HMCTS FamilyMan and Core Case Data",
@@ -105,7 +106,7 @@ fcsq_a11y <- new_a11ytable(
   tab_titles = c("Cover", "Contents", data_table_tabs),
   sheet_types = c("cover", "contents", "notes", rep("tables", table_num_access)),
   sheet_titles = c(
-    "Family Court Tables",
+    "Family Court Statistics Quarterly Tables",
     "Table of contents",
     "Notes",
     table_titles),

@@ -345,4 +345,7 @@ t16_all_part <- full_t16 %>% transmute(Year = Year,
 t16_complete_all_part <- bind_rows(dv_hard_annual_part, t16_all_part %>% filter(is.na(Quarter)), 
                                    dv_hard_qtr_part, t16_all_part %>% filter(!is.na(Quarter)))
 
-t16_accessible <- bind_rows(t16_complete_all_part, t16_exparte_part, t16_onnotice_part)
+t16_accessible <- bind_rows(t16_complete_all_part, t16_exparte_part, t16_onnotice_part) %>% 
+  mutate(`Application Type` = str_replace(`Application Type`, 'All', 'Exparte and On Notice')) %>% 
+  mutate(Quarter = replace_na(Quarter, 'Annual'))
+  

@@ -4,7 +4,7 @@ full_t13 <- bind_rows(t13_reg_year, t13_reg_qtr)
 
 t13_accessible <- full_t13 %>% 
   transmute(Year,
-            Quarter,
+            Quarter = replace_na(Quarter, 'Annual'),
             `Divorce cases started` = div_case_start,
             `Cases reaching decree nisi to date` = nisi_num,
             `% of divorce cases started reaching decree nisi` = nisi_perc,

@@ -28,4 +28,5 @@ t5_priv_law <- full_t5 %>%
             `Unknown age` = priv_unknown_age,
             `Total individual children` = priv_total_apps)
 
-t5_accessible <- bind_rows(t5_pub_law, t5_priv_law)
+t5_accessible <- bind_rows(t5_pub_law, t5_priv_law) %>% 
+  mutate(Quarter = replace_na(Quarter, 'Annual'))

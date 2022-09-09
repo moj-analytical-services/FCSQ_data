@@ -1,11 +1,11 @@
 # Table 17 accessible
-#Bulding an accessible version.
+#Building an accessible version.
 # Note that since all Na have been replaced by 0. The NA that represent a lack of data need to be added in
 
 full_t17 <- bind_rows(t17_reg_year, t17_reg_qtr_all)
 
 t17_accessible <- full_t17 %>% transmute(Year,
-                       Quarter,
+                       Quarter = replace_na(Quarter, 'Annual'),
                        `Applications: Age of person to be protected - 17 and under` = case_when(
                          Year %in% c(2008, 2009) ~ na_value,
                          TRUE ~ under_17),

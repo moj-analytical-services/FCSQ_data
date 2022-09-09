@@ -119,6 +119,14 @@ write_formatted_table(workbook = template,
                       quarterly_format = c(2),
                       note_row_heights = t2_note_heights)
 
+# Block on disposals from 2022 onward data due to CCD affecting public law
+na_adder(wb = template,
+         sheet = 'Table_2',
+         value = ':',
+         cols = 9,
+         lengths = nrow(t2_reg_qtr) - 44,
+         start_row = t2_start + nrow(t2_reg_year) + 44)
+
 ####################################################################
 #Children Act Individual children
 #Table 5
@@ -213,6 +221,14 @@ write_formatted_table(workbook = template,
                       starting_row = t8_start, 
                       quarterly_format = c(2),
                       note_row_heights = t8_row_heights)
+
+# Block on disposals from 2022 onward data due to CCD affecting Public Law - Quarterly
+na_adder(wb = template,
+         sheet = 'Table_8',
+         value = ':',
+         cols = c(3, 4, 5, 6),
+         lengths = rep(nrow(t8_reg_qtr) - 44, 4),
+         start_row = t8_start + nrow(t8_reg_year) + 44)
 
 ####################################################################
 #Private Law Disposal

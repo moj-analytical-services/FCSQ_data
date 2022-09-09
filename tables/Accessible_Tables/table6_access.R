@@ -26,4 +26,5 @@ t6_priv_law <- full_t6 %>%
             `Number of cases with three respondents` = priv_resp_three,
             `Number of cases with four or more respondents` = priv_resp_four)
 
-t6_accessible <- bind_rows(t6_pub_law, t6_priv_law)
+t6_accessible <- bind_rows(t6_pub_law, t6_priv_law) %>% 
+  mutate(Quarter = replace_na(Quarter, 'Annual'))

@@ -44,5 +44,6 @@ t1_accessible <- bind_rows(t1_accessible_a, t1_accessible_b) %>%
   mutate(`Forced Marriage Protection` = case_when(Year < 2009 ~ na_value,
                                                   TRUE ~ `Forced Marriage Protection`),
          `Female Genital Mutilation` = case_when((Year < 2015) | (Year == 2015 & Quarter %in% c('Q1', 'Q2')) ~ na_value,
-                                                 TRUE ~ `Female Genital Mutilation`))
+                                                 TRUE ~ `Female Genital Mutilation`)) %>% 
+  mutate(Quarter = replace_na(Quarter, 'Annual'))
   
