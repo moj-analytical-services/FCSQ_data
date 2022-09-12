@@ -665,6 +665,14 @@ na_formatter(wb = template,
              startRow = t23_start,
              na_value = suppress_value)
 
+# Block on deputyships from 2022 Q2
+na_adder(wb = template,
+         sheet = 'Table_23',
+         value = ':',
+         cols = 27,
+         lengths = nrow(t23_reg_qtr) - 57,
+         start_row = t23_start + nrow(t23_reg_year) + 57)
+
 
 ####################################################################
 #Probate
@@ -723,7 +731,7 @@ openxlsx::writeData(wb = template,
 # data
 
 t25_row_heights <- rep(15, length(notes25))
-t25_row_heights[[9]] <- 23.25
+t25_row_heights[c(8,9)] <- c(16.5, 23.25)
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_25', 
                       tables = list(t25_reg_year, t25_reg_qtr_a, t25_reg_qtr_b), 

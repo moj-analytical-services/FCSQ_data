@@ -1,8 +1,11 @@
 # Table 23 accessible
 
 # Select all non blanks columns
+# Deputyships past 2022 Q1 aren't currently available
 t23_accessible <- full_t23 %>% select(!starts_with('blank')) %>% 
-  mutate(Quarter = replace_na(Quarter, 'Annual'))
+  mutate(Quarter = replace_na(Quarter, 'Annual')) %>% 
+  mutate(deputyships = case_when(Year == 2022 & Quarter %in% c('Q2', 'Q3', 'Q4', 'Annual') ~ na_value,
+                                 TRUE ~ deputyships))
 
 # Adding registered applications prefix to all columns other than the last column, year and quarter
 colnames(t23_accessible) <- paste('Registered applications', c('Year',

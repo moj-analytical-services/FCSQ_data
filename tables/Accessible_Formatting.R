@@ -105,6 +105,37 @@ openxlsx::setColWidths(wb = accessible_tables,
                        cols = c(1, 2, 3),
                        widths = c(15.11, 15.11, 128) 
                        )
+
+# Setting Colwidth for Tables with long pieces of text
+colwidth_sheet <- c('Table 3a', 'Table 3b', 'Table 4a', 'Table 4b', 
+                    'Table 10', 'Table 12b', 'Table 14', 'Table 16',
+                    'Table 24', 'Table 25')
+colwidth_cols <- list(c(2, 3),
+                      c(2, 3),
+                      c(2, 3),
+                      c(2, 3),
+                      1,
+                      3,
+                      1,
+                      3,
+                      4,
+                      4
+                      )
+
+colwidths <- list(c(39.1, 39.1),
+                  c(39.1, 39.1),
+                  c(39.1, 39.1),
+                  c(39.1, 39.1),
+                  27.3,
+                  23.5,
+                  23.5,
+                  18.5,
+                  17.8,
+                  20.5)
+
+pwalk(list(colwidth_sheet, colwidth_cols, colwidths), openxlsx::setColWidths, wb = accessible_tables)
+
+# Exporting the finished table
 openxlsx::saveWorkbook(accessible_tables, paste0(path_to_project, glue("Accessible Family Court Tables ({pub_months_short} {pub_year}).xlsx")), overwrite = TRUE)
 #openxlsx::saveWorkbook(accessible_tables, paste0(path_to_project,"test_output_access.xlsx"), overwrite = TRUE)
 

@@ -5,10 +5,10 @@
 cover_df <- tribble(
   ~"Subsection title", ~"Subsection body",
   "Description", "Statistics on the types and volume of cases that have passed through the Family Court in an accessible format",
-  "Format", "A set of tables. Each tab contains only one table each. The data for Tables 3 and 4 contain two separate counts so are split into Tables 3a, 3b, 4a and 4b respectively",
+  "Format", "A set of tables, all in an accessible format. Each tab contains only one table each. The data for what is Tables 3 and 4 in the regular tables contains two separate counts so are split into Tables 3a, 3b, 4a and 4b respectively",
   "Publication dates", glue("This data was originally published at 9:30am on {pub_date}. The next publication will be published at 9:30 am on {next_pub_date}."),
   "Contact details", "Carly Gray\nHead of Access to Justice Data and Statistics\nPhone Number: 0778 427 5495",
-  "Statistical Contact", ""
+  "Statistical Contact Email", ""
 )
 
 table_sources_access <- c("HMCTS FamilyMan and Core Case Data",
