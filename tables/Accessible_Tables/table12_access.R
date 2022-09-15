@@ -151,7 +151,8 @@ dig_column <- t12_accessible_c %>% select(1:6) %>%
 
 # Adding the column to the table
 t12_accessible <- t12_accessible_c %>% left_join(dig_column, by = c('Year', 'Quarter', 'Proceeding Type', 'Case Type', 'Law')) %>% 
-  mutate(`Digital percentage` = replace_na(`Digital percentage`, na_value)) %>% 
+  mutate(`Proceeding Type` = as.character(`Proceeding Type`),
+         `Digital percentage` = replace_na(`Digital percentage`, na_value)) %>% 
   mutate(`Case Type` = str_replace(`Case Type`, 'All', 'Digital and Paper'),
          `Law` = str_replace(`Law`, 'All', 'Old and New')) %>% 
   mutate(Quarter = replace_na(Quarter, 'Annual'))

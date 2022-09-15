@@ -90,9 +90,11 @@ data_table_tabs <- contents_df$`Sheet name`
 table_num_access <- length(data_table_tabs) - 1
 
 # Adding time periods and notes to titles of the data
+space_tab_names <- contents_df$`Sheet name`[2:(table_num_access + 1)] %>% str_replace('_', ' ')
+
 table_titles <- contents_df$`Sheet title`[2:(table_num_access + 1)]
 
-table_titles <- paste0(table_titles, ', ', timeperiods_all, ' ',  title_notes)
+table_titles <- paste0(space_tab_names, ': ', table_titles, ', ', timeperiods_all, ' ',  title_notes)
 
 # A notes page, notes_all is made from the update excel file
 notes_df2 <- tribble(
@@ -103,7 +105,7 @@ notes_df2 <- tribble(
 
 notes_df <- bind_rows(notes_df2, notes_all)
 
-fcsq_a11y <- new_a11ytable(
+fcsq_a11y <- create_a11ytable(
   tab_titles = c("Cover", "Contents", data_table_tabs),
   sheet_types = c("cover", "contents", "notes", rep("tables", table_num_access)),
   sheet_titles = c(
@@ -118,39 +120,7 @@ fcsq_a11y <- new_a11ytable(
     table_sources_access
     
   ),
-  table_names = c(
-    "cover_sheet",
-    "table_of_contents",
-    "notes_table",
-    "Overall_Family_Court_Summary",
-    "Children_Act_Summary",
-    "Children_Act_Apps_Order_Count",
-    "Children_Act_Apps_Child_Count",
-    "Children_Act_Orders_Order_Count",
-    "Children_Act_Orders_Child_Count",
-    "Children_Act_Individual_Children_Age",
-    "Children_Act_Parties",
-    "Children_Act_High_Court",
-    "Care_Disposal_Summary",
-    "Private_Law_Disposal_Summary",
-    "Overall_time_to_first_disposal",
-    "Overall_Legal_Representation",
-    "Divorce_Summary",
-    "New_Divorce_Summary",
-    "Divorce_Progression",
-    "Divorce_Progression_Stage_Percentage",
-    "Financial_Remedy_Summary",
-    "Domestic_Violence_Summary",
-    "FMPO_Summary",
-    "FGMPO_Summary",
-    "Adopt_Apps",
-    "Adopt_Ords",
-    "COP_Apps",
-    "COP_Ords",
-    "OPG_Apps",
-    "Probate_Summary",
-    "Probate_Timeliness"
-  ),
+  blank_cells = rep(NA_character_, table_num_access + 3),
   tables = list(
     cover_df,
     contents_df,
@@ -186,5 +156,5 @@ fcsq_a11y <- new_a11ytable(
   )
 )
 
-fcsq_wb <- create_a11y_wb(fcsq_a11y)
+fcsq_wb <- generate_workbook(fcsq_a11y)
 saveWorkbook(fcsq_wb, "fcsq_accessible.xlsx", overwrite = TRUE)
