@@ -413,6 +413,7 @@ t25_accessible <- t25_accessible %>% add_col_notes(table_num = 25, col_nums = t2
 notes_all <- notes_import %>% select(!Lookup) %>% 
   mutate(`Note text` = str_replace(`Note text`, "'-'", "'[z]'")) %>% 
   mutate(`Note text` = str_replace(`Note text`, "':'", "'[z]'")) %>% 
+  mutate(`Note text` = str_replace(`Note text`, "'..'", "'[z]'")) %>% 
   mutate(`Note text` = str_replace(`Note text`, "'\\*'", "'[c]'"))
   
   
