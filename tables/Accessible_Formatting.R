@@ -106,6 +106,10 @@ openxlsx::setColWidths(wb = accessible_tables,
                        widths = c(15.11, 15.11, 128) 
                        )
 
+# Change in a11y means I'll reset everything to 16.11 column width
+all_cols <- map(table_list, ~ seq(ncol(.x)))
+map2(sheet_names, all_cols, ~openxlsx::setColWidths(wb = accessible_tables, sheet = ..1, cols = ..2, widths = 16.11))
+
 # Setting Colwidth for Tables with long pieces of text
 colwidth_sheet <- c('Table_3a', 'Table_3b', 'Table_4a', 'Table_4b', 
                     'Table_10', 'Table_12b', 'Table_14', 'Table_16',
