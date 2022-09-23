@@ -154,5 +154,7 @@ t12_accessible <- t12_accessible_c %>% left_join(dig_column, by = c('Year', 'Qua
   mutate(`Proceeding Type` = as.character(`Proceeding Type`),
          `Digital percentage` = replace_na(`Digital percentage`, na_value)) %>% 
   mutate(`Case Type` = str_replace(`Case Type`, 'All', 'Digital and Paper'),
-         `Law` = str_replace(`Law`, 'All', 'Old and New')) %>% 
-  mutate(Quarter = replace_na(Quarter, 'Annual'))
+         `Law` = str_replace(`Law`, 'All', 'Old and New'))
+
+# Replacing empty string with Annual
+t12_accessible$Quarter[t12_accessible$Quarter == ''] <- 'Annual'
