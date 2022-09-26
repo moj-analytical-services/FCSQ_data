@@ -44,7 +44,7 @@ t25_accessible_qtr <- t25_accessible_qtr %>% mutate(across(5:18, ~ case_when(Yea
 t25_accessible <- bind_rows(t25_accessible_year, t25_accessible_qtr) %>% 
   arrange(`Digital or Paper`, `Stopped or Not Stopped`) %>% 
   mutate(`Digital or Paper` = str_replace(`Digital or Paper`, 'All', 'Digital and Paper'),
-         `Stopped or Not Stopped` = str_replace(`Stopped or Not Stopped`, 'All', 'Stopped and Not Spotted')) %>% 
+         `Stopped or Not Stopped` = str_replace(`Stopped or Not Stopped`, 'All', 'Stopped and Not Stopped')) %>% 
   mutate(across(where(is.numeric), ~replace_na(.x, na_value))) %>% 
   mutate(Quarter = replace_na(Quarter, 'Annual'))
   
