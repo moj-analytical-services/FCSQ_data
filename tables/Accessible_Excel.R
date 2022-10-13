@@ -5,6 +5,8 @@
 cover_df <- tribble(
   ~"Subsection title", ~"Subsection body",
   "Description", "Statistics on the types and volume of cases that have passed through the Family Court in an accessible format",
+  "Public Law Data issues to note", "As a result of Reform for Family Public Law, there are data issues that affect a number of data series (across Tables 2, 4a,  8, 10 and 11). Please refer to the 'Data Quality issues' section of the accompanying bulletin for further details",
+   "Financial Remedy Data issues to note", "As a result of moving to a more robust data source of FamilyMan (for paper cases) and Core Case Data (CCD, for digital cases) for financial remedy, we are unable to provide FR timeliness data from Q4 2021. We are working to add this information as soon as possible.",
   "Format", "A set of tables, all in an accessible format. Each tab contains only one table each. The data for what is Tables 3 and 4 in the regular tables contains two separate counts so are split into Tables 3a, 3b, 4a and 4b respectively",
   "Publication dates", glue("This data was originally published at 9:30am on {pub_date}. The next publication will be published at 9:30 am on {next_pub_date}."),
   "Contact details", "Carly Gray\nHead of Access to Justice Data and Statistics\nPhone Number: 0778 427 5495",
@@ -109,7 +111,7 @@ fcsq_a11y <- create_a11ytable(
   tab_titles = c("Cover", "Contents", data_table_tabs),
   sheet_types = c("cover", "contents", "notes", rep("tables", table_num_access)),
   sheet_titles = c(
-    "Family Court Statistics Quarterly Tables",
+    paste0("Family Court Statistics Quarterly Tables",", ", pub_months, " ", pub_year),
     "Table of contents",
     "Notes",
     table_titles),
