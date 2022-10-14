@@ -60,7 +60,7 @@ t1_note_heights[6] = 23.25
 # Writing the data and notes into the template
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_1', 
-                      tables = list(table1_pivot_annual, table1_pivot_qtr), 
+                      tables = list(t1_reg_year, t1_reg_qtr), 
                       notes = notes1, 
                       starting_row = t1_start, 
                       quarterly_format = c(2),
@@ -88,7 +88,7 @@ na_adder(wb = template,
          value = "..",
          cols = c(9, 19),
          lengths = c(18, 18),
-         start_row = t1_start + nrow(table1_pivot_annual))
+         start_row = t1_start + nrow(t1_reg_year))
 
 
 ####################################################################
@@ -118,6 +118,14 @@ write_formatted_table(workbook = template,
                       starting_row = t2_start, 
                       quarterly_format = c(2),
                       note_row_heights = t2_note_heights)
+
+# Block on disposals from 2022 onward data due to CCD affecting public law
+na_adder(wb = template,
+         sheet = 'Table_2',
+         value = ':',
+         cols = 9,
+         lengths = nrow(t2_reg_qtr) - 44,
+         start_row = t2_start + nrow(t2_reg_year) + 44)
 
 ####################################################################
 #Children Act Individual children
@@ -214,6 +222,14 @@ write_formatted_table(workbook = template,
                       quarterly_format = c(2),
                       note_row_heights = t8_row_heights)
 
+# Block on disposals from 2022 onward data due to CCD affecting Public Law - Quarterly
+na_adder(wb = template,
+         sheet = 'Table_8',
+         value = ':',
+         cols = c(3, 4, 5, 6),
+         lengths = rep(nrow(t8_reg_qtr) - 44, 4),
+         start_row = t8_start + nrow(t8_reg_year) + 44)
+
 ####################################################################
 #Private Law Disposal
 #Table 9
@@ -255,7 +271,7 @@ openxlsx::writeData(wb = template,
 
 # data
 t12_row_heights <- rep(15, length(notes12))
-t12_row_heights[seq(from = 5, to = length(notes12))] <- c(24, 24, 22.5, 11.25, 12.75, 12.75, 24.75, 12.75)
+t12_row_heights[seq(from = 5, to = length(notes12))] <- c(24, 22.5, 11.25, 12.75, 12.75, 24.75, 12.75, 22.5)
 
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_12', 
@@ -265,12 +281,66 @@ write_formatted_table(workbook = template,
                       quarterly_format = c(2),
                       note_row_heights = t12_row_heights)
 
+# Pre 2006 Timeliness block
 na_adder(wb = template,
          sheet = 'Table_12',
          value = ".",
          cols = c(6, 7, 9, 10),
          lengths = rep(3, 4),
          start_row = t12_start)
+
+# Digital Column Block
+na_adder(wb = template,
+         sheet = 'Table_12',
+         value = ".",
+         cols = 11,
+         lengths = 16,
+         start_row = t12_start)
+
+# Digital Column Block
+na_adder(wb = template,
+         sheet = 'Table_12',
+         value = ".",
+         cols = 11,
+         lengths = 34,
+         start_row = t12_start + nrow(t12_reg_year))
+
+# Adding a dotted line to separate the old and new divorce law
+dotted_line_style <- openxlsx::createStyle(border = "top",
+                                           borderStyle = "mediumDashed")
+openxlsx::addStyle(wb = template,
+                   sheet = 'Table_12',
+                   style = dotted_line_style,
+                   rows = t12_start + nrow(t12_reg_year) + 45,
+                   cols = seq(ncol(t12_reg_year)),
+                   stack = T,
+                   gridExpand = T)
+
+####################################################################
+#New Matrimonial matters proceedings
+#Table 12b
+
+####################################################################
+# Loads and writes the data. Note that this table contains both formulas and raw data
+source(paste0(path_to_project, "Regular_Tables/table12b_reg.R"))
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_12b',
+                    x = timeperiod12b,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+t12b_row_heights <- rep(15, length(notes12b))
+t12b_row_heights[seq(from = 5, to = length(notes12b))] <- c(24, 22.5, 11.25, 12.75, 12.75, 24.75, 12.75, 22.5, 12)
+
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_12b', 
+                      tables = list(t12b_reg_qtr), 
+                      notes = notes12b, 
+                      starting_row = t12b_start, 
+                      quarterly_format = c(1),
+                      note_row_heights = t12b_row_heights)
+
 
 ####################################################################
 #Divorce Progression
@@ -595,6 +665,14 @@ na_formatter(wb = template,
              startRow = t23_start,
              na_value = suppress_value)
 
+# Block on deputyships from 2022 Q2
+na_adder(wb = template,
+         sheet = 'Table_23',
+         value = ':',
+         cols = 27,
+         lengths = nrow(t23_reg_qtr) - 57,
+         start_row = t23_start + nrow(t23_reg_year) + 57)
+
 
 ####################################################################
 #Probate
@@ -653,7 +731,7 @@ openxlsx::writeData(wb = template,
 # data
 
 t25_row_heights <- rep(15, length(notes25))
-t25_row_heights[[9]] <- 23.25
+t25_row_heights[c(8,9)] <- c(16.5, 23.25)
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_25', 
                       tables = list(t25_reg_year, t25_reg_qtr_a, t25_reg_qtr_b), 

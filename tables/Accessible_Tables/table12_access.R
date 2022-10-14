@@ -1,194 +1,160 @@
 # Accessible Version of Table 12
-# Dissolution of Marriage uses formulas in the regular table so necessary to do work here to get raw data
+
+divorce_t12_input <- divorce_t12_input %>% arrange(Year, Quarter) 
+  
+
+divorce_applications <- divorce_t12_input %>% filter(Stage == 'Petition')
+divorce_conditional <- divorce_t12_input %>% filter(Stage == 'Decree Nisi')
+divorce_final <- divorce_t12_input %>% filter(Stage %in% c('Decree Absolute', 'Judicial Separations Granted'))
 
 
-# Petitions
-diss_pet_year <- divorce_timeliness_csv %>% 
-  filter(Stage == 'Petition', Year >= 2003) %>% 
-  group_by(Year, Case_type) %>% 
-  summarise(d_pet_filed = sum(Count))
-
-diss_pet_qtr <- divorce_timeliness_csv %>%
-  filter(Stage == 'Petition', is.na(Year)) %>% 
-  separate(Quarter, into = c('Year', 'Quarter'), convert = TRUE) %>% 
-  filter(Year >= 2011) %>% 
-  group_by(Year, Quarter, Case_type) %>% 
-  summarise(d_pet_filed = sum(Count))
-
-# Decress Nisi
-diss_nisi_year <- divorce_timeliness_csv %>% 
-  filter(Stage == 'Decree Nisi', Year >= 2003) %>% 
-  group_by(Year, Case_type) %>% 
-  summarise(d_decrees_nisi = sum(Count))
-
-diss_nisi_qtr <- divorce_timeliness_csv %>%
-  filter(Stage == 'Decree Nisi', is.na(Year)) %>% 
-  separate(Quarter, into = c('Year', 'Quarter'), convert = TRUE) %>% 
-  filter(Year >= 2011) %>% 
-  group_by(Year, Quarter, Case_type) %>% 
-  summarise(d_decrees_nisi = sum(Count))
-
-# Mean time (weeks) to Decree Nisi
-diss_avg_nisi_weeks_year <- divorce_timeliness_csv %>% 
-  filter(Stage == 'Decree Nisi', Year >= 2006) %>% 
-  group_by(Year, Case_type) %>% 
-  summarise(d_avg_nisi_weeks = sum(Mean_weeks))
-
-diss_avg_nisi_weeks_qtr <- divorce_timeliness_csv %>%
-  filter(Stage == 'Decree Nisi', is.na(Year)) %>% 
-  separate(Quarter, into = c('Year', 'Quarter'), convert = TRUE) %>% 
-  filter(Year >= 2011) %>% 
-  group_by(Year, Quarter, Case_type) %>% 
-  summarise(d_avg_nisi_weeks = sum(Mean_weeks))
-
-# Median time (weeks) to Decree Nisi
-diss_med_nisi_weeks_year <- divorce_timeliness_csv %>% 
-  filter(Stage == 'Decree Nisi', Year >= 2006) %>% 
-  group_by(Year, Case_type) %>% 
-  summarise(d_med_nisi_weeks = sum(Median_weeks))
-
-diss_med_nisi_weeks_qtr <- divorce_timeliness_csv %>%
-  filter(Stage == 'Decree Nisi', is.na(Year)) %>% 
-  separate(Quarter, into = c('Year', 'Quarter'), convert = TRUE) %>% 
-  filter(Year >= 2011) %>% 
-  group_by(Year, Quarter, Case_type) %>% 
-  summarise(d_med_nisi_weeks = sum(Median_weeks))
-
-# Decress absolute
-diss_absolute_year <- divorce_timeliness_csv %>% 
-  filter(Stage == 'Decree Absolute', Year >= 2003) %>% 
-  group_by(Year, Case_type) %>% 
-  summarise(d_decrees_abs = sum(Count))
-
-diss_absolute_qtr <- divorce_timeliness_csv %>%
-  filter(Stage == 'Decree Absolute', is.na(Year)) %>% 
-  separate(Quarter, into = c('Year', 'Quarter'), convert = TRUE) %>% 
-  filter(Year >= 2011) %>% 
-  group_by(Year, Quarter, Case_type) %>% 
-  summarise(d_decrees_abs = sum(Count))
-
-# Mean time (weeks) to Decree absolute
-diss_avg_absolute_weeks_year <- divorce_timeliness_csv %>% 
-  filter(Stage == 'Decree Absolute', Year >= 2006) %>% 
-  group_by(Year, Case_type) %>% 
-  summarise(d_avg_absolute_weeks = sum(Mean_weeks))
-
-diss_avg_absolute_weeks_qtr <- divorce_timeliness_csv %>%
-  filter(Stage == 'Decree Absolute', is.na(Year)) %>% 
-  separate(Quarter, into = c('Year', 'Quarter'), convert = TRUE) %>% 
-  filter(Year >= 2011) %>% 
-  group_by(Year, Quarter, Case_type) %>% 
-  summarise(d_avg_absolute_weeks = sum(Mean_weeks))
-
-# Median time (weeks) to Decree absolute
-diss_med_absolute_weeks_year <- divorce_timeliness_csv %>% 
-  filter(Stage == 'Decree Absolute', Year >= 2006) %>% 
-  group_by(Year, Case_type) %>% 
-  summarise(d_med_absolute_weeks = sum(Median_weeks))
-
-diss_med_absolute_weeks_qtr <- divorce_timeliness_csv %>%
-  filter(Stage == 'Decree Absolute', is.na(Year)) %>% 
-  separate(Quarter, into = c('Year', 'Quarter'), convert = TRUE) %>% 
-  filter(Year >= 2011) %>% 
-  group_by(Year, Quarter, Case_type) %>% 
-  summarise(d_med_absolute_weeks = sum(Median_weeks))
-
-#Joining year and quarter columns then binding them to each other
-diss_annual_tables <- list(diss_pet_year, diss_nisi_year, diss_avg_nisi_weeks_year, diss_med_nisi_weeks_year,
-                       diss_absolute_year, diss_avg_absolute_weeks_year, diss_med_absolute_weeks_year)
-
-diss_joined_year <- reduce(diss_annual_tables, left_join, by = c('Year', 'Case_type')) %>% ungroup()
-
-diss_qtr_tables <- list(diss_pet_qtr, diss_nisi_qtr, diss_avg_nisi_weeks_qtr, diss_med_nisi_weeks_qtr,
-                           diss_absolute_qtr, diss_avg_absolute_weeks_qtr, diss_med_absolute_weeks_qtr)
-
-diss_joined_qtr <- reduce(diss_qtr_tables, left_join, by = c('Year', 'Quarter', 'Case_type'))
-
-t12_diss <- bind_rows(diss_joined_year, diss_joined_qtr)
-
-#diss_pet <- bind_rows(diss_pet_year, diss_pet_qtr)
-
-# NAs are replaced by na_value rather than zero here.
-t12_diss_part <- t12_diss %>% 
-  transmute(Year = Year,
-            Quarter,
-            `Proceeding Type` = 'Dissolution of marriage',
+#Applications Annually
+divorce_app_year <- divorce_applications %>% filter(Quarter == '') %>%
+  transmute(Year,
+            Quarter = '',
+            `Proceeding Type` = Case,
             `Case Type` = Case_type,
-            `Petitions filed` = d_pet_filed,
-            `Decrees Nisi` = d_decrees_nisi,
-            `Mean time (weeks) to decree Nisi` = d_avg_nisi_weeks,
-            `Median time (weeks) to decree Nisi` = d_med_nisi_weeks,
-            `Decrees Absolute` = d_decrees_abs,
-            `Mean time (weeks) to decree Absolute` = d_avg_absolute_weeks,
-            `Median time (weeks) to decree Absolute` = d_med_absolute_weeks,
-            `Decree Granted` = na_value,
-            `Decree Absolute/Granted` = na_value
+            Law,
+            `Applications` = Count) %>% 
+  filter(Year > 2002)
+
+# Applications Quarterly
+divorce_app_qtr <- divorce_applications %>% filter(Quarter != '') %>% 
+  separate(Quarter, c('Year', 'Quarter'), sep = ' ') %>% 
+  mutate(Year = as.numeric(Year)) %>%
+  transmute(Year,
+            Quarter,
+            `Proceeding Type` = Case,
+            `Case Type` = Case_type,
+            Law,
+            `Applications` = Count)%>% 
+  filter(Year > 2010)
+
+divorce_app <- bind_rows(divorce_app_year, divorce_app_qtr) %>% arrange(`Proceeding Type`, `Case Type`, `Law`)
+
+#Conditional Orders Annually
+divorce_cond_year <- divorce_conditional %>% filter(Quarter == '') %>%
+  transmute(Year,
+            Quarter = '',
+            `Proceeding Type` = Case,
+            `Case Type` = Case_type,
+            Law,
+            `Conditional Orders` = Count,
+            `Mean time (weeks) to Conditional Order` = Mean_weeks,
+            `Median time (weeks) to Conditional Order` = Median_weeks,
             ) %>% 
-  arrange(`Case Type`) %>% 
-  mutate(across(where(is.numeric), ~replace_na(.x, na_value)))
+  filter(Year > 2002)
 
-# Nullity of Marriage and Judicial separation are calculated in the regular version of Table 12
-
-full_t12 <- bind_rows(t12_reg_year, t12_reg_qtr)
-
-#Nullity of Marriage
-t12_nullity_part <- full_t12 %>% 
-  transmute(Year = Year,
+# Conditional Orders Quarterly
+divorce_cond_qtr <- divorce_conditional %>% filter(Quarter != '') %>% 
+  separate(Quarter, c('Year', 'Quarter'), sep = ' ') %>% 
+  mutate(Year = as.numeric(Year)) %>%
+  transmute(Year,
             Quarter,
-            `Proceeding Type` = 'Nullity of marriage',
-            `Case Type` = '[z]',
-            `Petitions filed` = n_pet_filed,
-            `Decrees Nisi` = n_decrees_nisi,
-            `Mean time (weeks) to decree Nisi` = na_value,
-            `Median time (weeks) to decree Nisi` = na_value,
-            `Decrees Absolute` = n_decrees_abs,
-            `Mean time (weeks) to decree Absolute` = na_value,
-            `Median time (weeks) to decree Absolute` = na_value,
-            `Decree Granted` = na_value,
-            `Decree Absolute/Granted` = na_value
-            
-)
+            `Proceeding Type` = Case,
+            `Case Type` = Case_type,
+            Law,
+            `Conditional Orders` = Count,
+            `Mean time (weeks) to Conditional Order` = Mean_weeks,
+            `Median time (weeks) to Conditional Order` = Median_weeks,
+  )%>% 
+  filter(Year > 2010)
 
-#Judicial separation
-t12_judicial_part <- full_t12 %>% 
-  transmute(Year = Year,
+divorce_cond <- bind_rows(divorce_cond_year, divorce_cond_qtr) %>% arrange(`Proceeding Type`, `Case Type`, `Law`)
+
+#Final Orders Annually
+divorce_final_year <- divorce_final %>% filter(Quarter == '') %>%
+  transmute(Year,
+            Quarter = '',
+            `Proceeding Type` = Case,
+            `Case Type` = Case_type,
+            Law,
+            `Final Orders` = Count,
+            `Mean time (weeks) to Final Order` = Mean_weeks,
+            `Median time (weeks) to Final Order` = Median_weeks,
+  ) %>% 
+  filter(Year > 2002)
+
+# Final Orders Quarterly
+divorce_final_qtr <- divorce_final %>% filter(Quarter != '') %>% 
+  separate(Quarter, c('Year', 'Quarter'), sep = ' ') %>% 
+  mutate(Year = as.numeric(Year)) %>%
+  transmute(Year,
             Quarter,
-            `Proceeding Type` = 'Judicial separation',
-            `Case Type` = '[z]',
-            `Petitions filed` = j_pet_filed,
-            `Decrees Nisi` = na_value,
-            `Mean time (weeks) to decree Nisi` = na_value,
-            `Median time (weeks) to decree Nisi` = na_value,
-            `Decrees Absolute` = na_value,
-            `Mean time (weeks) to decree Absolute` = na_value,
-            `Median time (weeks) to decree Absolute` = na_value,
-            `Decree Granted` = j_decrees_granted,
-            `Decree Absolute/Granted` = na_value
-  )
+            `Proceeding Type` = Case,
+            `Case Type` = Case_type,
+            Law,
+            `Final Orders` = Count,
+            `Mean time (weeks) to Final Order` = Mean_weeks,
+            `Median time (weeks) to Final Order` = Median_weeks,
+  )%>% 
+  filter(Year > 2010)
 
-#Total
-t12_total_part <- full_t12 %>% 
-  transmute(Year = Year,
+divorce_fin_ord <- bind_rows(divorce_final_year, divorce_final_qtr) %>% arrange(`Proceeding Type`, `Case Type`, `Law`)
+
+# Joining the three stages together
+divorce_tables_list <- list(divorce_app, divorce_cond, divorce_fin_ord)
+
+t12_accessible_a <- reduce(divorce_tables_list, left_join, by = c('Year', 'Quarter', 'Proceeding Type', 'Case Type', 'Law'))
+
+# Now creating a column for all the proceeding types combined
+t12_accessible_b <- t12_accessible_a %>% group_by(Year, Quarter, `Case Type`, Law) %>% 
+  summarise(Applications = sum_na(Applications),
+            `Conditional Orders` = sum_na(`Conditional Orders`),
+            `Final Orders` = sum_na(`Final Orders`)) %>% 
+  ungroup() %>% 
+  transmute(Year,
             Quarter,
             `Proceeding Type` = 'All',
-            `Case Type` = '[z]',
-            `Petitions filed` = all_pet_filed,
-            `Decrees Nisi` = all_decrees_nisi,
-            `Mean time (weeks) to decree Nisi` = na_value,
-            `Median time (weeks) to decree Nisi` = na_value,
-            `Decrees Absolute` = na_value,
-            `Mean time (weeks) to decree Absolute` = na_value,
-            `Median time (weeks) to decree Absolute` = na_value,
-            `Decree Granted` = na_value,
-            `Decree Absolute/Granted` = all_decrees_abs
-  )
+            `Case Type`,
+            Law,
+            Applications,
+            `Conditional Orders`,
+            `Mean time (weeks) to Conditional Order` = na_value,
+            `Median time (weeks) to Conditional Order` = na_value,
+            `Final Orders`,
+            `Mean time (weeks) to Final Order` = na_value,
+            `Median time (weeks) to Final Order` = na_value
+            )
 
-t12_accessible <- bind_rows(t12_diss_part, t12_nullity_part, t12_judicial_part, t12_total_part)
+# Doing some tidying up. Like with regular divorce 0 values are considered not applicable
+t12_accessible_c <- bind_rows(t12_accessible_a, filter(t12_accessible_b, Quarter == '', Year > 2002),filter(t12_accessible_b, Quarter != '', Year > 2010))  %>% 
+  mutate(`Mean time (weeks) to Conditional Order` = case_when(`Proceeding Type` != 'Divorce' | Year < 2006 ~ na_value,
+                                                              TRUE ~ `Mean time (weeks) to Conditional Order`),
+         `Median time (weeks) to Conditional Order` = case_when(`Proceeding Type` != 'Divorce' | Year < 2006 ~ na_value,
+                                                              TRUE ~ `Median time (weeks) to Conditional Order`),
+         `Mean time (weeks) to Final Order` = case_when(`Proceeding Type` != 'Divorce' | Year < 2006 ~ na_value,
+                                                              TRUE ~ `Mean time (weeks) to Final Order`),
+         `Median time (weeks) to Final Order` = case_when(`Proceeding Type` != 'Divorce' | Year < 2006 ~ na_value,
+                                                              TRUE ~ `Median time (weeks) to Final Order`),
+         `Conditional Orders` = case_when(`Proceeding Type` == 'Judicial Separation' ~ na_value,
+                                          TRUE ~ `Conditional Orders`),
+         `Proceeding Type` = factor(`Proceeding Type`, levels = c('Divorce', 'Nullity of Marriage', 'Judicial Separation', 'All'))
+         
+         ) %>%
+  mutate(across(where(is.numeric), ~replace_zero(.x, na_value))) %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, na_value))) %>% 
+  arrange(`Proceeding Type`, `Case Type`, `Law`)
 
-# Alt NA
-# %>%
-#   mutate(across(c(7, 8, 10, 11), function(x){
-#     case_when(Year < 2006 ~ na_value,
-#               TRUE ~ x)
-#   }
-#   ))
+
+# Creating a column for digital percentages
+dig_column <- t12_accessible_c %>% select(1:6) %>% 
+  filter(`Proceeding Type` == 'Divorce') %>% 
+  pivot_wider(names_from = `Case Type`, values_from = `Applications`) %>% 
+  mutate(perc = Digital/All) %>% 
+  transmute(Year,
+            Quarter,
+            `Proceeding Type`,
+            `Case Type` = "All",
+            Law,
+            `Digital percentage` = perc)
+
+# Adding the column to the table
+t12_accessible <- t12_accessible_c %>% left_join(dig_column, by = c('Year', 'Quarter', 'Proceeding Type', 'Case Type', 'Law')) %>% 
+  mutate(`Proceeding Type` = as.character(`Proceeding Type`),
+         `Digital percentage` = replace_na(`Digital percentage`, na_value)) %>% 
+  mutate(`Case Type` = str_replace(`Case Type`, 'All', 'Digital and Paper'),
+         `Law` = str_replace(`Law`, 'All', 'Old and New'))
+
+# Replacing empty string with Annual
+t12_accessible$Quarter[t12_accessible$Quarter == ''] <- 'Annual'

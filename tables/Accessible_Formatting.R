@@ -11,38 +11,44 @@ comma_style <- openxlsx::createStyle(numFmt = 'COMMA')
 sheet_names <- fcsq_a11y %>% filter(sheet_type == 'tables') %>% pull(tab_title)
 table_list <- fcsq_a11y %>% filter(sheet_type == 'tables') %>% pull(table)
 
-# List of columns that have comma formtting applied in each table. 99 represents no formatting applied
-comma_cols <- list(4:ncol(table_list[[1]]),
-                     4:ncol(table_list[[2]]),
-                     3:ncol(table_list[[3]]),
-                     3:ncol(table_list[[4]]),
-                     3:ncol(table_list[[5]]),
-                     3:ncol(table_list[[6]]),
-                     4:ncol(table_list[[7]]),
-                     4:ncol(table_list[[8]]),
-                     4:ncol(table_list[[9]]),
+# Select digits from sheet names and adding t at the front to use as names for the table list
+access_table_numbers <- paste0('t', contents_df %>% filter(`Sheet name` != 'Notes') %>% pull(`Sheet name`) %>% str_extract('\\d+.?'))
+names(table_list) <- access_table_numbers
+
+# List of columns that have comma formatting applied in each table. 99 represents no formatting applied
+comma_cols <- list(4:ncol(table_list[['t1']]),
+                   #Children Act Tables
+                     4:ncol(table_list[['t2']]),
+                     3:ncol(table_list[['t3a']]),
+                     3:ncol(table_list[['t3b']]),
+                     3:ncol(table_list[['t4a']]),
+                     3:ncol(table_list[['t4b']]),
+                     4:ncol(table_list[['t5']]),
+                     4:ncol(table_list[['t6']]),
+                     4:ncol(table_list[['t7']]),
                      #Table 8 and 9 only have a single column that is formatted
                      3,
                      3,
                      #Table 10 has every two columns formatted
-                     seq(from = 4, to = ncol(table_list[[12]]), by = 2),
-                     4:ncol(table_list[[13]]),
+                     seq(from = 4, to = ncol(table_list[['t10']]), by = 2),
+                     4:ncol(table_list[['t11']]),
                      # Divorce has a mixture of columns. Subject to change
-                     c(5, 6, 9, 12, 13),
-                     c(3, seq(from = 4, to = ncol(table_list[[15]]), by = 2)),
-                     #Divorce Progression does not need any 
+                     c(6, 7, 10),
+                     5,
+                     c(3, seq(from = 4, to = ncol(table_list[['t13']]), by = 2)),
+                     #T14 does not need any 
                      99,
-                     3:ncol(table_list[[17]]),
-                     4:ncol(table_list[[18]]),
+                     3:ncol(table_list[['t15']]),
+                     4:ncol(table_list[['t16']]),
                      #FMPO AND FGM don't require anything either
                      99,
                      99,
-                   3:ncol(table_list[[21]]),
-                   3:ncol(table_list[[22]]),
-                   3:ncol(table_list[[23]]),
-                   3:ncol(table_list[[24]]),
-                   3:ncol(table_list[[25]]),
-                   3:ncol(table_list[[26]]),
+                   3:ncol(table_list[['t19']]),
+                   3:ncol(table_list[['t20']]),
+                   3:ncol(table_list[['t21']]),
+                   3:ncol(table_list[['t22']]),
+                   3:ncol(table_list[['t23']]),
+                   3:ncol(table_list[['t24']]),
                    seq(from = 5, to = 20, by = 5)
                    
                    )
@@ -50,20 +56,34 @@ comma_cols <- list(4:ncol(table_list[[1]]),
 
 # Adds commas at the thousand separator and changes any na and suppressed values with their replacements
 pwalk(list(sheet_names, table_list, comma_cols), ~comma_formatter(accessible_tables, ..1, ..2, ..3))
+
+# Rounding to 1dp
+round_sheet_names <- c("Table_8", "Table_9", "Table_10", "Table_25" )
+round_cols <- list(c(4, 5), c(4, 5), 
+                   seq(from = 5, to = ncol(t10_accessible), by = 2),
+                   c(6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24)
+                   )
+round_table_list <- list(t8_accessible, t9_accessible, t10_accessible, t24_accessible)
+round_style <- openxlsx::createStyle(numFmt = "0.0")
+
+pwalk(list(round_sheet_names, round_table_list, round_cols), ~style_formatter(accessible_tables, ..1, ..2, ..3, style = round_style))
+
+# Rounding to 0dp percentage
+perc_sheet_names <- c("Table_8", "Table_12", "Table_14" )
+perc_cols <- list(6, 13, 2:ncol(t14_accessible))
+perc_table_list <- list(t8_accessible, t12_accessible, t14_accessible)
+perc_style <- openxlsx::createStyle(numFmt = "0%")
+
+pwalk(list(perc_sheet_names, perc_table_list, perc_cols), ~style_formatter(accessible_tables, ..1, ..2, ..3, style = perc_style))
+
+#Rounding to 1dp pecentage
+style_formatter(accessible_tables, "Table_13", t13_accessible, seq(from = 5, to = ncol(t13_accessible), by = 2), openxlsx::createStyle(numFmt = "0.0%"))
+
+#Dealing with na and suppression
 pwalk(list(sheet_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2, na_value = na_value))
-na_formatter(accessible_tables, 'Table 23', t23_accessible, na_value = suppress_value, value = '[c]' )
-#pwalk(list(sheet_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2, na_value = suppress_value, value = '[c]'))
+na_formatter(accessible_tables, 'Table_23', t23_accessible, na_value = suppress_value, value = '[c]' )
 
 
-# Adds hyperlinks to the Contents Page
-add_content_link <- function(sheet_name, startRow){
-  openxlsx::writeFormula(wb = accessible_tables, 
-                         "Contents",
-                         startRow = startRow,
-                         x = makeHyperlinkString(sheet = sheet_name, 
-                                                 row = 1, col = 1, 
-                                                 text = sheet_name))
-}
 
 # A list containing vectors for the worksheets used to add hyperlinks to the Contents Page
 content_list <- list(c('Notes', sheet_names), 
@@ -74,7 +94,7 @@ pwalk(content_list, add_content_link)
 
 openxlsx::writeFormula(wb = accessible_tables,
                        sheet = 'Cover',
-                       startRow = 10,
+                       startRow = 15,
                        x = '=HYPERLINK("mailto:familycourt.statistics@gov.uk", "familycourt.statistics@gov.uk")'
                        )
 
@@ -85,6 +105,41 @@ openxlsx::setColWidths(wb = accessible_tables,
                        cols = c(1, 2, 3),
                        widths = c(15.11, 15.11, 128) 
                        )
+
+# Change in a11y means I'll reset everything to 16.11 column width
+all_cols <- map(table_list, ~ seq(ncol(.x)))
+map2(sheet_names, all_cols, ~openxlsx::setColWidths(wb = accessible_tables, sheet = ..1, cols = ..2, widths = 16.11))
+
+# Setting Colwidth for Tables with long pieces of text
+colwidth_sheet <- c('Table_3a', 'Table_3b', 'Table_4a', 'Table_4b', 
+                    'Table_10', 'Table_12b', 'Table_14', 'Table_16',
+                    'Table_24', 'Table_25')
+colwidth_cols <- list(c(2, 3),
+                      c(2, 3),
+                      c(2, 3),
+                      c(2, 3),
+                      1,
+                      3,
+                      1,
+                      3,
+                      4,
+                      4
+                      )
+
+colwidths <- list(c(39.1, 39.1),
+                  c(39.1, 39.1),
+                  c(39.1, 39.1),
+                  c(39.1, 39.1),
+                  27.3,
+                  23.5,
+                  23.5,
+                  18.5,
+                  17.8,
+                  20.5)
+
+pwalk(list(colwidth_sheet, colwidth_cols, colwidths), openxlsx::setColWidths, wb = accessible_tables)
+
+# Exporting the finished table
 openxlsx::saveWorkbook(accessible_tables, paste0(path_to_project, glue("Accessible Family Court Tables ({pub_months_short} {pub_year}).xlsx")), overwrite = TRUE)
 #openxlsx::saveWorkbook(accessible_tables, paste0(path_to_project,"test_output_access.xlsx"), overwrite = TRUE)
 

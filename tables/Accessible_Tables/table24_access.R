@@ -47,4 +47,7 @@ t24_accessible <- bind_rows(t24_accessible_b %>% filter(is.na(Quarter), Year <= 
                               mutate(Quarter = paste0('Q', Quarter))) %>% 
   filter(!(Year == 2019 & Quarter %in% c('Q1', 'Q2'))) %>% 
   arrange(`Digital or Paper`, `Applicant Type`) %>% 
-  mutate(across(where(is.numeric), ~replace_na(.x, na_value)))
+  mutate(`Digital or Paper` = str_replace(`Digital or Paper`, 'All', 'Digital and Paper'),
+         `Applicant Type` = str_replace(`Applicant Type`, 'All', 'Personal and Solicitor')) %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, na_value))) %>% 
+  mutate(Quarter = replace_na(Quarter, 'Annual'))

@@ -11,7 +11,7 @@ t3_quarter <- child_act_csv %>% distinct(Year, Qtr) %>%
   filter(!is.na(Year), Qtr != '') %>% tail(4)
 
 
-####### Table 3a ##############################################################
+####### Table 3b ##############################################################
 
 ##############################################################################
 #Public Law Child Count Applications Year
@@ -32,9 +32,9 @@ t3_pub_order_template_year <- t3_orders %>% filter(Public_or_Private != 'Private
 
 #Joining together and pivoting to get the data in the right shape
 #Final step replaces any na with 0
-t3a_accessible_pub_year <- t3_pub_order_template_year %>% left_join(t3_child_pub_year, by = c('Year', 'Order type', 'Order_category')) %>% 
+t3b_accessible_pub_year <- t3_pub_order_template_year %>% left_join(t3_child_pub_year, by = c('Year', 'Order type', 'Order_category')) %>% 
   transmute(Category = 'Public law',
-            `Order category` = Order_category,
+            `Order type category` = Order_category,
             `Order type` = `Order type`,
             Year = Year,
             Count = Count) %>%
@@ -57,9 +57,9 @@ t3_pub_order_template_qtr <- t3_orders %>% filter(Public_or_Private != 'Private 
 
 #Joining together and pivoting to get the data in the right shape
 #Final step replaces any na with 0 and selects the last four quarters only
-t3a_accessible_pub_qtr <- t3_pub_order_template_qtr %>% left_join(t3_child_pub_qtr, by = c('Year', 'Qtr', 'Order type', 'Order_category')) %>% 
+t3b_accessible_pub_qtr <- t3_pub_order_template_qtr %>% left_join(t3_child_pub_qtr, by = c('Year', 'Qtr', 'Order type', 'Order_category')) %>% 
   transmute(Category = 'Public law',
-            `Order category` = Order_category,
+            `Order type category` = Order_category,
             `Order type` = `Order type`,
             Year = Year,
             Qtr = Qtr,
@@ -69,7 +69,7 @@ t3a_accessible_pub_qtr <- t3_pub_order_template_qtr %>% left_join(t3_child_pub_q
               values_from = Count) %>% 
   mutate(across(where(is.numeric), ~replace_na(.x, 0)))
 
-t3a_accessible_pub <- left_join(t3a_accessible_pub_year, t3a_accessible_pub_qtr, by = c("Category", "Order type", "Order category"))
+t3b_accessible_pub <- left_join(t3b_accessible_pub_year, t3b_accessible_pub_qtr, by = c("Category", "Order type", "Order type category"))
 
 
 ##############################################################################
@@ -88,9 +88,9 @@ t3_priv_order_template_year <- t3_orders %>% filter(Public_or_Private != 'Public
 
 #Joining together and pivoting to get the data in the right shape
 #Final step replaces any na with 0
-t3a_accessible_priv_year <- t3_priv_order_template_year %>% left_join(t3_child_priv_year, by = c('Year', 'Order type', 'Order_category')) %>% 
+t3b_accessible_priv_year <- t3_priv_order_template_year %>% left_join(t3_child_priv_year, by = c('Year', 'Order type', 'Order_category')) %>% 
   transmute(Category = 'Private law',
-            `Order category` = Order_category,
+            `Order type category` = Order_category,
             `Order type` = `Order type`,
             Year = Year,
             Count = Count) %>%
@@ -113,9 +113,9 @@ t3_priv_order_template_qtr <- t3_orders %>% filter(Public_or_Private != 'Public 
 
 #Joining together and pivoting to get the data in the right shape
 #Final step replaces any na with 0 and selects the last four quarters only
-t3a_accessible_priv_qtr <- t3_priv_order_template_qtr %>% left_join(t3_child_priv_qtr, by = c('Year', 'Qtr', 'Order type', 'Order_category')) %>% 
+t3b_accessible_priv_qtr <- t3_priv_order_template_qtr %>% left_join(t3_child_priv_qtr, by = c('Year', 'Qtr', 'Order type', 'Order_category')) %>% 
   transmute(Category = 'Private law',
-            `Order category` = Order_category,
+            `Order type category` = Order_category,
             `Order type` = `Order type`,
             Year = Year,
             Qtr = Qtr,
@@ -125,12 +125,12 @@ t3a_accessible_priv_qtr <- t3_priv_order_template_qtr %>% left_join(t3_child_pri
               values_from = Count) %>% 
   mutate(across(where(is.numeric), ~replace_na(.x, 0)))
 
-t3a_accessible_priv <- left_join(t3a_accessible_priv_year, t3a_accessible_priv_qtr, by = c("Category", "Order type", "Order category"))
+t3b_accessible_priv <- left_join(t3b_accessible_priv_year, t3b_accessible_priv_qtr, by = c("Category", "Order type", "Order type category"))
 
-t3a_accessible <- bind_rows(t3a_accessible_pub, t3a_accessible_priv)
+t3b_accessible <- bind_rows(t3b_accessible_pub, t3b_accessible_priv)
 
-####### Table 3b ##############################################################
-#Public Law Child Count Applications Year
+####### Table 3a ##############################################################
+#Public Law Order Count Applications Year
 ###############################################################################
 
 t3_order_pub_year <- child_act_csv %>% 
@@ -142,9 +142,9 @@ t3_order_pub_year <- child_act_csv %>%
 
 #Joining together and pivoting to get the data in the right shape
 #Final step replaces any na with 0
-t3b_accessible_pub_year <- t3_pub_order_template_year %>% left_join(t3_order_pub_year, by = c('Year', 'Order type', 'Order_category')) %>% 
+t3a_accessible_pub_year <- t3_pub_order_template_year %>% left_join(t3_order_pub_year, by = c('Year', 'Order type', 'Order_category')) %>% 
   transmute(Category = 'Public law',
-            `Order category` = Order_category,
+            `Order type category` = Order_category,
             `Order type` = `Order type`,
             Year = Year,
             Count = Count) %>%
@@ -153,7 +153,7 @@ t3b_accessible_pub_year <- t3_pub_order_template_year %>% left_join(t3_order_pub
   mutate(across(where(is.numeric), ~replace_na(.x, 0))) 
 
 ###############################################################################
-#Public Law Child Count Applications Quarterly
+#Public Law Order Count Applications Quarterly
 t3_order_pub_qtr <- child_act_csv %>% 
   filter(Type == 'Application', Count_type == 'Order type', Public_private == 'Public law') %>% 
   inner_join(t3_orders, by = 'Order_type_code') %>% 
@@ -163,9 +163,9 @@ t3_order_pub_qtr <- child_act_csv %>%
 
 #Joining together and pivoting to get the data in the right shape
 #Final step replaces any na with 0 and selects the last four quarters only
-t3b_accessible_pub_qtr <- t3_pub_order_template_qtr %>% left_join(t3_order_pub_qtr, by = c('Year', 'Qtr', 'Order type', 'Order_category')) %>% 
+t3a_accessible_pub_qtr <- t3_pub_order_template_qtr %>% left_join(t3_order_pub_qtr, by = c('Year', 'Qtr', 'Order type', 'Order_category')) %>% 
   transmute(Category = 'Public law',
-            `Order category` = Order_category,
+            `Order type category` = Order_category,
             `Order type` = `Order type`,
             Year = Year,
             Qtr = Qtr,
@@ -175,11 +175,11 @@ t3b_accessible_pub_qtr <- t3_pub_order_template_qtr %>% left_join(t3_order_pub_q
               values_from = Count) %>% 
   mutate(across(where(is.numeric), ~replace_na(.x, 0)))
 
-t3b_accessible_pub <- left_join(t3b_accessible_pub_year, t3b_accessible_pub_qtr, by = c('Category', 'Order type', 'Order category')) 
+t3a_accessible_pub <- left_join(t3a_accessible_pub_year, t3a_accessible_pub_qtr, by = c('Category', 'Order type', 'Order type category')) 
 
 
 ##############################################################################
-#Private Law Child Count Applications Year
+#Private Law Order Count Applications Year
 ###############################################################################
 t3_order_priv_year <- child_act_csv %>% 
   filter(Type == 'Application', Count_type == 'Order type', Public_private == 'Private law', Year <= annual_year) %>% 
@@ -190,9 +190,9 @@ t3_order_priv_year <- child_act_csv %>%
 
 #Joining together and pivoting to get the data in the right shape
 #Final step replaces any na with 0
-t3b_accessible_priv_year <- t3_priv_order_template_year %>% left_join(t3_order_priv_year, by = c('Year', 'Order type', 'Order_category')) %>% 
+t3a_accessible_priv_year <- t3_priv_order_template_year %>% left_join(t3_order_priv_year, by = c('Year', 'Order type', 'Order_category')) %>% 
   transmute(Category = 'Private law',
-            `Order category` = Order_category,
+            `Order type category` = Order_category,
             `Order type` = `Order type`,
             Year = Year,
             Count = Count) %>%
@@ -201,7 +201,7 @@ t3b_accessible_priv_year <- t3_priv_order_template_year %>% left_join(t3_order_p
   mutate(across(where(is.numeric), ~replace_na(.x, 0))) 
 
 ###############################################################################
-#Private Law Child Count Applications Quarterly
+#Private Law Order Count Applications Quarterly
 t3_order_priv_qtr <- child_act_csv %>% 
   filter(Type == 'Application', Count_type == 'Order type', Public_private == 'Private law') %>% 
   inner_join(t3_orders, by = 'Order_type_code') %>% 
@@ -211,9 +211,9 @@ t3_order_priv_qtr <- child_act_csv %>%
 
 #Joining together and pivoting to get the data in the right shape
 #Final step replaces any na with 0 and selects the last four quarters only
-t3b_accessible_priv_qtr <- t3_priv_order_template_qtr %>% left_join(t3_order_priv_qtr, by = c('Year', 'Qtr', 'Order type', 'Order_category')) %>% 
+t3a_accessible_priv_qtr <- t3_priv_order_template_qtr %>% left_join(t3_order_priv_qtr, by = c('Year', 'Qtr', 'Order type', 'Order_category')) %>% 
   transmute(Category = 'Private law',
-            `Order category` = Order_category,
+            `Order type category` = Order_category,
             `Order type` = `Order type`,
             Year = Year,
             Qtr = Qtr,
@@ -223,6 +223,6 @@ t3b_accessible_priv_qtr <- t3_priv_order_template_qtr %>% left_join(t3_order_pri
               values_from = Count) %>% 
   mutate(across(where(is.numeric), ~replace_na(.x, 0)))
 
-t3b_accessible_priv <- left_join(t3b_accessible_priv_year, t3b_accessible_priv_qtr, by = c('Category', 'Order type', 'Order category'))
+t3a_accessible_priv <- left_join(t3a_accessible_priv_year, t3a_accessible_priv_qtr, by = c('Category', 'Order type', 'Order type category'))
 
-t3b_accessible <- bind_rows(t3b_accessible_pub, t3b_accessible_priv)
+t3a_accessible <- bind_rows(t3a_accessible_pub, t3a_accessible_priv)

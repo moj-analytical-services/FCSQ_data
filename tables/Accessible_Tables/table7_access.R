@@ -21,4 +21,5 @@ t7_priv_law <- full_t7 %>%
             `High Court cases started outside Central London DFJ` = priv_outside_london_hc
   )
 
-t7_accessible <- bind_rows(t7_pub_law, t7_priv_law)
+t7_accessible <- bind_rows(t7_pub_law, t7_priv_law) %>% 
+  mutate(Quarter = replace_na(Quarter, 'Annual'))

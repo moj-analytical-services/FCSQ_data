@@ -14,6 +14,13 @@ probate_dates <- bind_rows(probate_dates_annual, probate_dates_quarter)
 
 probate_rowcount <- nrow(probate_dates)
 
+#List info
+t24_list_col <- 3
+t24_list_letter <- num_to_letter(t24_list_col)
+t24_list_a_row <- 7
+t24_list_b_row <- 8
+
+
 # formulae
 t24_start <- 13
 start_col <- 3
@@ -30,19 +37,19 @@ contest_probate_figures <- contest_probate %>% pull(-1)
 full_t24 <- tibble(Year = probate_dates$Year,
                    Quarter = probate_dates$Quarter,
                    # Backslash escapes single quotes
-                   probate_apps = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&$C$7&"|"&C$12&"|"&$C$8,\'Table 24 source\'!$A:$H,8, FALSE)'),
-                   grant_will_apps = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&$C$7&"|"&D$12&"|"&$C$8,\'Table 24 source\'!$A:$H,8, FALSE)'),
-                   grant_admin_apps = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&$C$7&"|"&E$12&"|"&$C$8,\'Table 24 source\'!$A:$H,8, FALSE)'),
-                   all_grant_apps = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&$C$7&"|"&F$12&"|"&$C$8,\'Table 24 source\'!$A:$H,8, FALSE)'),
+                   probate_apps = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&${t24_list_letter}${t24_list_a_row}&"|"&C$12&"|"&${t24_list_letter}${t24_list_b_row},\'Table 24 source\'!$A:$H,8, FALSE)'),
+                   grant_will_apps = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&${t24_list_letter}${t24_list_a_row}&"|"&D$12&"|"&${t24_list_letter}${t24_list_b_row},\'Table 24 source\'!$A:$H,8, FALSE)'),
+                   grant_admin_apps = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&${t24_list_letter}${t24_list_a_row}&"|"&E$12&"|"&${t24_list_letter}${t24_list_b_row},\'Table 24 source\'!$A:$H,8, FALSE)'),
+                   all_grant_apps = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&${t24_list_letter}${t24_list_a_row}&"|"&F$12&"|"&${t24_list_letter}${t24_list_b_row},\'Table 24 source\'!$A:$H,8, FALSE)'),
                    blank1 = NA,
-                   probate_issued = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&$C$7&"|"&H$12&"|"&$C$8,\'Table 24 source\'!$A:$H,7, FALSE)'),
-                   grant_will_issued = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&$C$7&"|"&I$12&"|"&$C$8,\'Table 24 source\'!$A:$H,7, FALSE)'),
-                   grant_admin_issued = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&$C$7&"|"&J$12&"|"&$C$8,\'Table 24 source\'!$A:$H,7, FALSE)'),
-                   all_grant_issued = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&$C$7&"|"&K$12&"|"&$C$8,\'Table 24 source\'!$A:$H,7, FALSE)'),
+                   probate_issued = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&${t24_list_letter}${t24_list_a_row}&"|"&H$12&"|"&${t24_list_letter}${t24_list_b_row},\'Table 24 source\'!$A:$H,7, FALSE)'),
+                   grant_will_issued = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&${t24_list_letter}${t24_list_a_row}&"|"&I$12&"|"&${t24_list_letter}${t24_list_b_row},\'Table 24 source\'!$A:$H,7, FALSE)'),
+                   grant_admin_issued = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&${t24_list_letter}${t24_list_a_row}&"|"&J$12&"|"&${t24_list_letter}${t24_list_b_row},\'Table 24 source\'!$A:$H,7, FALSE)'),
+                   all_grant_issued = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&${t24_list_letter}${t24_list_a_row}&"|"&K$12&"|"&${t24_list_letter}${t24_list_b_row},\'Table 24 source\'!$A:$H,7, FALSE)'),
                    blank2 = NA,
-                   grants_revoked = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&$C$7&"|"&M$12&"|"&$C$8,\'Table 24 source\'!$A:$H,7, FALSE)'),
-                   standing_search = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&$C$7&"|"&N$12&"|"&$C$8,\'Table 24 source\'!$A:$H,7, FALSE)'),
-                   contested_probate = c(glue('=IF(OR(AND($C$7="All",$C$8="All"),AND($C$7="Paper",$C$8="All")),{contest_probate_figures},":")'), 
+                   grants_revoked = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&${t24_list_letter}${t24_list_a_row}&"|"&M$12&"|"&${t24_list_letter}${t24_list_b_row},\'Table 24 source\'!$A:$H,7, FALSE)'),
+                   standing_search = glue('=VLOOKUP($A{probate_rows}&"|"&$B{probate_rows}&"|"&${t24_list_letter}${t24_list_a_row}&"|"&N$12&"|"&${t24_list_letter}${t24_list_b_row},\'Table 24 source\'!$A:$H,7, FALSE)'),
+                   contested_probate = c(glue('=IF(OR(AND(${t24_list_letter}${t24_list_a_row}="All",${t24_list_letter}${t24_list_b_row}="All"),AND(${t24_list_letter}${t24_list_a_row}="Paper",${t24_list_letter}${t24_list_b_row}="All")),{contest_probate_figures},":")'), 
                                          rep("-", probate_rowcount - length(contest_probate_figures)))
   
 )

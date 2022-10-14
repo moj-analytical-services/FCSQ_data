@@ -34,7 +34,12 @@ openxlsx::writeData(wb = template,
 # Adding source for Table 12
 openxlsx::writeData(wb = template,
                     sheet = 'Table_12_source',
-                    x = divorce_timeliness_csv)
+                    x = divorce_t12_input)
+
+# Adding source for Table 12b
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_12b_source',
+                    x = divorce_t12b_input)
 
 # Adding source for Table 16
 openxlsx::writeData(wb = template,

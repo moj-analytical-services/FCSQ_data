@@ -1,20 +1,8 @@
-# notes
-notes_select <- function(notes, table){
-  notes %>% filter(`Table number` == table) %>% 
-    pull(`Note text`)
-}
-
-make_reg_notes <- function(notes, source){
-  notes <- c("Source:",
-             glue(source),
-             "",
-             "Notes:",
-             glue("{seq_along(notes)}) {notes}"))
-}
 
 # Number of tables is set and used to get a vector containing the number of the tables
+# There are 26 tables with table 12b but that has the same table number despite being on a different tab
 no_tables <- 25
-no_tables_seq <- seq(no_tables)
+no_tables_seq <- append(seq(no_tables), '12b', after = 12)
 table_numbers <- glue('Table {no_tables_seq}')
 
 # Creates a list of notes that correspond to a particular table
@@ -32,6 +20,7 @@ table_sources_reg <- c("HMCTS FamilyMan and Core Case Data",
                    "HMCTS FamilyMan and Core Case Data",
                    "HMCTS FamilyMan and Core Case Data",
                    "HMCTS FamilyMan and Core Case Data",
+                   "HMCTS Core Case Data",
                    "HMCTS FamilyMan and Core Case Data",
                    "HMCTS FamilyMan and Core Case Data",
                    "HMCTS FamilyMan and Core Case Data",
@@ -43,7 +32,7 @@ table_sources_reg <- c("HMCTS FamilyMan and Core Case Data",
                    "Court of Protection data management system",
                    "Court of Protection data management system",
                    "Office of the Public Guardian data management systems SIRIUS and Casrec",
-                   "HMCTS ProbateMan system to Q1 2019, HMCTS Core Case Data from Q2 2019, HMCTS E-Filing service (contested cases only)",
+                   "HMCTS ProbateMan system to Q1 2019, HMCTS Core Case Data from Q2 2019, HMCTS Pentaho system (contested cases only)",
                    "HMCTS Core Case Data")
 
 # notes added to regular tables

@@ -1,62 +1,9 @@
 #Accessible Notes
-
-get_note_frame <- function(table_name){
-  # This gets the note numbers for a particular table after removing all the square brackets
-  notes_import %>% filter(`Table number` == table_name)
-  
-}
-
-# %>% pull(`Note number`) %>% str_remove_all('[\\[\\]]')
-
 # List of note numbers for each table. This uses the table numbers established in footnotes.R
 note_frame_list <- map(table_numbers, get_note_frame)
-
-# Column names are changed by positioning. For each table the number is picked from the note list and the appropriate note number picked.
-# Relative orders of notes for a particular table is therefore the only thing that matters
-
-col_name_check <- function(old_cols, new_cols, table){
-  # This checks that the new columns are referring to the same columns as the original columns
-  # This only works if there are no special characters in the original sequence
-  checker <- str_detect(new_cols, coll(old_cols))
-  if (!all(checker)){
-    # Prints new columns and old columns to check where the names don't match
-    print(old_cols[which(!checker)])
-    print(new_cols[which(!checker)])
-    
-    stop(glue('Names do not match in accessible table {table}'))
-    
-  }
-}
-
-add_col_notes <- function(table, table_num, col_nums, new_cols, skip = FALSE){
-  # Table name: This is the table that is being modified
-  # Table num : The number of the table
-  # col_nums: A numeric vector containing positions of column
-  # new_cols : A character string containing the new column names to replace the old ones
-  # skip lets you skip the check. Only set to TRUE id you are certain there is no error in renaming
-  orig_cols <- colnames(table)[col_nums]
-  
-  if (!skip){
-    col_name_check(orig_cols, new_cols, table = table_num)
-    
-  }
-  colnames(table)[col_nums] <- new_cols
-  table
-  
-  
-}
-
-note_lookup_selector <- function(frame_list, table_num, lookup_code){
-  # Takes the list of data frames and selects the note number based on the numerical lookup code for a particular note.
-  # As note numbers may change, lookup code for a particular note should not. 
-  # The lookup code is usually in the form of - 01 or - 10 or so forth
-  frame_list[[table_num]] %>% 
-    filter(str_detect(Lookup, paste('-', lookup_code))) %>% 
-    pull(`Note number`) %>% str_remove_all('[\\[\\]]')
-}
+names(note_frame_list) <- table_numbers
 
 # Table 1
-
 # Note to add into title
 title_note_t1 <- glue('[note {note_lookup_selector(note_frame_list, 1, "01")}]')
 
@@ -93,16 +40,16 @@ title_note_t3 <- glue('[note {note_lookup_selector(note_frame_list, 3, "01")}][n
 t3a_accessible <- t3a_accessible %>% 
   mutate(Notes = case_when(`Order type` == 'Parental order' ~ glue('[note {note_lookup_selector(note_frame_list, 3, "04")}]'),
                            `Order type` == 'Enforcement' ~ glue('[note {note_lookup_selector(note_frame_list, 3, "06")}]'),
-                           `Order category` == 'Return of Missing or Taken Children' ~ glue('[note {note_lookup_selector(note_frame_list, 3, "03")}]'),
-                           `Order category` == 'Post Separation Support and Dispute Resolution' ~ glue('[note {note_lookup_selector(note_frame_list, 3, "05")}]'))
+                           `Order type category` == 'Return of Missing or Taken Children' ~ glue('[note {note_lookup_selector(note_frame_list, 3, "03")}]'),
+                           `Order type category` == 'Post Separation Support and Dispute Resolution' ~ glue('[note {note_lookup_selector(note_frame_list, 3, "05")}]'))
                            
          )
 
 t3b_accessible <- t3b_accessible %>% 
   mutate(Notes = case_when(`Order type` == 'Parental order' ~ glue('[note {note_lookup_selector(note_frame_list, 3, "04")}]'),
                            `Order type` == 'Enforcement' ~ glue('[note {note_lookup_selector(note_frame_list, 3, "06")}]'),
-                           `Order category` == 'Return of Missing or Taken Children' ~ glue('[note {note_lookup_selector(note_frame_list, 3, "03")}]'),
-                           `Order category` == 'Post Separation Support and Dispute Resolution' ~ glue('[note {note_lookup_selector(note_frame_list, 3, "05")}]'))
+                           `Order type category` == 'Return of Missing or Taken Children' ~ glue('[note {note_lookup_selector(note_frame_list, 3, "03")}]'),
+                           `Order type category` == 'Post Separation Support and Dispute Resolution' ~ glue('[note {note_lookup_selector(note_frame_list, 3, "05")}]'))
          
   )
   
@@ -112,8 +59,8 @@ title_note_t4 <- glue('[note {note_lookup_selector(note_frame_list, 4, "01")}][n
 t4a_accessible <- t4a_accessible %>% mutate(Notes = case_when(`Order type` %in% c('Authorising search, taking charge and delivery', 'Authority to obtain information on missing child') ~ glue('[note {note_lookup_selector(note_frame_list, 4, "03")}]'),
                                             `Order type` %in% c('Recovery order', 'Authority to search for another child') ~ glue('[note {note_lookup_selector(note_frame_list, 4, "04")}]'),
                                             `Order type` == 'Parental order' ~ glue('[note {note_lookup_selector(note_frame_list, 4, "05")}]'),
-                                            `Order category` == 'Interim Orders' ~ glue('[note {note_lookup_selector(note_frame_list, 4, "06")}]'),
-                                            `Order category` == 'Combined Orders' ~ glue('[note {note_lookup_selector(note_frame_list, 4, "07")}]')
+                                            `Order type category` == 'Interim Orders' ~ glue('[note {note_lookup_selector(note_frame_list, 4, "06")}]'),
+                                            `Order type category` == 'Combined Orders' ~ glue('[note {note_lookup_selector(note_frame_list, 4, "07")}]')
                                             )
 )
 
@@ -121,8 +68,8 @@ t4a_accessible <- t4a_accessible %>% mutate(Notes = case_when(`Order type` %in% 
 t4b_accessible <- t4b_accessible %>% mutate(Notes = case_when(`Order type` %in% c('Authorising search, taking charge and delivery', 'Authority to obtain information on missing child') ~ glue('[note {note_lookup_selector(note_frame_list, 4, "03")}]'),
                                                               `Order type` %in% c('Recovery order', 'Authority to search for another child') ~ glue('[note {note_lookup_selector(note_frame_list, 4, "04")}]'),
                                                               `Order type` == 'Parental order' ~ glue('[note {note_lookup_selector(note_frame_list, 4, "05")}]'),
-                                                              `Order category` == 'Interim Orders' ~ glue('[note {note_lookup_selector(note_frame_list, 4, "06")}]'),
-                                                              `Order category` == 'Combined Orders' ~ glue('[note {note_lookup_selector(note_frame_list, 4, "07")}]')
+                                                              `Order type category` == 'Interim Orders' ~ glue('[note {note_lookup_selector(note_frame_list, 4, "06")}]'),
+                                                              `Order type category` == 'Combined Orders' ~ glue('[note {note_lookup_selector(note_frame_list, 4, "07")}]')
 )
 )
 
@@ -185,8 +132,8 @@ new_t10_cols <- c(glue('Category\n[notes {note_lookup_selector(note_frame_list, 
                   glue('Respondent only - Mean duration in weeks\n[note {note_lookup_selector(note_frame_list, 10, "06")}][note {note_lookup_selector(note_frame_list, 10, "08")}][note {note_lookup_selector(note_frame_list, 10, "09")}]'),
                   glue('Neither Applicant nor Respondent - Number of Disposals\n[note {note_lookup_selector(note_frame_list, 10, "06")}]'),
                   glue('Neither Applicant nor Respondent - Mean duration in weeks\n[note {note_lookup_selector(note_frame_list, 10, "06")}][note {note_lookup_selector(note_frame_list, 10, "08")}][note {note_lookup_selector(note_frame_list, 10, "09")}]'),
-                  glue('All - Number of Disposals\n[note {note_lookup_selector(note_frame_list, 10, "07")}]'),
-                  glue('All - Mean duration in weeks\n[note {note_lookup_selector(note_frame_list, 10, "07")}][note {note_lookup_selector(note_frame_list, 10, "08")}][note {note_lookup_selector(note_frame_list, 10, "09")}]')
+                  glue('All types of representation - Number of Disposals\n[note {note_lookup_selector(note_frame_list, 10, "07")}]'),
+                  glue('All types of representation - Mean duration in weeks\n[note {note_lookup_selector(note_frame_list, 10, "07")}][note {note_lookup_selector(note_frame_list, 10, "08")}][note {note_lookup_selector(note_frame_list, 10, "09")}]')
                   
                   )
 
@@ -208,14 +155,42 @@ new_t11_cols <- c(glue('Category\n[notes {note_lookup_selector(note_frame_list, 
 t11_accessible <- t11_accessible %>% add_col_notes(table_num = 11, col_nums = t11_col_change, new_cols = new_t11_cols)
 
 # Table 12
-# For now I'll leave alone adding Notes until update for NFD is added
-title_note_t12 <- ''
+title_note_t12 <- glue('[note {note_lookup_selector(note_frame_list, 12, "01")}][note {note_lookup_selector(note_frame_list, 12, "05")}][note {note_lookup_selector(note_frame_list, 12, "06")}][note {note_lookup_selector(note_frame_list, 12, "07")}]')
+t12_col_change <- c(5)
+new_t12_cols <- c(glue('Law\n[note {note_lookup_selector(note_frame_list, 12, "08")}]')
+                  )
+t12_accessible <- t12_accessible %>% add_col_notes(table_num = 12, col_nums = t12_col_change, new_cols = new_t12_cols) %>% 
+  mutate(Notes = case_when(`Proceeding Type` == 'Divorce' ~ glue('[note {note_lookup_selector(note_frame_list, 12, "07")}]'
+                                                                 )
+                           ))
+
+# Table 12b
+title_note_t12b <- glue('[note {note_lookup_selector(note_frame_list, "12b", "01")}]')
+t12b_col_change <- c(4)
+new_t12b_cols <- c(glue('Application Type\n[note {note_lookup_selector(note_frame_list, "12b", "05")}]')
+)
+
+t12b_accessible <- t12b_accessible %>% add_col_notes(table_num = '12b', col_nums = t12b_col_change, new_cols = new_t12b_cols)
 
 # Table 13
-title_note_t13 <-  ''
+title_note_t13 <-  glue('[note {note_lookup_selector(note_frame_list, 13, "01")}][note {note_lookup_selector(note_frame_list, 13, "02")}][note {note_lookup_selector(note_frame_list, 13, "03")}][note {note_lookup_selector(note_frame_list, 13, "08")}]')
+t13_col_change <- c(3, 4, 6, 8, 9, 10, 12, 13, 14, 16)
+new_t13_cols <- c(glue('Divorce cases started\n[note {note_lookup_selector(note_frame_list, 13, "08")}]'),
+                  glue('Cases reaching decree nisi to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]'),
+                  glue('Cases reaching decree absolute to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]'),
+                  glue('Cases reaching a financial remedy application to date\n[note {note_lookup_selector(note_frame_list, 13, "04")}][note {note_lookup_selector(note_frame_list, 13, "05")}][note {note_lookup_selector(note_frame_list, 13, "07")}]'),
+                  glue('% of divorce cases started reaching a financial remedy application\n[note {note_lookup_selector(note_frame_list, 13, "04")}][note {note_lookup_selector(note_frame_list, 13, "05")}]'),
+                  glue('Cases reaching a financial remedy disposal to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]'),
+                  glue('Cases reaching a hearing to date\n[note {note_lookup_selector(note_frame_list, 13, "06")}][note {note_lookup_selector(note_frame_list, 13, "07")}]'),
+                  glue('% of divorce cases started reaching a hearing\n[note {note_lookup_selector(note_frame_list, 13, "06")}]'),
+                  glue('Cases reaching an injunction application to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]'),
+                  glue('Cases reaching an injunction order to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]')
+                  )
+
+t13_accessible <- t13_accessible %>% add_col_notes(table_num = 13, col_nums = t13_col_change, new_cols = new_t13_cols)
 
 # Table 14
-title_note_t14 <-  ''
+title_note_t14 <-  glue('[note {note_lookup_selector(note_frame_list, 14, "01")}][note {note_lookup_selector(note_frame_list, 14, "02")}]')
 
 # Table 15
 title_note_t15 <- glue('[note {note_lookup_selector(note_frame_list, 15, "01")}][note {note_lookup_selector(note_frame_list, 15, "02")}]')
@@ -223,12 +198,12 @@ t15_col_change <- c(3, 4, 5, 6, 7, 8, 9, 10, 11)
 new_t15_cols <- c(glue('Uncontested Applications\n[note {note_lookup_selector(note_frame_list, 15, "03")}][note {note_lookup_selector(note_frame_list, 15, "04")}]'),
                   glue('Contested Applications\n[note {note_lookup_selector(note_frame_list, 15, "03")}][note {note_lookup_selector(note_frame_list, 15, "04")}]'),
                   glue('Total Applications\n[note {note_lookup_selector(note_frame_list, 15, "03")}][note {note_lookup_selector(note_frame_list, 15, "04")}]'),
-                  glue('Cases starting\n[note {note_lookup_selector(note_frame_list, 15, "03")}][note {note_lookup_selector(note_frame_list, 15, "04")}]'),
+                  glue('Total cases starting\n[note {note_lookup_selector(note_frame_list, 15, "03")}][note {note_lookup_selector(note_frame_list, 15, "04")}]'),
                   glue('Uncontested Disposals\n[note {note_lookup_selector(note_frame_list, 15, "05")}]'),
                   glue('Initially Contested Disposals\n[note {note_lookup_selector(note_frame_list, 15, "05")}]'),
                   glue('Contested Disposals\n[note {note_lookup_selector(note_frame_list, 15, "05")}]'),
                   glue('Total Disposals\n[note {note_lookup_selector(note_frame_list, 15, "05")}]'),
-                  glue('Cases closed\n[note {note_lookup_selector(note_frame_list, 15, "05")}]')
+                  glue('Total cases disposed\n[note {note_lookup_selector(note_frame_list, 15, "05")}]')
                   )
 
 t15_accessible <- t15_accessible %>% add_col_notes(table_num = 15, col_nums = t15_col_change, new_cols = new_t15_cols)
@@ -242,7 +217,7 @@ new_t16_cols <- c(glue('Application Type\n[note {note_lookup_selector(note_frame
                   glue('Total Orders applied for\n[note {note_lookup_selector(note_frame_list, 16, "03")}]'),
                   glue('Applications made\n[note {note_lookup_selector(note_frame_list, 16, "03")}]'),
                   glue('Cases started\n[note {note_lookup_selector(note_frame_list, 16, "06")}]'),
-                  glue('Cases concluding\n[note {note_lookup_selector(note_frame_list, 16, "06")}]')
+                  glue('Cases concluded\n[note {note_lookup_selector(note_frame_list, 16, "07")}]')
                   
   
 )
@@ -284,7 +259,7 @@ new_t18_cols <- c(
                   glue('Applications: Applicant type - Relevant 3rd party\n[note {note_lookup_selector(note_frame_list, 18, "03")}]'),
                   glue('Applications: Applicant type - Other 3rd party\n[note {note_lookup_selector(note_frame_list, 18, "04")}]'),
                   glue('Total cases started\n[note {note_lookup_selector(note_frame_list, 18, "05")}]'),
-                  glue('Disposals: Total orders made\n[note {note_lookup_selector(note_frame_list, 18, "06")}]'),
+                  glue('Disposals: Total FGMPO orders made\n[note {note_lookup_selector(note_frame_list, 18, "06")}]'),
                   glue('Disposals: Other disposals\n[note {note_lookup_selector(note_frame_list, 18, "07")}]'),
                   glue('Total cases concluded\n[note {note_lookup_selector(note_frame_list, 18, "08")}][note {note_lookup_selector(note_frame_list, 18, "09")}]')
 )
@@ -434,11 +409,18 @@ t25_accessible <- t25_accessible %>% add_col_notes(table_num = 25, col_nums = t2
                            )
          )
 
-# Removing the lookup column for the final table
-notes_all <- notes_import %>% select(!Lookup)
+# Removing the lookup column for the final table. Also editing notes to replace with symbols. Repeated for clarity
+notes_all <- notes_import %>% select(!Lookup) %>% 
+  mutate(`Note text` = str_replace(`Note text`, "'-'", "'[z]'")) %>% 
+  mutate(`Note text` = str_replace(`Note text`, "':'", "'[z]'")) %>% 
+  mutate(`Note text` = str_replace(`Note text`, "'..'", "'[z]'")) %>% 
+  mutate(`Note text` = str_replace(`Note text`, "'\\*'", "'[c]'"))
+  
+  
+
 
 # Gathering all the title notes
 title_notes <- list(title_note_t1, title_note_t2, title_note_t3, title_note_t3, title_note_t4, title_note_t4, title_note_t5,
-                    title_note_t6, title_note_t7, title_note_t8, title_note_t9, title_note_t10, title_note_t11, title_note_t12, 
+                    title_note_t6, title_note_t7, title_note_t8, title_note_t9, title_note_t10, title_note_t11, title_note_t12, title_note_t12b, 
                     title_note_t13, title_note_t14, title_note_t15, title_note_t16, title_note_t17, title_note_t18, title_note_t19,
                     title_note_t20, title_note_t21, title_note_t22, title_note_t23, title_note_t24, title_note_t25)

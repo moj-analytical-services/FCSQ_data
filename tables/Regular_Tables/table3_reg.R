@@ -28,10 +28,13 @@ t3_rows_all <- seq(start_row, end_row) #full set of rows in the table
 t3_pub_rows <- setdiff(t3_rows_all, t3_empty) #rows that have formulas in them
 
 #Number of Columns to add. Years since 2010 have their own column then a space for four quarters
-t3_columns <- c(seq(1,t3_years), seq(t3_years +2, t3_years +5))
+t3_columns <- setdiff(seq(from = 1, to = t3_years + 5), t3_years + 1)
 t3_pub_columns <- start_col + t3_columns - 1
 
-
+#Drop Down List Info - Used in list section
+t3_list_col <- 1
+t3_list_letter <- num_to_letter(t3_list_col)
+t3_list_row <- 7
 
 #Main Public Law formulae
 for (i in t3_pub_rows) {

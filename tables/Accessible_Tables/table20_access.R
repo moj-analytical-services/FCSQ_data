@@ -1,8 +1,8 @@
-# Table 19 accessible
+# Table 20 accessible
 full_t20 <- bind_rows(t20_reg_year, t20_reg_qtr)
 
 t20_accessible <- full_t20 %>% transmute(Year,
-                                         Quarter,
+                                         Quarter = replace_na(Quarter, 'Annual'),
                                          `Adoption orders: Adopter - Male/female couple` = m_f_couple,
                                          `Adoption orders: Adopter - Sole applicant` = sole_appl,
                                          `Adoption orders: Adopter - Step parent` = step_parent,

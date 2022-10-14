@@ -13,5 +13,4 @@ t14_accessible <- t14_reg %>% rename(`Stage of divorce case reached` = Stage,
                    `7 to 8 quarters after petition` = `7`,
                    `8 to 9 quarters after petition` = `8`,
                    `9 to 10 quarters after petition` = `9`,
-                   `10 or more quarters after petition` = `10+`) %>% 
-  mutate(across(where(is.numeric), ~ round(100 * .x, 0)))
+                   `10 or more quarters after petition` = `10+`)

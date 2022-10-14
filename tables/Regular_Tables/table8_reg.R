@@ -2,7 +2,7 @@
 
 #Yearly data
 t8_reg_year <- care_disposal_csv %>% 
-  filter(Quarter == '') %>% 
+  filter(Year <= annual_year, Quarter == '') %>% 
   mutate(Quarter = NA)
   
 
