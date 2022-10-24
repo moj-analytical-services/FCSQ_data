@@ -1,51 +1,6 @@
 # Code to fill in Table 11 source - from the CSV
 
-#add the download function
-download_file_from_s3 <- function(s3_path, local_path, overwrite = FALSE) {
-  # trim s3:// if included by the user and add it back in where required
-  s3_path <- paste0("s3://", gsub('^s3://', "", s3_path))
-  if (!(file.exists(local_path)) || overwrite) {
-    local_path_folders <- stringr::str_extract(local_path, ".*[\\/]+")
-    if(!is.na(local_path)) {
-      dir.create(local_path_folders, showWarnings = FALSE, recursive = TRUE)
-    }
-    # download file
-    tryCatch({
-      # download file to tempfile()
-      botor::s3_download_file(s3_path,
-                              local_path,
-                              force = overwrite)
-    },
-    error = function(cond){
-      stop("\nError, file cannot be found. \nYou either don't have access to this bucket, or are using an invalid s3_path argument (file does not exist).")
-    })
-    
-    
-  } else {
-    stop(paste0("The file already exists locally and you didn't specify",
-                " overwrite=TRUE"))
-  }
-}
 
-
-write_df_to_csv_in_s3 <- function(df, s3_path, overwrite = FALSE,
-                                  multipart = "unused", ...) {
-  # add errors
-  if(!any(grepl('data.frame', class(df)))) {
-    stop("df entered isn't a valid dataframe object")
-  }
-  if(tools::file_ext(s3_path) != 'csv') {
-    stop("s3_path entered is either not a csv or is missing the .csv suffix")
-  }
-  # trim s3:// if included by the user - removed so we can supply both
-  # alpha-... and s3://alpha - and then add again
-  s3_path <- paste0("s3://", gsub('^s3://', "", s3_path))
-  if(!overwrite & botor::s3_exists(s3_path)) {
-    stop("s3_path entered already exists and overwrite is FALSE")
-  }
-  # write csv
-  botor::s3_write(df, fun = write.csv, uri = s3_path, ...)
-}
 # Import ##########################################################################################
 # Create tables from the CSVs
 
@@ -56,6 +11,7 @@ library(mojrap)
 library(openxlsx)
 library(glue)
 library(readr)
+library(Rs3tools)
 
 # Variables #######################################################################################
 
@@ -66,7 +22,7 @@ next_pub_date <- "29th September 2022"
 annual_year <- 2021
 path_to_project = '~/FCSQ_data/'                                       # UPDATE ONLY IF YOU CHANGE THE LOCATION OF THE PROJECT FILES
 csv_folder <- paste0("alpha-family-data/CSVs/",pub_year, " Q",pub_quarter,"/") #
-download_file_from_s3(glue("{csv_folder}CSV Legal Representation National {pub_year} Q{pub_quarter}.csv"), "CSVs/csv_legrep.csv", overwrite = TRUE)
+Rs3tools::download_file_from_s3(glue("{csv_folder}CSV Legal Representation National {pub_year} Q{pub_quarter}.csv"), "CSVs/csv_legrep.csv", overwrite = TRUE)
 csv_legrep <- read_csv(paste0(path_to_project, "CSVs/csv_legrep.csv")) %>% 
   rename_with(tolower) %>%
   mutate(case_type = ifelse(case_type=="Divorce", "Divorce (incl. FR)", case_type))
@@ -186,4 +142,4 @@ legrep_lookup <- bind_rows(legrep_lookup_quarter,legrep_lookup_annual) %>%
 
 # Export ##########################################################################################
 # to export as a CSV
-write_df_to_csv_in_s3(legrep_lookup, glue("{csv_folder}legrep_lookup_{pub_year}_Q{pub_quarter}.csv"), overwrite = TRUE, row.names = FALSE)
+Rs3tools::write_df_to_csv_in_s3(legrep_lookup, glue("{csv_folder}legrep_lookup_{pub_year}_Q{pub_quarter}.csv"), overwrite = TRUE, row.names = FALSE)
