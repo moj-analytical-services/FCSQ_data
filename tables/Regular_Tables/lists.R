@@ -156,7 +156,7 @@ openxlsx::writeData(wb = template,
 
 # table 16 ###################
 list_add(wb = template,
-         sheet = 'Table_16',
+         sheet = 'Table_15',
          list = dropdown16_df,
          listRow = t16_list_row,
          listCol = t16_list_col,
@@ -164,7 +164,7 @@ list_add(wb = template,
          startCol = ncol(dv_qtr) + 1)
 
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_16',
+                    sheet = 'Table_15',
                     x = 'All',
                     startRow = t16_list_row,
                     startCol = t16_list_col)
@@ -172,7 +172,7 @@ openxlsx::writeData(wb = template,
 
 # table 24 ###################
 list_add(wb = template,
-         sheet = 'Table_24',
+         sheet = 'Table_23',
          list = dropdown24a_df,
          listRow = t24_list_a_row,
          listCol = t24_list_col,
@@ -181,7 +181,7 @@ list_add(wb = template,
 
 
 list_add(wb = template,
-         sheet = 'Table_24',
+         sheet = 'Table_23',
          list = dropdown24b_df,
          listRow = t24_list_b_row,
          listCol = t24_list_col,
@@ -189,20 +189,20 @@ list_add(wb = template,
          startCol = ncol(t24_reg_year) + 2)
 
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_24',
+                    sheet = 'Table_23',
                     x = 'All',
                     startRow = t24_list_a_row,
                     startCol = t24_list_col)
 
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_24',
+                    sheet = 'Table_23',
                     x = 'All',
                     startRow = t24_list_b_row,
                     startCol = t24_list_col)
 
 # table 25 ###################
 list_add(wb = template,
-         sheet = 'Table_25',
+         sheet = 'Table_24',
          list = dropdown25a_df,
          listRow = t25_list_a_row,
          listCol = t25_list_col,
@@ -211,7 +211,7 @@ list_add(wb = template,
 
 
 list_add(wb = template,
-         sheet = 'Table_25',
+         sheet = 'Table_24',
          list = dropdown25b_df,
          listRow = t25_list_b_row,
          listCol = t25_list_col,
@@ -219,13 +219,13 @@ list_add(wb = template,
          startCol = ncol(t25_reg_year) + 2)
 
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_25',
+                    sheet = 'Table_24',
                     x = 'All',
                     startRow = t25_list_a_row,
                     startCol = t25_list_col)
 
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_25',
+                    sheet = 'Table_24',
                     x = 'All',
                     startRow = t25_list_b_row,
                     startCol = t25_list_col)
