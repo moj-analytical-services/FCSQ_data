@@ -1,6 +1,8 @@
 
 # Number of tables is set and used to get a vector containing the number of the tables
 # There are 26 tables with table 12b but that has the same table number despite being on a different tab
+
+# Note Table 14 has been removed but due to keeping variable names the same in R, note14 will simply be ignored
 no_tables <- 25
 no_tables_seq <- append(seq(no_tables), '12b', after = 12)
 table_numbers <- glue('Table {no_tables_seq}')

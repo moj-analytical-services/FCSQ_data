@@ -15,7 +15,7 @@ source(paste0(path_to_project, "Accessible_Tables/table11_access.R"))
 source(paste0(path_to_project, "Accessible_Tables/table12_access.R"))
 source(paste0(path_to_project, "Accessible_Tables/table12b_access.R"))
 source(paste0(path_to_project, "Accessible_Tables/table13_access.R"))
-source(paste0(path_to_project, "Accessible_Tables/table14_access.R"))
+# Likewise Table 14 is now deleted. Sheet names will change, variables will remain the same
 source(paste0(path_to_project, "Accessible_Tables/table15_access.R"))
 source(paste0(path_to_project, "Accessible_Tables/table16_access.R"))
 source(paste0(path_to_project, "Accessible_Tables/table17_access.R"))

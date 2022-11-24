@@ -91,7 +91,7 @@ make_reg_notes <- function(notes, source){
 
 get_note_frame <- function(table_name){
   # This gets the note numbers for a particular table after removing all the square brackets
-  notes_import %>% filter(`Table number` == table_name)
+  notes_import %>% filter(R_Table == table_name)
   
 }
 

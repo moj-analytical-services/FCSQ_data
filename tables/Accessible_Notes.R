@@ -1,6 +1,10 @@
 #Accessible Notes
 # List of note numbers for each table. This uses the table numbers established in footnotes.R
-note_frame_list <- map(table_numbers, get_note_frame)
+# Note that Table numbers are left the samein the Lookup and variable name even though Table 14 is gone and all tables after that are one less
+
+# Table numbers are based on R table numbers rather than spreadsheet table numbers
+#notes_import <- openxlsx::read.xlsx(paste0(path_to_project,'Notes Workbook 2022 Q3.xlsx'), sheet = 'Notes', na.strings = na_keys, sep.names = ' ') %>% as_tibble()
+note_frame_list <- map(no_tables_seq, get_note_frame)
 names(note_frame_list) <- table_numbers
 
 # Table 1
@@ -410,7 +414,7 @@ t25_accessible <- t25_accessible %>% add_col_notes(table_num = 25, col_nums = t2
          )
 
 # Removing the lookup column for the final table. Also editing notes to replace with symbols. Repeated for clarity
-notes_all <- notes_import %>% select(!Lookup) %>% 
+notes_all <- notes_import %>% select(!c(Lookup, R_Table)) %>% 
   mutate(`Note text` = str_replace(`Note text`, "'-'", "'[z]'")) %>% 
   mutate(`Note text` = str_replace(`Note text`, "':'", "'[z]'")) %>% 
   mutate(`Note text` = str_replace(`Note text`, "'..'", "'[z]'")) %>% 
@@ -422,5 +426,5 @@ notes_all <- notes_import %>% select(!Lookup) %>%
 # Gathering all the title notes
 title_notes <- list(title_note_t1, title_note_t2, title_note_t3, title_note_t3, title_note_t4, title_note_t4, title_note_t5,
                     title_note_t6, title_note_t7, title_note_t8, title_note_t9, title_note_t10, title_note_t11, title_note_t12, title_note_t12b, 
-                    title_note_t13, title_note_t14, title_note_t15, title_note_t16, title_note_t17, title_note_t18, title_note_t19,
+                    title_note_t13, title_note_t15, title_note_t16, title_note_t17, title_note_t18, title_note_t19,
                     title_note_t20, title_note_t21, title_note_t22, title_note_t23, title_note_t24, title_note_t25)
