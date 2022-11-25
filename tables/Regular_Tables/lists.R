@@ -18,7 +18,7 @@ dropdown12b_df <- tibble(c("All", "Paper", "Digital"))
 
 # table 12b
 dropdown12b_a_df <- tibble(c("All", "Joint", "Sole"))
-dropdown12b_b_df <- tibble(c("Divorce", "Civil Partnership", "Both"))
+dropdown12b_b_df <- tibble(c("Divorce", "Civil Partnership", "Divorce and Civil Partnership"))
 
 #table 16
 dropdown16_df <- tibble(c('All', 'Exparte', 'On notice'))

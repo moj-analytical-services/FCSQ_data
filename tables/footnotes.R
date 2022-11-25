@@ -8,7 +8,7 @@ no_tables_seq <- append(seq(no_tables), '12b', after = 12)
 table_numbers <- glue('Table {no_tables_seq}')
 
 # Creates a list of notes that correspond to a particular table
-notes_list <- map(table_numbers, ~ notes_select(notes_import, .x))
+notes_list <- map(no_tables_seq, ~ notes_select(notes_import, .x))
 
 table_sources_reg <- c("HMCTS FamilyMan and Core Case Data",
                    "HMCTS FamilyMan",

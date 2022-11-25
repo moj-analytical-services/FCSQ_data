@@ -77,7 +77,7 @@ note_footer <- function(wb, sheet, start_row, notes, col_length, row_heights = N
 
 # note helper functions
 notes_select <- function(notes, table){
-  notes %>% filter(`Table number` == table) %>% 
+  notes %>% filter(`R_Table` == table) %>% 
     pull(`Note text`)
 }
 

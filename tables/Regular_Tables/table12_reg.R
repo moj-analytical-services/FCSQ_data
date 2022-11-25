@@ -113,10 +113,11 @@ div_qtr <- tibble(Year = current_div_qtr$Year,
                    j_decrees_granted = glue('=IF(SUMIFS(Table_12_source!$G:$G,Table_12_source!$D:$D,$A{div_qtr_row_seq} & " " &LEFT($B{div_qtr_row_seq},2),Table_12_source!$B:$B,R$6,Table_12_source!$A:$A,$Q$13,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,${t12_list_letter}${t12_list_b_row})=0,".",SUMIFS(Table_12_source!$G:$G,Table_12_source!$D:$D,$A{div_qtr_row_seq} & " " &LEFT($B{div_qtr_row_seq},2),Table_12_source!$B:$B,R$6,Table_12_source!$A:$A,$Q$13,Table_12_source!$F:$F,${t12_list_letter}${t12_list_a_row},Table_12_source!$E:$E,${t12_list_letter}${t12_list_b_row}))')
                    ,
                    t_pet_filed = case_when((Year == 2022 & Quarter == 2) ~ glue('=IF(OR(${t12_list_letter}${t12_list_a_row}="New",${t12_list_letter}${t12_list_b_row}="Digital"),D{div_qtr_row_seq},D{div_qtr_row_seq}+M{div_qtr_row_seq}+Q{div_qtr_row_seq})'),
-                                           (Year > 2021) & !(Year == 2022 & Quarter == 1) ~ glue('=IF(${t12_list_letter}${t12_list_a_row}="Old",".",D{div_qtr_row_seq})'),
+                                           (Year > 2021) & !(Year == 2022 & Quarter == 1) ~ glue('=IF(OR(${t12_list_letter}${t12_list_a_row}="New",${t12_list_letter}${t12_list_b_row} = "Digital"), D{div_qtr_row_seq},IF(${t12_list_letter}${t12_list_a_row}="Old",M{div_qtr_row_seq}+Q{div_qtr_row_seq},D{div_qtr_row_seq}+M{div_qtr_row_seq}+Q{div_qtr_row_seq}))'),
                                            TRUE ~ glue('=IF(${t12_list_letter}${t12_list_a_row}="New",".",IF(${t12_list_letter}${t12_list_b_row}="Digital",D{div_qtr_row_seq},D{div_qtr_row_seq}+M{div_qtr_row_seq}+Q{div_qtr_row_seq}))'))
                    ,
-                   t_decrees_nisi = glue('=IF(${t12_list_letter}${t12_list_a_row}="New",".",IF(${t12_list_letter}${t12_list_b_row} = "Digital", E{div_qtr_row_seq},E{div_qtr_row_seq}+N{div_qtr_row_seq}))')
+                   t_decrees_nisi = case_when((Year > 2021) & !(Year == 2022 & Quarter %in% c(1, 2)) ~ glue('=IF(OR(${t12_list_letter}${t12_list_a_row}="New",${t12_list_letter}${t12_list_b_row} = "Digital"), E{div_qtr_row_seq},E{div_qtr_row_seq}+N{div_qtr_row_seq})'),
+                                              TRUE ~ glue('=IF(${t12_list_letter}${t12_list_a_row}="New",".",IF(${t12_list_letter}${t12_list_b_row} = "Digital", E{div_qtr_row_seq},E{div_qtr_row_seq}+N{div_qtr_row_seq}))'))
                    ,
                    t_decrees_abs = glue('=IF(${t12_list_letter}${t12_list_a_row}="New",".",IF(${t12_list_letter}${t12_list_b_row} = "Digital", H{div_qtr_row_seq}, H{div_qtr_row_seq}+O{div_qtr_row_seq}+R{div_qtr_row_seq}))')
           
