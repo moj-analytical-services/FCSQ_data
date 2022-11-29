@@ -15,7 +15,7 @@ table_list <- fcsq_a11y %>% filter(sheet_type == 'tables') %>% pull(table)
 access_table_numbers <- paste0('t', contents_df %>% filter(`Sheet name` != 'Notes') %>% pull(`Sheet name`) %>% str_extract('\\d+.?'))
 names(table_list) <- access_table_numbers
 
-# List of columns that have comma formatting applied in each table. 99 represents no formatting applied
+# List of columns that have comma formatting applied in each table. 99 represents no formatting applied. Also tables are based on sheet titles rather than R titles
 comma_cols <- list(4:ncol(table_list[['t1']]),
                    #Children Act Tables
                      4:ncol(table_list[['t2']]),
@@ -36,19 +36,17 @@ comma_cols <- list(4:ncol(table_list[['t1']]),
                      c(6, 7, 10),
                      5,
                      c(3, seq(from = 4, to = ncol(table_list[['t13']]), by = 2)),
-                     #T14 does not need any 
-                     99,
-                     3:ncol(table_list[['t15']]),
-                     4:ncol(table_list[['t16']]),
+                     3:ncol(table_list[['t14']]),
+                     4:ncol(table_list[['t15']]),
                      #FMPO AND FGM don't require anything either
                      99,
                      99,
+                   3:ncol(table_list[['t18']]),
                    3:ncol(table_list[['t19']]),
                    3:ncol(table_list[['t20']]),
                    3:ncol(table_list[['t21']]),
                    3:ncol(table_list[['t22']]),
                    3:ncol(table_list[['t23']]),
-                   3:ncol(table_list[['t24']]),
                    seq(from = 5, to = 20, by = 5)
                    
                    )
@@ -58,7 +56,7 @@ comma_cols <- list(4:ncol(table_list[['t1']]),
 pwalk(list(sheet_names, table_list, comma_cols), ~comma_formatter(accessible_tables, ..1, ..2, ..3))
 
 # Rounding to 1dp
-round_sheet_names <- c("Table_8", "Table_9", "Table_10", "Table_25" )
+round_sheet_names <- c("Table_8", "Table_9", "Table_10", "Table_24" )
 round_cols <- list(c(4, 5), c(4, 5), 
                    seq(from = 5, to = ncol(t10_accessible), by = 2),
                    c(6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24)
@@ -69,9 +67,9 @@ round_style <- openxlsx::createStyle(numFmt = "0.0")
 pwalk(list(round_sheet_names, round_table_list, round_cols), ~style_formatter(accessible_tables, ..1, ..2, ..3, style = round_style))
 
 # Rounding to 0dp percentage
-perc_sheet_names <- c("Table_8", "Table_12", "Table_14" )
-perc_cols <- list(6, 13, 2:ncol(t14_accessible))
-perc_table_list <- list(t8_accessible, t12_accessible, t14_accessible)
+perc_sheet_names <- c("Table_8", "Table_12")
+perc_cols <- list(6, 13)
+perc_table_list <- list(t8_accessible, t12_accessible)
 perc_style <- openxlsx::createStyle(numFmt = "0%")
 
 pwalk(list(perc_sheet_names, perc_table_list, perc_cols), ~style_formatter(accessible_tables, ..1, ..2, ..3, style = perc_style))
@@ -81,7 +79,7 @@ style_formatter(accessible_tables, "Table_13", t13_accessible, seq(from = 5, to 
 
 #Dealing with na and suppression
 pwalk(list(sheet_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2, na_value = na_value))
-na_formatter(accessible_tables, 'Table_23', t23_accessible, na_value = suppress_value, value = '[c]' )
+na_formatter(accessible_tables, 'Table_22', t23_accessible, na_value = suppress_value, value = '[c]' )
 
 
 
@@ -112,15 +110,14 @@ map2(sheet_names, all_cols, ~openxlsx::setColWidths(wb = accessible_tables, shee
 
 # Setting Colwidth for Tables with long pieces of text
 colwidth_sheet <- c('Table_3a', 'Table_3b', 'Table_4a', 'Table_4b', 
-                    'Table_10', 'Table_12b', 'Table_14', 'Table_16',
-                    'Table_24', 'Table_25')
+                    'Table_10', 'Table_12b', 'Table_15',
+                    'Table_23', 'Table_24')
 colwidth_cols <- list(c(2, 3),
                       c(2, 3),
                       c(2, 3),
                       c(2, 3),
                       1,
                       3,
-                      1,
                       3,
                       4,
                       4
@@ -131,7 +128,6 @@ colwidths <- list(c(39.1, 39.1),
                   c(39.1, 39.1),
                   c(39.1, 39.1),
                   27.3,
-                  23.5,
                   23.5,
                   18.5,
                   17.8,

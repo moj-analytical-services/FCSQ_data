@@ -367,30 +367,8 @@ write_formatted_table(workbook = template,
                       quarterly_format = c(2),
                       note_row_heights = t13_row_heights)
 
-####################################################################
-#Divorce Progression Percentages
-#Table 14
-
-####################################################################
-# Loads and writes the data
-source(paste0(path_to_project, "Regular_Tables/table14_reg.R"))
-t14_start <- 7
-t14_row_heights <- rep(15, length(notes14))
-t14_row_heights[seq(from = 5, to = length(notes14))] <- c(24, 12.75, 40.5)
-openxlsx::writeData(wb = template,
-                    sheet = 'Table_14',
-                    x = timeperiod14,
-                    startRow = 3,
-                    colNames = F)
-
-# data
-write_formatted_table(workbook = template, 
-                      sheet_name = 'Table_14', 
-                      tables = list(t14_reg), 
-                      notes = notes14, 
-                      starting_row = t14_start, 
-                      quarterly_format = c(2),
-                      note_row_heights = t14_row_heights)
+# Note that the old Table 14 got removed. 
+# This means that from here each table while retaining the same number variable wise is in the sheet before the table number
 ####################################################################
 #Financial Remedy
 #Table 15
@@ -403,14 +381,14 @@ t15_row_heights <- rep(15, length(notes15))
 t15_row_heights[seq(from = 5, to = length(notes15))] <- c(24.75, 34.5, 24.75, 24.75, 24.75, 12.75)
 
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_15',
+                    sheet = 'Table_14',
                     x = timeperiod15,
                     startRow = 3,
                     colNames = F)
 
 # data
 write_formatted_table(workbook = template, 
-                      sheet_name = 'Table_15', 
+                      sheet_name = 'Table_14', 
                       tables = list(t15_reg_year, t15_reg_qtr), 
                       notes = notes15, 
                       starting_row = t15_start, 
@@ -428,14 +406,14 @@ t16_row_heights <- rep(15, length(notes16))
 t16_row_heights[seq(from = 5, to = length(notes16))] <- c(12.75, 36, 12.75, 12.75, 22.5, 22.5, 15)
 
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_16',
+                    sheet = 'Table_15',
                     x = timeperiod16,
                     startRow = 3,
                     colNames = F)
 
 # data
 write_formatted_table(workbook = template, 
-                      sheet_name = 'Table_16', 
+                      sheet_name = 'Table_15', 
                       tables = list(dv_hard_code, dv_year, dv_hard_code_qtr, dv_qtr), 
                       notes = notes16, 
                       starting_row = t16_start, 
@@ -450,7 +428,7 @@ write_formatted_table(workbook = template,
 # Loads the data
 source(paste0(path_to_project, "Regular_Tables/table17_reg.R"))
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_17',
+                    sheet = 'Table_16',
                     x = timeperiod17,
                     startRow = 3,
                     colNames = F)
@@ -458,7 +436,7 @@ openxlsx::writeData(wb = template,
 # sets the start row and writes the data. Note that since the table doesn't start from a full year, the quarterly data is split for formatting purposes.
 t17_start <- 8
 write_formatted_table(workbook = template, 
-                      sheet_name = 'Table_17', 
+                      sheet_name = 'Table_16', 
                       tables = list(t17_reg_year, t17_reg_qtr_a, t17_reg_qtr_b), 
                       notes = notes17, 
                       starting_row = t17_start, 
@@ -467,14 +445,14 @@ write_formatted_table(workbook = template,
 # adding all the nas for this table. This adds dashes for the years and quarters without data
 fmpo_dash_columns <- c(3, 4, 7, 8, 9, 10)
 na_adder(wb = template,
-         sheet = 'Table_17',
+         sheet = 'Table_16',
          value = "-",
          cols = fmpo_dash_columns,
          lengths = rep(1, length(fmpo_dash_columns)),
          start_row = t17_start)
 
 na_adder(wb = template,
-         sheet = 'Table_17',
+         sheet = 'Table_16',
          value = "-",
          cols = fmpo_dash_columns,
          lengths = rep(5, length(fmpo_dash_columns)),
@@ -483,14 +461,14 @@ na_adder(wb = template,
 # adds dots for FMPO with POA from 2014 Q2 to the current year/quarter
 fmpo_dot_columns <- c(14, 15)
 na_adder(wb = template,
-         sheet = 'Table_17',
+         sheet = 'Table_16',
          value = "..",
          cols = fmpo_dot_columns,
          lengths = rep(annual_year - 2013, length(fmpo_dot_columns)),
          start_row = t17_start + 5)
 
 na_adder(wb = template,
-         sheet = 'Table_17',
+         sheet = 'Table_16',
          value = "..",
          cols = fmpo_dot_columns,
          lengths = rep(nrow(t17_reg_qtr_all) - 23, length(fmpo_dot_columns)),
@@ -504,7 +482,7 @@ na_adder(wb = template,
 # Loads and writes the data
 source(paste0(path_to_project, "Regular_Tables/table18_reg.R"))
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_18',
+                    sheet = 'Table_17',
                     x = timeperiod18,
                     startRow = 3,
                     colNames = F)
@@ -513,7 +491,7 @@ t18_start <- 8
 t18_row_heights <- rep(15, length(notes18))
 t18_row_heights[c(9, 13)] <- c(24.75, 24.75)
 write_formatted_table(workbook = template, 
-                      sheet_name = 'Table_18', 
+                      sheet_name = 'Table_17', 
                       tables = list(t18_reg_year, t18_reg_qtr_a, t18_reg_qtr_b), 
                       notes = notes18, 
                       starting_row = t18_start, 
@@ -529,7 +507,7 @@ write_formatted_table(workbook = template,
 # Loads and writes the data
 source(paste0(path_to_project, "Regular_Tables/table19_reg.R"))
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_19',
+                    sheet = 'Table_18',
                     x = timeperiod19,
                     startRow = 3,
                     colNames = F)
@@ -539,7 +517,7 @@ t19_start <- 8
 t19_row_heights <- rep(15, length(notes19))
 t19_row_heights[[11]] <- 24.75
 write_formatted_table(workbook = template, 
-                      sheet_name = 'Table_19', 
+                      sheet_name = 'Table_18', 
                       tables = list(t19_reg_year, t19_reg_qtr), 
                       notes = notes19, 
                       starting_row = t19_start, 
@@ -554,7 +532,7 @@ write_formatted_table(workbook = template,
 # Loads and writes the data
 source(paste0(path_to_project, "Regular_Tables/table20_reg.R"))
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_20',
+                    sheet = 'Table_19',
                     x = timeperiod20,
                     startRow = 3,
                     colNames = F)
@@ -564,7 +542,7 @@ t20_start <- 8
 t20_row_heights <- rep(15, length(notes20))
 t20_row_heights[[5]] <- 24.75
 write_formatted_table(workbook = template, 
-                      sheet_name = 'Table_20', 
+                      sheet_name = 'Table_19', 
                       tables = list(t20_reg_year, t20_reg_qtr), 
                       notes = notes20, 
                       starting_row = t20_start, 
@@ -580,7 +558,7 @@ write_formatted_table(workbook = template,
 # Loads both Table 21 and Table 22 data
 source(paste0(path_to_project, "Regular_Tables/table21_22_reg.R"))
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_21',
+                    sheet = 'Table_20',
                     x = timeperiod21,
                     startRow = 4,
                     colNames = F)
@@ -588,7 +566,7 @@ openxlsx::writeData(wb = template,
 # data
 t21_start <- 7
 write_formatted_table(workbook = template, 
-                      sheet_name = 'Table_21', 
+                      sheet_name = 'Table_20', 
                       tables = list(t21_reg_year, t21_reg_qtr), 
                       notes = notes21, 
                       starting_row = t21_start, 
@@ -596,7 +574,7 @@ write_formatted_table(workbook = template,
 
 # Adding dot to table for first deprivation of liberty
 na_adder(wb = template,
-         sheet = 'Table_21',
+         sheet = 'Table_20',
          value = "..",
          cols = 16,
          lengths = 1,
@@ -609,7 +587,7 @@ na_adder(wb = template,
 ####################################################################
 # Data is loaded under Table 21 heading
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_22',
+                    sheet = 'Table_21',
                     x = timeperiod22,
                     startRow = 4,
                     colNames = F)
@@ -617,7 +595,7 @@ openxlsx::writeData(wb = template,
 # data
 t22_start <- 7
 write_formatted_table(workbook = template, 
-                      sheet_name = 'Table_22', 
+                      sheet_name = 'Table_21', 
                       tables = list(t22_reg_year, t22_reg_qtr), 
                       notes = notes22, 
                       starting_row = t22_start, 
@@ -625,7 +603,7 @@ write_formatted_table(workbook = template,
 
 # Adding dot to table for first deprivation of liberty
 na_adder(wb = template,
-         sheet = 'Table_22',
+         sheet = 'Table_21',
          value = "..",
          cols = 16,
          lengths = 1,
@@ -639,7 +617,7 @@ na_adder(wb = template,
 # Loads and writes the data
 source(paste0(path_to_project, "Regular_Tables/table23_reg.R"))
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_23',
+                    sheet = 'Table_22',
                     x = timeperiod23,
                     startRow = 4,
                     colNames = F)
@@ -650,7 +628,7 @@ t23_start <- 9
 t23_row_heights <- rep(15, length(notes23))
 t23_row_heights[[6]] <- 23.25
 write_formatted_table(workbook = template, 
-                      sheet_name = 'Table_23', 
+                      sheet_name = 'Table_22', 
                       tables = list(t23_reg_year, t23_reg_qtr), 
                       notes = notes23, 
                       starting_row = t23_start, 
@@ -659,7 +637,7 @@ write_formatted_table(workbook = template,
 
 # Adding stars to table
 na_formatter(wb = template,
-             sheet = 'Table_23',
+             sheet = 'Table_22',
              table = full_t23,
              value = '*',
              startRow = t23_start,
@@ -667,7 +645,7 @@ na_formatter(wb = template,
 
 # Block on deputyships from 2022 Q2
 na_adder(wb = template,
-         sheet = 'Table_23',
+         sheet = 'Table_22',
          value = ':',
          cols = 27,
          lengths = nrow(t23_reg_qtr) - 57,
@@ -682,7 +660,7 @@ na_adder(wb = template,
 # Loads and writes the data
 source(paste0(path_to_project, "Regular_Tables/table24_reg.R"))
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_24',
+                    sheet = 'Table_23',
                     x = timeperiod24,
                     startRow = 4,
                     colNames = F)
@@ -692,7 +670,7 @@ openxlsx::writeData(wb = template,
 t24_row_heights <- rep(15, length(notes24))
 t24_row_heights[c(5, 11, 12)] <- c(48, 24, 23.25)
 write_formatted_table(workbook = template, 
-                      sheet_name = 'Table_24', 
+                      sheet_name = 'Table_23', 
                       tables = list(t24_reg_year, t24_reg_qtr_a, t24_reg_qtr_b), 
                       notes = notes24, 
                       starting_row = t24_start, 
@@ -701,7 +679,7 @@ write_formatted_table(workbook = template,
 
 # Applications made NA
 na_adder(wb = template,
-         sheet = 'Table_24',
+         sheet = 'Table_23',
          value = "-",
          cols = c(3, 4, 5),
          lengths = rep(7, 3),
@@ -709,7 +687,7 @@ na_adder(wb = template,
 
 # Contested Probate NA
 na_adder(wb = template,
-         sheet = 'Table_24',
+         sheet = 'Table_23',
          value = "-",
          cols = 15,
          lengths = nrow(t24_reg_qtr_a) + nrow(t24_reg_qtr_b),
@@ -723,7 +701,7 @@ na_adder(wb = template,
 # Loads and writes the data
 source(paste0(path_to_project, "Regular_Tables/table25_reg.R"))
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_25',
+                    sheet = 'Table_24',
                     x = timeperiod25,
                     startRow = 4,
                     colNames = F)
@@ -733,7 +711,7 @@ openxlsx::writeData(wb = template,
 t25_row_heights <- rep(15, length(notes25))
 t25_row_heights[c(8,9)] <- c(16.5, 23.25)
 write_formatted_table(workbook = template, 
-                      sheet_name = 'Table_25', 
+                      sheet_name = 'Table_24', 
                       tables = list(t25_reg_year, t25_reg_qtr_a, t25_reg_qtr_b), 
                       notes = notes25, 
                       starting_row = t25_start, 
@@ -744,7 +722,7 @@ write_formatted_table(workbook = template,
 # Everything before All Grants is NA
 probate_time_na_columns <- setdiff(seq(from = 3, to = 23), probate_time_blank_cols)
 na_adder(wb = template,
-         sheet = 'Table_25',
+         sheet = 'Table_24',
          value = ":",
          cols = probate_time_na_columns,
          lengths = rep(1, length(probate_time_na_columns)),

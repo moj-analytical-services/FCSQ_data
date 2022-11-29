@@ -35,7 +35,6 @@ timeperiod_col <- data.frame(c(paste0("2006 - ", pub_year, " (", pub_months_shor
                            paste0("2022 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
-                           paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2003 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2008 (Oct-Dec) - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2015 (Jul-Sep) - ", pub_year, " (", pub_months_short, ")"),

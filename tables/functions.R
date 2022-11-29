@@ -77,7 +77,7 @@ note_footer <- function(wb, sheet, start_row, notes, col_length, row_heights = N
 
 # note helper functions
 notes_select <- function(notes, table){
-  notes %>% filter(`Table number` == table) %>% 
+  notes %>% filter(`R_Table` == table) %>% 
     pull(`Note text`)
 }
 
@@ -91,7 +91,7 @@ make_reg_notes <- function(notes, source){
 
 get_note_frame <- function(table_name){
   # This gets the note numbers for a particular table after removing all the square brackets
-  notes_import %>% filter(`Table number` == table_name)
+  notes_import %>% filter(R_Table == table_name)
   
 }
 
