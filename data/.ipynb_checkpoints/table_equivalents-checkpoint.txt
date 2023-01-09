@@ -1,1 +1,0 @@
-{"TBL_TUCS_EVENT_FIELD": "{database}.event_fields", "TBL_TUCS_EVENT": "{database}.events"}
