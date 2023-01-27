@@ -92,7 +92,7 @@ pwalk(content_list, add_content_link)
 
 openxlsx::writeFormula(wb = accessible_tables,
                        sheet = 'Cover',
-                       startRow = 15,
+                       startRow = 13,
                        x = '=HYPERLINK("mailto:familycourt.statistics@gov.uk", "familycourt.statistics@gov.uk")'
                        )
 

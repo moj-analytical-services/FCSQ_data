@@ -16,7 +16,8 @@ current_div_year_new <- tibble()
 #####################
 t12b_start_qtr <- t12b_start + length(current_div_year_new)
 
-current_div_qtr_new <- divorce_t12b_input %>% distinct(Quarter) %>% separate('Quarter', into = c('Year', 'Quarter'), sep = ' Q') %>% 
+current_div_qtr_new <- divorce_t12b_input %>% distinct(Quarter) %>% separate('Quarter', into = c('Year', 'Quarter'), sep = ' Q') %>%
+  mutate(Year = as.numeric(Year)) %>% 
   filter(Year > 2010) %>% 
   arrange(Year, Quarter)
 
