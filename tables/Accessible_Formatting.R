@@ -31,6 +31,7 @@ comma_cols <- list(4:ncol(table_list[['t1']]),
                      3,
                      #Table 10 has every two columns formatted
                      seq(from = 4, to = ncol(table_list[['t10']]), by = 2),
+                     seq(from = 4, to = ncol(table_list[['t10b']]), by = 2),
                      4:ncol(table_list[['t11']]),
                      # Divorce has a mixture of columns. Subject to change
                      c(6, 7, 10),
@@ -56,12 +57,13 @@ comma_cols <- list(4:ncol(table_list[['t1']]),
 pwalk(list(sheet_names, table_list, comma_cols), ~comma_formatter(accessible_tables, ..1, ..2, ..3))
 
 # Rounding to 1dp
-round_sheet_names <- c("Table_8", "Table_9", "Table_10", "Table_24" )
+round_sheet_names <- c("Table_8", "Table_9", "Table_10", "Table 10b", "Table_24" )
 round_cols <- list(c(4, 5), c(4, 5), 
                    seq(from = 5, to = ncol(t10_accessible), by = 2),
+                   seq(from = 5, to = ncol(t10b_accessible), by = 2),
                    c(6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24)
                    )
-round_table_list <- list(t8_accessible, t9_accessible, t10_accessible, t24_accessible)
+round_table_list <- list(t8_accessible, t9_accessible, t10_accessible, t10b_accessible, t24_accessible)
 round_style <- openxlsx::createStyle(numFmt = "0.0")
 
 pwalk(list(round_sheet_names, round_table_list, round_cols), ~style_formatter(accessible_tables, ..1, ..2, ..3, style = round_style))

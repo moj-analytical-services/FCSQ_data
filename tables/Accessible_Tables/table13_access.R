@@ -15,9 +15,5 @@ t13_accessible <- full_t13 %>%
             `Cases reaching a financial remedy disposal to date` = arord_num,
             `% of divorce cases started reaching a financial remedy disposal` = arord_perc,
             `Cases reaching a hearing to date` = hearing_num,
-            `% of divorce cases started reaching a hearing` = hearing_perc,
-            `Cases reaching an injunction application to date` = injapp_num,
-            `% of divorce cases started reaching an injunction application` = injapp_perc,
-            `Cases reaching an injunction order to date` = injord_num,
-            `% of divorce cases started reaching an injunction order` = injord_perc
+            `% of divorce cases started reaching a hearing` = hearing_perc
             )

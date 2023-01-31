@@ -26,6 +26,19 @@ na_formatter(wb = template,
              startRow = 2,
              na_value = na_value)
 
+# Adding source for Table 10
+table_10b_lookup <- table_10b_lookup %>% mutate(across(where(is.numeric), ~replace_na(.x, na_value)))
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_10b_source',
+                    x = table_10b_lookup)
+
+na_formatter(wb = template,
+             sheet = 'Table_10b_source',
+             table = table_10b_lookup,
+             value = "-",
+             startRow = 2,
+             na_value = na_value)
+
 # Adding source for Table 11
 openxlsx::writeData(wb = template,
                     sheet = 'Table_11_source',

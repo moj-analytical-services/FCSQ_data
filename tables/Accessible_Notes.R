@@ -143,6 +143,9 @@ new_t10_cols <- c(glue('Category\n[notes {note_lookup_selector(note_frame_list, 
 
 t10_accessible <- t10_accessible %>% add_col_notes(table_num = 10, col_nums = t10_col_change, new_cols = new_t10_cols)
 
+#Table 10b
+title_note_t10b <- ''
+
 # Table 11
 title_note_t11 <- glue('[note {note_lookup_selector(note_frame_list, 11, "01")}][note {note_lookup_selector(note_frame_list, 11, "02")}][note {note_lookup_selector(note_frame_list, 11, "03")}]')
 t11_col_change <- c(1, 7, 9)
@@ -425,6 +428,6 @@ notes_all <- notes_import %>% select(!c(Lookup, R_Table)) %>%
 
 # Gathering all the title notes
 title_notes <- list(title_note_t1, title_note_t2, title_note_t3, title_note_t3, title_note_t4, title_note_t4, title_note_t5,
-                    title_note_t6, title_note_t7, title_note_t8, title_note_t9, title_note_t10, title_note_t11, title_note_t12, title_note_t12b, 
+                    title_note_t6, title_note_t7, title_note_t8, title_note_t9, title_note_t10, title_note_t10b, title_note_t11, title_note_t12, title_note_t12b, 
                     title_note_t13, title_note_t15, title_note_t16, title_note_t17, title_note_t18, title_note_t19,
                     title_note_t20, title_note_t21, title_note_t22, title_note_t23, title_note_t24, title_note_t25)

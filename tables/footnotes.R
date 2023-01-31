@@ -1,10 +1,10 @@
 
 # Number of tables is set and used to get a vector containing the number of the tables
-# There are 26 tables with table 12b but that has the same table number despite being on a different tab
+# There are 25 tables in R. The old table 14 has been dropped. Table 12b and 10b but that has the same table number despite being on a different tab
 
 # Note Table 14 has been removed but due to keeping variable names the same in R, note14 will simply be ignored
 no_tables <- 25
-no_tables_seq <- append(seq(no_tables), '12b', after = 12)
+no_tables_seq <- append(seq(no_tables), '10b', after = 10) %>% append('12b', after = 13)
 table_numbers <- glue('Table {no_tables_seq}')
 
 # Creates a list of notes that correspond to a particular table
@@ -20,6 +20,7 @@ table_sources_reg <- c("HMCTS FamilyMan and Core Case Data",
                    "HMCTS FamilyMan",
                    "HMCTS FamilyMan",
                    "HMCTS FamilyMan and Core Case Data",
+                   "HMCTS Core Case Data",
                    "HMCTS FamilyMan and Core Case Data",
                    "HMCTS FamilyMan and Core Case Data",
                    "HMCTS Core Case Data",

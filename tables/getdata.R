@@ -68,6 +68,7 @@ care_disposal_csv <- read_using(readr::read_csv, paste0(csv_folder, 'CARE_FINAL'
 table_3_lookup <- read_using(readr::read_csv, paste0(csv_folder, 'Table_3_lookup', " ", pub_year, " Q", pub_quarter,'.csv'), na = na_keys) %>% rename_with(str_to_title)
 table_10_lookup <- read_using(readr::read_csv, paste0(csv_folder, 'Table_10_lookup', " ", pub_year, " Q", pub_quarter,'.csv'), na = na_keys) %>% rename_with(str_to_title)
 table_11_lookup <- read_using(readr::read_csv, paste0(csv_folder, 'Table_11_lookup', " ", pub_year, " Q", pub_quarter,'.csv'), na = na_keys) %>% rename_with(str_to_title)
+table_10b_lookup <- read_using(readr::read_csv, paste0(csv_folder, 'Table_10b_lookup', " ", pub_year, " Q", pub_quarter,'.csv'), na = na_keys) %>% rename_with(str_to_title)
 
 cop_link <- paste0(csv_folder, "COP Tables ", pub_year, " Q", pub_quarter, ".xlsx")
 cop_table_21 <- read_using(openxlsx::read.xlsx, cop_link, sheet = "Table 21", check.names = TRUE, na.strings = na_keys)
