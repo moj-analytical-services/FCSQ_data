@@ -401,6 +401,13 @@ table3_header <- function(wb, sheet, heading, start_row, start_col){
                      stack = T,
                      gridExpand = T)
   
+  #Adjusting widths in blank columns
+  blank_cols <- c(start_col + num_years, start_col + num_years + 5, start_col + 2 * num_years + 6)
+  openxlsx::setColWidths(wb = wb,
+                         sheet = sheet,
+                         cols = blank_cols,
+                         widths = 1.8)
+  
   #Remove gridlines from sheet
   openxlsx::showGridLines(wb = wb,
                           sheet = sheet,
