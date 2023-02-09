@@ -104,5 +104,9 @@ sole_column <- t12b_accessible_b %>% select(1:5) %>%
             `Application Type` = "All",
             `Sole percentage` = perc)
 
+t12b_accessible <- t12b_accessible_b %>% left_join(sole_column, by = c('Year', 'Quarter', 'Case', 'Application Type')) %>% 
+  mutate(Case = as.character(Case),
+         `Sole percentage` = replace_na(`Sole percentage`, na_value))
+
 # Replacing empty string with Annual
 t12b_accessible$Quarter[t12b_accessible$Quarter == ''] <- 'Annual'

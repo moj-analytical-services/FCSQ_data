@@ -181,17 +181,15 @@ t12b_accessible <- t12b_accessible %>% add_col_notes(table_num = '12b', col_nums
 
 # Table 13
 title_note_t13 <-  glue('[note {note_lookup_selector(note_frame_list, 13, "01")}][note {note_lookup_selector(note_frame_list, 13, "02")}][note {note_lookup_selector(note_frame_list, 13, "03")}][note {note_lookup_selector(note_frame_list, 13, "08")}]')
-t13_col_change <- c(3, 4, 6, 8, 9, 10, 12, 13, 14, 16)
+t13_col_change <- c(3, 4, 6, 8, 9, 10, 12, 13)
 new_t13_cols <- c(glue('Divorce cases started\n[note {note_lookup_selector(note_frame_list, 13, "08")}]'),
-                  glue('Cases reaching decree nisi to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]'),
-                  glue('Cases reaching decree absolute to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]'),
+                  glue('Cases reaching conditional order to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]'),
+                  glue('Cases reaching final order to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]'),
                   glue('Cases reaching a financial remedy application to date\n[note {note_lookup_selector(note_frame_list, 13, "04")}][note {note_lookup_selector(note_frame_list, 13, "05")}][note {note_lookup_selector(note_frame_list, 13, "07")}]'),
                   glue('% of divorce cases started reaching a financial remedy application\n[note {note_lookup_selector(note_frame_list, 13, "04")}][note {note_lookup_selector(note_frame_list, 13, "05")}]'),
                   glue('Cases reaching a financial remedy disposal to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]'),
                   glue('Cases reaching a hearing to date\n[note {note_lookup_selector(note_frame_list, 13, "06")}][note {note_lookup_selector(note_frame_list, 13, "07")}]'),
-                  glue('% of divorce cases started reaching a hearing\n[note {note_lookup_selector(note_frame_list, 13, "06")}]'),
-                  glue('Cases reaching an injunction application to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]'),
-                  glue('Cases reaching an injunction order to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]')
+                  glue('% of divorce cases started reaching a hearing\n[note {note_lookup_selector(note_frame_list, 13, "06")}]')
                   )
 
 t13_accessible <- t13_accessible %>% add_col_notes(table_num = 13, col_nums = t13_col_change, new_cols = new_t13_cols)
