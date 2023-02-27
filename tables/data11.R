@@ -16,12 +16,12 @@ library(Rs3tools)
 # Variables #######################################################################################
 
 pub_year <- 2022                                                              # Specify the publication year and quarter for the output name
-pub_quarter <- 1
-pub_date <- "30th June 2022"
-next_pub_date <- "29th September 2022"
-annual_year <- 2021
+pub_quarter <- 4
+pub_date <- "30 March 2023"
+next_pub_date <- "29th June 2023"
+annual_year <- 2022
 path_to_project = '~/FCSQ_data/'                                       # UPDATE ONLY IF YOU CHANGE THE LOCATION OF THE PROJECT FILES
-csv_folder <- paste0("alpha-family-data/CSVs/",pub_year, " Q",pub_quarter,"/") #
+csv_folder <- paste0("alpha-family-data/CSVs/CSV_bulletin/",pub_year, " Q",pub_quarter,"/") #
 Rs3tools::download_file_from_s3(glue("{csv_folder}CSV Legal Representation National {pub_year} Q{pub_quarter}.csv"), "CSVs/csv_legrep.csv", overwrite = TRUE)
 csv_legrep <- read_csv(paste0(path_to_project, "CSVs/csv_legrep.csv")) %>% 
   rename_with(tolower) %>%
