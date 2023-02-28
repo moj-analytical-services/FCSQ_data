@@ -350,14 +350,13 @@ t22_accessible <- t22_accessible %>% add_col_notes(table_num = 22, col_nums = t2
 
 # Table 23
 title_note_t23 <- glue('[note {note_lookup_selector(note_frame_list, 23, "01")}]')
-t23_col_change <- c(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22)
+t23_col_change <- c(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20)
 new_t23_cols <- c(glue('Registered applications - Application Type: Enduring Power of Attorney\n[note {note_lookup_selector(note_frame_list, 23, "03")}]'),
                   glue('Registered applications - Application Type: Lasting Power of Attorney\n[note {note_lookup_selector(note_frame_list, 23, "04")}]'),
                   glue('Registered applications - Case Subtype: Property and finance\n[note {note_lookup_selector(note_frame_list, 23, "05")}]'),
                   glue('Registered applications - Case Subtype: Health and welfare\n[note {note_lookup_selector(note_frame_list, 23, "05")}]'),
                   glue('Registered applications - Gender of Donor: Female\n[note {note_lookup_selector(note_frame_list, 23, "06")}][note {note_lookup_selector(note_frame_list, 23, "07")}]'),
                   glue('Registered applications - Gender of Donor: Male\n[note {note_lookup_selector(note_frame_list, 23, "06")}][note {note_lookup_selector(note_frame_list, 23, "07")}]'),
-                  glue('Registered applications - Gender of Donor: Other\n[note {note_lookup_selector(note_frame_list, 23, "06")}][note {note_lookup_selector(note_frame_list, 23, "07")}]'),
                   glue('Registered applications - Gender of Donor: Unknown\n[note {note_lookup_selector(note_frame_list, 23, "06")}][note {note_lookup_selector(note_frame_list, 23, "07")}][note {note_lookup_selector(note_frame_list, 23, "08")}]'),
                   glue('Registered applications - Age of Donor: 18-24\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
                   glue('Registered applications - Age of Donor: 25-34\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
@@ -367,7 +366,6 @@ new_t23_cols <- c(glue('Registered applications - Application Type: Enduring Pow
                   glue('Registered applications - Age of Donor: 65-74\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
                   glue('Registered applications - Age of Donor: 75-84\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
                   glue('Registered applications - Age of Donor: 85+\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
-                  glue('Registered applications - Age of Donor: Other\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}][note {note_lookup_selector(note_frame_list, 23, "11")}]'),
                   glue('Registered applications - Age of Donor: Unknown\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
                   glue('Number of deputyships appointed\n[note {note_lookup_selector(note_frame_list, 23, "12")}]')
                   )
@@ -376,14 +374,16 @@ t23_accessible <- t23_accessible %>% add_col_notes(table_num = 23, col_nums = t2
 
 # Table 24
 title_note_t24 <- glue('[note {note_lookup_selector(note_frame_list, 24, "01")}][note {note_lookup_selector(note_frame_list, 24, "02")}][note {note_lookup_selector(note_frame_list, 24, "03")}]')
-t24_col_change <- 5:15
+t24_col_change <- 5:17
 new_t24_cols <- c(glue('Applications Made: Grant of Probate\n[note {note_lookup_selector(note_frame_list, 24, "04")}][note {note_lookup_selector(note_frame_list, 24, "05")}][note {note_lookup_selector(note_frame_list, 24, "06")}]'),
                   glue('Applications Made: Grant of Administration with Will annexed\n[note {note_lookup_selector(note_frame_list, 24, "04")}][note {note_lookup_selector(note_frame_list, 24, "05")}][note {note_lookup_selector(note_frame_list, 24, "06")}]'),
                   glue('Applications Made: Grant of Administration\n[note {note_lookup_selector(note_frame_list, 24, "04")}][note {note_lookup_selector(note_frame_list, 24, "05")}][note {note_lookup_selector(note_frame_list, 24, "06")}]'),
+                  'Applications Made: Grants resealed',
                   glue('Applications Made: All grant types\n[note {note_lookup_selector(note_frame_list, 24, "04")}][note {note_lookup_selector(note_frame_list, 24, "05")}][note {note_lookup_selector(note_frame_list, 24, "06")}]'),
                   glue('Grants issued: Grant of Probate\n[note {note_lookup_selector(note_frame_list, 24, "06")}]'),
                   glue('Grants issued: Grant of Administration with Will annexed\n[note {note_lookup_selector(note_frame_list, 24, "06")}]'),
                   glue('Grants issued: Grant of Administration\n[note {note_lookup_selector(note_frame_list, 24, "06")}]'),
+                  'Grants issued: Grants resealed',
                   glue('Grants issued: All grant types\n[note {note_lookup_selector(note_frame_list, 24, "06")}]'),
                   glue('Grants revoked\n[note {note_lookup_selector(note_frame_list, 24, "07")}]'),
                   glue('Standing Search\n[note {note_lookup_selector(note_frame_list, 24, "07")}]'),

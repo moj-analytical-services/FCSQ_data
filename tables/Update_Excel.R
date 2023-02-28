@@ -648,9 +648,18 @@ na_formatter(wb = template,
 na_adder(wb = template,
          sheet = 'Table_22',
          value = ':',
-         cols = 27,
+         cols = 25,
          lengths = nrow(t23_reg_qtr) - 57,
          start_row = t23_start + nrow(t23_reg_year) + 57)
+
+# Block deputyships from 2022
+na_adder(wb = template,
+         sheet = 'Table_22',
+         value = ':',
+         cols = 25,
+         lengths = nrow(t23_reg_year) - 14,
+         start_row = t23_start + 14)
+
 
 
 ####################################################################
@@ -682,7 +691,7 @@ write_formatted_table(workbook = template,
 na_adder(wb = template,
          sheet = 'Table_23',
          value = "-",
-         cols = c(3, 4, 5),
+         cols = c(3, 4, 5, 6, 12),
          lengths = rep(7, 3),
          start_row = t24_start)
 
@@ -690,7 +699,7 @@ na_adder(wb = template,
 na_adder(wb = template,
          sheet = 'Table_23',
          value = "-",
-         cols = 15,
+         cols = 17,
          lengths = nrow(t24_reg_qtr_a) + nrow(t24_reg_qtr_b),
          start_row = t24_start + nrow(t24_reg_year))
 
