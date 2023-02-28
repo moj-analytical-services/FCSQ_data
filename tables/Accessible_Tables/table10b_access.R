@@ -38,6 +38,6 @@ colnames(t10b_accessible_qtr) <- c('Category',
 )
 
 #Binds rows together and rounds all week columns to one decimal place
-t10b_accessible <- bind_rows(t10b_accessible_year, t10b_accessible_qtr) %>% arrange(Category) %>% 
+t10b_accessible <- bind_rows(t10b_accessible_year, t10b_accessible_qtr) %>% arrange(Category, Year, Quarter) %>% 
   mutate(across(where(is.numeric), ~replace_na(.x, na_value))) %>% 
   mutate(Quarter = replace_na(Quarter, 'Annual'))

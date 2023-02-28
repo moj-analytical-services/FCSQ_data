@@ -333,6 +333,7 @@ table3_header <- function(wb, sheet, heading, start_row, start_col){
   # Last four quarters
   t3_qtr_head <- child_act_csv %>% distinct(Year, Qtr) %>% 
     filter(!is.na(Year), Qtr != '') %>% mutate(Quarter = paste0(Year, " Q", Qtr)) %>% 
+    arrange(Year, Quarter) %>% 
     tail(4) %>% pull(-1)
   
   #Combining and taking the transpose to have in row format

@@ -6,9 +6,9 @@
 # years and quarters
 table10b_alt <- table_10b_lookup %>% separate(Lookup, c("Case_type", "Year", "Quarter"), sep = '\\|', convert = TRUE)
 
-time_div_dates_annual <- table10b_alt %>% distinct(Year) %>% mutate(Quarter = NA) %>% filter(Year <= annual_year)
+time_div_dates_annual <- table10b_alt %>% distinct(Year) %>% mutate(Quarter = NA) %>% filter(Year <= annual_year) %>% arrange(Year, Quarter)
 
-time_div_dates_quarter <- table10b_alt %>% distinct(Year, Quarter) %>% filter(Quarter != '')   
+time_div_dates_quarter <- table10b_alt %>% distinct(Year, Quarter) %>% filter(Quarter != '') %>% arrange(Year, Quarter)
 
 
 time_div_rowcount <- nrow(time_div_dates_annual) + nrow(time_div_dates_quarter)
