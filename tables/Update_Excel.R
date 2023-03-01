@@ -336,10 +336,10 @@ t12b_row_heights[seq(from = 5, to = length(notes12b))] <- c(24, 22.5, 11.25, 12.
 
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_12b', 
-                      tables = list(t12b_reg_qtr), 
+                      tables = list(t12b_reg_year, t12b_reg_qtr), 
                       notes = notes12b, 
                       starting_row = t12b_start, 
-                      quarterly_format = c(1),
+                      quarterly_format = c(2),
                       note_row_heights = t12b_row_heights)
 
 
@@ -367,6 +367,22 @@ write_formatted_table(workbook = template,
                       starting_row = t13_start, 
                       quarterly_format = c(2),
                       note_row_heights = t13_row_heights)
+
+# Block hearings from 2022 Q2
+na_adder(wb = template,
+         sheet = 'Table_13',
+         value = ':',
+         cols = c(17, 18),
+         lengths = rep(nrow(t13_reg_qtr) - 45, 2),
+         start_row = t13_start + nrow(t13_reg_year) + 45)
+
+# Block hearings from 2022
+na_adder(wb = template,
+         sheet = 'Table_13',
+         value = ':',
+         cols = c(17, 18),
+         lengths = rep(nrow(t13_reg_year) - 19, 2),
+         start_row = t13_start + 19)
 
 # Note that the old Table 14 got removed. 
 # This means that from here each table while retaining the same number variable wise is in the sheet before the table number

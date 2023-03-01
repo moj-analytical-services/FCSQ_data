@@ -145,6 +145,10 @@ t10_accessible <- t10_accessible %>% add_col_notes(table_num = 10, col_nums = t1
 
 #Table 10b
 title_note_t10b <- ''
+t10b_col_change <- c(1)
+new_t10b_cols <- c(glue('Category\n[note {note_lookup_selector(note_frame_list, "10b", "01")}]'))
+
+t10b_accessible <- t10b_accessible %>% add_col_notes(table_num = '10b', col_nums = t10b_col_change, new_cols = new_t10b_cols)
 
 # Table 11
 title_note_t11 <- glue('[note {note_lookup_selector(note_frame_list, 11, "01")}][note {note_lookup_selector(note_frame_list, 11, "02")}][note {note_lookup_selector(note_frame_list, 11, "03")}]')

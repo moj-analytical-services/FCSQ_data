@@ -10,7 +10,50 @@ t12b_list_letter <- num_to_letter(t12_list_col)
 t12b_list_a_row <- 7
 t12b_list_b_row <- 8
 
-current_div_year_new <- tibble()
+current_div_year_new <- divorce_t12b_input %>%  distinct(Year) %>% filter(Year <= annual_year) %>% pull(Year)
+
+#####################
+#Annually
+#####################
+div_year_row_seq_new <- seq(from = t12b_start, to = t12b_start + length(current_div_year_new) - 1)
+
+#Annual data
+div_year_new <- tibble(Year = current_div_year_new,
+                      Quarter = NA_character_,
+                      d_apps = glue('=IF(SUMIFS(Table_12b_source!$H:$H,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,D$5,Table_12b_source!$A:$A,${t12b_list_letter}${t12b_list_b_row},Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row},Table_12b_source!$F:$F,"All")=0,".",SUMIFS(Table_12b_source!$H:$H,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,D$5,Table_12b_source!$A:$A,${t12b_list_letter}${t12b_list_b_row},Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row},Table_12b_source!$F:$F,"All"))')
+                      ,
+                      d_cond = glue('=IF(SUMIFS(Table_12b_source!$H:$H,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,E$5,Table_12b_source!$A:$A,${t12b_list_letter}${t12b_list_b_row},Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row})=0,".",SUMIFS(Table_12b_source!$H:$H,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,E$5,Table_12b_source!$A:$A,${t12b_list_letter}${t12b_list_b_row},Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row}))')
+                      ,
+                      d_mean_cond = glue('=IF(SUMIFS(Table_12b_source!$I:$I,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,$E$5,Table_12b_source!$A:$A,${t12b_list_letter}${t12b_list_b_row},Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row})=0,".",SUMIFS(Table_12b_source!$I:$I,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,$E$5,Table_12b_source!$A:$A,${t12b_list_letter}${t12b_list_b_row},Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row}))')
+                      ,
+                      d_median_cond = glue('=IF(SUMIFS(Table_12b_source!$J:$J,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,$E$5,Table_12b_source!$A:$A,${t12b_list_letter}${t12b_list_b_row},Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row})=0,".",SUMIFS(Table_12b_source!$J:$J,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,$E$5,Table_12b_source!$A:$A,${t12b_list_letter}${t12b_list_b_row},Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row}))')
+                      ,
+                      d_final = glue('=IF(SUMIFS(Table_12b_source!$H:$H,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,H$5,Table_12b_source!$A:$A,${t12b_list_letter}${t12b_list_b_row},Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row})=0,".",SUMIFS(Table_12b_source!$H:$H,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,H$5,Table_12b_source!$A:$A,${t12b_list_letter}${t12b_list_b_row},Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row}))')
+                      ,
+                      d_mean_final = glue('=IF(SUMIFS(Table_12b_source!$I:$I,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,H$5, Table_12b_source!$A:$A,${t12b_list_letter}${t12b_list_b_row}, Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row})=0,".",SUMIFS(Table_12b_source!$I:$I,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,H$5, Table_12b_source!$A:$A,${t12b_list_letter}${t12b_list_b_row}, Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row}))')
+                      ,
+                      d_median_final = glue('=IF(SUMIFS(Table_12b_source!$J:$J,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,$H$5,Table_12b_source!$A:$A,${t12b_list_letter}${t12b_list_b_row},Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row})=0,".",SUMIFS(Table_12b_source!$J:$J,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,$H$5,Table_12b_source!$A:$A,${t12b_list_letter}${t12b_list_b_row},Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row}))')
+                      ,
+                      n_apps = glue('=IF(SUMIFS(Table_12b_source!$H:$H,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,L$5,Table_12b_source!$A:$A,$L$12,Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row})=0,".",SUMIFS(Table_12b_source!$H:$H,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,L$5,Table_12b_source!$A:$A,$L$12,Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row}))')
+                      ,
+                      n_cond = glue('=IF(SUMIFS(Table_12b_source!$H:$H,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,M$5,Table_12b_source!$A:$A,$L$12,Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row})=0,".",SUMIFS(Table_12b_source!$H:$H,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,M$5,Table_12b_source!$A:$A,$L$12,Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row}))')
+                      ,
+                      n_final = glue('=IF(SUMIFS(Table_12b_source!$H:$H,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,N$5,Table_12b_source!$A:$A,$L$12,Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row})=0,".",SUMIFS(Table_12b_source!$H:$H,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,N$5,Table_12b_source!$A:$A,$L$12,Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row}))')
+                      ,
+                      j_apps = glue('=IF(SUMIFS(Table_12b_source!$H:$H,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,P$5,Table_12b_source!$A:$A,$P$12,Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row})=0,".",SUMIFS(Table_12b_source!$H:$H,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,P$5,Table_12b_source!$A:$A,$P$12,Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row}))')
+                      ,
+                      j_final = glue('=IF(SUMIFS(Table_12b_source!$H:$H,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,Q$5,Table_12b_source!$A:$A,$P$12,Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row})=0,".",SUMIFS(Table_12b_source!$H:$H,Table_12b_source!$C:$C,$A{div_year_row_seq_new},Table_12b_source!$B:$B,Q$5,Table_12b_source!$A:$A,$P$12,Table_12b_source!$E:$E,${t12b_list_letter}${t12b_list_a_row}))')
+                      
+)
+
+t12b_reg_year <- div_year_new %>% 
+  mutate(blank1 = NA, blank2 = NA, blank3 = NA) %>% 
+  relocate(blank1, .after = Quarter) %>% 
+  relocate(blank2, .after = d_median_final) %>% 
+  relocate(blank3, .after = n_final) %>%  
+  mutate(across(3:ncol(.), .fns = formula_add)) %>% 
+  mutate(across(where(is.numeric), ~replace_na(.x, 0))) 
+
 #####################
 #Quarterly
 #####################
