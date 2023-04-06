@@ -12,4 +12,5 @@ lookup_folder <- "alpha-family-data/CSVs/lookups/"
 # Numerical values that will be used for na and suppressed values. Numerical values must be used to keep numerical columns numerical
 na_value <- -1
 suppress_value <- -2
+not_collect_value <- -3
 

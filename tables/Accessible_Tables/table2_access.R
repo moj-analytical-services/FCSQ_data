@@ -34,6 +34,15 @@ t2_priv_law <- full_t2 %>%
 #Combining for the final table
 #Issues with switch to CCD means disposals made is blocked.
 t2_accessible <- bind_rows(t2_pub_law, t2_priv_law) %>% 
-  mutate(`Disposals made` = case_when(Category == 'Public law' & Year == 2022 ~ na_value,
-                                      TRUE ~ `Disposals made`)) %>% 
-  mutate(Quarter = replace_na(Quarter, 'Annual'))
+  mutate(Quarter = replace_na(Quarter, 'Annual')) %>% 
+  mutate(`Disposals made` = case_when(Category == 'Public law' & Year >= 2022 ~ na_value,
+                                      TRUE ~ `Disposals made`),
+         `Orders made` = case_when(
+           (Category == 'Public law' & Year > 2022) |
+             (Category == 'Public law' & (Year == 2022 & Quarter %in% c('Annual', 'Q3', 'Q4'))) ~ na_value,
+                                      TRUE ~ `Orders made`),
+         `Cases disposed` = case_when(
+           (Category == 'Public law' & Year > 2022) |
+             (Category == 'Public law' & (Year == 2022 & Quarter %in% c('Annual', 'Q3', 'Q4'))) ~ na_value,
+           TRUE ~ `Cases disposed`)
+  ) 

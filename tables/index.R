@@ -69,7 +69,7 @@ openxlsx::addStyle(wb = template,
 openxlsx::writeData(wb = template,
                     sheet = 'Index',
                     x = timeperiod_col,
-                    startRow = 6,
+                    startRow = 7,
                     startCol = 4,
                     colNames = F)
 
@@ -77,5 +77,5 @@ openxlsx::writeData(wb = template,
 openxlsx::writeData(wb = template,
                     sheet = 'Index',
                     x = publish_dates,
-                    startRow = 40,
+                    startRow = 41,
                     colNames = F)

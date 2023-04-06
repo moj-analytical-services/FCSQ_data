@@ -52,7 +52,7 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # the start row of the data
-t1_start <- 7
+t1_start <- 9
 
 # Adjusting row height for notes. Actual footnotes do not start until row 5 
 t1_note_heights <- rep(14.3, length(notes1))
@@ -68,6 +68,8 @@ write_formatted_table(workbook = template,
                       note_row_heights = t1_note_heights)
 
 # Adding expressions for missing values. As these are strings they have to be added separately from the numbers
+
+#Blocking before years before 2011 for some categories
 na_cols <- c(3, 4, 7, 10, 11, 13, 14, 17, 20, 21)
 na_adder(wb = template,
          sheet = 'Table_1',
@@ -76,6 +78,7 @@ na_adder(wb = template,
          lengths = rep(5, length(na_cols)),
          start_row = t1_start)
 
+#Blocking forced marriage and female genital mutilation
 na_cols_fmpo_fgm <- c(8, 9, 18, 19)
 na_adder(wb = template,
          sheet = 'Table_1',
@@ -90,6 +93,41 @@ na_adder(wb = template,
          cols = c(9, 19),
          lengths = c(18, 18),
          start_row = t1_start + nrow(t1_reg_year))
+
+#Temporary Data Quality Issues blocked
+
+#Adoption Starts and Total Case Starts - Yearly
+na_adder(wb = template,
+         sheet = 'Table_1',
+         value = ":",
+         cols = c(10, 11),
+         lengths = rep(nrow(t1_reg_year) - 16, 2),
+         start_row = t1_start + 16)
+
+#Adoption Starts and Total Case Starts - Quarterly
+na_adder(wb = template,
+         sheet = 'Table_1',
+         value = ":",
+         cols = c(10, 11),
+         lengths = rep(nrow(t1_reg_qtr) - 47, 2),
+         start_row = t1_start + nrow(t1_reg_year) + 47)
+
+#Public Law and Total Cases Disposed - Annually
+na_adder(wb = template,
+         sheet = 'Table_1',
+         value = ":",
+         cols = c(13, 21),
+         lengths = rep(nrow(t1_reg_year) - 16, 2),
+         start_row = t1_start + 16)
+
+#Public Law and Total Cases Disposed - Quarterly
+na_adder(wb = template,
+         sheet = 'Table_1',
+         value = ":",
+         cols = c(13, 21),
+         lengths = rep(nrow(t1_reg_qtr) - 46, 2),
+         start_row = t1_start + nrow(t1_reg_year) + 46)
+
 
 
 ####################################################################
@@ -107,7 +145,7 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # setting start row and note heights
-t2_start <- 9
+t2_start <- 11
 t2_note_heights <- rep(14.3, length(notes2))
 t2_note_heights[5] = 21.8
 
@@ -120,7 +158,25 @@ write_formatted_table(workbook = template,
                       quarterly_format = c(2),
                       note_row_heights = t2_note_heights)
 
-# Block on disposals from 2022 onward data due to CCD affecting public law
+# Data Quality Issues block
+
+# Block on public law orders made and cases disposed - Annually
+na_adder(wb = template,
+         sheet = 'Table_2',
+         value = ':',
+         cols = c(8, 9, 10),
+         lengths = rep(nrow(t2_reg_year) - 11, 3),
+         start_row = t2_start + 11)
+
+# Block on public law orders made and cases disposed - Quarterly
+na_adder(wb = template,
+         sheet = 'Table_2',
+         value = ':',
+         cols = c(8, 10),
+         lengths = rep(nrow(t2_reg_qtr) - 46, 2),
+         start_row = t2_start + nrow(t2_reg_year) + 46)
+
+# Block on public law disposals from 2022 onward data due to CCD affecting public law - Quarterly
 na_adder(wb = template,
          sheet = 'Table_2',
          value = ':',
