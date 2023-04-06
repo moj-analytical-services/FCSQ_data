@@ -237,7 +237,7 @@ write_formatted_table(workbook = template,
 ####################################################################
 # Loads and writes the data
 source(paste0(path_to_project, "Regular_Tables/table7_reg.R"))
-t7_start <- 8
+t7_start <- 10
 
 openxlsx::writeData(wb = template,
                     sheet = 'Table_7',
@@ -253,6 +253,25 @@ write_formatted_table(workbook = template,
                       starting_row = t7_start, 
                       quarterly_format = c(2))
 
+# Data Quality Issues
+
+#Public Law High Court - Annually
+na_adder(wb = template,
+         sheet = 'Table_7',
+         value = ':',
+         cols = c(4, 5, 6),
+         lengths = rep(nrow(t7_reg_year) - 11, 3),
+         start_row = t7_start + 11)
+
+#Public Law High Court - Quarterly
+na_adder(wb = template,
+         sheet = 'Table_7',
+         value = ':',
+         cols = c(4, 5, 6),
+         lengths = rep(nrow(t7_reg_qtr) - 46, 3),
+         start_row = t7_start + nrow(t7_reg_year) + 46)
+
+
 ####################################################################
 #Care and Supervision
 #Table 8
@@ -260,7 +279,7 @@ write_formatted_table(workbook = template,
 ####################################################################
 # Loads and writes the data
 source(paste0(path_to_project, "Regular_Tables/table8_reg.R"))
-t8_start <- 6
+t8_start <- 8
 t8_row_heights <- rep(15, length(notes8))
 t8_row_heights[c(5, 6, 7, 8)] <- c(46.5, 25.5, 37.5, 25.5)
 
@@ -278,6 +297,14 @@ write_formatted_table(workbook = template,
                       starting_row = t8_start, 
                       quarterly_format = c(2),
                       note_row_heights = t8_row_heights)
+
+# Block on disposals from 2022 onward data due to CCD affecting Public Law - Annually
+na_adder(wb = template,
+         sheet = 'Table_8',
+         value = ':',
+         cols = c(3, 4, 5, 6),
+         lengths = rep(nrow(t8_reg_year) - 11, 4),
+         start_row = t8_start + 11)
 
 # Block on disposals from 2022 onward data due to CCD affecting Public Law - Quarterly
 na_adder(wb = template,

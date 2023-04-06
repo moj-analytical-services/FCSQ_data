@@ -9,31 +9,33 @@ names(note_frame_list) <- table_numbers
 
 # Table 1
 # Note to add into title
-title_note_t1 <- glue('[note {note_lookup_selector(note_frame_list, 1, "01")}]')
+title_note_t1 <- glue('[note {note_lookup_selector(note_frame_list, 1, "01")}][note {note_lookup_selector(note_frame_list, 1, "11")}]')
 
 # Modifying columns to have notes in them
-t1_col_change <- c(3, 6, 7, 9, 10, 11)
+t1_col_change <- c(3, 6, 7, 9, 10, 11, 12)
 new_t1_cols <- c(glue('Stage\n[note {note_lookup_selector(note_frame_list, 1, "02")}]'),
                  glue('Matrimonial Matters\n[note {note_lookup_selector(note_frame_list, 1, "08")}]'),
                  glue('Financial Remedies\n[note {note_lookup_selector(note_frame_list, 1, "03")}]'),
                  glue('Forced Marriage Protection\n[note {note_lookup_selector(note_frame_list, 1, "04")}]'),
                  glue('Female Genital Mutilation Protection\n[note {note_lookup_selector(note_frame_list, 1, "09")}]'),
-                 glue('Adoption\n[note {note_lookup_selector(note_frame_list, 1, "05")}]')
+                 glue('Adoption\n[note {note_lookup_selector(note_frame_list, 1, "05")}][note {note_lookup_selector(note_frame_list, 1, "11")}]'),
+                 glue('Total\n[note {note_lookup_selector(note_frame_list, 1, "11")}]')
+                 
 )
 
 t1_accessible <- t1_accessible %>% add_col_notes(table_num = 1, col_nums = t1_col_change, new_cols = new_t1_cols)
 
 # Table 2
-title_note_t2 <- glue('[note {note_lookup_selector(note_frame_list, 2, "01")}][note {note_lookup_selector(note_frame_list, 2, "02")}]')
+title_note_t2 <- glue('[note {note_lookup_selector(note_frame_list, 2, "01")}][note {note_lookup_selector(note_frame_list, 2, "02")}][note {note_lookup_selector(note_frame_list, 2, "13")}]')
 t2_col_change <- c(1, 4, 5, 6, 7, 8, 9, 10)
 new_t2_cols <- c(glue('Category\n[note {note_lookup_selector(note_frame_list, 2, "03")}]'),
   glue('Individual children involved in Applications\n[note {note_lookup_selector(note_frame_list, 2, "04")}][note {note_lookup_selector(note_frame_list, 2, "05")}]'),
   glue('Applications made\n[note {note_lookup_selector(note_frame_list, 2, "06")}]'),
   glue('Total orders applied for\n[note {note_lookup_selector(note_frame_list, 2, "07")}]'),
   glue('Cases starting\n[note {note_lookup_selector(note_frame_list, 2, "08")}]'),
-  glue('Orders made\n[note {note_lookup_selector(note_frame_list, 2, "09")}]'),
-  glue('Disposals made\n[note {note_lookup_selector(note_frame_list, 2, "09")}]'),
-  glue('Cases disposed\n[note {note_lookup_selector(note_frame_list, 2, "08")}][note {note_lookup_selector(note_frame_list, 2, "11")}]')
+  glue('Orders made\n[note {note_lookup_selector(note_frame_list, 2, "09")}][note {note_lookup_selector(note_frame_list, 2, "13")}]'),
+  glue('Disposals made\n[note {note_lookup_selector(note_frame_list, 2, "09")}][note {note_lookup_selector(note_frame_list, 2, "13")}]'),
+  glue('Cases disposed\n[note {note_lookup_selector(note_frame_list, 2, "08")}][note {note_lookup_selector(note_frame_list, 2, "11")}][note {note_lookup_selector(note_frame_list, 2, "13")}]')
   
 )
 
@@ -100,9 +102,11 @@ t6_accessible <- t6_accessible %>% add_col_notes(table_num = 6, col_nums = t6_co
 # Table 7
 title_note_t7 <- glue('[note {note_lookup_selector(note_frame_list, 7, "01")}]')
 
-t7_col_change <- c(1, 6)
+t7_col_change <- c(1, 5, 6, 7)
 new_t7_cols <- c(glue('Category\n[note {note_lookup_selector(note_frame_list, 7, "02")}]'),
-                 glue('High Court cases started in Central London DFJ\n[note {note_lookup_selector(note_frame_list, 7, "03")}]')
+                 glue('Total cases started indiacted as High Court\n[note {note_lookup_selector(note_frame_list, 7, "05")}]'),
+                 glue('High Court cases started in Central London DFJ\n[note {note_lookup_selector(note_frame_list, 7, "03")}]'),
+                 glue('High Court cases started outside Central London DFJ\n[note {note_lookup_selector(note_frame_list, 7, "05")}]')
 )
 
 t7_accessible <- t7_accessible %>% add_col_notes(table_num = 7, col_nums = t7_col_change, new_cols = new_t7_cols)
