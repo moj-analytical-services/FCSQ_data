@@ -6,12 +6,12 @@
 # years and quarters
 table10b_alt <- table_10b_lookup %>% separate(Lookup, c("Case_type", "Year", "Quarter"), sep = '\\|', convert = TRUE)
 
-time_div_dates_annual <- table10b_alt %>% distinct(Year) %>% mutate(Quarter = NA) %>% filter(Year <= annual_year) %>% arrange(Year, Quarter)
+#time_div_dates_annual <- table10b_alt %>% distinct(Year) %>% mutate(Quarter = NA) %>% filter(Year <= annual_year) %>% arrange(Year, Quarter)
 
 time_div_dates_quarter <- table10b_alt %>% distinct(Year, Quarter) %>% filter(Quarter != '') %>% arrange(Year, Quarter)
 
 
-time_div_rowcount <- nrow(time_div_dates_annual) + nrow(time_div_dates_quarter)
+time_div_rowcount <- nrow(time_div_dates_quarter)
 
 # formulae
 t10b_start <- 13
@@ -22,7 +22,7 @@ t10b_list_col <- 2
 t10b_list_letter <- num_to_letter(t10b_list_col)
 t10b_list_row <- 7
 
-#Columns in Excel sheet. There are blank columns that are missed out.
+#Columns in Excel sheet. There are blank columns that are missed out that aren't included in this list.
 columns <- c(1,2,4,5,7,8,10,11,13,14)
 
 #Columns that the vlookup looks up from the source file
@@ -65,11 +65,12 @@ openxlsx::writeData(wb = template,
 # table
 #setting row heights
 t10b_row_heights <- rep(15, length(notes10b))
+t10b_row_heights[c(9, 10)] <- c(21.8, 21.8)
 
 t10b_col_length <- 16
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_10b', 
-                      tables = list(time_div_dates_annual, time_div_dates_quarter), 
+                      tables = list(time_div_dates_quarter), 
                       notes = notes10b, 
                       starting_row = t10b_start, 
                       quarterly_format = c(2),

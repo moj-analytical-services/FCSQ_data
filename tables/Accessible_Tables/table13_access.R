@@ -16,7 +16,16 @@ t13_accessible <- full_t13 %>%
             `% of divorce cases started reaching a financial remedy disposal` = arord_perc,
             `Cases reaching a hearing to date` = hearing_num,
             `% of divorce cases started reaching a hearing` = hearing_perc
-            ) %>% mutate(`Cases reaching a hearing to date` = case_when(Year == 2022 & Quarter %in% c('Q2', 'Q3', 'Q4', 'Annual') ~ na_value,
+            ) %>% mutate(`Cases reaching a hearing to date` = case_when((Year == 2022 & Quarter %in% c('Q2', 'Q3', 'Q4', 'Annual')) | (Year > 2022) ~ na_value,
                                              TRUE ~ `Cases reaching a hearing to date`),
-                         `% of divorce cases started reaching a hearing` = case_when(Year == 2022 & Quarter %in% c('Q2', 'Q3', 'Q4', 'Annual') ~ na_value,
-                                                                        TRUE ~ `% of divorce cases started reaching a hearing`))
+                         `% of divorce cases started reaching a hearing` = case_when((Year == 2022 & Quarter %in% c('Q2', 'Q3', 'Q4', 'Annual')) | (Year > 2022) ~ na_value,
+                                                                        TRUE ~ `% of divorce cases started reaching a hearing`),
+                         `Cases reaching a financial remedy application to date` = case_when((Year == 2022 & Quarter %in% c('Q3', 'Q4')) | (Year > 2022) ~ na_value,
+                                                                                             TRUE ~ `Cases reaching a financial remedy application to date`),
+                         `% of divorce cases started reaching a financial remedy application` = case_when((Year == 2022 & Quarter %in% c('Q3', 'Q4')) | (Year > 2022) ~ na_value,
+                                                                                             TRUE ~ `% of divorce cases started reaching a financial remedy application`),
+                         `Cases reaching a financial remedy disposal to date` = case_when((Year == 2022 & Quarter %in% c('Q3', 'Q4')) | (Year > 2022) ~ na_value,
+                                                                                             TRUE ~ `Cases reaching a financial remedy disposal to date`),
+                         
+                         `% of divorce cases started reaching a financial remedy disposal` = case_when((Year == 2022 & Quarter %in% c('Q3', 'Q4')) | (Year > 2022) ~ na_value,
+                                                                                                          TRUE ~ `% of divorce cases started reaching a financial remedy disposal`))

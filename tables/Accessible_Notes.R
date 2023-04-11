@@ -104,7 +104,7 @@ title_note_t7 <- glue('[note {note_lookup_selector(note_frame_list, 7, "01")}]')
 
 t7_col_change <- c(1, 5, 6, 7)
 new_t7_cols <- c(glue('Category\n[note {note_lookup_selector(note_frame_list, 7, "02")}]'),
-                 glue('Total cases started indiacted as High Court\n[note {note_lookup_selector(note_frame_list, 7, "05")}]'),
+                 glue('Total cases started indicated as High Court\n[note {note_lookup_selector(note_frame_list, 7, "05")}]'),
                  glue('High Court cases started in Central London DFJ\n[note {note_lookup_selector(note_frame_list, 7, "03")}]'),
                  glue('High Court cases started outside Central London DFJ\n[note {note_lookup_selector(note_frame_list, 7, "05")}]')
 )
@@ -148,9 +148,15 @@ new_t10_cols <- c(glue('Category\n[notes {note_lookup_selector(note_frame_list, 
 t10_accessible <- t10_accessible %>% add_col_notes(table_num = 10, col_nums = t10_col_change, new_cols = new_t10_cols)
 
 #Table 10b
-title_note_t10b <- ''
-t10b_col_change <- c(1)
-new_t10b_cols <- c(glue('Category\n[note {note_lookup_selector(note_frame_list, "10b", "01")}]'))
+title_note_t10b <- glue('[note {note_lookup_selector(note_frame_list, "10b", "01")}][note {note_lookup_selector(note_frame_list, "10b", "04")}][note {note_lookup_selector(note_frame_list, "10b", "05")}][note {note_lookup_selector(note_frame_list, "10b", "06")}]')
+t10b_col_change <- c(1, 5, 7, 9, 11, 13)
+new_t10b_cols <- c(glue('Category\n[note {note_lookup_selector(note_frame_list, "10b", "01")}]'),
+                   glue('Both Applicant and Respondent - Mean duration in weeks\n[note {note_lookup_selector(note_frame_list, "10b", "02")}][note {note_lookup_selector(note_frame_list, "10b", "03")}]'),
+                   glue('Applicant only - Mean duration in weeks\n[note {note_lookup_selector(note_frame_list, "10b", "02")}][note {note_lookup_selector(note_frame_list, "10b", "03")}]'),
+                   glue('Respondent only - Mean duration in weeks\n[note {note_lookup_selector(note_frame_list, "10b", "02")}][note {note_lookup_selector(note_frame_list, "10b", "03")}]'),
+                   glue('Neither Applicant nor Respondent - Mean duration in weeks\n[note {note_lookup_selector(note_frame_list, "10b", "02")}][note {note_lookup_selector(note_frame_list, "10b", "03")}]'),
+                   glue('All types of representation - Mean duration in weeks\n[note {note_lookup_selector(note_frame_list, "10b", "02")}][note {note_lookup_selector(note_frame_list, "10b", "03")}]')
+                   )
 
 t10b_accessible <- t10b_accessible %>% add_col_notes(table_num = '10b', col_nums = t10b_col_change, new_cols = new_t10b_cols)
 
@@ -188,7 +194,7 @@ new_t12b_cols <- c(glue('Application Type\n[note {note_lookup_selector(note_fram
 t12b_accessible <- t12b_accessible %>% add_col_notes(table_num = '12b', col_nums = t12b_col_change, new_cols = new_t12b_cols)
 
 # Table 13
-title_note_t13 <-  glue('[note {note_lookup_selector(note_frame_list, 13, "01")}][note {note_lookup_selector(note_frame_list, 13, "02")}][note {note_lookup_selector(note_frame_list, 13, "03")}][note {note_lookup_selector(note_frame_list, 13, "08")}]')
+title_note_t13 <-  glue('[note {note_lookup_selector(note_frame_list, 13, "01")}][note {note_lookup_selector(note_frame_list, 13, "02")}][note {note_lookup_selector(note_frame_list, 13, "03")}][note {note_lookup_selector(note_frame_list, 13, "08")}][note {note_lookup_selector(note_frame_list, 13, "09")}][note {note_lookup_selector(note_frame_list, 13, "11")}][note {note_lookup_selector(note_frame_list, 13, "12")}][note {note_lookup_selector(note_frame_list, 13, "10")}][note {note_lookup_selector(note_frame_list, 13, "13")}]')
 t13_col_change <- c(3, 4, 6, 8, 9, 10, 12, 13)
 new_t13_cols <- c(glue('Divorce cases started\n[note {note_lookup_selector(note_frame_list, 13, "08")}]'),
                   glue('Cases reaching conditional order to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]'),
