@@ -833,8 +833,8 @@ na_adder(wb = template,
 na_adder(wb = template,
          sheet = 'Table_23',
          value = ":",
-         cols = 6,
-         lengths = 1,
+         cols = c(6, 12),
+         lengths = c(1, 1),
          start_row = t24_start + 7)
 
 
