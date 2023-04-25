@@ -30,6 +30,7 @@ timeperiod_col <- data.frame(c(paste0("2006 - ", pub_year, " (", pub_months_shor
                            paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
+                           paste0("2022 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2022 - ", pub_year, " (", pub_months_short, ")"),
@@ -68,7 +69,7 @@ openxlsx::addStyle(wb = template,
 openxlsx::writeData(wb = template,
                     sheet = 'Index',
                     x = timeperiod_col,
-                    startRow = 6,
+                    startRow = 7,
                     startCol = 4,
                     colNames = F)
 
@@ -76,5 +77,5 @@ openxlsx::writeData(wb = template,
 openxlsx::writeData(wb = template,
                     sheet = 'Index',
                     x = publish_dates,
-                    startRow = 40,
+                    startRow = 41,
                     colNames = F)

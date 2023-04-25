@@ -7,6 +7,7 @@ t4_years <- child_act_csv %>% filter(Year <= annual_year, !is.na(Year)) %>% dist
 
 # Selecting final four quarters only
 t4_quarter <- child_act_csv %>% distinct(Year, Qtr) %>% 
+  arrange(Year, Qtr) %>% 
   filter(!is.na(Year), Qtr != '') %>% tail(4)
 
 

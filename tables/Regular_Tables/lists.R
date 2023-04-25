@@ -9,6 +9,9 @@ dropdown4_df <- data.frame(c("Order count", "Children count"))
 # table 10
 dropdown10_df <- data.frame(c("Adoption", "Divorce (incl. annulment and FR)", "Domestic Violence", "Financial Remedy", "Private Law", "Public Law"))
 
+# table 10b
+dropdown10b_df <- data.frame(c("All", "Sole", "Joint"))
+
 # table 11
 dropdown11_df <- data.frame(c("Adoption", "Divorce (incl. FR)", "Domestic Violence", "Financial Remedy", "Private Law", "Public Law"))
 
@@ -18,7 +21,7 @@ dropdown12b_df <- tibble(c("All", "Paper", "Digital"))
 
 # table 12b
 dropdown12b_a_df <- tibble(c("All", "Joint", "Sole"))
-dropdown12b_b_df <- tibble(c("Divorce", "Civil Partnership", "Divorce and Civil Partnership"))
+dropdown12b_b_df <- tibble(c("Divorce and Civil Partnership", "Divorce", "Civil Partnership"))
 
 #table 16
 dropdown16_df <- tibble(c('All', 'Exparte', 'On notice'))
@@ -80,6 +83,21 @@ openxlsx::writeData(wb = template,
                     x = 'Adoption',
                     startRow = t10_list_row,
                     startCol = t10_list_col)
+
+# table 10b ###############################
+list_add(wb = template,
+         sheet = 'Table_10b',
+         list = dropdown10b_df,
+         listRow = t10b_list_row,
+         listCol = t10b_list_col,
+         startRow = t10b_start,
+         startCol = t10b_col_length + 1)
+
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_10b',
+                    x = 'All',
+                    startRow = t10b_list_row,
+                    startCol = t10b_list_col)
 
 # table 11 #############################
 list_add(wb = template,
@@ -150,7 +168,7 @@ openxlsx::writeData(wb = template,
 
 openxlsx::writeData(wb = template,
                     sheet = 'Table_12b',
-                    x = 'Divorce',
+                    x = 'Divorce and Civil Partnership',
                     startRow = t12b_list_b_row,
                     startCol = t12b_list_col)
 

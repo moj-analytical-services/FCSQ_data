@@ -16,7 +16,6 @@ colnames(t23_accessible) <- paste('Registered applications', c('Year',
                               'Case Subtype: Health and welfare',
                               'Gender of Donor: Female',
                               'Gender of Donor: Male',
-                              'Gender of Donor: Other',
                               'Gender of Donor: Unknown',
                               'Age of Donor: 18-24',
                               'Age of Donor: 25-34',
@@ -26,10 +25,9 @@ colnames(t23_accessible) <- paste('Registered applications', c('Year',
                               'Age of Donor: 65-74',
                               'Age of Donor: 75-84',
                               'Age of Donor: 85+',
-                              'Age of Donor: Other',
                               'Age of Donor: Unknown',
                               'Total registered applications',
                               'Number of deputyships appointed'
 ), sep = ' - ') 
 
-colnames(t23_accessible)[c(1, 2, 22)] <- c('Year', 'Quarter', 'Number of deputyships appointed')
+colnames(t23_accessible)[c(1, 2, 20)] <- c('Year', 'Quarter', 'Number of deputyships appointed')

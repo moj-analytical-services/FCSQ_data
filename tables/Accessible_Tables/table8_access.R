@@ -10,6 +10,6 @@ t8_accessible <- full_t8 %>% transmute(Year = Year,
                                        `Median disposal duration (weeks)` = Median_duration,
                                        `Cases disposed in 26 weeks` = Disposed_in_26_weeks) %>% 
   mutate(across(3:ncol(.), function(x){
-    case_when(Year == 2022 ~ na_value,
+    case_when(Year >= 2022 ~ na_value,
               TRUE ~ x)
   }))

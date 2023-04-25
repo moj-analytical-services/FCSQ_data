@@ -333,6 +333,7 @@ table3_header <- function(wb, sheet, heading, start_row, start_col){
   # Last four quarters
   t3_qtr_head <- child_act_csv %>% distinct(Year, Qtr) %>% 
     filter(!is.na(Year), Qtr != '') %>% mutate(Quarter = paste0(Year, " Q", Qtr)) %>% 
+    arrange(Year, Quarter) %>% 
     tail(4) %>% pull(-1)
   
   #Combining and taking the transpose to have in row format
@@ -400,6 +401,13 @@ table3_header <- function(wb, sheet, heading, start_row, start_col){
                      cols = start_col + t3_years,
                      stack = T,
                      gridExpand = T)
+  
+  #Adjusting widths in blank columns
+  blank_cols <- c(start_col + num_years, start_col + num_years + 5, start_col + 2 * num_years + 6)
+  openxlsx::setColWidths(wb = wb,
+                         sheet = sheet,
+                         cols = blank_cols,
+                         widths = 1.8)
   
   #Remove gridlines from sheet
   openxlsx::showGridLines(wb = wb,

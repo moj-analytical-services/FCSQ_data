@@ -28,6 +28,7 @@ source(paste0(path_to_project, "footnotes.R"))
 source(paste0(path_to_project, "Regular_Tables/table3_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table4_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table10_reg.R"))
+source(paste0(path_to_project, "Regular_Tables/table10b_reg.R"))
 source(paste0(path_to_project, "Regular_Tables/table11_reg.R"))
 
 # Now data frames for the non formula tables are added into the excel workbook.
@@ -51,7 +52,7 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # the start row of the data
-t1_start <- 7
+t1_start <- 9
 
 # Adjusting row height for notes. Actual footnotes do not start until row 5 
 t1_note_heights <- rep(14.3, length(notes1))
@@ -67,6 +68,8 @@ write_formatted_table(workbook = template,
                       note_row_heights = t1_note_heights)
 
 # Adding expressions for missing values. As these are strings they have to be added separately from the numbers
+
+#Blocking before years before 2011 for some categories
 na_cols <- c(3, 4, 7, 10, 11, 13, 14, 17, 20, 21)
 na_adder(wb = template,
          sheet = 'Table_1',
@@ -75,6 +78,7 @@ na_adder(wb = template,
          lengths = rep(5, length(na_cols)),
          start_row = t1_start)
 
+#Blocking forced marriage and female genital mutilation
 na_cols_fmpo_fgm <- c(8, 9, 18, 19)
 na_adder(wb = template,
          sheet = 'Table_1',
@@ -89,6 +93,41 @@ na_adder(wb = template,
          cols = c(9, 19),
          lengths = c(18, 18),
          start_row = t1_start + nrow(t1_reg_year))
+
+#Temporary Data Quality Issues blocked
+
+#Adoption Starts and Total Case Starts - Yearly
+na_adder(wb = template,
+         sheet = 'Table_1',
+         value = ":",
+         cols = c(10, 11),
+         lengths = rep(nrow(t1_reg_year) - 16, 2),
+         start_row = t1_start + 16)
+
+#Adoption Starts and Total Case Starts - Quarterly
+na_adder(wb = template,
+         sheet = 'Table_1',
+         value = ":",
+         cols = c(10, 11),
+         lengths = rep(nrow(t1_reg_qtr) - 47, 2),
+         start_row = t1_start + nrow(t1_reg_year) + 47)
+
+#Public Law and Total Cases Disposed - Annually
+na_adder(wb = template,
+         sheet = 'Table_1',
+         value = ":",
+         cols = c(13, 21),
+         lengths = rep(nrow(t1_reg_year) - 16, 2),
+         start_row = t1_start + 16)
+
+#Public Law and Total Cases Disposed - Quarterly
+na_adder(wb = template,
+         sheet = 'Table_1',
+         value = ":",
+         cols = c(13, 21),
+         lengths = rep(nrow(t1_reg_qtr) - 46, 2),
+         start_row = t1_start + nrow(t1_reg_year) + 46)
+
 
 
 ####################################################################
@@ -106,7 +145,7 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # setting start row and note heights
-t2_start <- 9
+t2_start <- 11
 t2_note_heights <- rep(14.3, length(notes2))
 t2_note_heights[5] = 21.8
 
@@ -119,7 +158,25 @@ write_formatted_table(workbook = template,
                       quarterly_format = c(2),
                       note_row_heights = t2_note_heights)
 
-# Block on disposals from 2022 onward data due to CCD affecting public law
+# Data Quality Issues block
+
+# Block on public law orders made and cases disposed - Annually
+na_adder(wb = template,
+         sheet = 'Table_2',
+         value = ':',
+         cols = c(8, 9, 10),
+         lengths = rep(nrow(t2_reg_year) - 11, 3),
+         start_row = t2_start + 11)
+
+# Block on public law orders made and cases disposed - Quarterly
+na_adder(wb = template,
+         sheet = 'Table_2',
+         value = ':',
+         cols = c(8, 10),
+         lengths = rep(nrow(t2_reg_qtr) - 46, 2),
+         start_row = t2_start + nrow(t2_reg_year) + 46)
+
+# Block on public law disposals from 2022 onward data due to CCD affecting public law - Quarterly
 na_adder(wb = template,
          sheet = 'Table_2',
          value = ':',
@@ -180,7 +237,7 @@ write_formatted_table(workbook = template,
 ####################################################################
 # Loads and writes the data
 source(paste0(path_to_project, "Regular_Tables/table7_reg.R"))
-t7_start <- 8
+t7_start <- 10
 
 openxlsx::writeData(wb = template,
                     sheet = 'Table_7',
@@ -196,6 +253,25 @@ write_formatted_table(workbook = template,
                       starting_row = t7_start, 
                       quarterly_format = c(2))
 
+# Data Quality Issues
+
+#Public Law High Court - Annually
+na_adder(wb = template,
+         sheet = 'Table_7',
+         value = ':',
+         cols = c(4, 5, 6),
+         lengths = rep(nrow(t7_reg_year) - 11, 3),
+         start_row = t7_start + 11)
+
+#Public Law High Court - Quarterly
+na_adder(wb = template,
+         sheet = 'Table_7',
+         value = ':',
+         cols = c(4, 5, 6),
+         lengths = rep(nrow(t7_reg_qtr) - 46, 3),
+         start_row = t7_start + nrow(t7_reg_year) + 46)
+
+
 ####################################################################
 #Care and Supervision
 #Table 8
@@ -203,7 +279,7 @@ write_formatted_table(workbook = template,
 ####################################################################
 # Loads and writes the data
 source(paste0(path_to_project, "Regular_Tables/table8_reg.R"))
-t8_start <- 6
+t8_start <- 8
 t8_row_heights <- rep(15, length(notes8))
 t8_row_heights[c(5, 6, 7, 8)] <- c(46.5, 25.5, 37.5, 25.5)
 
@@ -221,6 +297,14 @@ write_formatted_table(workbook = template,
                       starting_row = t8_start, 
                       quarterly_format = c(2),
                       note_row_heights = t8_row_heights)
+
+# Block on disposals from 2022 onward data due to CCD affecting Public Law - Annually
+na_adder(wb = template,
+         sheet = 'Table_8',
+         value = ':',
+         cols = c(3, 4, 5, 6),
+         lengths = rep(nrow(t8_reg_year) - 11, 4),
+         start_row = t8_start + 11)
 
 # Block on disposals from 2022 onward data due to CCD affecting Public Law - Quarterly
 na_adder(wb = template,
@@ -338,7 +422,7 @@ write_formatted_table(workbook = template,
                       tables = list(t12b_reg_qtr), 
                       notes = notes12b, 
                       starting_row = t12b_start, 
-                      quarterly_format = c(1),
+                      quarterly_format = c(2),
                       note_row_heights = t12b_row_heights)
 
 
@@ -366,6 +450,30 @@ write_formatted_table(workbook = template,
                       starting_row = t13_start, 
                       quarterly_format = c(2),
                       note_row_heights = t13_row_heights)
+
+# Block hearings from 2022 Q2
+na_adder(wb = template,
+         sheet = 'Table_13',
+         value = ':',
+         cols = c(17, 18),
+         lengths = rep(nrow(t13_reg_qtr) - 45, 2),
+         start_row = t13_start + nrow(t13_reg_year) + 45)
+
+# Block hearings from 2022
+na_adder(wb = template,
+         sheet = 'Table_13',
+         value = ':',
+         cols = c(17, 18),
+         lengths = rep(nrow(t13_reg_year) - 19, 2),
+         start_row = t13_start + 19)
+
+# Block FR from 2022 Q3 onwards
+na_adder(wb = template,
+         sheet = 'Table_13',
+         value = '-',
+         cols = c(11, 12, 14, 15),
+         lengths = rep(nrow(t13_reg_qtr) - 46, 4),
+         start_row = t13_start + nrow(t13_reg_year) + 46)
 
 # Note that the old Table 14 got removed. 
 # This means that from here each table while retaining the same number variable wise is in the sheet before the table number
@@ -513,7 +621,7 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # data
-t19_start <- 8
+t19_start <- 10
 t19_row_heights <- rep(15, length(notes19))
 t19_row_heights[[11]] <- 24.75
 write_formatted_table(workbook = template, 
@@ -523,6 +631,25 @@ write_formatted_table(workbook = template,
                       starting_row = t19_start, 
                       quarterly_format = c(2),
                       note_row_heights = t19_row_heights)
+
+#Data Quality Issues
+
+#Adoption Placement Order Applications blocked
+na_adder(wb = template,
+         sheet = 'Table_18',
+         value = ':',
+         cols = c(10, 13, 14),
+         lengths = rep(nrow(t19_reg_qtr) - 47, 3),
+         start_row = t19_start + nrow(t19_reg_year) + 47)
+
+
+na_adder(wb = template,
+         sheet = 'Table_18',
+         value = ':',
+         cols = c(10, 13, 14),
+         lengths = rep(nrow(t19_reg_year) - 11, 3),
+         start_row = t19_start + 11)
+
 
 ####################################################################
 #Adoption Orders
@@ -626,7 +753,7 @@ openxlsx::writeData(wb = template,
 t23_start <- 9
 
 t23_row_heights <- rep(15, length(notes23))
-t23_row_heights[[6]] <- 23.25
+t23_row_heights[c(6, 8, 10)] <- c(23.25, 21, 21)
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_22', 
                       tables = list(t23_reg_year, t23_reg_qtr), 
@@ -647,9 +774,18 @@ na_formatter(wb = template,
 na_adder(wb = template,
          sheet = 'Table_22',
          value = ':',
-         cols = 27,
+         cols = 25,
          lengths = nrow(t23_reg_qtr) - 57,
          start_row = t23_start + nrow(t23_reg_year) + 57)
+
+# Block deputyships from 2022
+na_adder(wb = template,
+         sheet = 'Table_22',
+         value = ':',
+         cols = 25,
+         lengths = nrow(t23_reg_year) - 14,
+         start_row = t23_start + 14)
+
 
 
 ####################################################################
@@ -681,17 +817,26 @@ write_formatted_table(workbook = template,
 na_adder(wb = template,
          sheet = 'Table_23',
          value = "-",
-         cols = c(3, 4, 5),
-         lengths = rep(7, 3),
+         cols = c(3, 4, 5, 6, 12),
+         lengths = rep(7, 5),
          start_row = t24_start)
 
 # Contested Probate NA
 na_adder(wb = template,
          sheet = 'Table_23',
          value = "-",
-         cols = 15,
+         cols = 17,
          lengths = nrow(t24_reg_qtr_a) + nrow(t24_reg_qtr_b),
          start_row = t24_start + nrow(t24_reg_year))
+
+# Grants resealed NA
+na_adder(wb = template,
+         sheet = 'Table_23',
+         value = ":",
+         cols = c(6, 12),
+         lengths = c(1, 1),
+         start_row = t24_start + 7)
+
 
 ####################################################################
 #Probate Timeliness
@@ -709,7 +854,7 @@ openxlsx::writeData(wb = template,
 # data
 
 t25_row_heights <- rep(15, length(notes25))
-t25_row_heights[c(8,9)] <- c(16.5, 23.25)
+t25_row_heights[c(6, 8, 9)] <- c(21.4, 21.4, 23.25)
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_24', 
                       tables = list(t25_reg_year, t25_reg_qtr_a, t25_reg_qtr_b), 

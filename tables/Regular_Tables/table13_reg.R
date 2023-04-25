@@ -43,22 +43,21 @@ div_prog_hearing_num_year <- divorce_progress_csv %>%
   group_by(Year) %>% 
   summarise(hearing_num = sum_na(Number))
 
-# Injunction Application Number
-div_prog_injapp_num_year <- divorce_progress_csv %>% 
-  filter(Stage == 'Injunction Application') %>% 
-  group_by(Year) %>% 
-  summarise(injapp_num = sum_na(Number))
-
-# Injunction Order Number
-div_prog_injord_num_year <- divorce_progress_csv %>% 
-  filter(Stage == 'Injunction Order') %>% 
-  group_by(Year) %>% 
-  summarise(injord_num = sum_na(Number))
+# # Injunction Application Number
+# div_prog_injapp_num_year <- divorce_progress_csv %>% 
+#   filter(Stage == 'Injunction Application') %>% 
+#   group_by(Year) %>% 
+#   summarise(injapp_num = sum_na(Number))
+# 
+# # Injunction Order Number
+# div_prog_injord_num_year <- divorce_progress_csv %>% 
+#   filter(Stage == 'Injunction Order') %>% 
+#   group_by(Year) %>% 
+#   summarise(injord_num = sum_na(Number))
 
 #Gathering and joining
 div_prog_annual_tables <- list(div_prog_cases_year, div_prog_nisi_num_year, div_prog_abs_num_year,
-                               div_prog_arapp_num_year, div_prog_arord_num_year, div_prog_hearing_num_year,
-                               div_prog_injapp_num_year, div_prog_injord_num_year)
+                               div_prog_arapp_num_year, div_prog_arord_num_year, div_prog_hearing_num_year)
 
 div_prog_joined_year <- reduce(div_prog_annual_tables, left_join, by = 'Year')
 
@@ -82,13 +81,7 @@ t13_reg_year <- div_prog_joined_year %>%
             arord_perc = arord_num/div_case_start,
             blank5 = NA,
             hearing_num,
-            hearing_perc = hearing_num/div_case_start,
-            blank6  = NA,
-            injapp_num,
-            injapp_perc = injapp_num/div_case_start,
-            blank7 = NA,
-            injord_num,
-            injord_perc = injord_num/div_case_start
+            hearing_perc = hearing_num/div_case_start
             ) %>% 
   mutate(across(where(is.numeric), ~replace_na(.x, 0))) 
   
@@ -131,22 +124,21 @@ div_prog_hearing_num_qtr <- divorce_progress_csv %>% filter(Year >= 2011) %>%
   group_by(Year, Quarter) %>% 
   summarise(hearing_num = sum_na(Number))
 
-# Injunction Application Number
-div_prog_injapp_num_qtr <- divorce_progress_csv %>% filter(Year >= 2011) %>% 
-  filter(Stage == 'Injunction Application') %>% 
-  group_by(Year, Quarter) %>% 
-  summarise(injapp_num = sum_na(Number))
-
-# Injunction Order Number
-div_prog_injord_num_qtr <- divorce_progress_csv %>% filter(Year >= 2011) %>% 
-  filter(Stage == 'Injunction Order') %>% 
-  group_by(Year, Quarter) %>% 
-  summarise(injord_num = sum_na(Number))
+# # Injunction Application Number
+# div_prog_injapp_num_qtr <- divorce_progress_csv %>% filter(Year >= 2011) %>% 
+#   filter(Stage == 'Injunction Application') %>% 
+#   group_by(Year, Quarter) %>% 
+#   summarise(injapp_num = sum_na(Number))
+# 
+# # Injunction Order Number
+# div_prog_injord_num_qtr <- divorce_progress_csv %>% filter(Year >= 2011) %>% 
+#   filter(Stage == 'Injunction Order') %>% 
+#   group_by(Year, Quarter) %>% 
+#   summarise(injord_num = sum_na(Number))
 
 #Gathering and joining
 div_prog_qtr_tables <- list(div_prog_cases_qtr, div_prog_nisi_num_qtr, div_prog_abs_num_qtr,
-                               div_prog_arapp_num_qtr, div_prog_arord_num_qtr, div_prog_hearing_num_qtr,
-                               div_prog_injapp_num_qtr, div_prog_injord_num_qtr)
+                               div_prog_arapp_num_qtr, div_prog_arord_num_qtr, div_prog_hearing_num_qtr)
 
 div_prog_joined_qtr <- reduce(div_prog_qtr_tables, left_join, by = c('Year', 'Quarter'))
 
@@ -169,13 +161,7 @@ t13_reg_qtr <- div_prog_joined_qtr %>%
             arord_perc = arord_num/div_case_start,
             blank5 = NA,
             hearing_num,
-            hearing_perc = hearing_num/div_case_start,
-            blank6  = NA,
-            injapp_num,
-            injapp_perc = injapp_num/div_case_start,
-            blank7 = NA,
-            injord_num,
-            injord_perc = injord_num/div_case_start
+            hearing_perc = hearing_num/div_case_start
   ) %>% 
   mutate(across(where(is.numeric), ~replace_na(.x, 0))) 
 

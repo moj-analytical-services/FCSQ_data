@@ -6,7 +6,6 @@ cover_df <- tribble(
   ~"Subsection title", ~"Subsection body",
   "Description", "Statistics on the types and volume of cases that have passed through the Family Court in an accessible format",
   "Public Law Data issues to note", "As a result of Reform for Family Public Law, there are data issues that affect a number of data series (across Tables 2, 4a,  8, 10 and 11). Please refer to the 'Data Quality issues' section of the accompanying bulletin for further details",
-   "Financial Remedy Data issues to note", "As a result of moving to a more robust data source of FamilyMan (for paper cases) and Core Case Data (CCD, for digital cases) for financial remedy, we are unable to provide FR timeliness data from Q4 2021. We are working to add this information as soon as possible.",
   "Format", "A set of tables, all in an accessible format. Each tab contains only one table each. The data for what is Tables 3 and 4 in the regular tables contains two separate counts so are split into Tables 3a, 3b, 4a and 4b respectively",
   "Publication dates", glue("This data was originally published at 9:30am on {pub_date}. The next publication will be published at 9:30 am on {next_pub_date}."),
   "Contact details", "Carly Gray\nHead of Access to Justice Data and Statistics\nPhone Number: 0778 427 5495",
@@ -25,6 +24,7 @@ table_sources_access <- c("HMCTS FamilyMan and Core Case Data",
              "HMCTS FamilyMan",
              "HMCTS FamilyMan",
              "HMCTS FamilyMan and Core Case Data",
+             "HMCTS Core Case Data",
              "HMCTS FamilyMan and Core Case Data",
              "HMCTS FamilyMan and Core Case Data",
              "HMCTS Core Case Data",
@@ -56,7 +56,8 @@ contents_df <- tribble(
   "Table_7", "Number of Public and Private (Children Act) cases started in England and Wales by High court indicator and area",
   "Table_8", "Summary statistics on the time to first definitive disposal for care proceedings in the Family courts of England and Wales",
   "Table_9", "Summary statistics on the timeliness of Private law cases from issue to final order in the Family courts of England and Wales",
-  "Table_10", "Number of disposals and average time to first definitve disposal in courts in England and Wales by case type and legal representaion of parties",
+  "Table_10", "Number of disposals and average time to first definitive disposal in courts in England and Wales by case type and legal representaion of parties",
+  "Table_10b", "Number of disposals and average time to first definitive disposal in courts in England and Wales by new divorce case type and legal representaion of parties",
   "Table_11", "Legal representation status of applicants and respondents in cases with at least one hearing in Family courts in England and Wales",
   "Table_12", "Number of cases relating to matrimonial proceedings (including civil partnerships), with selected average times, in England and Wales",
   "Table_12b", "Number of cases relating to matrimonial proceedings (including civil partnerships), for New Divorce Law, in England and Wales",
@@ -78,7 +79,7 @@ contents_df <- tribble(
 
 # Adding Sources. timeperiod from index page
 timeperiods_all <- c(timeperiod1, timeperiod2, timeperiod3, timeperiod3, timeperiod4, timeperiod4,
-                     timeperiod5, timeperiod6, timeperiod7, timeperiod8, timeperiod9, timeperiod10,
+                     timeperiod5, timeperiod6, timeperiod7, timeperiod8, timeperiod9, timeperiod10, timeperiod10b,
                      timeperiod11, timeperiod12, timeperiod12b, timeperiod13, timeperiod15, timeperiod16,
                      timeperiod17, timeperiod18, timeperiod19, timeperiod20, timeperiod21, timeperiod22, timeperiod23, timeperiod24, timeperiod25)
 
@@ -137,6 +138,7 @@ fcsq_a11y <- create_a11ytable(
     t8_accessible,
     t9_accessible,
     t10_accessible,
+    t10b_accessible,
     t11_accessible,
     t12_accessible,
     t12b_accessible,

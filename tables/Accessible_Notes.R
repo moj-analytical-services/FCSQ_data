@@ -9,31 +9,33 @@ names(note_frame_list) <- table_numbers
 
 # Table 1
 # Note to add into title
-title_note_t1 <- glue('[note {note_lookup_selector(note_frame_list, 1, "01")}]')
+title_note_t1 <- glue('[note {note_lookup_selector(note_frame_list, 1, "01")}][note {note_lookup_selector(note_frame_list, 1, "11")}]')
 
 # Modifying columns to have notes in them
-t1_col_change <- c(3, 6, 7, 9, 10, 11)
+t1_col_change <- c(3, 6, 7, 9, 10, 11, 12)
 new_t1_cols <- c(glue('Stage\n[note {note_lookup_selector(note_frame_list, 1, "02")}]'),
                  glue('Matrimonial Matters\n[note {note_lookup_selector(note_frame_list, 1, "08")}]'),
                  glue('Financial Remedies\n[note {note_lookup_selector(note_frame_list, 1, "03")}]'),
                  glue('Forced Marriage Protection\n[note {note_lookup_selector(note_frame_list, 1, "04")}]'),
                  glue('Female Genital Mutilation Protection\n[note {note_lookup_selector(note_frame_list, 1, "09")}]'),
-                 glue('Adoption\n[note {note_lookup_selector(note_frame_list, 1, "05")}]')
+                 glue('Adoption\n[note {note_lookup_selector(note_frame_list, 1, "05")}][note {note_lookup_selector(note_frame_list, 1, "11")}]'),
+                 glue('Total\n[note {note_lookup_selector(note_frame_list, 1, "11")}]')
+                 
 )
 
 t1_accessible <- t1_accessible %>% add_col_notes(table_num = 1, col_nums = t1_col_change, new_cols = new_t1_cols)
 
 # Table 2
-title_note_t2 <- glue('[note {note_lookup_selector(note_frame_list, 2, "01")}][note {note_lookup_selector(note_frame_list, 2, "02")}]')
+title_note_t2 <- glue('[note {note_lookup_selector(note_frame_list, 2, "01")}][note {note_lookup_selector(note_frame_list, 2, "02")}][note {note_lookup_selector(note_frame_list, 2, "13")}]')
 t2_col_change <- c(1, 4, 5, 6, 7, 8, 9, 10)
 new_t2_cols <- c(glue('Category\n[note {note_lookup_selector(note_frame_list, 2, "03")}]'),
   glue('Individual children involved in Applications\n[note {note_lookup_selector(note_frame_list, 2, "04")}][note {note_lookup_selector(note_frame_list, 2, "05")}]'),
   glue('Applications made\n[note {note_lookup_selector(note_frame_list, 2, "06")}]'),
   glue('Total orders applied for\n[note {note_lookup_selector(note_frame_list, 2, "07")}]'),
   glue('Cases starting\n[note {note_lookup_selector(note_frame_list, 2, "08")}]'),
-  glue('Orders made\n[note {note_lookup_selector(note_frame_list, 2, "09")}]'),
-  glue('Disposals made\n[note {note_lookup_selector(note_frame_list, 2, "09")}]'),
-  glue('Cases disposed\n[note {note_lookup_selector(note_frame_list, 2, "08")}][note {note_lookup_selector(note_frame_list, 2, "11")}]')
+  glue('Orders made\n[note {note_lookup_selector(note_frame_list, 2, "09")}][note {note_lookup_selector(note_frame_list, 2, "13")}]'),
+  glue('Disposals made\n[note {note_lookup_selector(note_frame_list, 2, "09")}][note {note_lookup_selector(note_frame_list, 2, "13")}]'),
+  glue('Cases disposed\n[note {note_lookup_selector(note_frame_list, 2, "08")}][note {note_lookup_selector(note_frame_list, 2, "11")}][note {note_lookup_selector(note_frame_list, 2, "13")}]')
   
 )
 
@@ -100,9 +102,11 @@ t6_accessible <- t6_accessible %>% add_col_notes(table_num = 6, col_nums = t6_co
 # Table 7
 title_note_t7 <- glue('[note {note_lookup_selector(note_frame_list, 7, "01")}]')
 
-t7_col_change <- c(1, 6)
+t7_col_change <- c(1, 5, 6, 7)
 new_t7_cols <- c(glue('Category\n[note {note_lookup_selector(note_frame_list, 7, "02")}]'),
-                 glue('High Court cases started in Central London DFJ\n[note {note_lookup_selector(note_frame_list, 7, "03")}]')
+                 glue('Total cases started indicated as High Court\n[note {note_lookup_selector(note_frame_list, 7, "05")}]'),
+                 glue('High Court cases started in Central London DFJ\n[note {note_lookup_selector(note_frame_list, 7, "03")}]'),
+                 glue('High Court cases started outside Central London DFJ\n[note {note_lookup_selector(note_frame_list, 7, "05")}]')
 )
 
 t7_accessible <- t7_accessible %>% add_col_notes(table_num = 7, col_nums = t7_col_change, new_cols = new_t7_cols)
@@ -143,6 +147,19 @@ new_t10_cols <- c(glue('Category\n[notes {note_lookup_selector(note_frame_list, 
 
 t10_accessible <- t10_accessible %>% add_col_notes(table_num = 10, col_nums = t10_col_change, new_cols = new_t10_cols)
 
+#Table 10b
+title_note_t10b <- glue('[note {note_lookup_selector(note_frame_list, "10b", "01")}][note {note_lookup_selector(note_frame_list, "10b", "04")}][note {note_lookup_selector(note_frame_list, "10b", "05")}][note {note_lookup_selector(note_frame_list, "10b", "06")}]')
+t10b_col_change <- c(1, 5, 7, 9, 11, 13)
+new_t10b_cols <- c(glue('Category\n[note {note_lookup_selector(note_frame_list, "10b", "01")}]'),
+                   glue('Both Applicant and Respondent - Mean duration in weeks\n[note {note_lookup_selector(note_frame_list, "10b", "02")}][note {note_lookup_selector(note_frame_list, "10b", "03")}]'),
+                   glue('Applicant only - Mean duration in weeks\n[note {note_lookup_selector(note_frame_list, "10b", "02")}][note {note_lookup_selector(note_frame_list, "10b", "03")}]'),
+                   glue('Respondent only - Mean duration in weeks\n[note {note_lookup_selector(note_frame_list, "10b", "02")}][note {note_lookup_selector(note_frame_list, "10b", "03")}]'),
+                   glue('Neither Applicant nor Respondent - Mean duration in weeks\n[note {note_lookup_selector(note_frame_list, "10b", "02")}][note {note_lookup_selector(note_frame_list, "10b", "03")}]'),
+                   glue('All types of representation - Mean duration in weeks\n[note {note_lookup_selector(note_frame_list, "10b", "02")}][note {note_lookup_selector(note_frame_list, "10b", "03")}]')
+                   )
+
+t10b_accessible <- t10b_accessible %>% add_col_notes(table_num = '10b', col_nums = t10b_col_change, new_cols = new_t10b_cols)
+
 # Table 11
 title_note_t11 <- glue('[note {note_lookup_selector(note_frame_list, 11, "01")}][note {note_lookup_selector(note_frame_list, 11, "02")}][note {note_lookup_selector(note_frame_list, 11, "03")}]')
 t11_col_change <- c(1, 7, 9)
@@ -177,18 +194,16 @@ new_t12b_cols <- c(glue('Application Type\n[note {note_lookup_selector(note_fram
 t12b_accessible <- t12b_accessible %>% add_col_notes(table_num = '12b', col_nums = t12b_col_change, new_cols = new_t12b_cols)
 
 # Table 13
-title_note_t13 <-  glue('[note {note_lookup_selector(note_frame_list, 13, "01")}][note {note_lookup_selector(note_frame_list, 13, "02")}][note {note_lookup_selector(note_frame_list, 13, "03")}][note {note_lookup_selector(note_frame_list, 13, "08")}]')
-t13_col_change <- c(3, 4, 6, 8, 9, 10, 12, 13, 14, 16)
+title_note_t13 <-  glue('[note {note_lookup_selector(note_frame_list, 13, "01")}][note {note_lookup_selector(note_frame_list, 13, "02")}][note {note_lookup_selector(note_frame_list, 13, "03")}][note {note_lookup_selector(note_frame_list, 13, "08")}][note {note_lookup_selector(note_frame_list, 13, "09")}][note {note_lookup_selector(note_frame_list, 13, "11")}][note {note_lookup_selector(note_frame_list, 13, "12")}][note {note_lookup_selector(note_frame_list, 13, "10")}][note {note_lookup_selector(note_frame_list, 13, "13")}]')
+t13_col_change <- c(3, 4, 6, 8, 9, 10, 12, 13)
 new_t13_cols <- c(glue('Divorce cases started\n[note {note_lookup_selector(note_frame_list, 13, "08")}]'),
-                  glue('Cases reaching decree nisi to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]'),
-                  glue('Cases reaching decree absolute to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]'),
+                  glue('Cases reaching conditional order to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]'),
+                  glue('Cases reaching final order to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]'),
                   glue('Cases reaching a financial remedy application to date\n[note {note_lookup_selector(note_frame_list, 13, "04")}][note {note_lookup_selector(note_frame_list, 13, "05")}][note {note_lookup_selector(note_frame_list, 13, "07")}]'),
                   glue('% of divorce cases started reaching a financial remedy application\n[note {note_lookup_selector(note_frame_list, 13, "04")}][note {note_lookup_selector(note_frame_list, 13, "05")}]'),
                   glue('Cases reaching a financial remedy disposal to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]'),
                   glue('Cases reaching a hearing to date\n[note {note_lookup_selector(note_frame_list, 13, "06")}][note {note_lookup_selector(note_frame_list, 13, "07")}]'),
-                  glue('% of divorce cases started reaching a hearing\n[note {note_lookup_selector(note_frame_list, 13, "06")}]'),
-                  glue('Cases reaching an injunction application to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]'),
-                  glue('Cases reaching an injunction order to date\n[note {note_lookup_selector(note_frame_list, 13, "07")}]')
+                  glue('% of divorce cases started reaching a hearing\n[note {note_lookup_selector(note_frame_list, 13, "06")}]')
                   )
 
 t13_accessible <- t13_accessible %>% add_col_notes(table_num = 13, col_nums = t13_col_change, new_cols = new_t13_cols)
@@ -349,14 +364,13 @@ t22_accessible <- t22_accessible %>% add_col_notes(table_num = 22, col_nums = t2
 
 # Table 23
 title_note_t23 <- glue('[note {note_lookup_selector(note_frame_list, 23, "01")}]')
-t23_col_change <- c(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22)
+t23_col_change <- c(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20)
 new_t23_cols <- c(glue('Registered applications - Application Type: Enduring Power of Attorney\n[note {note_lookup_selector(note_frame_list, 23, "03")}]'),
                   glue('Registered applications - Application Type: Lasting Power of Attorney\n[note {note_lookup_selector(note_frame_list, 23, "04")}]'),
                   glue('Registered applications - Case Subtype: Property and finance\n[note {note_lookup_selector(note_frame_list, 23, "05")}]'),
                   glue('Registered applications - Case Subtype: Health and welfare\n[note {note_lookup_selector(note_frame_list, 23, "05")}]'),
                   glue('Registered applications - Gender of Donor: Female\n[note {note_lookup_selector(note_frame_list, 23, "06")}][note {note_lookup_selector(note_frame_list, 23, "07")}]'),
                   glue('Registered applications - Gender of Donor: Male\n[note {note_lookup_selector(note_frame_list, 23, "06")}][note {note_lookup_selector(note_frame_list, 23, "07")}]'),
-                  glue('Registered applications - Gender of Donor: Other\n[note {note_lookup_selector(note_frame_list, 23, "06")}][note {note_lookup_selector(note_frame_list, 23, "07")}]'),
                   glue('Registered applications - Gender of Donor: Unknown\n[note {note_lookup_selector(note_frame_list, 23, "06")}][note {note_lookup_selector(note_frame_list, 23, "07")}][note {note_lookup_selector(note_frame_list, 23, "08")}]'),
                   glue('Registered applications - Age of Donor: 18-24\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
                   glue('Registered applications - Age of Donor: 25-34\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
@@ -366,7 +380,6 @@ new_t23_cols <- c(glue('Registered applications - Application Type: Enduring Pow
                   glue('Registered applications - Age of Donor: 65-74\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
                   glue('Registered applications - Age of Donor: 75-84\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
                   glue('Registered applications - Age of Donor: 85+\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
-                  glue('Registered applications - Age of Donor: Other\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}][note {note_lookup_selector(note_frame_list, 23, "11")}]'),
                   glue('Registered applications - Age of Donor: Unknown\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
                   glue('Number of deputyships appointed\n[note {note_lookup_selector(note_frame_list, 23, "12")}]')
                   )
@@ -375,14 +388,16 @@ t23_accessible <- t23_accessible %>% add_col_notes(table_num = 23, col_nums = t2
 
 # Table 24
 title_note_t24 <- glue('[note {note_lookup_selector(note_frame_list, 24, "01")}][note {note_lookup_selector(note_frame_list, 24, "02")}][note {note_lookup_selector(note_frame_list, 24, "03")}]')
-t24_col_change <- 5:15
+t24_col_change <- 5:17
 new_t24_cols <- c(glue('Applications Made: Grant of Probate\n[note {note_lookup_selector(note_frame_list, 24, "04")}][note {note_lookup_selector(note_frame_list, 24, "05")}][note {note_lookup_selector(note_frame_list, 24, "06")}]'),
                   glue('Applications Made: Grant of Administration with Will annexed\n[note {note_lookup_selector(note_frame_list, 24, "04")}][note {note_lookup_selector(note_frame_list, 24, "05")}][note {note_lookup_selector(note_frame_list, 24, "06")}]'),
                   glue('Applications Made: Grant of Administration\n[note {note_lookup_selector(note_frame_list, 24, "04")}][note {note_lookup_selector(note_frame_list, 24, "05")}][note {note_lookup_selector(note_frame_list, 24, "06")}]'),
+                  'Applications Made: Grants resealed',
                   glue('Applications Made: All grant types\n[note {note_lookup_selector(note_frame_list, 24, "04")}][note {note_lookup_selector(note_frame_list, 24, "05")}][note {note_lookup_selector(note_frame_list, 24, "06")}]'),
                   glue('Grants issued: Grant of Probate\n[note {note_lookup_selector(note_frame_list, 24, "06")}]'),
                   glue('Grants issued: Grant of Administration with Will annexed\n[note {note_lookup_selector(note_frame_list, 24, "06")}]'),
                   glue('Grants issued: Grant of Administration\n[note {note_lookup_selector(note_frame_list, 24, "06")}]'),
+                  'Grants issued: Grants resealed',
                   glue('Grants issued: All grant types\n[note {note_lookup_selector(note_frame_list, 24, "06")}]'),
                   glue('Grants revoked\n[note {note_lookup_selector(note_frame_list, 24, "07")}]'),
                   glue('Standing Search\n[note {note_lookup_selector(note_frame_list, 24, "07")}]'),
@@ -425,6 +440,6 @@ notes_all <- notes_import %>% select(!c(Lookup, R_Table)) %>%
 
 # Gathering all the title notes
 title_notes <- list(title_note_t1, title_note_t2, title_note_t3, title_note_t3, title_note_t4, title_note_t4, title_note_t5,
-                    title_note_t6, title_note_t7, title_note_t8, title_note_t9, title_note_t10, title_note_t11, title_note_t12, title_note_t12b, 
+                    title_note_t6, title_note_t7, title_note_t8, title_note_t9, title_note_t10, title_note_t10b, title_note_t11, title_note_t12, title_note_t12b, 
                     title_note_t13, title_note_t15, title_note_t16, title_note_t17, title_note_t18, title_note_t19,
                     title_note_t20, title_note_t21, title_note_t22, title_note_t23, title_note_t24, title_note_t25)
