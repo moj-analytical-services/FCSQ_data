@@ -11,8 +11,8 @@ library(readr)
 
 # Variables #######################################################################################
 
-pub_year <- 2020                                                              # Specify the publication year and quarter for the output name
-pub_quarter <- 4
+pub_year <- 2021                                                              # Specify the publication year and quarter for the output name
+pub_quarter <- 2
 pub_date <- "25th March 2021"
 next_pub_date <- "24th June 2021"
 path_to_project = '~/FCSQ_data/tables/'                                       # UPDATE ONLY IF YOU CHANGE THE LOCATION OF THE PROJECT FILES
