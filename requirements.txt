@@ -26,7 +26,7 @@ fsspec==2022.3.0
 gremlinpython==3.5.2
 idna==3.3
 ipykernel==6.12.1
-ipython==8.2.0
+ipython==8.10.0
 isodate==0.6.1
 jedi==0.18.1
 Jinja2==3.1.1
