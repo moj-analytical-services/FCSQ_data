@@ -56,7 +56,7 @@ t1_start <- 9
 
 # Adjusting row height for notes. Actual footnotes do not start until row 5 
 t1_note_heights <- rep(14.3, length(notes1))
-t1_note_heights[6] = 23.25
+t1_note_heights[c(6, 17)] = c(23.25, 20.7)
 
 # Writing the data and notes into the template
 write_formatted_table(workbook = template, 
@@ -112,21 +112,21 @@ na_adder(wb = template,
          lengths = rep(nrow(t1_reg_qtr) - 47, 2),
          start_row = t1_start + nrow(t1_reg_year) + 47)
 
-#Public Law and Total Cases Disposed - Annually
-na_adder(wb = template,
-         sheet = 'Table_1',
-         value = ":",
-         cols = c(13, 21),
-         lengths = rep(nrow(t1_reg_year) - 16, 2),
-         start_row = t1_start + 16)
-
-#Public Law and Total Cases Disposed - Quarterly
-na_adder(wb = template,
-         sheet = 'Table_1',
-         value = ":",
-         cols = c(13, 21),
-         lengths = rep(nrow(t1_reg_qtr) - 46, 2),
-         start_row = t1_start + nrow(t1_reg_year) + 46)
+# #Public Law and Total Cases Disposed - Annually
+# na_adder(wb = template,
+#          sheet = 'Table_1',
+#          value = ":",
+#          cols = c(13, 21),
+#          lengths = rep(nrow(t1_reg_year) - 16, 2),
+#          start_row = t1_start + 16)
+# 
+# #Public Law and Total Cases Disposed - Quarterly
+# na_adder(wb = template,
+#          sheet = 'Table_1',
+#          value = ":",
+#          cols = c(13, 21),
+#          lengths = rep(nrow(t1_reg_qtr) - 46, 2),
+#          start_row = t1_start + nrow(t1_reg_year) + 46)
 
 
 
@@ -147,7 +147,7 @@ openxlsx::writeData(wb = template,
 # setting start row and note heights
 t2_start <- 11
 t2_note_heights <- rep(14.3, length(notes2))
-t2_note_heights[5] = 21.8
+t2_note_heights[c(5, 18)] = c(21.8, 20.7)
 
 # writing the data and notes
 write_formatted_table(workbook = template, 
@@ -164,17 +164,17 @@ write_formatted_table(workbook = template,
 na_adder(wb = template,
          sheet = 'Table_2',
          value = ':',
-         cols = c(8, 9, 10),
-         lengths = rep(nrow(t2_reg_year) - 11, 3),
+         cols = c(9),
+         lengths = rep(nrow(t2_reg_year) - 11, 1),
          start_row = t2_start + 11)
 
-# Block on public law orders made and cases disposed - Quarterly
-na_adder(wb = template,
-         sheet = 'Table_2',
-         value = ':',
-         cols = c(8, 10),
-         lengths = rep(nrow(t2_reg_qtr) - 46, 2),
-         start_row = t2_start + nrow(t2_reg_year) + 46)
+# # Block on public law orders made and cases disposed - Quarterly
+# na_adder(wb = template,
+#          sheet = 'Table_2',
+#          value = ':',
+#          cols = c(8, 10),
+#          lengths = rep(nrow(t2_reg_qtr) - 46, 2),
+#          start_row = t2_start + nrow(t2_reg_year) + 46)
 
 # Block on public law disposals from 2022 onward data due to CCD affecting public law - Quarterly
 na_adder(wb = template,
@@ -194,6 +194,9 @@ source(paste0(path_to_project, "Regular_Tables/table5_reg.R"))
 
 
 t5_start <- 8
+t5_note_heights <- rep(14.3, length(notes5))
+t5_note_heights[[10]] <- 20.7
+
 openxlsx::writeData(wb = template,
                     sheet = 'Table_5',
                     x = timeperiod5,
@@ -206,7 +209,8 @@ write_formatted_table(workbook = template,
                       tables = list(t5_reg_year, t5_reg_qtr), 
                       notes = notes5, 
                       starting_row = t5_start, 
-                      quarterly_format = c(2))
+                      quarterly_format = c(2),
+                      note_row_heights = t5_note_heights)
 
 
 ####################################################################
@@ -217,6 +221,8 @@ write_formatted_table(workbook = template,
 # Loads and writes the data
 source(paste0(path_to_project, "Regular_Tables/table6_reg.R"))
 t6_start <- 8
+t6_note_heights <- rep(14.3, length(notes6))
+t6_note_heights[[8]] <- 20.7
 openxlsx::writeData(wb = template,
                     sheet = 'Table_6',
                     x = timeperiod6,
@@ -228,7 +234,8 @@ write_formatted_table(workbook = template,
                       tables = list(t6_reg_year, t6_reg_qtr), 
                       notes = notes6, 
                       starting_row = 8, 
-                      quarterly_format = c(2))
+                      quarterly_format = c(2),
+                      note_row_heights = t6_note_heights)
 
 ####################################################################
 #Children Act High Court
@@ -281,7 +288,7 @@ na_adder(wb = template,
 source(paste0(path_to_project, "Regular_Tables/table8_reg.R"))
 t8_start <- 8
 t8_row_heights <- rep(15, length(notes8))
-t8_row_heights[c(5, 6, 7, 8)] <- c(46.5, 25.5, 37.5, 25.5)
+t8_row_heights[c(5, 6, 7, 8)] <- c(46.5, 25.5, 22.9, 25.5)
 
 openxlsx::writeData(wb = template,
                     sheet = 'Table_8',
@@ -435,7 +442,7 @@ write_formatted_table(workbook = template,
 source(paste0(path_to_project, "Regular_Tables/table13_reg.R"))
 t13_start <- 9
 t13_row_heights <- rep(15, length(notes13))
-t13_row_heights[[12]] <- 34.5
+t13_row_heights[c(8, 12, 13, 15)] <- c(22.2, 34.5, 19.5, 20.7)
 openxlsx::writeData(wb = template,
                     sheet = 'Table_13',
                     x = timeperiod13,
@@ -468,12 +475,12 @@ na_adder(wb = template,
          start_row = t13_start + 19)
 
 # Block FR from 2022 Q3 onwards
-na_adder(wb = template,
-         sheet = 'Table_13',
-         value = '-',
-         cols = c(11, 12, 14, 15),
-         lengths = rep(nrow(t13_reg_qtr) - 46, 4),
-         start_row = t13_start + nrow(t13_reg_year) + 46)
+# na_adder(wb = template,
+#          sheet = 'Table_13',
+#          value = '-',
+#          cols = c(11, 12, 14, 15),
+#          lengths = rep(nrow(t13_reg_qtr) - 46, 4),
+#          start_row = t13_start + nrow(t13_reg_year) + 46)
 
 # Note that the old Table 14 got removed. 
 # This means that from here each table while retaining the same number variable wise is in the sheet before the table number
@@ -770,21 +777,21 @@ na_formatter(wb = template,
              startRow = t23_start,
              na_value = suppress_value)
 
-# Block on deputyships from 2022 Q2
+# # Block on deputyships from 2008 - 2014 quarterly
 na_adder(wb = template,
          sheet = 'Table_22',
-         value = ':',
+         value = '-',
          cols = 25,
-         lengths = nrow(t23_reg_qtr) - 57,
-         start_row = t23_start + nrow(t23_reg_year) + 57)
+         lengths = 28,
+         start_row = t23_start + nrow(t23_reg_year))
 
-# Block deputyships from 2022
+# Block deputyships from 2008 - 2014 annually
 na_adder(wb = template,
          sheet = 'Table_22',
-         value = ':',
+         value = '-',
          cols = 25,
-         lengths = nrow(t23_reg_year) - 14,
-         start_row = t23_start + 14)
+         lengths = 7,
+         start_row = t23_start)
 
 
 

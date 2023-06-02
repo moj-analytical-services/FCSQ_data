@@ -46,17 +46,7 @@ t1_accessible <- bind_rows(t1_accessible_a, t1_accessible_b) %>%
          `Female Genital Mutilation` = case_when((Year < 2015) | (Year == 2015 & Quarter %in% c('Q1', 'Q2')) ~ na_value,
                                                  TRUE ~ `Female Genital Mutilation`)) %>% 
   mutate(Quarter = replace_na(Quarter, 'Annual')) %>% 
-  mutate(`Public Law` = case_when(
-    (Stage == 'Cases closed' & (Year == 2022 & Quarter %in% c('Annual', 'Q3', 'Q4') ) ) |
-      (Stage == 'Cases closed' & Year > 2022) ~ na_value,
-    TRUE ~ `Public Law`),
-    
-    `Total` = case_when(
-      (Stage == 'Cases closed' & (Year == 2022 & Quarter %in% c('Annual', 'Q3', 'Q4') ) ) |
-        (Stage == 'Cases closed' & Year > 2022) ~ na_value,
-      TRUE ~ `Total`),
-    
-    `Adoption` = case_when(
+  mutate(`Adoption` = case_when(
       (Stage == 'Cases started' & (Year == 2022 & Quarter %in% c('Annual', 'Q4') ) ) |
         (Stage == 'Cases started' & Year > 2022) ~ na_value,
       TRUE ~ `Adoption`),
