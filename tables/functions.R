@@ -81,12 +81,24 @@ notes_select <- function(notes, table){
     pull(`Note text`)
 }
 
-make_reg_notes <- function(notes, source){
-  notes <- c("Source:",
-             glue(source),
-             "",
-             "Notes:",
-             glue("{seq_along(notes)}) {notes}"))
+make_reg_notes <- function(notes, source, revision){
+  if(is.null(revision)){
+    notes <- c("Source:",
+               glue(source),
+               "",
+               "Notes:",
+               glue("{seq_along(notes)}) {notes}"))
+    
+  }
+ else{
+   notes <- c("Source:",
+              glue(source),
+              glue("R- {revision}"),
+              "",
+              "Notes:",
+              glue("{seq_along(notes)}) {notes}"))
+   
+ }
 }
 
 get_note_frame <- function(table_name){

@@ -54,9 +54,32 @@ openxlsx::writeData(wb = template,
 # the start row of the data
 t1_start <- 9
 
-# Adjusting row height for notes. Actual footnotes do not start until row 5 
+# Adjusting row height for notes.
 t1_note_heights <- rep(14.3, length(notes1))
-t1_note_heights[c(6, 17)] = c(23.25, 20.7)
+
+# Helper function for adjusting note row heights. 
+note_adjuster <- function(notes, table, revision = FALSE){
+  # Notes is the numbers of the note you want adjusted
+  # Table is the table number
+  # Revision is if you want any revision notices adjusted as well. Put the number of each revision notice
+  
+  if (!revision || (length(rev_notes_list[[glue("t{table}")]]) == 0) ){
+    notes_numbers <- notes + length(rev_notes_list[[glue("t{table}")]]) + 4
+    return(notes_numbers)
+    
+  }
+ else{
+   rev_notes_numbers <- revision + 2
+   notes_numbers <-  notes + length(rev_notes_list[[glue("t{table}")]]) + 4
+   notes_numbers_with_rev <- c(rev_notes_numbers, notes_numbers)
+   return(notes_numbers_with_rev)
+   
+ } 
+  
+}
+
+t1_note_adjust <- note_adjuster(notes = c(2, 13), table = 1)
+t1_note_heights[t1_note_adjust] = c(23.25, 20.7)
 
 # Writing the data and notes into the template
 write_formatted_table(workbook = template, 
@@ -147,7 +170,10 @@ openxlsx::writeData(wb = template,
 # setting start row and note heights
 t2_start <- 11
 t2_note_heights <- rep(14.3, length(notes2))
-t2_note_heights[c(5, 18)] = c(21.8, 20.7)
+
+t2_note_adjust <- note_adjuster(notes = c(1, 4, 14), table = 2)
+
+t2_note_heights[t2_note_adjust] = c(21.8, 22.2, 20.7)
 
 # writing the data and notes
 write_formatted_table(workbook = template, 
@@ -195,7 +221,8 @@ source(paste0(path_to_project, "Regular_Tables/table5_reg.R"))
 
 t5_start <- 8
 t5_note_heights <- rep(14.3, length(notes5))
-t5_note_heights[[10]] <- 20.7
+t5_note_adjust <- note_adjuster(notes = c(6), table = 5)
+t5_note_heights[t5_note_adjust] <- 20.7
 
 openxlsx::writeData(wb = template,
                     sheet = 'Table_5',
@@ -222,7 +249,8 @@ write_formatted_table(workbook = template,
 source(paste0(path_to_project, "Regular_Tables/table6_reg.R"))
 t6_start <- 8
 t6_note_heights <- rep(14.3, length(notes6))
-t6_note_heights[[8]] <- 20.7
+t6_note_adjust <- note_adjuster(notes = c(4), table = 6)
+t6_note_heights[t6_note_adjust] <- 20.7
 openxlsx::writeData(wb = template,
                     sheet = 'Table_6',
                     x = timeperiod6,
@@ -246,6 +274,10 @@ write_formatted_table(workbook = template,
 source(paste0(path_to_project, "Regular_Tables/table7_reg.R"))
 t7_start <- 10
 
+t7_note_heights <- rep(14.3, length(notes7))
+t7_note_adjust <- note_adjuster(notes = c(1), table = 7, revision = c(1))
+t7_note_heights[t7_note_adjust] <- c(22.2, 24)
+
 openxlsx::writeData(wb = template,
                     sheet = 'Table_7',
                     x = timeperiod7,
@@ -258,7 +290,8 @@ write_formatted_table(workbook = template,
                       tables = list(t7_reg_year, t7_reg_qtr), 
                       notes = notes7, 
                       starting_row = t7_start, 
-                      quarterly_format = c(2))
+                      quarterly_format = c(2),
+                      note_row_heights = t7_note_heights)
 
 # Data Quality Issues
 
@@ -288,7 +321,8 @@ na_adder(wb = template,
 source(paste0(path_to_project, "Regular_Tables/table8_reg.R"))
 t8_start <- 8
 t8_row_heights <- rep(15, length(notes8))
-t8_row_heights[c(5, 6, 7, 8)] <- c(46.5, 25.5, 22.9, 25.5)
+t8_note_adjust <- note_adjuster(notes = c(1, 2, 3, 4, 5), table = 8)
+t8_row_heights[t8_note_adjust] <- c(46.5, 25.5, 22.9, 25.5, 24)
 
 openxlsx::writeData(wb = template,
                     sheet = 'Table_8',
@@ -331,7 +365,8 @@ source(paste0(path_to_project, "Regular_Tables/table9_reg.R"))
 t9_start <- 6
 
 t9_row_heights <- rep(15, length(notes9))
-t9_row_heights[c(5, 6, 7)] <- c(25.5, 36.75, 25.5)
+t9_note_adjust <- note_adjuster(notes = c(1, 2, 3), table = 9, revision = c(1))
+t9_row_heights[t9_note_adjust] <- c(31.8, 25.5, 36.75, 25.5)
 
 openxlsx::writeData(wb = template,
                     sheet = 'Table_9',
