@@ -8,7 +8,10 @@ no_tables_seq <- append(seq(no_tables), '10b', after = 10) %>% append('12b', aft
 table_numbers <- glue('Table {no_tables_seq}')
 
 # Creates a list of notes that correspond to a particular table
-notes_list <- map(no_tables_seq, ~ notes_select(notes_import, .x))
+
+#Removing revision notices for now. Will handle later
+notes_no_rev <- notes_import %>% filter(!str_detect(Lookup, "Revision"))
+notes_list <- map(no_tables_seq, ~ notes_select(notes_no_rev, .x))
 
 table_sources_reg <- c("HMCTS FamilyMan and Core Case Data",
                    "HMCTS FamilyMan",

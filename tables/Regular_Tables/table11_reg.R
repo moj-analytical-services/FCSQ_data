@@ -41,11 +41,11 @@ for (i in 1:legrep_rowcount) {
 # time period
 if(pub_quarter==4){
   
-  timeperiod11 <- paste0("Annually 2011 - ", pub_year, " and quarterly Q1 2012 - Q", pub_quarter," ", pub_year)
+  timeperiod11 <- paste0("Annually 2011 - ", pub_year, " and quarterly Q1 2011 - Q", pub_quarter," ", pub_year)
   
 } else {
   
-  timeperiod11 <- paste0("Annually 2011 - ", pub_year-1, " and quarterly Q1 2012 - Q", pub_quarter," ", pub_year)
+  timeperiod11 <- paste0("Annually 2011 - ", pub_year-1, " and quarterly Q1 2011 - Q", pub_quarter," ", pub_year)
 }
 
 

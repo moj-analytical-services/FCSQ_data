@@ -7,7 +7,7 @@ dropdown3_df <- data.frame(c("Order count", "Children count"))
 dropdown4_df <- data.frame(c("Order count", "Children count"))
 
 # table 10
-dropdown10_df <- data.frame(c("Adoption", "Divorce (incl. annulment and FR)", "Domestic Violence", "Financial Remedy", "Private Law", "Public Law"))
+dropdown10_df <- data.frame(c("Adoption", "Old Divorce (incl. annulment and FR)", "Domestic Violence", "Financial Remedy", "Private Law", "Public Law"))
 
 # table 10b
 dropdown10b_df <- data.frame(c("All", "Sole", "Joint"))

@@ -131,7 +131,7 @@ t9_accessible <- t9_accessible %>% add_col_notes(table_num = 9, col_nums = t9_co
 title_note_t10 <- glue('[note {note_lookup_selector(note_frame_list, 10, "01")}]')
 t10_col_change <- c(1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
 new_t10_cols <- c(glue('Category\n[notes {note_lookup_selector(note_frame_list, 10, "02")},{note_lookup_selector(note_frame_list, 10, "03")}\\
-,{note_lookup_selector(note_frame_list, 10, "04")},{note_lookup_selector(note_frame_list, 10, "05")},{note_lookup_selector(note_frame_list, 10, "11")}]'),
+,{note_lookup_selector(note_frame_list, 10, "05")},{note_lookup_selector(note_frame_list, 10, "11")}]'),
                   glue('Both Applicant and Respondent - Number of Disposals\n[note {note_lookup_selector(note_frame_list, 10, "06")}]'),
                   glue('Both Applicant and Respondent - Mean duration in weeks\n[note {note_lookup_selector(note_frame_list, 10, "06")}][note {note_lookup_selector(note_frame_list, 10, "08")}][note {note_lookup_selector(note_frame_list, 10, "09")}]'),
                   glue('Applicant only - Number of Disposals\n[note {note_lookup_selector(note_frame_list, 10, "06")}]'),
@@ -165,8 +165,7 @@ title_note_t11 <- glue('[note {note_lookup_selector(note_frame_list, 11, "01")}]
 t11_col_change <- c(1, 7, 9)
 new_t11_cols <- c(glue('Category\n[notes {note_lookup_selector(note_frame_list, 11, "04")},{note_lookup_selector(note_frame_list, 11, "05")}\\
 ,{note_lookup_selector(note_frame_list, 11, "06")},{note_lookup_selector(note_frame_list, 11, "07")},{note_lookup_selector(note_frame_list, 11, "08")}\\
-,{note_lookup_selector(note_frame_list, 11, "09")},{note_lookup_selector(note_frame_list, 11, "12")},{note_lookup_selector(note_frame_list, 11, "13")}\\
-,{note_lookup_selector(note_frame_list, 11, "14")}]'),
+,{note_lookup_selector(note_frame_list, 11, "09")},{note_lookup_selector(note_frame_list, 11, "13")}]'),
                   glue('Applicants - unrepresented parties\n[note {note_lookup_selector(note_frame_list, 11, "10")}]'),
                   glue('Respondents - unrepresented parties\n[note {note_lookup_selector(note_frame_list, 11, "10")}]')
                   
@@ -304,7 +303,7 @@ t19_accessible <- t19_accessible %>% add_col_notes(table_num = 19, col_nums = t1
 
 # Table 20
 title_note_t20 <- glue('[note {note_lookup_selector(note_frame_list, 20, "01")}]')
-t20_col_change <- c(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20)
+t20_col_change <- c(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
 new_t20_cols <- c(glue('Adoption orders: Adopter - Male/female couple\n[note {note_lookup_selector(note_frame_list, 20, "02")}][note {note_lookup_selector(note_frame_list, 20, "03")}][note {note_lookup_selector(note_frame_list, 20, "11")}]'),
                   glue('Adoption orders: Adopter - Sole applicant\n[note {note_lookup_selector(note_frame_list, 20, "02")}]'),
                   glue('Adoption orders: Adopter - Step parent\n[note {note_lookup_selector(note_frame_list, 20, "02")}]'),
@@ -320,6 +319,7 @@ new_t20_cols <- c(glue('Adoption orders: Adopter - Male/female couple\n[note {no
                   glue('Adoption orders: Adopted Child Age - Other\n[note {note_lookup_selector(note_frame_list, 20, "02")}][note {note_lookup_selector(note_frame_list, 20, "06")}]'),
                   glue('Adoption orders: Adopted Child Age - Unknown\n[note {note_lookup_selector(note_frame_list, 20, "02")}][note {note_lookup_selector(note_frame_list, 20, "07")}]'),
                   glue('Adoption orders: Total adoption orders\n[note {note_lookup_selector(note_frame_list, 20, "02")}]'),
+                  glue('Non-Adoption orders - Placement orders\n[note {note_lookup_selector(note_frame_list, 20, "13")}]'),
                   glue('Non-Adoption orders - Other orders\n[note {note_lookup_selector(note_frame_list, 20, "08")}]'),
                   glue('Other disposals of Adoption and Children Act 2002 cases\n[note {note_lookup_selector(note_frame_list, 20, "09")}]')
                   
@@ -381,7 +381,7 @@ new_t23_cols <- c(glue('Registered applications - Application Type: Enduring Pow
                   glue('Registered applications - Age of Donor: 75-84\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
                   glue('Registered applications - Age of Donor: 85+\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
                   glue('Registered applications - Age of Donor: Unknown\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
-                  glue('Number of deputyships appointed\n[note {note_lookup_selector(note_frame_list, 23, "12")}]')
+                  glue('Number of deputyships appointed\n[note {note_lookup_selector(note_frame_list, 23, "12")}][note {note_lookup_selector(note_frame_list, 23, "13")}]')
                   )
 
 t23_accessible <- t23_accessible %>% add_col_notes(table_num = 23, col_nums = t23_col_change, new_cols = new_t23_cols)

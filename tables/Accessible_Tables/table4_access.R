@@ -154,7 +154,11 @@ t4b_accessible_priv <- left_join(t4b_accessible_priv_year, t4b_accessible_priv_q
 
 t4b_accessible <- bind_rows(t4b_accessible_pub, t4b_accessible_priv) %>% 
   mutate(across(where(is.numeric), ~replace_na(.x, 0))) %>% 
-  mutate(across(starts_with('2022'), ~ na_value))
+  mutate(across(starts_with(c('2022', '2023')), function(x){
+    case_when(Category == 'Public law' ~ na_value,
+              TRUE ~ x)
+    
+  }))
 
 
 
@@ -282,4 +286,8 @@ t4a_accessible_priv <- left_join(t4a_accessible_priv_year, t4a_accessible_priv_q
 
 t4a_accessible <- bind_rows(t4a_accessible_pub, t4a_accessible_priv) %>% 
   mutate(across(where(is.numeric), ~replace_na(.x, 0))) %>% 
-  mutate(across(starts_with('2022'), ~ na_value))
+  mutate(across(starts_with(c('2022', '2023')), function(x){
+    case_when(Category == 'Public law' ~ na_value,
+              TRUE ~ x)
+    
+  }))
