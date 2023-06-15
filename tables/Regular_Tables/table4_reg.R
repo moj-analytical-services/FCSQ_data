@@ -12,8 +12,9 @@ start_col <- 2
 t4_priv_row_start <- 29
 
 # Setting heights of notes
-t4_row_heights <- rep(14.3, length(notes3))
-t4_row_heights[6] = 33
+t4_row_heights <- rep(14.3, length(notes4))
+t4_note_adjust <- note_adjuster(notes = c(2), table = 4)
+t4_row_heights[t4_note_adjust] = 33
 
 t4_empty <- c(11, 15, 16, 24, 25, 32, 33, 37, 38, 43, 44, 51, 52, 55, 56, 59, 60, 67, 68) #rows excluded because they are blank
 

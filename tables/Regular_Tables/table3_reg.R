@@ -14,7 +14,8 @@ t3_priv_row_start <- 35
 
 # Setting heights of notes
 t3_row_heights <- rep(14.3, length(notes3))
-t3_row_heights[6] = 33
+t3_note_adjust <- note_adjuster(notes = c(2), table = 3)
+t3_row_heights[t3_note_adjust] = 33
 
 # Empty rows in Table 3
 t3_empty <- c(11, 15, 16, 24, 25, 29, 30, 33, 34, 38, 39, 45, 46)
