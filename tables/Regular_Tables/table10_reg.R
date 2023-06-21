@@ -14,13 +14,13 @@ time_dates_quarter <- table10_alt %>% distinct(Year, Quarter) %>% filter(Quarter
 time_rowcount <- nrow(time_dates_annual) + nrow(time_dates_quarter)
 
 # formulae
-t10_start <- 13
+t10_start <- 15
 start_col <- 3
 
 #drop down list info - This is the cell containing the list
 t10_list_col <- 2
 t10_list_letter <- num_to_letter(t10_list_col)
-t10_list_row <- 7
+t10_list_row <- 9
 
 #Columns in Excel sheet. There are blank columns that are missed out.
 columns <- c(1,2,4,5,7,8,10,11,13,14)

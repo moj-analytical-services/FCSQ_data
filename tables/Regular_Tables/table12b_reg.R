@@ -103,7 +103,10 @@ t12b_reg_qtr <- div_qtr_new %>%
   relocate(blank2, .after = sole_perc) %>% 
   relocate(blank3, .after = n_final) %>%  
   mutate(across(3:ncol(.), .fns = formula_add)) %>% 
-  mutate(across(where(is.numeric), ~replace_na(.x, 0))) 
+  mutate(across(where(is.numeric), ~replace_na(.x, 0)))
+
+t12b_reg_qtr_a <- t12b_reg_qtr %>% filter(Year == 2022) %>% mutate(across(3:ncol(.), .fns = formula_add))
+t12b_reg_qtr_b <- t12b_reg_qtr %>% filter(Year > 2022) %>% mutate(across(3:ncol(.), .fns = formula_add))
 
 # time period
 timeperiod12b <- paste0("Quarterly Q2 2022 - Q", pub_quarter," ", pub_year)

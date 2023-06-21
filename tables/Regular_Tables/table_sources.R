@@ -50,9 +50,11 @@ openxlsx::writeData(wb = template,
                     x = divorce_t12_input)
 
 # Adding source for Table 12b
+# Replacing Divorce and Civil Partnership with All in table for consistency with other tables
+divorce_t12b_input_replace <- divorce_t12b_input %>% mutate(Case = str_replace(Case, 'Divorce and Civil Partnership', 'All'))
 openxlsx::writeData(wb = template,
                     sheet = 'Table_12b_source',
-                    x = divorce_t12b_input)
+                    x = divorce_t12b_input_replace)
 
 # Adding source for Table 16
 openxlsx::writeData(wb = template,

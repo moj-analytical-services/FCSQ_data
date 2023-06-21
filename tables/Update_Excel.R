@@ -444,10 +444,10 @@ t12b_row_heights[t12b_note_adjust] <- c(24, 17.7, 13.2, 14.7, 14.7)
 
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_12b', 
-                      tables = list(t12b_reg_qtr), 
+                      tables = list(t12b_reg_qtr_a, t12b_reg_qtr_b), 
                       notes = notes12b, 
                       starting_row = t12b_start, 
-                      quarterly_format = c(2),
+                      quarterly_format = c(1, 2),
                       note_row_heights = t12b_row_heights)
 
 

@@ -9,6 +9,8 @@ table10b_alt <- table_10b_lookup %>% separate(Lookup, c("Case_type", "Year", "Qu
 #time_div_dates_annual <- table10b_alt %>% distinct(Year) %>% mutate(Quarter = NA) %>% filter(Year <= annual_year) %>% arrange(Year, Quarter)
 
 time_div_dates_quarter <- table10b_alt %>% distinct(Year, Quarter) %>% filter(Quarter != '') %>% arrange(Year, Quarter)
+time_div_dates_quarter_a <- time_div_dates_quarter %>% filter(Year == 2022)
+time_div_dates_quarter_b <- time_div_dates_quarter %>% filter(Year > 2022)
 
 
 time_div_rowcount <- nrow(time_div_dates_quarter)
@@ -71,9 +73,9 @@ t10b_row_heights[c(9, 10)] <- c(21.8, 21.8)
 t10b_col_length <- 16
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_10b', 
-                      tables = list(time_div_dates_quarter), 
+                      tables = list(time_div_dates_quarter_a, time_div_dates_quarter_b), 
                       notes = notes10b, 
                       starting_row = t10b_start, 
-                      quarterly_format = c(2),
+                      quarterly_format = c(1, 2),
                       col_num = t10b_col_length,
                       note_row_heights = t10b_row_heights)
