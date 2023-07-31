@@ -21,7 +21,7 @@ dropdown12b_df <- tibble(c("All", "Paper", "Digital"))
 
 # table 12b
 dropdown12b_a_df <- tibble(c("All", "Joint", "Sole"))
-dropdown12b_b_df <- tibble(c("Divorce and Civil Partnership", "Divorce", "Civil Partnership"))
+dropdown12b_b_df <- tibble(c("All", "Divorce", "Civil Partnership"))
 
 #table 16
 dropdown16_df <- tibble(c('All', 'Exparte', 'On notice'))
@@ -168,7 +168,7 @@ openxlsx::writeData(wb = template,
 
 openxlsx::writeData(wb = template,
                     sheet = 'Table_12b',
-                    x = 'Divorce and Civil Partnership',
+                    x = 'All',
                     startRow = t12b_list_b_row,
                     startCol = t12b_list_col)
 

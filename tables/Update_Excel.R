@@ -54,9 +54,13 @@ openxlsx::writeData(wb = template,
 # the start row of the data
 t1_start <- 9
 
-# Adjusting row height for notes. Actual footnotes do not start until row 5 
+# Adjusting row height for notes.
 t1_note_heights <- rep(14.3, length(notes1))
-t1_note_heights[c(6, 17)] = c(23.25, 20.7)
+
+
+
+t1_note_adjust <- note_adjuster(notes = c(2, 13), table = 1)
+t1_note_heights[t1_note_adjust] = c(23.25, 20.7)
 
 # Writing the data and notes into the template
 write_formatted_table(workbook = template, 
@@ -147,7 +151,10 @@ openxlsx::writeData(wb = template,
 # setting start row and note heights
 t2_start <- 11
 t2_note_heights <- rep(14.3, length(notes2))
-t2_note_heights[c(5, 18)] = c(21.8, 20.7)
+
+t2_note_adjust <- note_adjuster(notes = c(1, 4, 14), table = 2)
+
+t2_note_heights[t2_note_adjust] = c(21.8, 22.2, 20.7)
 
 # writing the data and notes
 write_formatted_table(workbook = template, 
@@ -195,7 +202,8 @@ source(paste0(path_to_project, "Regular_Tables/table5_reg.R"))
 
 t5_start <- 8
 t5_note_heights <- rep(14.3, length(notes5))
-t5_note_heights[[10]] <- 20.7
+t5_note_adjust <- note_adjuster(notes = c(6), table = 5)
+t5_note_heights[t5_note_adjust] <- 20.7
 
 openxlsx::writeData(wb = template,
                     sheet = 'Table_5',
@@ -222,7 +230,8 @@ write_formatted_table(workbook = template,
 source(paste0(path_to_project, "Regular_Tables/table6_reg.R"))
 t6_start <- 8
 t6_note_heights <- rep(14.3, length(notes6))
-t6_note_heights[[8]] <- 20.7
+t6_note_adjust <- note_adjuster(notes = c(4), table = 6)
+t6_note_heights[t6_note_adjust] <- 20.7
 openxlsx::writeData(wb = template,
                     sheet = 'Table_6',
                     x = timeperiod6,
@@ -246,6 +255,10 @@ write_formatted_table(workbook = template,
 source(paste0(path_to_project, "Regular_Tables/table7_reg.R"))
 t7_start <- 10
 
+t7_note_heights <- rep(14.3, length(notes7))
+t7_note_adjust <- note_adjuster(notes = c(1), table = 7)
+t7_note_heights[t7_note_adjust] <- c(24)
+
 openxlsx::writeData(wb = template,
                     sheet = 'Table_7',
                     x = timeperiod7,
@@ -258,7 +271,8 @@ write_formatted_table(workbook = template,
                       tables = list(t7_reg_year, t7_reg_qtr), 
                       notes = notes7, 
                       starting_row = t7_start, 
-                      quarterly_format = c(2))
+                      quarterly_format = c(2),
+                      note_row_heights = t7_note_heights)
 
 # Data Quality Issues
 
@@ -288,7 +302,8 @@ na_adder(wb = template,
 source(paste0(path_to_project, "Regular_Tables/table8_reg.R"))
 t8_start <- 8
 t8_row_heights <- rep(15, length(notes8))
-t8_row_heights[c(5, 6, 7, 8)] <- c(46.5, 25.5, 22.9, 25.5)
+t8_note_adjust <- note_adjuster(notes = c(1, 2, 3, 4, 5), table = 8)
+t8_row_heights[t8_note_adjust] <- c(46.5, 25.5, 22.9, 25.5, 24)
 
 openxlsx::writeData(wb = template,
                     sheet = 'Table_8',
@@ -331,7 +346,8 @@ source(paste0(path_to_project, "Regular_Tables/table9_reg.R"))
 t9_start <- 6
 
 t9_row_heights <- rep(15, length(notes9))
-t9_row_heights[c(5, 6, 7)] <- c(25.5, 36.75, 25.5)
+t9_note_adjust <- note_adjuster(notes = c(1, 2, 3), table = 9)
+t9_row_heights[t9_note_adjust] <- c(25.5, 36.75, 25.5)
 
 openxlsx::writeData(wb = template,
                     sheet = 'Table_9',
@@ -362,7 +378,8 @@ openxlsx::writeData(wb = template,
 
 # data
 t12_row_heights <- rep(15, length(notes12))
-t12_row_heights[seq(from = 5, to = length(notes12))] <- c(24, 22.5, 11.25, 12.75, 12.75, 24.75, 12.75, 22.5)
+t12_note_adjust <- note_adjuster(notes = c(1, 2, 3, 4, 5, 6, 7, 8), table = 12)
+t12_row_heights[t12_note_adjust] <- c(24, 22.5, 11.25, 12.75, 12.75, 24.75, 12.75, 22.5)
 
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_12', 
@@ -422,14 +439,15 @@ openxlsx::writeData(wb = template,
 
 # data
 t12b_row_heights <- rep(15, length(notes12b))
-t12b_row_heights[seq(from = 5, to = length(notes12b))] <- c(24, 22.5, 11.25, 12.75, 12.75, 24.75, 12.75, 22.5, 12)
+t12b_note_adjust <- note_adjuster(notes = c(1, 2, 3, 4, 5), table = "12b")
+t12b_row_heights[t12b_note_adjust] <- c(24, 17.7, 13.2, 14.7, 14.7)
 
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_12b', 
-                      tables = list(t12b_reg_qtr), 
+                      tables = list(t12b_reg_qtr_a, t12b_reg_qtr_b), 
                       notes = notes12b, 
                       starting_row = t12b_start, 
-                      quarterly_format = c(2),
+                      quarterly_format = c(1, 2),
                       note_row_heights = t12b_row_heights)
 
 
@@ -442,7 +460,9 @@ write_formatted_table(workbook = template,
 source(paste0(path_to_project, "Regular_Tables/table13_reg.R"))
 t13_start <- 9
 t13_row_heights <- rep(15, length(notes13))
-t13_row_heights[c(8, 12, 13, 15)] <- c(22.2, 34.5, 19.5, 20.7)
+t13_note_adjust <- note_adjuster(notes = c(4, 8, 9, 11), table = 13)
+t13_row_heights[t13_note_adjust] <- c(22.2, 34.5, 19.5, 20.7)
+
 openxlsx::writeData(wb = template,
                     sheet = 'Table_13',
                     x = timeperiod13,
@@ -493,7 +513,8 @@ na_adder(wb = template,
 source(paste0(path_to_project, "Regular_Tables/table15_reg.R"))
 t15_start <- 7
 t15_row_heights <- rep(15, length(notes15))
-t15_row_heights[seq(from = 5, to = length(notes15))] <- c(24.75, 34.5, 24.75, 24.75, 24.75, 12.75)
+t15_note_adjust <- note_adjuster(notes = c(1, 2, 3, 4, 5, 6), table = 15)
+t15_row_heights[t15_note_adjust] <- c(24.75, 34.5, 24.75, 24.75, 24.75, 12.75)
 
 openxlsx::writeData(wb = template,
                     sheet = 'Table_14',
@@ -518,7 +539,8 @@ write_formatted_table(workbook = template,
 # Loads and writes the data frame. This table is all formula
 source(paste0(path_to_project, "Regular_Tables/table16_reg.R"))
 t16_row_heights <- rep(15, length(notes16))
-t16_row_heights[seq(from = 5, to = length(notes16))] <- c(12.75, 36, 12.75, 12.75, 22.5, 22.5, 15)
+t16_note_adjust <- note_adjuster(notes = c(1, 2, 3, 4, 5, 6, 7), table = 16)
+t16_row_heights[t16_note_adjust] <- c(12.75, 36, 12.75, 12.75, 22.5, 22.5, 15)
 
 openxlsx::writeData(wb = template,
                     sheet = 'Table_15',
@@ -604,7 +626,8 @@ openxlsx::writeData(wb = template,
 
 t18_start <- 8
 t18_row_heights <- rep(15, length(notes18))
-t18_row_heights[c(9, 13)] <- c(24.75, 24.75)
+t18_note_adjust <- note_adjuster(notes = c(5, 9), table = 18)
+t18_row_heights[t18_note_adjust] <- c(24.75, 24.75)
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_17', 
                       tables = list(t18_reg_year, t18_reg_qtr_a, t18_reg_qtr_b), 
@@ -630,7 +653,8 @@ openxlsx::writeData(wb = template,
 # data
 t19_start <- 10
 t19_row_heights <- rep(15, length(notes19))
-t19_row_heights[[11]] <- 24.75
+t19_note_adjust <- note_adjuster(notes = c(7), table = 19)
+t19_row_heights[t19_note_adjust] <- 24.75
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_18', 
                       tables = list(t19_reg_year, t19_reg_qtr), 
@@ -674,7 +698,8 @@ openxlsx::writeData(wb = template,
 # data
 t20_start <- 8
 t20_row_heights <- rep(15, length(notes20))
-t20_row_heights[[5]] <- 24.75
+t20_note_adjust <- note_adjuster(notes = c(1), table = 20)
+t20_row_heights[t20_note_adjust] <- 24.75
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_19', 
                       tables = list(t20_reg_year, t20_reg_qtr), 
@@ -760,7 +785,9 @@ openxlsx::writeData(wb = template,
 t23_start <- 9
 
 t23_row_heights <- rep(15, length(notes23))
-t23_row_heights[c(6, 8, 10)] <- c(23.25, 21, 21)
+t23_note_adjust <- note_adjuster(notes = c(2, 4, 6), table = 23)
+t23_row_heights[t23_note_adjust] <- c(23.25, 21, 21)
+
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_22', 
                       tables = list(t23_reg_year, t23_reg_qtr), 
@@ -811,7 +838,9 @@ openxlsx::writeData(wb = template,
 # data
 
 t24_row_heights <- rep(15, length(notes24))
-t24_row_heights[c(5, 11, 12)] <- c(48, 24, 23.25)
+t24_note_adjust <- note_adjuster(notes = c(1, 7, 8), table = 24)
+t24_row_heights[t24_note_adjust] <- c(48, 24, 23.25)
+
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_23', 
                       tables = list(t24_reg_year, t24_reg_qtr_a, t24_reg_qtr_b), 
@@ -861,7 +890,9 @@ openxlsx::writeData(wb = template,
 # data
 
 t25_row_heights <- rep(15, length(notes25))
-t25_row_heights[c(6, 8, 9)] <- c(21.4, 21.4, 23.25)
+t25_note_adjust <- note_adjuster(notes = c(2, 4, 5), table = 25)
+t25_row_heights[t25_note_adjust] <- c(21.4, 21.4, 23.25)
+
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_24', 
                       tables = list(t25_reg_year, t25_reg_qtr_a, t25_reg_qtr_b), 

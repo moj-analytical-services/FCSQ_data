@@ -81,12 +81,24 @@ notes_select <- function(notes, table){
     pull(`Note text`)
 }
 
-make_reg_notes <- function(notes, source){
-  notes <- c("Source:",
-             glue(source),
-             "",
-             "Notes:",
-             glue("{seq_along(notes)}) {notes}"))
+make_reg_notes <- function(notes, source, revision){
+  if(is.null(revision)){
+    notes <- c("Source:",
+               glue(source),
+               "",
+               "Notes:",
+               glue("{seq_along(notes)}) {notes}"))
+    
+  }
+ else{
+   notes <- c("Source:",
+              glue(source),
+              glue("R- {revision}"),
+              "",
+              "Notes:",
+              glue("{seq_along(notes)}) {notes}"))
+   
+ }
 }
 
 get_note_frame <- function(table_name){
@@ -140,6 +152,26 @@ note_lookup_selector <- function(frame_list, table_num, lookup_code){
     pull(`Note number`) %>% str_remove_all('[\\[\\]]')
 }
 
+# Helper function for adjusting note row heights. 
+note_adjuster <- function(notes, table, revision = FALSE){
+  # Notes is the numbers of the note you want adjusted
+  # Table is the table number
+  # Revision is if you want any revision notices adjusted as well. Put the number of each revision notice
+  
+  if (!revision || (length(rev_notes_list[[glue("t{table}")]]) == 0) ){
+    notes_numbers <- notes + length(rev_notes_list[[glue("t{table}")]]) + 4
+    return(notes_numbers)
+    
+  }
+  else{
+    rev_notes_numbers <- revision + 2
+    notes_numbers <-  notes + length(rev_notes_list[[glue("t{table}")]]) + 4
+    notes_numbers_with_rev <- c(rev_notes_numbers, notes_numbers)
+    return(notes_numbers_with_rev)
+    
+  } 
+  
+}
 
 # This function takes a list of tables, notes and the starting row and adds the data to the spreadsheet properly formatted.
 write_formatted_table <- function(workbook, sheet_name, tables, notes, starting_row, quarterly_format = NULL, col_num = NULL, note_row_heights = NULL) {

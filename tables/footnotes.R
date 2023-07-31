@@ -10,7 +10,11 @@ table_numbers <- glue('Table {no_tables_seq}')
 # Creates a list of notes that correspond to a particular table
 
 #Removing revision notices for now. Will handle later
+notes_rev <- notes_import %>% filter(str_detect(Lookup, "Revision"))
 notes_no_rev <- notes_import %>% filter(!str_detect(Lookup, "Revision"))
+
+rev_notes_list <- map(no_tables_seq, ~ notes_select(notes_rev, .x))
+names(rev_notes_list) <- glue('t{no_tables_seq}')
 notes_list <- map(no_tables_seq, ~ notes_select(notes_no_rev, .x))
 
 table_sources_reg <- c("HMCTS FamilyMan and Core Case Data",
@@ -42,7 +46,7 @@ table_sources_reg <- c("HMCTS FamilyMan and Core Case Data",
                    "HMCTS Core Case Data")
 
 # notes added to regular tables
-reg_notes <- map2(notes_list, table_sources_reg, make_reg_notes)
+reg_notes <- pmap(list(notes_list, table_sources_reg, rev_notes_list), make_reg_notes)
 names(reg_notes) <- glue('notes{no_tables_seq}')
 
 #Binding to use variable names instead of having to refer to the list

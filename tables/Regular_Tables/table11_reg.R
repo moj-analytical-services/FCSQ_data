@@ -60,7 +60,8 @@ openxlsx::writeData(wb = template,
 
 # table
 t11_row_heights <- rep(15, length(notes11))
-t11_row_heights[seq(from = 5, to = length(notes11))] <- c(46.5, 12.75, 21, 12.75, 12.75, 33.75, 37.5, 30, 21, 21, 21, 43.5, 48, 27, 27)
+t11_note_adjust <- note_adjuster(notes = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15), table = 11)
+t11_row_heights[t11_note_adjust] <- c(46.5, 12.75, 21, 12.75, 12.75, 33.75, 37.5, 30, 21, 21, 21, 48, 37.2, 31.5, 14.7)
 
 t11_col_length <- 12
 

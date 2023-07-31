@@ -14,13 +14,13 @@ time_dates_quarter <- table10_alt %>% distinct(Year, Quarter) %>% filter(Quarter
 time_rowcount <- nrow(time_dates_annual) + nrow(time_dates_quarter)
 
 # formulae
-t10_start <- 13
+t10_start <- 15
 start_col <- 3
 
 #drop down list info - This is the cell containing the list
 t10_list_col <- 2
 t10_list_letter <- num_to_letter(t10_list_col)
-t10_list_row <- 7
+t10_list_row <- 9
 
 #Columns in Excel sheet. There are blank columns that are missed out.
 columns <- c(1,2,4,5,7,8,10,11,13,14)
@@ -65,7 +65,8 @@ openxlsx::writeData(wb = template,
 # table
 #setting row heights
 t10_row_heights <- rep(15, length(notes10))
-t10_row_heights[c(seq(from = 5, to = length(notes10)))] <- c(21.75, 21, 33, 12.75, 12.75, 12.75, 21, 21, 21, 12.75, 36.75, 26.25)
+t10_note_adjust <- note_adjuster(notes = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14), table = 10)
+t10_row_heights[t10_note_adjust] <- c(21.75, 21, 33, 14.7, 13.2, 21, 21, 21, 13.2, 37.2, 26.7, 22.2, 21, 33)
 
 t10_col_length <- 16
 write_formatted_table(workbook = template, 
