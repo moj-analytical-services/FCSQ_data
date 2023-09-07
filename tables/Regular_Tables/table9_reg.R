@@ -4,14 +4,16 @@
 t9_reg_year <- priv_law_disposal_csv %>% 
   filter(Quarter == '') %>% 
   mutate(Quarter = NA) %>% 
-  select(!Type)
+  select(!Type) %>% 
+  arrange(Year)
 
 
 # Separating Quarterly data and dropping Type column
 t9_reg_qtr <- priv_law_disposal_csv %>% filter(is.na(Year)) %>% 
   separate(Quarter, into = c('Year', 'Quarter'), convert = TRUE) %>%
   relocate(Year, Quarter) %>% 
-  select(!Type)
+  select(!Type) %>% 
+  arrange(Year, Quarter)
 
 # Content #########################################################################################
 
