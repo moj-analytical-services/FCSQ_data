@@ -22,4 +22,6 @@ t20_accessible <- full_t20 %>% transmute(Year,
                                          `Non-Adoption orders - Other orders` = other_orders,
                                          `Other disposals of Adoption and Children Act 2002 cases` = other_disps,
                                          `Total disposals under the Adoption and Children Act 2002` = total_disps,
-                                         `Total cases disposed under the Adoption and Children Act 2002` = case_close)
+                                         `Total cases disposed under the Adoption and Children Act 2002` = case_close) %>% 
+  mutate(`Total cases disposed under the Adoption and Children Act 2002` = case_when((Year > 2022) ~ na_value,
+                                                                             TRUE ~ `Total cases disposed under the Adoption and Children Act 2002`))

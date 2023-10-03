@@ -116,6 +116,14 @@ na_adder(wb = template,
          lengths = rep(nrow(t1_reg_qtr) - 47, 2),
          start_row = t1_start + nrow(t1_reg_year) + 47)
 
+#Adoption Disposals and Total Case Disposals - Quarterly
+na_adder(wb = template,
+         sheet = 'Table_1',
+         value = ":",
+         cols = c(20, 21),
+         lengths = rep(nrow(t1_reg_qtr) - 48, 2),
+         start_row = t1_start + nrow(t1_reg_year) + 48)
+
 # #Public Law and Total Cases Disposed - Annually
 # na_adder(wb = template,
 #          sheet = 'Table_1',
@@ -708,6 +716,13 @@ write_formatted_table(workbook = template,
                       quarterly_format = c(2),
                       note_row_heights = t20_row_heights)
 
+#Adoption Disposals blocked
+na_adder(wb = template,
+         sheet = 'Table_19',
+         value = ':',
+         cols = c(26),
+         lengths = rep(nrow(t20_reg_qtr) - 48, 3),
+         start_row = t20_start + nrow(t20_reg_year) + 48)
 
 ####################################################################
 #Applications under the Mental Capacity Act

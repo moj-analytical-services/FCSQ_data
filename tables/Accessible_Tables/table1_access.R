@@ -48,11 +48,11 @@ t1_accessible <- bind_rows(t1_accessible_a, t1_accessible_b) %>%
   mutate(Quarter = replace_na(Quarter, 'Annual')) %>% 
   mutate(`Adoption` = case_when(
       (Stage == 'Cases started' & (Year == 2022 & Quarter %in% c('Annual', 'Q4') ) ) |
-        (Stage == 'Cases started' & Year > 2022) ~ na_value,
+        (Stage == 'Cases started' & Year > 2022) | (Stage == 'Cases closed' & Year > 2022) ~ na_value,
       TRUE ~ `Adoption`),
     
     `Total` = case_when(
       (Stage == 'Cases started' & (Year == 2022 & Quarter %in% c('Annual', 'Q4') ) ) |
-        (Stage == 'Cases started' & Year > 2022) ~ na_value,
+        (Stage == 'Cases started' & Year > 2022) | (Stage == 'Cases closed' & Year > 2022) ~ na_value,
       TRUE ~ `Total`))
   
