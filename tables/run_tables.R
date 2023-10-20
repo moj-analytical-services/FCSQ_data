@@ -19,6 +19,7 @@ pub_year <- 2021                                                              # 
 pub_quarter <- 4
 pub_date <- "31st March 2022"
 next_pub_date <- "30th June 2022"
+
 path_to_project = '~/FCSQ_data/tables/'                                       # UPDATE ONLY IF YOU CHANGE THE LOCATION OF THE PROJECT FILES
 csv_folder <- paste0("alpha-family-data/CSVs/CSV_bulletin/", pub_year, " Q",pub_quarter,"/") # location in the S3 bucket to import CSVs from
 
