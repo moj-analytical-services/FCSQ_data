@@ -39,7 +39,7 @@ pub_ca_ord_made_year <- child_act_pub %>%
 
 #Disposals made
 pub_ca_disp_made_year <- child_act_pub %>%
-  filter(Type == 'Disposal', Count_type == 'Order type', Disposal_type != 'Interim order') %>% 
+  filter(Type == 'Disposal', Count_type == 'Order type', !Disposal_type %in% c('Interim order', 'Interim Order')) %>% 
   group_by(Year) %>% 
   summarise(pub_disp_made = sum_na(Count))
 
@@ -94,7 +94,7 @@ priv_ca_ord_made_year <- child_act_priv %>%
 
 #Disposals made
 priv_ca_disp_made_year <- child_act_priv %>%
-  filter(Type == 'Disposal', Count_type == 'Order type', Disposal_type != 'Interim order') %>% 
+  filter(Type == 'Disposal', Count_type == 'Order type', !Disposal_type %in% c('Interim order', 'Interim Order')) %>% 
   group_by(Year) %>% 
   summarise(priv_disp_made = sum_na(Count))
 
@@ -160,7 +160,7 @@ pub_ca_ord_made_qtr <- child_act_pub %>%
 
 #Disposals made
 pub_ca_disp_made_qtr <- child_act_pub %>%
-  filter(Type == 'Disposal', Count_type == 'Order type', Disposal_type != 'Interim order') %>% 
+  filter(Type == 'Disposal', Count_type == 'Order type', !Disposal_type %in% c('Interim order', 'Interim Order')) %>% 
   group_by(Year, Qtr) %>% 
   summarise(pub_disp_made = sum_na(Count))
 
@@ -214,7 +214,7 @@ priv_ca_ord_made_qtr <- child_act_priv %>%
 
 #Disposals made
 priv_ca_disp_made_qtr <- child_act_priv %>%
-  filter(Type == 'Disposal', Count_type == 'Order type', Disposal_type != 'Interim order') %>% 
+  filter(Type == 'Disposal', Count_type == 'Order type', !Disposal_type %in% c('Interim order', 'Interim Order')) %>% 
   group_by(Year, Qtr) %>% 
   summarise(priv_disp_made = sum_na(Count))
 
