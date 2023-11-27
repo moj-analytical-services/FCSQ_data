@@ -372,16 +372,16 @@ new_t23_cols <- c(glue('Registered applications - Application Type: Enduring Pow
                   glue('Registered applications - Gender of Donor: Female\n[note {note_lookup_selector(note_frame_list, 23, "06")}][note {note_lookup_selector(note_frame_list, 23, "07")}]'),
                   glue('Registered applications - Gender of Donor: Male\n[note {note_lookup_selector(note_frame_list, 23, "06")}][note {note_lookup_selector(note_frame_list, 23, "07")}]'),
                   glue('Registered applications - Gender of Donor: Unknown\n[note {note_lookup_selector(note_frame_list, 23, "06")}][note {note_lookup_selector(note_frame_list, 23, "07")}][note {note_lookup_selector(note_frame_list, 23, "08")}]'),
-                  glue('Registered applications - Age of Donor: 18-24\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
-                  glue('Registered applications - Age of Donor: 25-34\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
-                  glue('Registered applications - Age of Donor: 35-44\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
-                  glue('Registered applications - Age of Donor: 45-54\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
-                  glue('Registered applications - Age of Donor: 55-64\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
-                  glue('Registered applications - Age of Donor: 65-74\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
-                  glue('Registered applications - Age of Donor: 75-84\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
-                  glue('Registered applications - Age of Donor: 85+\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
-                  glue('Registered applications - Age of Donor: Unknown\n[note {note_lookup_selector(note_frame_list, 23, "08")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
-                  glue('Number of deputyships appointed\n[note {note_lookup_selector(note_frame_list, 23, "12")}][note {note_lookup_selector(note_frame_list, 23, "13")}]')
+                  glue('Registered applications - Age of Donor: 18-24\n[note {note_lookup_selector(note_frame_list, 23, "07")}][note {note_lookup_selector(note_frame_list, 23, "09")}]'),
+                  glue('Registered applications - Age of Donor: 25-34\n[note {note_lookup_selector(note_frame_list, 23, "07")}][note {note_lookup_selector(note_frame_list, 23, "09")}]'),
+                  glue('Registered applications - Age of Donor: 35-44\n[note {note_lookup_selector(note_frame_list, 23, "07")}][note {note_lookup_selector(note_frame_list, 23, "09")}]'),
+                  glue('Registered applications - Age of Donor: 45-54\n[note {note_lookup_selector(note_frame_list, 23, "07")}][note {note_lookup_selector(note_frame_list, 23, "09")}]'),
+                  glue('Registered applications - Age of Donor: 55-64\n[note {note_lookup_selector(note_frame_list, 23, "07")}][note {note_lookup_selector(note_frame_list, 23, "09")}]'),
+                  glue('Registered applications - Age of Donor: 65-74\n[note {note_lookup_selector(note_frame_list, 23, "07")}][note {note_lookup_selector(note_frame_list, 23, "09")}]'),
+                  glue('Registered applications - Age of Donor: 75-84\n[note {note_lookup_selector(note_frame_list, 23, "07")}][note {note_lookup_selector(note_frame_list, 23, "09")}]'),
+                  glue('Registered applications - Age of Donor: 85+\n[note {note_lookup_selector(note_frame_list, 23, "07")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "10")}]'),
+                  glue('Registered applications - Age of Donor: Unknown\n[note {note_lookup_selector(note_frame_list, 23, "07")}][note {note_lookup_selector(note_frame_list, 23, "09")}][note {note_lookup_selector(note_frame_list, 23, "11")}]'),
+                  glue('Number of deputyships appointed\n[note {note_lookup_selector(note_frame_list, 23, "12")}][note {note_lookup_selector(note_frame_list, 23, "13")}][note {note_lookup_selector(note_frame_list, 23, "14")}]')
                   )
 
 t23_accessible <- t23_accessible %>% add_col_notes(table_num = 23, col_nums = t23_col_change, new_cols = new_t23_cols)
