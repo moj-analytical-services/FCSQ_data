@@ -72,11 +72,11 @@ openxlsx::writeData(wb = template,
 # Creating and adding source for Table 24
 probate_lookup_fill <- probate_lookup %>% mutate(across(where(is.numeric) & !c(Year, Quarter), ~replace_na(.x, na_value)))
 openxlsx::writeData(wb = template,
-                    sheet = 'Table 23 source',
+                    sheet = 'Table 24 source',
                     x = probate_lookup_fill)
 
 na_formatter(wb = template,
-             sheet = 'Table 23 source',
+             sheet = 'Table 24 source',
              table = probate_lookup_fill,
              value = ':',
              startRow = 2,
@@ -86,11 +86,11 @@ na_formatter(wb = template,
 # Creating and adding source for Table 25
 probate_time_lookup <- probate_time_lookup %>% mutate(across(where(is.numeric) & !c(Year, Quarter), ~replace_na(.x, na_value)))
 openxlsx::writeData(wb = template,
-                    sheet = 'Table 24 source',
+                    sheet = 'Table 25 source',
                     x = probate_time_lookup)
 
 na_formatter(wb = template,
-             sheet = 'Table 24 source',
+             sheet = 'Table 25 source',
              table = probate_time_lookup,
              value = ':',
              startRow = 2,

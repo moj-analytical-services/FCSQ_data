@@ -43,6 +43,7 @@ timeperiod_col <- data.frame(c(paste0("2006 - ", pub_year, " (", pub_months_shor
                            paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2008 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2008 - ", pub_year, " (", pub_months_short, ")"),
+                           paste0("2023 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2008 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2012 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2019 (Apr-Jun) - ", pub_year, " (", pub_months_short, ")")))
@@ -77,5 +78,5 @@ openxlsx::writeData(wb = template,
 openxlsx::writeData(wb = template,
                     sheet = 'Index',
                     x = publish_dates,
-                    startRow = 41,
+                    startRow = 42,
                     colNames = F)
