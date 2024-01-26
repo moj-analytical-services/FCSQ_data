@@ -789,7 +789,8 @@ na_adder(wb = template,
 #Table 22a
 
 ####################################################################
-# Data is loaded under Table 21 heading
+# Loads current Table 22
+source(paste0(path_to_project, "Regular_Tables/table22a_reg.R"))
 openxlsx::writeData(wb = template,
                     sheet = 'Table_22',
                     x = timeperiod22a,
