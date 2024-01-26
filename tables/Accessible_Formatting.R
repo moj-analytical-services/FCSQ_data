@@ -46,8 +46,9 @@ comma_cols <- list(4:ncol(table_list[['t1']]),
                    3:ncol(table_list[['t19']]),
                    3:ncol(table_list[['t20']]),
                    3:ncol(table_list[['t21']]),
-                   3:ncol(table_list[['t22']]),
+                   99,
                    3:ncol(table_list[['t23']]),
+                   3:ncol(table_list[['t24']]),
                    seq(from = 5, to = 20, by = 5)
                    
                    )
@@ -57,7 +58,7 @@ comma_cols <- list(4:ncol(table_list[['t1']]),
 pwalk(list(sheet_names, table_list, comma_cols), ~comma_formatter(accessible_tables, ..1, ..2, ..3))
 
 # Rounding to 1dp
-round_sheet_names <- c("Table_8", "Table_9", "Table_10", "Table_10b", "Table_24" )
+round_sheet_names <- c("Table_8", "Table_9", "Table_10", "Table_10b", "Table_25" )
 round_cols <- list(c(4, 5), c(4, 5), 
                    seq(from = 5, to = ncol(t10_accessible), by = 2),
                    seq(from = 5, to = ncol(t10b_accessible), by = 2),
@@ -81,7 +82,7 @@ style_formatter(accessible_tables, "Table_13", t13_accessible, seq(from = 5, to 
 
 #Dealing with na and suppression
 pwalk(list(sheet_names, table_list), ~ na_formatter(accessible_tables, ..1, ..2, na_value = na_value))
-na_formatter(accessible_tables, 'Table_22', t23_accessible, na_value = suppress_value, value = '[c]' )
+na_formatter(accessible_tables, 'Table_23', t23_accessible, na_value = suppress_value, value = '[c]' )
 
 
 
@@ -113,7 +114,7 @@ map2(sheet_names, all_cols, ~openxlsx::setColWidths(wb = accessible_tables, shee
 # Setting Colwidth for Tables with long pieces of text
 colwidth_sheet <- c('Table_3a', 'Table_3b', 'Table_4a', 'Table_4b', 
                     'Table_10', 'Table_12b', 'Table_15',
-                    'Table_23', 'Table_24')
+                    'Table_24', 'Table_25')
 colwidth_cols <- list(c(2, 3),
                       c(2, 3),
                       c(2, 3),

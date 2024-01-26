@@ -362,6 +362,15 @@ new_t22_cols <- c(glue('Orders for appointment of a hybrid deputy\n[note {note_l
 
 t22_accessible <- t22_accessible %>% add_col_notes(table_num = 22, col_nums = t22_col_change, new_cols = new_t22_cols)
 
+# Table 22a
+title_note_t22a <- glue('[note {note_lookup_selector(note_frame_list, "22a", "03")}]')
+t22a_col_change <- c(8, 9)
+new_t22a_cols <- c(glue('Total individual children\n[note {note_lookup_selector(note_frame_list, "22a", "01")}]'),
+                  glue('Total Applications Made\n[note {note_lookup_selector(note_frame_list, "22a", "01")}][note {note_lookup_selector(note_frame_list, "22a", "02")}]')
+)
+
+t22a_accessible <- t22a_accessible %>% add_col_notes(table_num = '22a', col_nums = t22a_col_change, new_cols = new_t22a_cols)
+
 # Table 23
 title_note_t23 <- glue('[note {note_lookup_selector(note_frame_list, 23, "01")}]')
 t23_col_change <- c(3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20)
@@ -442,4 +451,4 @@ notes_all <- notes_import %>% select(!c(Lookup, R_Table)) %>%
 title_notes <- list(title_note_t1, title_note_t2, title_note_t3, title_note_t3, title_note_t4, title_note_t4, title_note_t5,
                     title_note_t6, title_note_t7, title_note_t8, title_note_t9, title_note_t10, title_note_t10b, title_note_t11, title_note_t12, title_note_t12b, 
                     title_note_t13, title_note_t15, title_note_t16, title_note_t17, title_note_t18, title_note_t19,
-                    title_note_t20, title_note_t21, title_note_t22, title_note_t23, title_note_t24, title_note_t25)
+                    title_note_t20, title_note_t21, title_note_t22, title_note_t22a, title_note_t23, title_note_t24, title_note_t25)

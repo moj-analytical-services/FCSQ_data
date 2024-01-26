@@ -783,6 +783,32 @@ na_adder(wb = template,
          lengths = 1,
          start_row = t22_start)
 
+
+####################################################################
+#High Court Deprivation of Liberty
+#Table 22a
+
+####################################################################
+# Loads current Table 22
+source(paste0(path_to_project, "Regular_Tables/table22a_reg.R"))
+openxlsx::writeData(wb = template,
+                    sheet = 'Table_22',
+                    x = timeperiod22a,
+                    startRow = 3,
+                    colNames = F)
+
+# data
+t22a_start <- 9
+t22a_row_heights <- rep(15, length(notes22a))
+t22a_note_adjust <- note_adjuster(notes = c(3), table = '22a')
+t22a_row_heights[t22a_note_adjust] <- c(22.9)
+
+write_formatted_table(workbook = template, 
+                      sheet_name = 'Table_22', 
+                      tables = list(t22a_reg_qtr), 
+                      notes = notes22a, 
+                      starting_row = t22a_start, 
+                      quarterly_format = c(1))
 ####################################################################
 #OPG
 #Table 23
@@ -791,7 +817,7 @@ na_adder(wb = template,
 # Loads and writes the data
 source(paste0(path_to_project, "Regular_Tables/table23_reg.R"))
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_22',
+                    sheet = 'Table_23',
                     x = timeperiod23,
                     startRow = 4,
                     colNames = F)
@@ -804,7 +830,7 @@ t23_note_adjust <- note_adjuster(notes = c(2, 4, 6), table = 23)
 t23_row_heights[t23_note_adjust] <- c(23.25, 21, 21)
 
 write_formatted_table(workbook = template, 
-                      sheet_name = 'Table_22', 
+                      sheet_name = 'Table_23', 
                       tables = list(t23_reg_year, t23_reg_qtr), 
                       notes = notes23, 
                       starting_row = t23_start, 
@@ -813,7 +839,7 @@ write_formatted_table(workbook = template,
 
 # Adding stars to table
 na_formatter(wb = template,
-             sheet = 'Table_22',
+             sheet = 'Table_23',
              table = full_t23,
              value = '*',
              startRow = t23_start,
@@ -821,7 +847,7 @@ na_formatter(wb = template,
 
 # # Block on deputyships from 2008 - 2014 quarterly
 na_adder(wb = template,
-         sheet = 'Table_22',
+         sheet = 'Table_23',
          value = '-',
          cols = 25,
          lengths = 28,
@@ -829,7 +855,7 @@ na_adder(wb = template,
 
 # Block deputyships from 2008 - 2014 annually
 na_adder(wb = template,
-         sheet = 'Table_22',
+         sheet = 'Table_23',
          value = '-',
          cols = 25,
          lengths = 7,
@@ -845,7 +871,7 @@ na_adder(wb = template,
 # Loads and writes the data
 source(paste0(path_to_project, "Regular_Tables/table24_reg.R"))
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_23',
+                    sheet = 'Table_24',
                     x = timeperiod24,
                     startRow = 4,
                     colNames = F)
@@ -857,7 +883,7 @@ t24_note_adjust <- note_adjuster(notes = c(1, 7, 8), table = 24)
 t24_row_heights[t24_note_adjust] <- c(48, 24, 23.25)
 
 write_formatted_table(workbook = template, 
-                      sheet_name = 'Table_23', 
+                      sheet_name = 'Table_24', 
                       tables = list(t24_reg_year, t24_reg_qtr_a, t24_reg_qtr_b), 
                       notes = notes24, 
                       starting_row = t24_start, 
@@ -866,7 +892,7 @@ write_formatted_table(workbook = template,
 
 # Applications made NA
 na_adder(wb = template,
-         sheet = 'Table_23',
+         sheet = 'Table_24',
          value = "-",
          cols = c(3, 4, 5, 6, 12),
          lengths = rep(7, 5),
@@ -874,7 +900,7 @@ na_adder(wb = template,
 
 # Contested Probate NA
 na_adder(wb = template,
-         sheet = 'Table_23',
+         sheet = 'Table_24',
          value = "-",
          cols = 17,
          lengths = nrow(t24_reg_qtr_a) + nrow(t24_reg_qtr_b),
@@ -882,7 +908,7 @@ na_adder(wb = template,
 
 # Grants resealed NA
 na_adder(wb = template,
-         sheet = 'Table_23',
+         sheet = 'Table_24',
          value = ":",
          cols = c(6, 12),
          lengths = c(1, 1),
@@ -897,7 +923,7 @@ na_adder(wb = template,
 # Loads and writes the data
 source(paste0(path_to_project, "Regular_Tables/table25_reg.R"))
 openxlsx::writeData(wb = template,
-                    sheet = 'Table_24',
+                    sheet = 'Table_25',
                     x = timeperiod25,
                     startRow = 4,
                     colNames = F)
@@ -909,7 +935,7 @@ t25_note_adjust <- note_adjuster(notes = c(2, 4, 5), table = 25)
 t25_row_heights[t25_note_adjust] <- c(21.4, 21.4, 23.25)
 
 write_formatted_table(workbook = template, 
-                      sheet_name = 'Table_24', 
+                      sheet_name = 'Table_25', 
                       tables = list(t25_reg_year, t25_reg_qtr_a, t25_reg_qtr_b), 
                       notes = notes25, 
                       starting_row = t25_start, 
@@ -920,7 +946,7 @@ write_formatted_table(workbook = template,
 # Everything before All Grants is NA
 probate_time_na_columns <- setdiff(seq(from = 3, to = 23), probate_time_blank_cols)
 na_adder(wb = template,
-         sheet = 'Table_24',
+         sheet = 'Table_25',
          value = ":",
          cols = probate_time_na_columns,
          lengths = rep(1, length(probate_time_na_columns)),

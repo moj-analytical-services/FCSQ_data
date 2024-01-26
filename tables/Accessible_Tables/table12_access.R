@@ -1,7 +1,8 @@
 # Accessible Version of Table 12
 
-divorce_t12_input <- divorce_t12_input %>% arrange(Year, Quarter) 
-  
+divorce_t12_input <- divorce_t12_input %>% arrange(Year, Quarter) %>% 
+  filter(Case != 'Judicial Separation' | Quarter < '2023 Q2')
+
 
 divorce_applications <- divorce_t12_input %>% filter(Stage == 'Petition')
 divorce_conditional <- divorce_t12_input %>% filter(Stage == 'Decree Nisi')
@@ -92,8 +93,12 @@ divorce_final_qtr <- divorce_final %>% filter(Quarter != '') %>%
 
 divorce_fin_ord <- bind_rows(divorce_final_year, divorce_final_qtr) %>% arrange(`Proceeding Type`, `Case Type`, `Law`)
 
+# To keep all the quarters in for each year when joining, an extra table is created
+t12_all_cats <- divorce_fin_ord %>% distinct(Year, Quarter, `Proceeding Type`, `Case Type`, Law)
+
 # Joining the three stages together
-divorce_tables_list <- list(divorce_app, divorce_cond, divorce_fin_ord)
+divorce_tables_list <- list(t12_all_cats, divorce_app, divorce_cond, divorce_fin_ord)
+
 
 t12_accessible_a <- reduce(divorce_tables_list, left_join, by = c('Year', 'Quarter', 'Proceeding Type', 'Case Type', 'Law'))
 

@@ -37,6 +37,7 @@ table_sources_access <- c("HMCTS FamilyMan and Core Case Data",
              "HMCTS FamilyMan and Core Case Data",
              "Court of Protection data management system",
              "Court of Protection data management system",
+             "HMCTS FamilyMan",
              "Office of the Public Guardian data management systems SIRIUS and Casrec",
              "HMCTS ProbateMan system to Q1 2019, HMCTS Core Case Data from Q2 2019, HMCTS Pentaho system (contested cases only)",
              "HMCTS Core Case Data")
@@ -70,9 +71,10 @@ contents_df <- tribble(
   "Table_19", "Orders issued for adoption and related orders in courts in England and Wales",
   "Table_20", "Court of Protection Applications made in England and Wales",
   "Table_21", "Court of Protection Orders made in England and Wales",
-  "Table_22", "Office of the Public Guardian applications registered in England and Wales",
-  "Table_23", "Number of applications made and grants issued for grants of representation in probate proceedings, by type and method of application, and grant revocations, standings searches and contested probate cases",
-  "Table_24", "Average time to grant issue for grants of representation in probate proceedings, England and Wales"
+  "Table_22", "Number of deprivation of liberty applications made in the High Court in England and Wales by age of child",
+  "Table_23", "Office of the Public Guardian applications registered in England and Wales",
+  "Table_24", "Number of applications made and grants issued for grants of representation in probate proceedings, by type and method of application, and grant revocations, standings searches and contested probate cases",
+  "Table_25", "Average time to grant issue for grants of representation in probate proceedings, England and Wales"
   
 )
 
@@ -81,7 +83,7 @@ contents_df <- tribble(
 timeperiods_all <- c(timeperiod1, timeperiod2, timeperiod3, timeperiod3, timeperiod4, timeperiod4,
                      timeperiod5, timeperiod6, timeperiod7, timeperiod8, timeperiod9, timeperiod10, timeperiod10b,
                      timeperiod11, timeperiod12, timeperiod12b, timeperiod13, timeperiod15, timeperiod16,
-                     timeperiod17, timeperiod18, timeperiod19, timeperiod20, timeperiod21, timeperiod22, timeperiod23, timeperiod24, timeperiod25)
+                     timeperiod17, timeperiod18, timeperiod19, timeperiod20, timeperiod21, timeperiod22, timeperiod22a, timeperiod23, timeperiod24, timeperiod25)
 
 contents_df <- contents_df %>% mutate(Source = c(NA, table_sources_access),
                                       `Time period` = c(NA, timeperiods_all))
@@ -151,6 +153,7 @@ fcsq_a11y <- create_a11ytable(
     t20_accessible,
     t21_accessible,
     t22_accessible,
+    t22a_accessible,
     t23_accessible,
     t24_accessible,
     t25_accessible
