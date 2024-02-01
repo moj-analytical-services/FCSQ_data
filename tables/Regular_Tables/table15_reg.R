@@ -156,11 +156,11 @@ t15_reg_qtr <-  fr_joined_qtr %>%
 # time period
 if(pub_quarter==4){
   
-  timeperiod15 <- paste0("Annually 2003 - ", pub_year, " and quarterly Q1 2009 - Q", pub_quarter," ", pub_year)
+  timeperiod15 <- paste0("Annually 2006 - ", pub_year, " and quarterly Q1 2009 - Q", pub_quarter," ", pub_year)
   
 } else {
   
-  timeperiod15 <- paste0("Annually 2003 - ", pub_year-1, " and quarterly Q1 2009 - Q", pub_quarter," ", pub_year)
+  timeperiod15 <- paste0("Annually 2006 - ", pub_year-1, " and quarterly Q1 2009 - Q", pub_quarter," ", pub_year)
 }
 
              
