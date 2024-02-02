@@ -704,7 +704,7 @@ openxlsx::writeData(wb = template,
                     colNames = F)
 
 # data
-t20_start <- 8
+t20_start <- 10
 t20_row_heights <- rep(15, length(notes20))
 t20_note_adjust <- note_adjuster(notes = c(1), table = 20)
 t20_row_heights[t20_note_adjust] <- 24.75
