@@ -41,7 +41,7 @@ t3_list_row <- 7
 for (i in t3_pub_rows) {
   lookup_col <- 2
   for (j in t3_pub_columns) {
-    formula <- glue("=VLOOKUP($BA{i}&$A$8&$B$9&$BA$7,'Table 3_4_source'!$A$2:$Q${nrow_lookup},{lookup_col},FALSE)")
+    formula <- glue("=VLOOKUP($BA{i}&$A$8&$B$9&$BA$7,'Table 3_4_source'!$A$2:$R${nrow_lookup},{lookup_col},FALSE)")
     writeFormula(wb=template,
                  sheet='Table_3',
                  x=formula,
@@ -56,7 +56,7 @@ for (i in t3_pub_rows) {
 for (i in c(37, 44)) {
   lookup_col <- 2
   for (j in t3_pub_columns) {
-    formula <- glue("=IFERROR(VLOOKUP($BA{i}&$A$8&$B$9&$BA$7,'Table 3_4_source'!$A$2:$Q${nrow_lookup},{lookup_col},FALSE),0)")
+    formula <- glue("=IFERROR(VLOOKUP($BA{i}&$A$8&$B$9&$BA$7,'Table 3_4_source'!$A$2:$R${nrow_lookup},{lookup_col},FALSE),0)")
     writeFormula(wb=template,
                  sheet='Table_3',
                  x=formula,
