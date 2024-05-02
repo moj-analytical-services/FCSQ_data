@@ -124,6 +124,14 @@ na_adder(wb = template,
          lengths = rep(nrow(t1_reg_qtr) - 48, 2),
          start_row = t1_start + nrow(t1_reg_year) + 48)
 
+#Adoption Disposals and Total Case Disposals - Annually
+na_adder(wb = template,
+         sheet = 'Table_1',
+         value = ":",
+         cols = c(20, 21),
+         lengths = rep(nrow(t1_reg_year) - 17, 2),
+         start_row = t1_start + 17)
+
 # #Public Law and Total Cases Disposed - Annually
 # na_adder(wb = template,
 #          sheet = 'Table_1',
@@ -420,6 +428,24 @@ na_adder(wb = template,
          cols = 11,
          lengths = 34,
          start_row = t12_start + nrow(t12_reg_year))
+
+
+#Judical Seperation Block Annually
+na_adder(wb = template,
+         sheet = 'Table_12',
+         value = ":",
+         cols = c(17, 18),
+         lengths = rep(nrow(t12_reg_year) - 20, 2),
+         start_row = t12_start + 20)
+
+#Judical Seperation Block Quarterly
+na_adder(wb = template,
+         sheet = 'Table_12',
+         value = ":",
+         cols = c(17, 18),
+         lengths = rep(nrow(t12_reg_qtr) - 49, 2),
+         start_row = t12_start + nrow(t12_reg_year) + 49)
+
 
 # Adding a dotted line to separate the old and new divorce law
 dotted_line_style <- openxlsx::createStyle(border = "top",

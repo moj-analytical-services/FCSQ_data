@@ -39,7 +39,7 @@ t4_list_row <- 7
 for (i in t4_pub_rows) {
   lookup_col <- 2
   for (j in t4_pub_columns) {
-    formula <- glue("=VLOOKUP($BA{i}&$A$8&$B$9&$BA$7,'Table 3_4_source'!$A$2:$R${nrow_lookup},{lookup_col},FALSE)")
+    formula <- glue("=VLOOKUP($BA{i}&$A$8&$B$9&$BA$7,'Table 3_4_source'!$A$2:${t3_last_col}${nrow_lookup},{lookup_col},FALSE)")
     writeFormula(wb=template,
                  sheet='Table_4',
                  x=formula,
@@ -95,7 +95,7 @@ pri_start_letter <- num_to_letter(pri_start_col)
 for (i in t4_priv_rows) {
   lookup_col <- 2
   for (j in t4_priv_columns) {
-    formula <- glue("=VLOOKUP($BA{i}&$A$8&${pri_start_letter}$9&$BA$7,'Table 3_4_source'!$A$2:$R${nrow_lookup},{lookup_col},FALSE)")
+    formula <- glue("=VLOOKUP($BA{i}&$A$8&${pri_start_letter}$9&$BA$7,'Table 3_4_source'!$A$2:${t3_last_col}${nrow_lookup},{lookup_col},FALSE)")
     writeFormula(wb=template,
                  sheet='Table_4',
                  x=formula,
