@@ -52,7 +52,7 @@ pg8000==1.24.1
 pickleshare==0.7.5
 ply==3.11
 progressbar2==3.55.0
-prompt-toolkit==3.0.29
+prompt-toolkit==3.0.30
 psutil==5.9.0
 ptyprocess==0.7.0
 pure-eval==0.2.2
