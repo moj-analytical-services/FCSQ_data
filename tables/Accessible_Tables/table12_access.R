@@ -134,7 +134,10 @@ t12_accessible_c <- bind_rows(t12_accessible_a, filter(t12_accessible_b, Quarter
                                                               TRUE ~ `Median time (weeks) to Final Order`),
          `Conditional Orders` = case_when(`Proceeding Type` == 'Judicial Separation' ~ na_value,
                                           TRUE ~ `Conditional Orders`),
-         `Proceeding Type` = factor(`Proceeding Type`, levels = c('Divorce', 'Nullity of Marriage', 'Judicial Separation', 'All'))
+         `Proceeding Type` = factor(`Proceeding Type`, levels = c('Divorce', 'Nullity of Marriage', 'Judicial Separation', 'All')),
+         
+         Applications = case_when(`Proceeding Type` == 'Judicial Separation' & (Year > 2022 | (Year = 2023 & Quarter %in% c('Q2', 'Q3', 'Q4'))) ~ na_value,
+                                  TRUE ~ `Applications`)
          
          ) %>%
   mutate(across(where(is.numeric), ~replace_zero(.x, na_value))) %>% 
