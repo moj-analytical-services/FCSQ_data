@@ -5,23 +5,28 @@
 library(dplyr)
 library(mojrap)
 library(openxlsx)
-library(s3tools)
+#library(s3tools)
 library(glue)
 library(readr)
+library(tidyverse)
+library(xltabr)
+library(a11ytables)
+library(mojtable)
 
 # Variables #######################################################################################
 
 pub_year <- 2021                                                              # Specify the publication year and quarter for the output name
-pub_quarter <- 2
-pub_date <- "25th March 2021"
-next_pub_date <- "24th June 2021"
+pub_quarter <- 4
+pub_date <- "31st March 2022"
+next_pub_date <- "30th June 2022"
+
 path_to_project = '~/FCSQ_data/tables/'                                       # UPDATE ONLY IF YOU CHANGE THE LOCATION OF THE PROJECT FILES
-csv_folder <- paste0("alpha-family-data/CSVs/",pub_year, "-Q",pub_quarter,"/") # location in the S3 bucket to import CSVs from
+csv_folder <- paste0("alpha-family-data/CSVs/CSV_bulletin/", pub_year, " Q",pub_quarter,"/") # location in the S3 bucket to import CSVs from
 
 # Import ##########################################################################################
 
 # template Excel sheet
-s3tools::download_file_from_s3("alpha-family-data/Tables/template.xlsx", paste0(path_to_project, "template.xlsx"), overwrite = TRUE)
+download_file_from_s3("alpha-family-data/Tables/2021 Q4 Template.xls", paste0(path_to_project, "template.xlsx"), overwrite = TRUE)
 template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "template.xlsx"))
 
 # Editing #########################################################################################

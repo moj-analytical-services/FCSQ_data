@@ -20,14 +20,7 @@ if(pub_quarter=="1"){
 
 titleindex <- paste0("Family Court Statistics Quarterly, ", pub_months, " ", pub_year)
 
-timeperiod <- data.frame(c(paste0("2008 - ", pub_year, " (", pub_months_short, ")"),
-                           paste0("2008 - ", pub_year, " (", pub_months_short, ")"),
-                           paste0("2008 - ", pub_year, " (", pub_months_short, ")"),
-                           paste0("2008 - ", pub_year, " (", pub_months_short, ")"),
-                           paste0("2008 - ", pub_year, " (", pub_months_short, ")"),
-                           paste0("2008 - ", pub_year, " (", pub_months_short, ")"),
-                           paste0("2008 - ", pub_year, " (", pub_months_short, ")"),
-                           paste0("2008 - ", pub_year, " (", pub_months_short, ")"),
+timeperiod_col <- data.frame(c(paste0("2006 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
@@ -35,6 +28,14 @@ timeperiod <- data.frame(c(paste0("2008 - ", pub_year, " (", pub_months_short, "
                            paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
+                           paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
+                           paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
+                           paste0("2022 - ", pub_year, " (", pub_months_short, ")"),
+                           paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
+                           paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
+                           paste0("2022 - ", pub_year, " (", pub_months_short, ")"),
+                           paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
+                           paste0("2006 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2003 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2008 (Oct-Dec) - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2015 (Jul-Sep) - ", pub_year, " (", pub_months_short, ")"),
@@ -42,9 +43,9 @@ timeperiod <- data.frame(c(paste0("2008 - ", pub_year, " (", pub_months_short, "
                            paste0("2011 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2008 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2008 - ", pub_year, " (", pub_months_short, ")"),
+                           paste0("2023 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2008 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2012 - ", pub_year, " (", pub_months_short, ")"),
-                           paste0("2007 - ", pub_year, " (", pub_months_short, ")"),
                            paste0("2019 (Apr-Jun) - ", pub_year, " (", pub_months_short, ")")))
 
 publish_dates <- data.frame(c(paste0("Published ", pub_date), paste0("Next update ", next_pub_date)))
@@ -68,8 +69,8 @@ openxlsx::addStyle(wb = template,
 # time period
 openxlsx::writeData(wb = template,
                     sheet = 'Index',
-                    x = timeperiod,
-                    startRow = 6,
+                    x = timeperiod_col,
+                    startRow = 7,
                     startCol = 4,
                     colNames = F)
 
@@ -77,5 +78,5 @@ openxlsx::writeData(wb = template,
 openxlsx::writeData(wb = template,
                     sheet = 'Index',
                     x = publish_dates,
-                    startRow = 39,
+                    startRow = 42,
                     colNames = F)
