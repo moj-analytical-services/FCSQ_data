@@ -57,7 +57,7 @@ psutil==5.9.0
 ptyprocess==0.7.0
 pure-eval==0.2.2
 pyarrow==7.0.0
-pydbtools==5.2.0
+pydbtools==5.6.3
 Pygments==2.11.2
 PyMySQL==1.0.2
 pyparsing==3.0.7
