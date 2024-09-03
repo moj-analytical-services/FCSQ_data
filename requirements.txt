@@ -59,7 +59,7 @@ pure-eval==0.2.2
 pyarrow==7.0.0
 pydbtools==5.6.3
 Pygments==2.11.2
-PyMySQL==1.0.2
+PyMySQL==1.1.1
 pyparsing==3.0.7
 pyrsistent==0.18.1
 python-dateutil==2.8.2
