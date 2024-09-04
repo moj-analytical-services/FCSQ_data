@@ -7,13 +7,13 @@ new_divorce_conditional <- divorce_t12b_input %>% filter(Stage == 'Conditional O
 new_divorce_final <- divorce_t12b_input %>% filter(Stage == 'Final Order', Main_applicant_gender == 'All')
 
 #Applications Annually
-# new_divorce_app_year <- new_divorce_applications %>% filter(Quarter == '') %>%
-#   transmute(Year,
-#             Quarter,
-#             Case,
-#             `Application Type` = Applicant,
-#             `Applications` = Count) %>% 
-#   arrange(Case, `Application Type`)
+new_divorce_app_year <- new_divorce_applications %>% filter(Quarter == '', Year >= 2023) %>%
+  transmute(Year,
+            Quarter,
+            Case,
+            `Application Type` = Applicant,
+            `Applications` = Count) %>%
+  arrange(Case, `Application Type`)
 
 #Applications Quarterly
 new_divorce_app_qtr <- new_divorce_applications %>% filter(Quarter != '') %>%
@@ -26,18 +26,18 @@ new_divorce_app_qtr <- new_divorce_applications %>% filter(Quarter != '') %>%
             `Applications` = Count) %>% 
   arrange(Case, `Application Type`)
 
-new_divorce_app <- bind_rows(new_divorce_app_qtr)
+new_divorce_app <- bind_rows(new_divorce_app_year, new_divorce_app_qtr)
 
 #Conditional Orders Annually
-# new_divorce_cond_year <- new_divorce_conditional %>% filter(Quarter == '') %>% 
-#   transmute(Year,
-#             Quarter,
-#             Case,
-#             `Application Type` = Applicant,
-#             `Conditional Orders` = Count,
-#             `Mean time (weeks) to Conditional Order` = Mean_weeks,
-#             `Median time (weeks) to Conditional Order` = Median_weeks,
-#   )
+new_divorce_cond_year <- new_divorce_conditional %>% filter(Quarter == '', Year >= 2023) %>%
+  transmute(Year,
+            Quarter,
+            Case,
+            `Application Type` = Applicant,
+            `Conditional Orders` = Count,
+            `Mean time (weeks) to Conditional Order` = Mean_weeks,
+            `Median time (weeks) to Conditional Order` = Median_weeks,
+  )
 
 
 #Conditional Orders Quarterly
@@ -53,18 +53,18 @@ new_divorce_cond_qtr <- new_divorce_conditional %>% filter(Quarter != '') %>%
             `Median time (weeks) to Conditional Order` = Median_weeks,
   )
 
-new_divorce_cond <- bind_rows(new_divorce_cond_qtr)
+new_divorce_cond <- bind_rows(new_divorce_cond_year, new_divorce_cond_qtr)
 
 #Final Orders Annually
-# new_divorce_final_year <- new_divorce_final %>% filter(Quarter == '') %>% 
-#   transmute(Year,
-#             Quarter,
-#             Case,
-#             `Application Type` = Applicant,
-#             `Final Orders` = Count,
-#             `Mean time (weeks) to Final Order` = Mean_weeks,
-#             `Median time (weeks) to Final Order` = Median_weeks,
-#   )
+new_divorce_final_year <- new_divorce_final %>% filter(Quarter == '', Year >= 2023) %>%
+  transmute(Year,
+            Quarter,
+            Case,
+            `Application Type` = Applicant,
+            `Final Orders` = Count,
+            `Mean time (weeks) to Final Order` = Mean_weeks,
+            `Median time (weeks) to Final Order` = Median_weeks,
+  )
 
 
 #Final Orders Quarterly
@@ -80,7 +80,7 @@ new_divorce_final_qtr <- new_divorce_final %>% filter(Quarter != '') %>%
             `Median time (weeks) to Final Order` = Median_weeks,
   )
 
-new_divorce_final <- bind_rows(new_divorce_final_qtr)
+new_divorce_final <- bind_rows(new_divorce_final_year, new_divorce_final_qtr)
 
 # Joining the stages together
 new_divorce_tables_list <- list(new_divorce_app, new_divorce_cond, new_divorce_final)

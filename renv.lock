@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.1.2",
+    "Version": "4.2.3",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -9,9 +9,9 @@
     ]
   },
   "Python": {
-    "Version": "3.8.10",
+    "Version": "3.10.12",
     "Type": "virtualenv",
-    "Name": "./renv/python/virtualenvs/renv-python-3.8"
+    "Name": "./renv/python/virtualenvs/renv-python-3.10"
   },
   "Packages": {
     "DBI": {
@@ -26,7 +26,7 @@
       "Package": "MASS",
       "Version": "7.3-54",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Hash": "0e59129db205112e3963904db67fd0dc",
       "Requirements": []
     },
@@ -34,7 +34,7 @@
       "Package": "Matrix",
       "Version": "1.3-4",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Hash": "4ed05e9c9726267e4a5872e09c04587c",
       "Requirements": [
         "lattice"
@@ -72,6 +72,31 @@
       "Hash": "f8a578aa91321ecec1292f1e2ffadeda",
       "Requirements": [
         "Rcpp"
+      ]
+    },
+    "Rs3tools": {
+      "Package": "Rs3tools",
+      "Version": "0.4.5",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "moj-analytical-services",
+      "RemoteRepo": "Rs3tools",
+      "RemoteRef": "main",
+      "RemoteSha": "d9872b4912bce820dffb50d5dec2d72d41a37f93",
+      "Hash": "3e89cc4d5831dd16ffaa7db418dc4c62",
+      "Requirements": [
+        "dplyr",
+        "gdata",
+        "glue",
+        "httr",
+        "magrittr",
+        "paws",
+        "purrr",
+        "readr",
+        "rlang",
+        "stringr",
+        "tibble"
       ]
     },
     "a11ytables": {
@@ -505,6 +530,16 @@
         "withr"
       ]
     },
+    "gdata": {
+      "Package": "gdata",
+      "Version": "3.0.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "d3d6e4c174b8a5f251fd273f245f2471",
+      "Requirements": [
+        "gtools"
+      ]
+    },
     "generics": {
       "Package": "generics",
       "Version": "0.1.2",
@@ -592,6 +627,14 @@
       "Source": "Repository",
       "Repository": "RSPM",
       "Hash": "ac5c6baf7822ce8732b343f14c072c4d",
+      "Requirements": []
+    },
+    "gtools": {
+      "Package": "gtools",
+      "Version": "3.9.5",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "588d091c35389f1f4a9d533c8d709b35",
       "Requirements": []
     },
     "haven": {
@@ -793,7 +836,7 @@
       "Package": "mgcv",
       "Version": "1.8-38",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Hash": "be3c61ffbb1e3d3b3df214d192ac5444",
       "Requirements": [
         "Matrix",
@@ -833,8 +876,9 @@
       "RemoteUrl": "git@github.com:moj-analytical-services/mojrap.git",
       "RemoteRef": "",
       "Remotes": "moj-analytical-services/s3tools",
-      "Hash": "9d1fcc6a8ec53c54ca5dd05d3e0191fc",
+      "Hash": "436564cbac7e540cbed3451f7fc18f95",
       "Requirements": [
+        "Rs3tools",
         "data.table",
         "dplyr",
         "formattable",
@@ -847,7 +891,6 @@
         "plyr",
         "readr",
         "rlang",
-        "s3tools",
         "scales",
         "stringr",
         "tibble"
@@ -880,7 +923,7 @@
       "Package": "nlme",
       "Version": "3.1-153",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Hash": "2d632e0d963a653a0329756ce701ecdd",
       "Requirements": [
         "lattice"
@@ -917,6 +960,175 @@
       "Requirements": [
         "Rcpp",
         "digest"
+      ]
+    },
+    "paws": {
+      "Package": "paws",
+      "Version": "0.5.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "373745f3091ac32bd5f70d783d89d6db",
+      "Requirements": [
+        "paws.analytics",
+        "paws.application.integration",
+        "paws.common",
+        "paws.compute",
+        "paws.cost.management",
+        "paws.customer.engagement",
+        "paws.database",
+        "paws.developer.tools",
+        "paws.end.user.computing",
+        "paws.machine.learning",
+        "paws.management",
+        "paws.networking",
+        "paws.security.identity",
+        "paws.storage"
+      ]
+    },
+    "paws.analytics": {
+      "Package": "paws.analytics",
+      "Version": "0.6.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "d8ea9a4dfefe8a49eceff027e053aa2f",
+      "Requirements": [
+        "paws.common"
+      ]
+    },
+    "paws.application.integration": {
+      "Package": "paws.application.integration",
+      "Version": "0.6.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "4a768547ec143a4a0742b33929010da4",
+      "Requirements": [
+        "paws.common"
+      ]
+    },
+    "paws.common": {
+      "Package": "paws.common",
+      "Version": "0.7.3",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "cac0fa401210ea975f052359afa894e2",
+      "Requirements": [
+        "Rcpp",
+        "base64enc",
+        "curl",
+        "digest",
+        "httr",
+        "jsonlite",
+        "xml2"
+      ]
+    },
+    "paws.compute": {
+      "Package": "paws.compute",
+      "Version": "0.5.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "31c510a7c324db340d7616f111fdbefb",
+      "Requirements": [
+        "paws.common"
+      ]
+    },
+    "paws.cost.management": {
+      "Package": "paws.cost.management",
+      "Version": "0.6.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "756e7414ddce9aecc9a33650ac60c903",
+      "Requirements": [
+        "paws.common"
+      ]
+    },
+    "paws.customer.engagement": {
+      "Package": "paws.customer.engagement",
+      "Version": "0.6.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "ff913af420713815ade6aec300c0390d",
+      "Requirements": [
+        "paws.common"
+      ]
+    },
+    "paws.database": {
+      "Package": "paws.database",
+      "Version": "0.6.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "f46bbfaad83b675c56b19a44555a0a45",
+      "Requirements": [
+        "paws.common"
+      ]
+    },
+    "paws.developer.tools": {
+      "Package": "paws.developer.tools",
+      "Version": "0.6.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "6e32fbe7df12ab9d3376865032218d55",
+      "Requirements": [
+        "paws.common"
+      ]
+    },
+    "paws.end.user.computing": {
+      "Package": "paws.end.user.computing",
+      "Version": "0.6.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "e9de6ac1785b5f2520184f6aec59ac61",
+      "Requirements": [
+        "paws.common"
+      ]
+    },
+    "paws.machine.learning": {
+      "Package": "paws.machine.learning",
+      "Version": "0.6.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "4d6b5c39490c366bdba2783f9c2727dd",
+      "Requirements": [
+        "paws.common"
+      ]
+    },
+    "paws.management": {
+      "Package": "paws.management",
+      "Version": "0.5.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "351811e503d344c0cb2162d5d0fd717e",
+      "Requirements": [
+        "paws.common"
+      ]
+    },
+    "paws.networking": {
+      "Package": "paws.networking",
+      "Version": "0.6.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "c21930277e2d5a74937bcdf1dc0fc574",
+      "Requirements": [
+        "paws.common"
+      ]
+    },
+    "paws.security.identity": {
+      "Package": "paws.security.identity",
+      "Version": "0.5.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "a7ed398f6e8d4153ab19626a71a49cfa",
+      "Requirements": [
+        "paws.common"
+      ]
+    },
+    "paws.storage": {
+      "Package": "paws.storage",
+      "Version": "0.6.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "86a93407f22e5855723b83988a142dcb",
+      "Requirements": [
+        "paws.common"
       ]
     },
     "pillar": {
@@ -1185,7 +1397,7 @@
       "RemoteRef": "master",
       "RemoteSha": "ae339b81f90fe0fe37a5e87d4605af60ab6ae031",
       "Remotes": "cloudyr/aws.signature, cloudyr/aws.s3, cloudyr/aws.ec2metadata",
-      "Hash": "e101e1e22b09a8495d26003eb3d60db6",
+      "Hash": "643f38267c752848d08867e1782730fd",
       "Requirements": [
         "aws.ec2metadata",
         "aws.s3",

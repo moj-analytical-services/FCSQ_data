@@ -9,7 +9,7 @@ options(digits = 15) # Set the number of significant figure to 15 (same as excel
 options(dplyr.summarise.inform = FALSE)
 
 # Downloads the template from the s3 bucket. This will be filled in with data
-download_file_from_s3(paste0(csv_folder, "FCSQ Template", " ", pub_year, " Q", pub_quarter, ".xlsx"), "tables/FCSQ Template.xlsx", overwrite = TRUE)
+Rs3tools::download_file_from_s3(paste0(csv_folder, "FCSQ Template", " ", pub_year, " Q", pub_quarter, ".xlsx"), "tables/FCSQ Template.xlsx", overwrite = TRUE)
 template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "FCSQ Template.xlsx"))
 
 #template <- openxlsx::loadWorkbook(file=paste0(path_to_project, "My template.xlsx"))
