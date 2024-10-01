@@ -831,10 +831,10 @@ t22a_row_heights[t22a_note_adjust] <- c(22.9)
 
 write_formatted_table(workbook = template, 
                       sheet_name = 'Table_22', 
-                      tables = list(t22a_reg_qtr), 
+                      tables = list(t22a_reg_qtr_a, t22a_reg_qtr_b), 
                       notes = notes22a, 
                       starting_row = t22a_start, 
-                      quarterly_format = c(1))
+                      quarterly_format = c(1, 2))
 ####################################################################
 #OPG
 #Table 23

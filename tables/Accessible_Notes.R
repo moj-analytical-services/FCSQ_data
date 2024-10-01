@@ -364,10 +364,17 @@ t22_accessible <- t22_accessible %>% add_col_notes(table_num = 22, col_nums = t2
 
 # Table 22a
 title_note_t22a <- glue('[note {note_lookup_selector(note_frame_list, "22a", "03")}]')
-t22a_col_change <- c(8, 9)
+t22a_col_change <- c(8, 9, 10, 11, 12, 13, 14, 15, 16)
 new_t22a_cols <- c(glue('Total individual children\n[note {note_lookup_selector(note_frame_list, "22a", "01")}]'),
-                  glue('Total Applications Made\n[note {note_lookup_selector(note_frame_list, "22a", "01")}][note {note_lookup_selector(note_frame_list, "22a", "02")}]')
-)
+                  glue('Total Applications Made\n[note {note_lookup_selector(note_frame_list, "22a", "01")}][note {note_lookup_selector(note_frame_list, "22a", "02")}]'),
+                  glue('Total Orders Made\n[note {note_lookup_selector(note_frame_list, "22a", "04")}]'),
+                  glue('Number of orders that have had a final order made\n[note {note_lookup_selector(note_frame_list, "22a", "05")}]'),
+                  glue('Length between first order and expiration of final order: 0-3 months\n[note {note_lookup_selector(note_frame_list, "22a", "05")}]'),
+                  glue('Length between first order and expiration of final order: 3-6 months\n[note {note_lookup_selector(note_frame_list, "22a", "05")}]'),
+                  glue('Length between first order and expiration of final order: 6-9 months\n[note {note_lookup_selector(note_frame_list, "22a", "05")}]'),
+                  glue('Length between first order and expiration of final order: 9-12 months\n[note {note_lookup_selector(note_frame_list, "22a", "05")}]'),
+                  glue('Length between first order and expiration of final order: Over 12 months\n[note {note_lookup_selector(note_frame_list, "22a", "05")}]')
+                  )
 
 t22a_accessible <- t22a_accessible %>% add_col_notes(table_num = '22a', col_nums = t22a_col_change, new_cols = new_t22a_cols)
 
