@@ -404,16 +404,14 @@ t23_accessible <- t23_accessible %>% add_col_notes(table_num = 23, col_nums = t2
 
 # Table 24
 title_note_t24 <- glue('[note {note_lookup_selector(note_frame_list, 24, "01")}][note {note_lookup_selector(note_frame_list, 24, "02")}][note {note_lookup_selector(note_frame_list, 24, "03")}]')
-t24_col_change <- 5:17
+t24_col_change <- 5:15
 new_t24_cols <- c(glue('Applications Made: Grant of Probate\n[note {note_lookup_selector(note_frame_list, 24, "04")}][note {note_lookup_selector(note_frame_list, 24, "05")}][note {note_lookup_selector(note_frame_list, 24, "06")}]'),
                   glue('Applications Made: Grant of Administration with Will annexed\n[note {note_lookup_selector(note_frame_list, 24, "04")}][note {note_lookup_selector(note_frame_list, 24, "05")}][note {note_lookup_selector(note_frame_list, 24, "06")}]'),
                   glue('Applications Made: Grant of Administration\n[note {note_lookup_selector(note_frame_list, 24, "04")}][note {note_lookup_selector(note_frame_list, 24, "05")}][note {note_lookup_selector(note_frame_list, 24, "06")}]'),
-                  'Applications Made: Grants resealed',
                   glue('Applications Made: All grant types\n[note {note_lookup_selector(note_frame_list, 24, "04")}][note {note_lookup_selector(note_frame_list, 24, "05")}][note {note_lookup_selector(note_frame_list, 24, "06")}]'),
                   glue('Grants issued: Grant of Probate\n[note {note_lookup_selector(note_frame_list, 24, "06")}]'),
                   glue('Grants issued: Grant of Administration with Will annexed\n[note {note_lookup_selector(note_frame_list, 24, "06")}]'),
                   glue('Grants issued: Grant of Administration\n[note {note_lookup_selector(note_frame_list, 24, "06")}]'),
-                  'Grants issued: Grants resealed',
                   glue('Grants issued: All grant types\n[note {note_lookup_selector(note_frame_list, 24, "06")}]'),
                   glue('Grants revoked\n[note {note_lookup_selector(note_frame_list, 24, "07")}]'),
                   glue('Standing Search\n[note {note_lookup_selector(note_frame_list, 24, "07")}]'),

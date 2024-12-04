@@ -101,36 +101,36 @@ na_adder(wb = template,
 #Temporary Data Quality Issues blocked
 
 #Adoption Starts and Total Case Starts - Yearly
-na_adder(wb = template,
-         sheet = 'Table_1',
-         value = ":",
-         cols = c(10, 11),
-         lengths = rep(nrow(t1_reg_year) - 16, 2),
-         start_row = t1_start + 16)
-
-#Adoption Starts and Total Case Starts - Quarterly
-na_adder(wb = template,
-         sheet = 'Table_1',
-         value = ":",
-         cols = c(10, 11),
-         lengths = rep(nrow(t1_reg_qtr) - 47, 2),
-         start_row = t1_start + nrow(t1_reg_year) + 47)
-
-#Adoption Disposals and Total Case Disposals - Quarterly
-na_adder(wb = template,
-         sheet = 'Table_1',
-         value = ":",
-         cols = c(20, 21),
-         lengths = rep(nrow(t1_reg_qtr) - 48, 2),
-         start_row = t1_start + nrow(t1_reg_year) + 48)
-
-#Adoption Disposals and Total Case Disposals - Annually
-na_adder(wb = template,
-         sheet = 'Table_1',
-         value = ":",
-         cols = c(20, 21),
-         lengths = rep(nrow(t1_reg_year) - 17, 2),
-         start_row = t1_start + 17)
+# na_adder(wb = template,
+#          sheet = 'Table_1',
+#          value = ":",
+#          cols = c(10, 11),
+#          lengths = rep(nrow(t1_reg_year) - 16, 2),
+#          start_row = t1_start + 16)
+# 
+# #Adoption Starts and Total Case Starts - Quarterly
+# na_adder(wb = template,
+#          sheet = 'Table_1',
+#          value = ":",
+#          cols = c(10, 11),
+#          lengths = rep(nrow(t1_reg_qtr) - 47, 2),
+#          start_row = t1_start + nrow(t1_reg_year) + 47)
+# 
+# #Adoption Disposals and Total Case Disposals - Quarterly
+# na_adder(wb = template,
+#          sheet = 'Table_1',
+#          value = ":",
+#          cols = c(20, 21),
+#          lengths = rep(nrow(t1_reg_qtr) - 48, 2),
+#          start_row = t1_start + nrow(t1_reg_year) + 48)
+# 
+# #Adoption Disposals and Total Case Disposals - Annually
+# na_adder(wb = template,
+#          sheet = 'Table_1',
+#          value = ":",
+#          cols = c(20, 21),
+#          lengths = rep(nrow(t1_reg_year) - 17, 2),
+#          start_row = t1_start + 17)
 
 # #Public Law and Total Cases Disposed - Annually
 # na_adder(wb = template,
@@ -293,20 +293,20 @@ write_formatted_table(workbook = template,
 # Data Quality Issues
 
 #Public Law High Court - Annually
-na_adder(wb = template,
-         sheet = 'Table_7',
-         value = ':',
-         cols = c(4, 5, 6),
-         lengths = rep(nrow(t7_reg_year) - 11, 3),
-         start_row = t7_start + 11)
-
-#Public Law High Court - Quarterly
-na_adder(wb = template,
-         sheet = 'Table_7',
-         value = ':',
-         cols = c(4, 5, 6),
-         lengths = rep(nrow(t7_reg_qtr) - 46, 3),
-         start_row = t7_start + nrow(t7_reg_year) + 46)
+# na_adder(wb = template,
+#          sheet = 'Table_7',
+#          value = ':',
+#          cols = c(4, 5, 6),
+#          lengths = rep(nrow(t7_reg_year) - 11, 3),
+#          start_row = t7_start + 11)
+# 
+# #Public Law High Court - Quarterly
+# na_adder(wb = template,
+#          sheet = 'Table_7',
+#          value = ':',
+#          cols = c(4, 5, 6),
+#          lengths = rep(nrow(t7_reg_qtr) - 46, 3),
+#          start_row = t7_start + nrow(t7_reg_year) + 46)
 
 
 ####################################################################
@@ -337,20 +337,20 @@ write_formatted_table(workbook = template,
                       note_row_heights = t8_row_heights)
 
 # Block on disposals from 2022 onward data due to CCD affecting Public Law - Annually
-na_adder(wb = template,
-         sheet = 'Table_8',
-         value = ':',
-         cols = c(3, 4, 5, 6),
-         lengths = rep(nrow(t8_reg_year) - 11, 4),
-         start_row = t8_start + 11)
+# na_adder(wb = template,
+#          sheet = 'Table_8',
+#          value = ':',
+#          cols = c(3, 4, 5, 6),
+#          lengths = rep(nrow(t8_reg_year) - 11, 4),
+#          start_row = t8_start + 11)
 
 # Block on disposals from 2022 onward data due to CCD affecting Public Law - Quarterly
-na_adder(wb = template,
-         sheet = 'Table_8',
-         value = ':',
-         cols = c(3, 4, 5, 6),
-         lengths = rep(nrow(t8_reg_qtr) - 44, 4),
-         start_row = t8_start + nrow(t8_reg_year) + 44)
+# na_adder(wb = template,
+#          sheet = 'Table_8',
+#          value = ':',
+#          cols = c(3, 4, 5, 6),
+#          lengths = rep(nrow(t8_reg_qtr) - 44, 4),
+#          start_row = t8_start + nrow(t8_reg_year) + 44)
 
 ####################################################################
 #Private Law Disposal
@@ -700,20 +700,20 @@ write_formatted_table(workbook = template,
 #Data Quality Issues
 
 #Adoption Placement Order Applications blocked
-na_adder(wb = template,
-         sheet = 'Table_18',
-         value = ':',
-         cols = c(10, 13, 14),
-         lengths = rep(nrow(t19_reg_qtr) - 47, 3),
-         start_row = t19_start + nrow(t19_reg_year) + 47)
-
-
-na_adder(wb = template,
-         sheet = 'Table_18',
-         value = ':',
-         cols = c(10, 13, 14),
-         lengths = rep(nrow(t19_reg_year) - 11, 3),
-         start_row = t19_start + 11)
+# na_adder(wb = template,
+#          sheet = 'Table_18',
+#          value = ':',
+#          cols = c(10, 13, 14),
+#          lengths = rep(nrow(t19_reg_qtr) - 47, 3),
+#          start_row = t19_start + nrow(t19_reg_year) + 47)
+# 
+# 
+# na_adder(wb = template,
+#          sheet = 'Table_18',
+#          value = ':',
+#          cols = c(10, 13, 14),
+#          lengths = rep(nrow(t19_reg_year) - 11, 3),
+#          start_row = t19_start + 11)
 
 
 ####################################################################
@@ -743,12 +743,12 @@ write_formatted_table(workbook = template,
                       note_row_heights = t20_row_heights)
 
 #Adoption Disposals blocked
-na_adder(wb = template,
-         sheet = 'Table_19',
-         value = ':',
-         cols = c(26),
-         lengths = rep(nrow(t20_reg_qtr) - 48, 3),
-         start_row = t20_start + nrow(t20_reg_year) + 48)
+# na_adder(wb = template,
+#          sheet = 'Table_19',
+#          value = ':',
+#          cols = c(26),
+#          lengths = rep(nrow(t20_reg_qtr) - 48, 3),
+#          start_row = t20_start + nrow(t20_reg_year) + 48)
 
 ####################################################################
 #Applications under the Mental Capacity Act

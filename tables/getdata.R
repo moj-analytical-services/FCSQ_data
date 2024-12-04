@@ -20,7 +20,7 @@ log_threshold(WARN, namespace = 'botor')
 #Loading Data
 source(paste0(path_to_project, "functions.R"))
 
-na_keys <- c(":", ".", "..", "*", "#REF!", "-", "**")
+na_keys <- c(":", ".", "..", "*", "#REF!", "-", "**", "NULL")
 
 child_act_csv <- Rs3tools::read_using(readr::read_csv, paste0(csv_folder, "CSV Children Act", " ", pub_year_quarter, ".csv" ), na = na_keys,
                             col_types = cols(
