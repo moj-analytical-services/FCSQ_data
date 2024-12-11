@@ -22,23 +22,7 @@ t7_priv_law <- full_t7 %>%
   )
 
 t7_accessible <- bind_rows(t7_pub_law, t7_priv_law) %>% 
-  mutate(Quarter = replace_na(Quarter, 'Annual')) %>% 
-  mutate(`Total cases started indicated as High Court` = case_when(
-    (Category == 'Public law' & Year > 2022) |
-      (Category == 'Public law' & (Year == 2022 & Quarter %in% c('Annual', 'Q3', 'Q4'))) ~ na_value,
-    TRUE ~ `Total cases started indicated as High Court`),
-    
-    `High Court cases started in Central London DFJ` = case_when(
-      (Category == 'Public law' & Year > 2022) |
-        (Category == 'Public law' & (Year == 2022 & Quarter %in% c('Annual', 'Q3', 'Q4'))) ~ na_value,
-      TRUE ~ `High Court cases started in Central London DFJ`),
-    
-    `High Court cases started outside Central London DFJ` = case_when(
-      (Category == 'Public law' & Year > 2022) |
-        (Category == 'Public law' & (Year == 2022 & Quarter %in% c('Annual', 'Q3', 'Q4'))) ~ na_value,
-      TRUE ~ `High Court cases started outside Central London DFJ`)
-  
-    )
+  mutate(Quarter = replace_na(Quarter, 'Annual'))
     
     
     
